@@ -1,12 +1,20 @@
+import { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import maple from "@/icons/maple.ico";
 import AccordionLayoutButton from "./AccordionLayoutButton";
 
 const NavBar = () => {
+  const [navWidth, setNavWidth] = useState<string>("w-56");
+
+  const handelNavWidth = () => {
+    if (navWidth === "w-56") return setNavWidth("w-0");
+    if (navWidth === "w-0") return setNavWidth("w-56");
+  };
+
   return (
     <>
-      <nav className="w-56 pt-3 relative">
+      <nav className={`${navWidth} pt-3 relative transition-all`}>
         <div className="flex flex-col items-center mb-5">
           <Link href="/">
             <h1 className="flex items-center font-bold">
@@ -27,7 +35,10 @@ const NavBar = () => {
             <Link href="/gem">보스 결졍석</Link>
           </li>
         </ul>
-        <AccordionLayoutButton />
+        <AccordionLayoutButton
+          navWidth={navWidth}
+          handelNavWidth={handelNavWidth}
+        />
       </nav>
     </>
   );
