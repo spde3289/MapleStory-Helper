@@ -23,11 +23,11 @@ const myFont = localFont({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <main className={`${myFont.className} flex`}>
+      <div className={`${myFont.className} flex`}>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </main>
+      </div>
     </>
   );
 }
