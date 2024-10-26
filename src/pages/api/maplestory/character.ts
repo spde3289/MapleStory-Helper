@@ -1,13 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import axios from "axios";
 import { Get, isAxiosError } from "../backEnd";
 
 export const getMapleKey = () => process.env.NEXT_PUBLIC_MAPLEAPI_KEY;
 
 type Data = {
-  message?: string;
-  error?: string; // error 속성 추가
-  status?: number; // 상태 코드 추가
-  statusText?: string; // 상태 텍스트 추가
+  data?: BasicResponse & StatResponse & CharacterIdResponse;
+  status: number;
+  statusText: string;
+  name?: string;
 };
 
 export default async function handler(
@@ -17,30 +18,29 @@ export default async function handler(
   const { character_name } = req.query;
   // 대표캐릭터 get 요청
   if (req.method === "GET" && typeof character_name === "string") {
-    try {
-      // 외부 API 요청
-      const response = await getCharacter(character_name);
-
+    // 외부 API 요청
+    const response = await getCharacter(character_name);
+    if (response.status === 200) {
       res.status(200).json(response); // 데이터를 클라이언트에 응답
-    } catch (error) {
-      res.status(500).json({ error: "Failed to fetch data" });
+    } else {
+      res.status(400).json(response); // 데이터를 클라이언트에 응답
     }
-  } else {
-    res.status(405).json({ message: "Method not allowed" });
   }
 }
 
 interface ResponseDataType {
-  statusText?: string;
-  status?: number;
-  error: string;
+  statusText: string;
+  status: number;
+  error: {
+    name: string;
+    message: string;
+  };
 }
 
 interface CharacterIdResponse {
   ocid: string;
 }
-
-interface basicResponse {
+interface BasicResponse {
   date: string;
   character_name: string;
   world_name: string;
@@ -56,33 +56,58 @@ interface basicResponse {
   access_flag: string;
   liberation_quest_clear_flag: string;
 }
+interface StatResponse {
+  date: string;
+  character_class: string;
+  final_stat: {
+    stat_name: string;
+    stat_value: string;
+  }[];
+  remain_ap: number;
+}
 
-// 캐릭터 기본정보 + 스텟 정보
-const getCharacter = async (character_name: string) => {
+// 대표캐릭터 기본정보 + 스텟 정보
+const getCharacter = async (character_name: string): Promise<Data> => {
   try {
-    // 1단계: 캐릭터 식별자 가져오기
+    // 1단계: 대표캐릭터 식별자 가져오기
     const idResponse = await Get<CharacterIdResponse>("/v1/id", {
       params: { character_name },
     });
 
     const ocid = idResponse.data.ocid;
 
-    // 2단계: 캐릭터 기본 정보 가져오기
-    const basicResponse = await Get<basicResponse>("/v1/character/basic", {
+    // 2단계: 대표캐릭터 기본 정보 가져오기
+    const basicResponse = await Get<BasicResponse>("/v1/character/basic", {
       params: { ocid: ocid },
     });
 
-    return { ...basicResponse.data }; // 캐릭터 기본 정보 반환
+    // 3단계: 대표캐릭터 스텟 정보 가져오기
+    const statResponse = await Get<StatResponse>("/v1/character/stat", {
+      params: { ocid: ocid },
+    });
+
+    return {
+      status: 200,
+      statusText: "OK",
+      data: { ...basicResponse.data, ...statResponse.data, ocid },
+    }; // 캐릭터 기본 정보 반환
   } catch (error) {
-    if (isAxiosError<ResponseDataType>(error)) {
+    if (axios.isAxiosError<ResponseDataType, any>(error)) {
+      console.log(error.response?.data.error.message);
       return {
-        status: error.response?.status,
-        statusText: error.response?.statusText,
-        error: "API Error", // API 오류 메시지 추가
+        status: error.response?.status ? error.response?.status : 400,
+        statusText: error.response?.data.error.message
+          ? error.response?.data.error.message
+          : "에러",
+        name: error.response?.data.error.name
+          ? error.response?.data.error.name
+          : "에러",
       };
     } else {
       return {
-        error: "An unexpected error occurred", // 예기치 않은 오류 처리
+        status: 400,
+        statusText: "An unexpected error occurred",
+        name: "",
       };
     }
   }
