@@ -8,7 +8,7 @@ interface Data {
   name?: string;
 }
 
-interface MainCharacter {
+export interface MainCharacter {
   date: string;
   character_name: string;
   world_name: string;

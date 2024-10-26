@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { setCookie, getCookie, hasCookie } from "cookies-next";
 import { getCharOcid } from "@/fetch/charFetch";
+import { useMainCharacterContext } from "@/context/characterContext";
 
 export default function Home() {
   const [character, setCharacter] = useState<string>("");
+  const { setMainCharacter } = useMainCharacterContext();
 
   const date = new Date();
   date.setFullYear(date.getFullYear() + 1);
@@ -17,10 +19,11 @@ export default function Home() {
       const ocid = getCookie("ocid", options);
       if (typeof ocid === "string") {
         const { status, data, statusText } = await getCharOcid(ocid);
-        console.log(statusText, data, status);
         if (statusText === "OK") {
-          // 전역으로 캐릭터 정보 관리
-          console.log(data?.access_flag);
+          if (data) {
+            setMainCharacter(data);
+            console.log(data);
+          }
         }
       }
     };

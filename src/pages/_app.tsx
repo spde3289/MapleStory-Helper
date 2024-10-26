@@ -1,7 +1,8 @@
 import "@/styles/globals.css";
-import Layout from "@/components/Layout";
-import type { AppProps } from "next/app";
+import Layout from "@/components/layout";
+import { AppProps } from "next/app";
 import localFont from "next/font/local";
+import MainCharacterProvider from "@/context/characterContext";
 
 // 폰트 파일 경로를 /public/fonts 에서 가져옴
 const myFont = localFont({
@@ -24,9 +25,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <div className={`${myFont.className} flex`}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <MainCharacterProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </MainCharacterProvider>
       </div>
     </>
   );
