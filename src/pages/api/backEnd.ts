@@ -77,7 +77,7 @@ interface CommonResponse<T> {
 export const Get = async <T>(
   url: string,
   config?: AxiosRequestConfig
-): Promise<CommonResponse<T>> => {
+): Promise<AxiosResponse<T>> => {
   const response = await backend.get(url, config);
   return response;
 };
@@ -86,7 +86,7 @@ export const Post = async <T>(
   url: string,
   data?: any,
   config?: AxiosRequestConfig
-): Promise<CommonResponse<T>> => {
+): Promise<AxiosResponse<T>> => {
   const response = await backend.post(url, data, config);
 
   return response;
@@ -96,7 +96,7 @@ export const Put = async <T>(
   url: string,
   data?: any,
   config?: AxiosRequestConfig
-): Promise<CommonResponse<T>> => {
+): Promise<AxiosResponse<T>> => {
   const response = await backend.put(url, data, config);
   return response;
 };
@@ -105,7 +105,7 @@ export const Patch = async <T>(
   url: string,
   data?: any,
   config?: AxiosRequestConfig
-): Promise<CommonResponse<T>> => {
+): Promise<AxiosResponse<T>> => {
   const response = await backend.patch(url, data, config);
 
   return response;
@@ -115,7 +115,7 @@ export const Delete = async <T>(
   url: string,
   data?: any,
   config?: AxiosRequestConfig
-): Promise<CommonResponse<T>> => {
+): Promise<AxiosResponse<T>> => {
   const response = await backend.delete(url, {
     ...config,
     data: data,

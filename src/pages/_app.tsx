@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import Layout from "@/components/layout";
+import Layout from "@/components/Layout";
 import { AppProps } from "next/app";
 import localFont from "next/font/local";
 import MainCharacterProvider from "@/context/characterContext";

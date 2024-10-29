@@ -15,17 +15,21 @@ const client = axios.create({
 });
 
 const onError = (error: AxiosError | Error): Promise<AxiosError> => {
-  // if (axios.isAxiosError(error)) {
-  //   const { method, url } = error.config as InternalAxiosRequestConfig;
-  //   if (error.response) {
-  //     const { statusCode, message } = error.response.data;
-  //     console.log(
-  //       `🚨 [API - ERROR] ${method?.toUpperCase()} ${url} | ${statusCode} : ${message}`
-  //     );
-  //   }
-  // } else {
-  //   console.log(`🚨 [API] | Error ${error.message}`);
-  // }
+  if (axios.isAxiosError(error)) {
+    // console.log(error.response?.data.statusText);
+    // const { method, url } = error.config as InternalAxiosRequestConfig;
+    if (error.response) {
+      const { name } = error.response?.data;
+      if (name === "OPENAPI00004" || name === "OPENAPI00003") {
+        alert("일치하는 이름이 없습니다.");
+      }
+      // console.log(
+      //   `🚨 [API - ERROR] ${method?.toUpperCase()} ${url} | ${name} : ${statusText}`
+      // );
+    }
+  } else {
+    console.log(`🚨 [API] | Error ${error.message}`);
+  }
   return Promise.reject(error);
 };
 
@@ -48,51 +52,51 @@ interface CommonResponse<T> {
 export const Get = async <T>(
   url: string,
   config?: AxiosRequestConfig
-): Promise<CommonResponse<T>> => {
+): Promise<AxiosResponse<T>> => {
   const response = await client.get(url, config);
-  return response.data;
+  return response;
 };
 
 export const Post = async <T>(
   url: string,
   data?: any,
   config?: AxiosRequestConfig
-): Promise<CommonResponse<T>> => {
+): Promise<AxiosResponse<T>> => {
   const response = await client.post(url, data, config);
 
-  return response.data;
+  return response;
 };
 
 export const Put = async <T>(
   url: string,
   data?: any,
   config?: AxiosRequestConfig
-): Promise<CommonResponse<T>> => {
+): Promise<AxiosResponse<T>> => {
   const response = await client.put(url, data, config);
-  return response.data;
+  return response;
 };
 
 export const Patch = async <T>(
   url: string,
   data?: any,
   config?: AxiosRequestConfig
-): Promise<CommonResponse<T>> => {
+): Promise<AxiosResponse<T>> => {
   const response = await client.patch(url, data, config);
 
-  return response.data;
+  return response;
 };
 
 export const Delete = async <T>(
   url: string,
   data?: any,
   config?: AxiosRequestConfig
-): Promise<CommonResponse<T>> => {
+): Promise<AxiosResponse<T>> => {
   const response = await client.delete(url, {
     ...config,
     data: data,
   });
 
-  return response.data;
+  return response;
 };
 
 export default client;

@@ -1,9 +1,9 @@
-import { useContext, createContext, useState } from "react";
+import { useContext, createContext, useState, useEffect } from "react";
 import { MainCharacter } from "@/fetch/charFetch";
 
 interface MainCharacterContextType {
-  maincharacter: MainCharacter | null;
-  setMainCharacter: (newValue: MainCharacter) => void;
+  mainCharacter: MainCharacter | null;
+  setMainCharacter: (newValue: MainCharacter | null) => void;
 }
 
 const MainCharacterContext = createContext<null | MainCharacterContextType>(
@@ -13,14 +13,14 @@ const MainCharacterContext = createContext<null | MainCharacterContextType>(
 const MainCharacterProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [maincharacter, setMainCharacter] = useState<MainCharacter | null>(
+  const [mainCharacter, setMainCharacter] = useState<MainCharacter | null>(
     null
   );
 
   return (
     <MainCharacterContext.Provider
       children={children}
-      value={{ maincharacter, setMainCharacter }}
+      value={{ mainCharacter, setMainCharacter }}
     />
   );
 };

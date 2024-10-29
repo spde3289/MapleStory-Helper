@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { Get, isAxiosError } from "../backEnd";
 
 export const getMapleKey = () => process.env.NEXT_PUBLIC_MAPLEAPI_KEY;
@@ -23,7 +23,7 @@ export default async function handler(
     if (response.status === 200) {
       res.status(200).json(response); // 데이터를 클라이언트에 응답
     } else {
-      res.status(400).json(response); // 데이터를 클라이언트에 응답
+      res.status(response.status).json(response); // 에러 데이터를 클라이언트에 응답
     }
   }
 }
@@ -73,7 +73,6 @@ const getCharacter = async (character_name: string): Promise<Data> => {
     const idResponse = await Get<CharacterIdResponse>("/v1/id", {
       params: { character_name },
     });
-
     const ocid = idResponse.data.ocid;
 
     // 2단계: 대표캐릭터 기본 정보 가져오기
@@ -89,11 +88,10 @@ const getCharacter = async (character_name: string): Promise<Data> => {
     return {
       status: 200,
       statusText: "OK",
-      data: { ...basicResponse.data, ...statResponse.data, ocid },
+      data: { ...basicResponse.data, ...statResponse.data, ...idResponse.data },
     }; // 캐릭터 기본 정보 반환
   } catch (error) {
     if (axios.isAxiosError<ResponseDataType, any>(error)) {
-      console.log(error.response?.data.error.message);
       return {
         status: error.response?.status ? error.response?.status : 400,
         statusText: error.response?.data.error.message

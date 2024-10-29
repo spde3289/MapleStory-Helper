@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { Get } from "./client";
 
-interface Data {
+export interface ResponseDataType {
   data?: MainCharacter;
   status?: number;
   statusText?: string;
@@ -31,18 +31,17 @@ export interface MainCharacter {
   remain_ap: number;
 }
 
-interface ResponseDataType {
+interface ResponseErrorDataType {
   statusText: string;
   status: number;
   name: string;
-  // error: {
-  //   message: string;
-  // };
 }
 
-export const getCharOcid = async (characterName: string): Promise<Data> => {
+export const getCharOcid = async (
+  characterName: string
+): Promise<ResponseDataType> => {
   try {
-    const characterResponse = await Get<MainCharacter>(
+    const characterResponse = await Get<ResponseDataType>(
       "api/maplestory/character",
       {
         params: {
@@ -50,16 +49,15 @@ export const getCharOcid = async (characterName: string): Promise<Data> => {
         },
       }
     );
-    return characterResponse;
+    return characterResponse.data;
   } catch (error) {
-    if (axios.isAxiosError<ResponseDataType, any>(error)) {
-      console.log(error.response?.data.statusText);
+    if (axios.isAxiosError<ResponseErrorDataType, any>(error)) {
       return {
-        status: error?.response?.status ? error?.response?.status : 400,
+        status: error.response?.status ? error.response.status : 400,
         statusText: error.response?.data.statusText
-          ? error.response?.data.statusText
+          ? error.response.data.statusText
           : "에러",
-        name: error.response?.data.name ? error.response?.data.name : "에러",
+        name: error.response?.data.name ? error.response.data.name : "에러",
       };
     } else {
       return {
