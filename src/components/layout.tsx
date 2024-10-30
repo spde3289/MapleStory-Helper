@@ -1,4 +1,4 @@
-import NavBar from "./commonLayout/NavBar";
+import NavBar from './commonLayout/NavBar'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -8,7 +8,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         {children}
       </section>
     </>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout
