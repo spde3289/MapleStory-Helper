@@ -25,6 +25,22 @@
     "next/typescript"
   ],
   "rules": {
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "variable",
+        "format": ["camelCase", "PascalCase", "UPPER_CASE", "snake_case"] // snake_case 허용 추가
+      }
+    ],
+    // alert, confirm, prompt 사용을 허용
+    "no-alert": "off",
+
+    // console 허용
+    "no-console": "off",
+
+    // any 타입 허용
+    "@typescript-eslint/no-explicit-any": "off",
+
     // react 17부턴 import 안해도돼서 기능 끔
     "react/react-in-jsx-scope": "off",
 

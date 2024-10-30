@@ -1,13 +1,13 @@
-import CharacterCreator from "@/components/characterCreator";
+import CharacterCreator from '@/components/characterCreator'
 
-export default function Home() {
+const Home = () => {
   return (
-    <>
-      <main className="h-full flex items-center justify-center">
-        <div>
-          <CharacterCreator />
-        </div>
-      </main>
-    </>
-  );
+    <main className="h-full flex items-center justify-center">
+      <div>
+        <CharacterCreator />
+      </div>
+    </main>
+  )
 }
+
+export default Home
