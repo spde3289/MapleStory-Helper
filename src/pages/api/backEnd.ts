@@ -1,7 +1,7 @@
 import axios, {
+  AxiosError,
   AxiosRequestConfig,
   AxiosResponse,
-  AxiosError,
   InternalAxiosRequestConfig,
 } from 'axios'
 // 넥슨 베이스 URL

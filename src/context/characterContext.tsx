@@ -1,5 +1,5 @@
-import { useContext, createContext, useState, useMemo } from 'react'
 import { MainCharacter } from '@/fetch/charFetch'
+import { createContext, useContext, useMemo, useState } from 'react'
 
 interface MainCharacterContextType {
   mainCharacter: MainCharacter | null

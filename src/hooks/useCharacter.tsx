@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import { useMainCharacterContext } from '@/context/characterContext' // 실제 경로로 수정
+import { useMainCharacterContext } from '@/context/characterContext'
 import { getCharOcid } from '@/fetch/charFetch'
-import { setCookie, getCookie } from 'cookies-next'
+import { getCookie, setCookie } from 'cookies-next'
+import { useState } from 'react'
 
 const useCharacter = () => {
   const [character, setCharacter] = useState<string>('')

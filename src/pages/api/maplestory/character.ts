@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
+import type { NextApiRequest, NextApiResponse } from 'next'
 import { Get } from '../backEnd'
 
 // 대표캐릭터 기본정보 + 스텟 정보

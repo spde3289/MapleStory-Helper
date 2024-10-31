@@ -1,6 +1,6 @@
 import { useMainCharacterContext } from '@/context/characterContext'
-import SearchCharacter from './SearchCharacter'
 import MainCharacterCard from './MainCharacterCard'
+import SearchCharacter from './SearchCharacter'
 
 const CharacterCreator = () => {
   const { mainCharacter } = useMainCharacterContext()

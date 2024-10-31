@@ -1,11 +1,11 @@
-import Image, { StaticImageData } from 'next/image'
-import { useState, useEffect } from 'react'
-import { deleteCookie } from 'cookies-next'
 import { useMainCharacterContext } from '@/context/characterContext'
 import { MainCharacter } from '@/fetch/charFetch'
-import { FaRegTrashAlt } from 'react-icons/fa'
-import worldIcons from '@/icons/world'
 import noChar from '@/icons/character/no_char.png'
+import worldIcons from '@/icons/world'
+import { deleteCookie } from 'cookies-next'
+import Image, { StaticImageData } from 'next/image'
+import { useEffect, useState } from 'react'
+import { FaRegTrashAlt } from 'react-icons/fa'
 
 const MainCharacterCard = ({
   mainCharacter,
