@@ -22,7 +22,6 @@ const myFont = localFont({
 })
 
 const App = ({ Component, pageProps }: AppProps) => {
-  console.log('dasds')
   return (
     <div className={`${myFont.className} flex`}>
       <MainCharacterProvider>

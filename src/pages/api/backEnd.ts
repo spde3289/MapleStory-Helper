@@ -30,6 +30,23 @@ backend.interceptors.request.use(
   },
 )
 
+// const request = (res: AxiosResponse) => {
+//   const { method, url } = res.config
+//   const { status, statusText } = res
+//   console.log(res)
+//   if (statusText === 'OK') {
+//     console.log(
+//       `[API - RESPONSE] ${method?.toUpperCase()} ${url} | ${status} : ${statusText}`,
+//     )
+//   } else {
+//     console.log(
+//       `[API - ERROR] ${method?.toUpperCase()} ${url} | ${status} : ${statusText}`,
+//     )
+//   }
+
+//   return res
+// }
+
 // 리스폰스 인터셉터
 backend.interceptors.response.use(
   (res: AxiosResponse) => {

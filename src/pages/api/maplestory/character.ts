@@ -15,7 +15,6 @@ const getCharacter = async (character_name: string): Promise<Data> => {
     const basicResponse = await Get<BasicResponse>('/v1/character/basic', {
       params: { ocid },
     })
-
     // 3단계: 대표캐릭터 스텟 정보 가져오기
     const statResponse = await Get<StatResponse>('/v1/character/stat', {
       params: { ocid },

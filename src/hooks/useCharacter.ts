@@ -1,33 +1,18 @@
 import { useMainCharacterContext } from '@/context/characterContext'
 import { getCharOcid } from '@/fetch/charFetch'
-import { getCookie, setCookie } from 'cookies-next'
+import { setYear } from '@/utils/setDate'
+import { setCookie } from 'cookies-next'
 import { useState } from 'react'
 
 const useCharacter = () => {
   const [character, setCharacter] = useState<string>('')
   const { setMainCharacter } = useMainCharacterContext()
 
-  const date = new Date()
-  date.setFullYear(date.getFullYear() + 1)
-
   const options = {
-    expires: date,
+    expires: setYear(1),
   }
 
-  const fetchData = async () => {
-    const ocid = getCookie('ocid', options) // 캐릭터이름저장
-    if (typeof ocid === 'string') {
-      const { data, statusText } = await getCharOcid(ocid)
-      if (statusText === 'OK' && data) {
-        setMainCharacter(data)
-      }
-    }
-  }
-  fetchData()
-  // useEffect(() => {
-  // }, [])
-
-  const handlerSubmit = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+  async function handlerSubmit(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter') {
       ;(e.target as HTMLInputElement).blur() // 포커스아웃
       const { data, statusText } = await getCharOcid(character)

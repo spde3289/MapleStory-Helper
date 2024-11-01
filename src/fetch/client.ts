@@ -17,16 +17,11 @@ const client = axios.create({
 
 const onError = (error: AxiosError | Error): Promise<AxiosError> => {
   if (axios.isAxiosError(error)) {
-    // console.log(error.response?.data.statusText);
-    // const { method, url } = error.config as InternalAxiosRequestConfig;
     if (error?.response) {
       const name = error.response?.data?.name || '' // 기본값을 빈 문자열로 설정
       if (name === 'OPENAPI00004' || name === 'OPENAPI00003') {
         alert('일치하는 이름이 없습니다.')
       }
-      // console.log(
-      //   `🚨 [API - ERROR] ${method?.toUpperCase()} ${url} | ${name} : ${statusText}`
-      // );
     }
   } else {
     console.log(`🚨 [API] | Error ${error.message}`)

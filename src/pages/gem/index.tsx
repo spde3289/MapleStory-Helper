@@ -1,4 +1,8 @@
+import { useMainCharacterContext } from '@/context/characterContext'
+
 const GemPage = () => {
+  const { mainCharacter } = useMainCharacterContext()
+  console.log(mainCharacter)
   return (
     <main className="flex items-center justify-evenly w-full h-full">
       <section className="bg-white">캐릭터 추가</section>
