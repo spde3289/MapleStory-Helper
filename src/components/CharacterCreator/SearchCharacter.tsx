@@ -1,18 +1,19 @@
 import { useMainCharacterContext } from '@/context/characterContext'
 import { getCharOcid } from '@/fetch/charFetch'
+import { checkHangulRex } from '@/utils/inputUtils'
 import { setYear } from '@/utils/setDate'
 import { setCookie } from 'cookies-next'
 import { useState } from 'react'
 
-const useCharacter = () => {
-  const [character, setCharacter] = useState<string>('')
+const SearchCharacter = () => {
   const { setMainCharacter } = useMainCharacterContext()
+  const [character, setCharacter] = useState<string>('')
 
   const options = {
     expires: setYear(1),
   }
 
-  async function handlerSubmit(e: React.KeyboardEvent<HTMLInputElement>) {
+  const handlerSubmit = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       ;(e.target as HTMLInputElement).blur() // 포커스아웃
       const { data, statusText } = await getCharOcid(character)
@@ -30,17 +31,18 @@ const useCharacter = () => {
   }
 
   const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const regex = /^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ]*$/ // 한글, 영어, 숫자만 입력 가능 스페이스바 불가능
-    if (regex.test(e.target.value)) {
-      setCharacter(e.target.value)
-    }
+    if (checkHangulRex(e.target.value)) setCharacter(e.target.value)
   }
 
-  return {
-    character,
-    handlerChange,
-    handlerSubmit,
-  }
+  return (
+    <input
+      className="h-8 p-3 rounded-lg"
+      placeholder="대표 캐릭터를 등록해주세요"
+      value={character}
+      onChange={handlerChange}
+      onKeyDown={handlerSubmit}
+    />
+  )
 }
 
-export default useCharacter
+export default SearchCharacter

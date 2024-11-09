@@ -1,4 +1,4 @@
-import { MainCharacterResponse } from '@/type/axios/characterType'
+import { CharListResponse } from '@/type/axios/charListType'
 import {
   ResponseDataType,
   ResponseErrorDataType,
@@ -7,17 +7,19 @@ import axios from 'axios'
 import { Get } from './client'
 import Paths from './path'
 
-export const getCharOcid = async (
-  characterName: string,
-): Promise<ResponseDataType<MainCharacterResponse>> => {
+export const getCharList = async (
+  ApiKey: string,
+): Promise<ResponseDataType<CharListResponse>> => {
   try {
-    const characterResponse = await Get<
-      ResponseDataType<MainCharacterResponse>
-    >(Paths.character, {
-      params: {
-        character_name: characterName,
+    const characterResponse = await Get<ResponseDataType<CharListResponse>>(
+      Paths.characterList,
+      {
+        params: {
+          ApiKey,
+        },
       },
-    })
+    )
+    console.log(characterResponse)
     return characterResponse.data
   } catch (error) {
     if (axios.isAxiosError<ResponseErrorDataType, any>(error)) {

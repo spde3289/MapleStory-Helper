@@ -1,4 +1,4 @@
-import CharacterCreator from '@/components/characterCreator'
+import CharacterCreator from '@/components/CharacterCreator'
 
 const Home = () => {
   return (

@@ -13,6 +13,7 @@ const backend = axios.create({
   timeout: 3000,
   baseURL: getBackEndBase(),
   headers: {
+    'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
     'x-nxopen-api-key': getMapleKey(),
   },

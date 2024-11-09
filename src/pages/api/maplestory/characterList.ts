@@ -1,9 +1,4 @@
-import {
-  BasicResponse,
-  CharacterIdResponse,
-  MainCharacterResponse,
-  StatResponse,
-} from '@/type/axios/characterType'
+import { CharListResponse } from '@/type/axios/charListType'
 import {
   APIResponseErrorDataType,
   ResponseDataType,
@@ -14,30 +9,20 @@ import { Get } from '../backEnd'
 import { Paths } from '../path'
 
 // 캐릭터 기본정보 + 스텟 정보
-const getCharacter = async (
-  character_name: string,
-): Promise<ResponseDataType<MainCharacterResponse>> => {
+const getCharacterList = async (
+  ApiKey: string,
+): Promise<ResponseDataType<CharListResponse>> => {
   try {
-    // 1단계: 캐릭터 식별자 가져오기
-    const idResponse = await Get<CharacterIdResponse>(Paths.Ocid, {
-      params: { character_name },
-    })
-    const { ocid } = idResponse.data
-
-    // 2단계: 캐릭터 기본 정보 가져오기
-    const basicResponse = await Get<BasicResponse>(Paths.CharBasic, {
-      params: { ocid },
-    })
-    // 3단계: 캐릭터 스텟 정보 가져오기
-    const statResponse = await Get<StatResponse>(Paths.CharStat, {
-      params: { ocid },
+    // 1단계: 보유 캐릭터 리스트 가져오기
+    const charListResponse = await Get<CharListResponse>(Paths.CharList, {
+      headers: { 'x-nxopen-api-key': ApiKey },
     })
 
     return {
       status: 200,
       statusText: 'OK',
-      data: { ...basicResponse.data, ...statResponse.data, ...idResponse.data },
-    } // 캐릭터 기본 정보 반환
+      data: { ...charListResponse.data },
+    }
   } catch (error) {
     if (axios.isAxiosError<APIResponseErrorDataType, any>(error)) {
       return {
@@ -60,13 +45,14 @@ const getCharacter = async (
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResponseDataType<MainCharacterResponse>>,
+  res: NextApiResponse<ResponseDataType<CharListResponse>>,
 ) {
-  const { character_name } = req.query
+  const { ApiKey } = req.query
   // 캐릭터 get 요청
-  if (req.method === 'GET' && typeof character_name === 'string') {
+  if (req.method === 'GET' && typeof ApiKey === 'string') {
     // 외부 API 요청
-    const response = await getCharacter(character_name)
+    const response = await getCharacterList(ApiKey)
+
     if (response.status === 200) {
       res.status(200).json(response) // 데이터를 클라이언트에 응답
     } else {

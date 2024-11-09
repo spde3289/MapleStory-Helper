@@ -4,7 +4,7 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios'
-
+// api 폴더 URL
 export const getClientBase = () => process.env.NEXT_PUBLIC_BACKEND_URL
 
 const client = axios.create({
@@ -12,6 +12,7 @@ const client = axios.create({
   baseURL: getClientBase(),
   headers: {
     'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
   },
 })
 
