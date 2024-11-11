@@ -1,9 +1,9 @@
-import { MainCharacter } from '@/fetch/charFetch'
+import { MainCharacterResponse } from '@/type/axios/characterType'
 import { createContext, useContext, useMemo, useState } from 'react'
 
 interface MainCharacterContextType {
-  mainCharacter: MainCharacter | null
-  setMainCharacter: (newValue: MainCharacter | null) => void
+  mainCharacter: MainCharacterResponse | null
+  setMainCharacter: (newValue: MainCharacterResponse | null) => void
 }
 
 const MainCharacterContext = createContext<null | MainCharacterContextType>(
@@ -13,7 +13,8 @@ const MainCharacterContext = createContext<null | MainCharacterContextType>(
 const MainCharacterProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [mainCharacter, setMainCharacter] = useState<MainCharacter | null>(null)
+  const [mainCharacter, setMainCharacter] =
+    useState<MainCharacterResponse | null>(null)
 
   // value 객체를 useMemo로 메모이제이션
   const value = useMemo(

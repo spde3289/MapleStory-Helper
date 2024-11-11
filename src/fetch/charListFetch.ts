@@ -1,4 +1,5 @@
 import { CharListResponse } from '@/type/axios/charListType'
+import { MainCharacterResponse } from '@/type/axios/characterType'
 import {
   ResponseDataType,
   ResponseErrorDataType,
@@ -9,9 +10,9 @@ import Paths from './path'
 
 export const getCharList = async (
   ApiKey: string,
-): Promise<ResponseDataType<CharListResponse>> => {
+): Promise<ResponseDataType<MainCharacterResponse[]>> => {
   try {
-    const characterResponse = await Get<ResponseDataType<CharListResponse>>(
+    const characterListResponse = await Get<ResponseDataType<CharListResponse>>(
       Paths.characterList,
       {
         params: {
@@ -19,8 +20,38 @@ export const getCharList = async (
         },
       },
     )
-    console.log(characterResponse)
-    return characterResponse.data
+    // 220 레벨을 넘는 캐릭터 리스트
+    const level220PlusCharacters =
+      characterListResponse.data.data?.account_list[0].character_list.filter(
+        (el) => el.character_level >= 220,
+      )
+
+    const level220PlusCharactersResponse: MainCharacterResponse[] = []
+
+    if (level220PlusCharacters?.length) {
+      const requests = level220PlusCharacters.map((character) => {
+        return Get<ResponseDataType<MainCharacterResponse>>(Paths.character, {
+          params: { character_name: character.character_name },
+        })
+      })
+      try {
+        const responses = await Promise.all(requests)
+
+        responses.forEach((response) => {
+          if (response?.data?.data) {
+            level220PlusCharactersResponse.push(response.data.data)
+          }
+        })
+      } catch (error) {
+        console.error('요청 중 오류가 발생했습니다:', error)
+      }
+    }
+
+    return {
+      data: level220PlusCharactersResponse,
+      status: 200,
+      statusText: 'OK',
+    }
   } catch (error) {
     if (axios.isAxiosError<ResponseErrorDataType, any>(error)) {
       return {

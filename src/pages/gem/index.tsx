@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import CharacterSection from '@/components/Gem/CharacterSection'
-import GemSection from '@/components/Gem/GemSection'
+import CharacterSection from '@/components/gem/CharacterSection'
+import GemSection from '@/components/gem/GemSection'
 
 const GemPage = () => {
   return (
