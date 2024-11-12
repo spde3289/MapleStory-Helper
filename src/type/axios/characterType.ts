@@ -1,3 +1,5 @@
+import { WorldType } from '@/type/character/world'
+
 export interface ResponseErrorType {
   statusText: string
   status: number
@@ -10,7 +12,7 @@ export interface ResponseErrorType {
 export interface MainCharacterResponse {
   date: string
   character_name: string
-  world_name: string
+  world_name: WorldType
   character_gender: string
   character_class: string
   character_class_level: string
