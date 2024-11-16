@@ -29,13 +29,17 @@ export const getCharList = async (
     const level220PlusCharactersResponse: MainCharacterResponse[] = []
 
     if (level220PlusCharacters?.length) {
-      const requests = level220PlusCharacters.map((character) => {
-        return Get<ResponseDataType<MainCharacterResponse>>(Paths.character, {
-          params: { character_name: character.character_name },
-        })
-      })
       try {
-        const responses = await Promise.all(requests)
+        const responses = await Promise.all(
+          level220PlusCharacters.map((character) => {
+            return axios.get<ResponseDataType<MainCharacterResponse>>(
+              `http://localhost:3000/api${Paths.character}`,
+              {
+                params: { character_name: character.character_name },
+              },
+            )
+          }),
+        )
 
         responses.forEach((response) => {
           if (response?.data?.data) {
@@ -47,8 +51,18 @@ export const getCharList = async (
       }
     }
 
+    console.log(
+      level220PlusCharactersResponse.sort(
+        (a, b) => a.character_level - b.character_level,
+      ),
+    )
     return {
-      data: level220PlusCharactersResponse,
+      data: level220PlusCharactersResponse.sort((a, b) => {
+        if (a.character_level === b.character_level) {
+          return b.final_stat[42].stat_value - a.final_stat[42].stat_value
+        }
+        return b.character_level - a.character_level
+      }),
       status: 200,
       statusText: 'OK',
     }

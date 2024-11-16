@@ -23,7 +23,6 @@ const getCharacter = async (
       params: { character_name },
     })
     const { ocid } = idResponse.data
-
     // 2단계: 캐릭터 기본 정보 가져오기
     const basicResponse = await Get<BasicResponse>(Paths.CharBasic, {
       params: { ocid },
@@ -33,10 +32,20 @@ const getCharacter = async (
       params: { ocid },
     })
 
+    const statData = {
+      remain_ap: statResponse.data.remain_ap,
+      final_stat: statResponse.data.final_stat.map((stat) => {
+        return {
+          stat_name: stat.stat_name,
+          stat_value: Number(stat.stat_value),
+        }
+      }),
+    }
+
     return {
       status: 200,
       statusText: 'OK',
-      data: { ...basicResponse.data, ...statResponse.data, ...idResponse.data },
+      data: { ...idResponse.data, ...basicResponse.data, ...statData },
     } // 캐릭터 기본 정보 반환
   } catch (error) {
     if (axios.isAxiosError<APIResponseErrorDataType, any>(error)) {

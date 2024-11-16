@@ -1,5 +1,12 @@
+import ItemContainer from '@/commonComponents/ItemContainer'
+
 const GemSection = () => {
-  return <section className="bg-white">결졍석 판매 가격</section>
+  return (
+    <ItemContainer title="결정석 판매 가격">
+      <div>어쩌구 저쩌구</div>
+      <div>어쩌구 저쩌구</div>
+    </ItemContainer>
+  )
 }
 
 export default GemSection

@@ -33,7 +33,9 @@ const NavBar = () => {
           </div>
           <ul className="ml-3 mr-3 space-y-6 font-bold ">
             <li className="pl-3">
-              <Link href="/gem">보스 결졍석</Link>
+              <h2>
+                <Link href="/gem">보스 결졍석</Link>
+              </h2>
             </li>
           </ul>
         </>

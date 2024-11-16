@@ -7,7 +7,7 @@ import axios from 'axios'
 import { Get } from './client'
 import Paths from './path'
 
-export const getCharOcid = async (
+export const getCharInfo = async (
   characterName: string,
 ): Promise<ResponseDataType<MainCharacterResponse>> => {
   try {

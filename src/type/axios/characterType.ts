@@ -27,7 +27,7 @@ export interface MainCharacterResponse {
   ocid: string
   final_stat: {
     stat_name: string
-    stat_value: string
+    stat_value: number
   }[]
   remain_ap: number
 }
@@ -39,7 +39,7 @@ export interface CharacterIdResponse {
 export interface BasicResponse {
   date: string
   character_name: string
-  world_name: string
+  world_name: WorldType
   character_gender: string
   character_class: string
   character_class_level: string
