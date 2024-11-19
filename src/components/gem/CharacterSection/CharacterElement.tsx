@@ -1,3 +1,4 @@
+import BossImage from '@/commonComponents/BossImage'
 import CharacterImage from '@/commonComponents/CharacterImage'
 import {
   characterInfo,
@@ -5,7 +6,7 @@ import {
 } from '@/context/characterInfoListContext'
 import { WorldType } from '@/type/character/world'
 import { formatKoreanNumber } from '@/utils/numberUtils'
-import { memo } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 type WorldListType = {
   world: WorldType
@@ -22,6 +23,25 @@ const CharacterElement = ({
   currentWorld,
 }: CharacterElementPropsType) => {
   const { setCharacterInfoList } = useCharacterInfoListContext()
+  const [currentBossList, setCurrentBossList] = useState<any[]>([])
+
+  useEffect(() => {
+    const arr: any[] = []
+    character?.boss.forEach((boss) => {
+      if (boss.type.filter((type) => type.current === true).length !== 0) {
+        arr.push({
+          name: boss.name,
+          krName: boss.krName,
+          difficulty: boss.type.find((type) => type.current === true)
+            ?.difficulty,
+        })
+        setCurrentBossList(arr)
+      } else if (arr.length === 0) {
+        setCurrentBossList([])
+      }
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [character])
 
   if (currentWorld?.world !== character.world_name) return null
 
@@ -47,7 +67,7 @@ const CharacterElement = ({
       onKeyDown={handleCharacter}
       tabIndex={0}
       role="button"
-      className={`mr-6 items-center flex ${currentCss} rounded-lg`}
+      className={` items-center flex ${currentCss} rounded-lg`}
     >
       <div className="flex items-center flex-col text-sm mr-4 w-24">
         <CharacterImage
@@ -57,9 +77,24 @@ const CharacterElement = ({
         />
         {character.character_name}
       </div>
-      <div className="h-fit w-36">
-        <div className="text-xs">{character.final_stat[42].stat_name}</div>
-        <div>{combatPower}</div>
+      <div className="h-fit w-32">
+        <div>
+          <div>LV. {character.character_level}</div>
+        </div>
+        <div>
+          <div className="text-xs">{character.final_stat[42].stat_name}</div>
+          <div>{combatPower}</div>
+        </div>
+      </div>
+      <div className="flex gap-1">
+        {currentBossList.map((boss) => {
+          return (
+            <div className="flex flex-col w-10 items-center" key={boss.name}>
+              <BossImage boss={boss.name} />
+              <div className="text-xs">{boss.difficulty}</div>
+            </div>
+          )
+        })}
       </div>
     </div>
   )

@@ -1,4 +1,5 @@
 import ItemContainer from '@/commonComponents/ItemContainer'
+import { memo } from 'react'
 
 const GemSection = () => {
   return (
@@ -9,4 +10,4 @@ const GemSection = () => {
   )
 }
 
-export default GemSection
+export default memo(GemSection)

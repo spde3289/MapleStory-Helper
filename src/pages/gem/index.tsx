@@ -6,8 +6,10 @@ const GemPage = () => {
   return (
     <main className="flex w-full h-full p-3 pl-12 gap-3 overflow-y-scroll">
       <CharacterSection />
-      <BossSection />
-      <GemSection />
+      <div className="flex flex-col gap-3">
+        <GemSection />
+        <BossSection />
+      </div>
     </main>
   )
 }

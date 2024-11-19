@@ -4,10 +4,10 @@ import { memo } from 'react'
 
 interface BossImagePropsType {
   boss: string
-  className: string
+  className?: string
 }
 
-const BossImage = ({ boss, className }: BossImagePropsType) => {
+const BossImage = ({ boss, className = '' }: BossImagePropsType) => {
   return (
     <Image
       className={className}

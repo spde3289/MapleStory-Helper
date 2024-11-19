@@ -1,7 +1,14 @@
 import BossImage from '@/commonComponents/BossImage'
 import ItemContainer from '@/commonComponents/ItemContainer'
 import { useCharacterInfoListContext } from '@/context/characterInfoListContext'
-import { ChangeEvent, memo, useEffect, useState } from 'react'
+import bosses from '@/data/boss'
+import {
+  ChangeEvent,
+  memo,
+  MouseEventHandler,
+  useEffect,
+  useState,
+} from 'react'
 import BossDummy from './BossDummy'
 
 // interface CheckedBoss {
@@ -60,12 +67,74 @@ const BossSection = () => {
     )
   }
 
+  const handleSetBoss: MouseEventHandler<HTMLButtonElement> = (e) => {
+    const key = e.currentTarget.id
+
+    setCharacterInfoList((prev) =>
+      prev.map((item) => {
+        if (item.ocid !== currentChar.ocid) return item
+
+        return { ...item, boss: bosses[key] }
+      }),
+    )
+  }
+
   return (
     <ItemContainer title="보스 리스트">
       <>
+        <div className="flex gap-4 mb-2">
+          <button
+            onClick={handleSetBoss}
+            id="sde"
+            className="px-2 bg-gray-200 rounded-xl"
+            type="button"
+          >
+            스데
+          </button>
+          <button
+            onClick={handleSetBoss}
+            id="gaenseul"
+            className="px-2 bg-gray-200 rounded-xl"
+            type="button"
+          >
+            가엔슬
+          </button>
+          <button
+            onClick={handleSetBoss}
+            id="irushi"
+            className="px-2 bg-gray-200 rounded-xl"
+            type="button"
+          >
+            이루시
+          </button>
+          <button
+            onClick={handleSetBoss}
+            id="ruwill"
+            className="px-2 bg-gray-200 rounded-xl"
+            type="button"
+          >
+            이루윌
+          </button>
+          <button
+            onClick={handleSetBoss}
+            id="geommitsol"
+            className="px-2 bg-gray-200 rounded-xl"
+            type="button"
+          >
+            검밑솔
+          </button>
+          <button
+            onClick={handleSetBoss}
+            id="haseikal"
+            className="px-2 bg-gray-200 rounded-xl"
+            type="button"
+          >
+            하세이칼
+          </button>
+        </div>
         {currentChar.boss.map((boss) => {
           return (
-            <div className="flex" key={boss.name}>
+            <div className="flex w-[510px]" key={boss.name}>
               <div className="flex items-center w-48 mb-1">
                 <BossImage className="mr-2" boss={boss.name} />
                 <div>{boss.krName}</div>

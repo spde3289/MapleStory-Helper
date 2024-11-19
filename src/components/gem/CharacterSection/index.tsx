@@ -110,35 +110,37 @@ const CharacterSection = () => {
 
   return (
     <ItemContainer title="캐릭터 등록">
-      <input
-        className="h-8 p-3 w-80 rounded-lg outline-none bg-gray-200"
-        placeholder="캐릭터 이름 혹은 APIKEY를 입력해 주세요"
-        value={characterName}
-        onChange={handlerChange}
-        onKeyDown={handlerSubmit}
-      />
-      <div className="p-1 h-fit">
-        {worldList.map((world) => {
-          return (
-            <button
-              key={world.world}
-              className="mr-6"
-              type="button"
-              onClick={() => handleWorldChange(world)}
-            >
-              {world.world}
-            </button>
-          )
-        })}
-        {characterInfoList.map((char) => {
-          return (
-            <CharacterElement
-              key={char.ocid}
-              currentWorld={worldList.find((world) => world.current)}
-              character={char}
-            />
-          )
-        })}
+      <div className="w-[780px]">
+        <input
+          className="h-8 p-3 w-full rounded-lg outline-none bg-gray-200"
+          placeholder="캐릭터 이름 혹은 APIKEY를 입력해 주세요"
+          value={characterName}
+          onChange={handlerChange}
+          onKeyDown={handlerSubmit}
+        />
+        <div className="p-1 h-fit">
+          {worldList.map((world) => {
+            return (
+              <button
+                key={world.world}
+                className="mr-6"
+                type="button"
+                onClick={() => handleWorldChange(world)}
+              >
+                {world.world}
+              </button>
+            )
+          })}
+          {characterInfoList.map((char) => {
+            return (
+              <CharacterElement
+                key={char.ocid}
+                currentWorld={worldList.find((world) => world.current)}
+                character={char}
+              />
+            )
+          })}
+        </div>
       </div>
     </ItemContainer>
   )

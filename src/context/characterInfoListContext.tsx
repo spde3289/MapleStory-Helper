@@ -1,4 +1,4 @@
-import BossInfo from '@/data/boss.json'
+import BossInfo from '@/data/boss/boss.json'
 import { MainCharacterResponse } from '@/type/axios/characterType'
 import {
   createContext,

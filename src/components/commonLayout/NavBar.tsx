@@ -4,17 +4,19 @@ import Link from 'next/link'
 import { useState } from 'react'
 import AccordionLayoutButton from './AccordionLayoutButton'
 
+const width = 'w-52'
+
 const NavBar = () => {
-  const [navWidth, setNavWidth] = useState<string>('w-56')
+  const [navWidth, setNavWidth] = useState<string>(width)
 
   const handelNavWidth = () => {
-    if (navWidth === 'w-56') setNavWidth('w-0')
-    if (navWidth === 'w-0') setNavWidth('w-56')
+    if (navWidth === width) setNavWidth('w-0')
+    if (navWidth === 'w-0') setNavWidth(width)
   }
 
   return (
-    <nav className={`${navWidth} pt-4 relative transition-all`}>
-      {navWidth === 'w-56' && (
+    <nav className={`${navWidth} w- pt-4 relative transition-all`}>
+      {navWidth === width && (
         <>
           <div className="flex flex-col items-center mb-6">
             <Link href="/">
@@ -22,8 +24,8 @@ const NavBar = () => {
                 <Image
                   className="mr-2"
                   src={maple}
-                  width={42}
-                  height={42}
+                  width={32}
+                  height={32}
                   alt="메이플 아이콘"
                 />
                 Maple Helper
@@ -42,6 +44,7 @@ const NavBar = () => {
       )}
       <AccordionLayoutButton
         navWidth={navWidth}
+        width={width}
         handelNavWidth={handelNavWidth}
       />
     </nav>
