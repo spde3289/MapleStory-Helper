@@ -1,5 +1,5 @@
 import { useMainCharacterContext } from '@/context/characterContext'
-import { getCharOcid } from '@/fetch/charFetch'
+import { getCharInfo } from '@/fetch/charFetch'
 import { checkHangulRex } from '@/utils/inputUtils'
 import { setYear } from '@/utils/setDate'
 import { setCookie } from 'cookies-next'
@@ -16,11 +16,11 @@ const SearchCharacter = () => {
   const handlerSubmit = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       ;(e.target as HTMLInputElement).blur() // 포커스아웃
-      const { data, statusText } = await getCharOcid(character)
+      const { data, statusText } = await getCharInfo(character)
 
       if (statusText === 'OK') {
         // 쿠키에 대표 캐릭터 이름 저장
-        setCookie('ocid', data?.character_name, options)
+        setCookie('characterName', data?.character_name, options)
         if (data) {
           setMainCharacter(data)
         }

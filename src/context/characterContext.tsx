@@ -36,7 +36,7 @@ export const useMainCharacterContext = () => {
       'useMainCharacterContext must be used within a MainCharacterProvider',
     )
   }
-  return context // Context의 값을 반환
+  return context
 }
 
 export default MainCharacterProvider

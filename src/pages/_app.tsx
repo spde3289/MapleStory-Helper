@@ -1,5 +1,6 @@
 import Layout from '@/components/Layout'
 import MainCharacterProvider from '@/context/characterContext'
+import CharacterInfoListProvider from '@/context/characterInfoListContext'
 import '@/styles/globals.css'
 import { AppProps } from 'next/app'
 import localFont from 'next/font/local'
@@ -23,12 +24,14 @@ const myFont = localFont({
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <div className={`${myFont.className} flex`}>
-      <MainCharacterProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </MainCharacterProvider>
+    <div className={`${myFont.className} flex no-drag`}>
+      <CharacterInfoListProvider>
+        <MainCharacterProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </MainCharacterProvider>
+      </CharacterInfoListProvider>
     </div>
   )
 }

@@ -51,11 +51,6 @@ export const getCharList = async (
       }
     }
 
-    console.log(
-      level220PlusCharactersResponse.sort(
-        (a, b) => a.character_level - b.character_level,
-      ),
-    )
     return {
       data: level220PlusCharactersResponse.sort((a, b) => {
         if (a.character_level === b.character_level) {

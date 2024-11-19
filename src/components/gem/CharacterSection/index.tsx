@@ -1,14 +1,12 @@
 import ItemContainer from '@/commonComponents/ItemContainer'
+import { useCharacterInfoListContext } from '@/context/characterInfoListContext'
 import { getCharInfo } from '@/fetch/charFetch'
 import { getCharList } from '@/fetch/charListFetch'
-// import { Get } from '@/fetch/client'
 import { MainCharacterResponse } from '@/type/axios/characterType'
 import { WorldType } from '@/type/character/world'
 import { checkHangulRex } from '@/utils/inputUtils'
-// import axios from 'axios'
 import { memo, useCallback, useEffect, useState } from 'react'
 import CharacterElement from './CharacterElement'
-import WorldButton from './WorldButton'
 
 // then은 요청에 대한 응답을 기다리고 다음 줄을 실행한다.
 // 함수가 종료 되어도 요청에 대한 응답이 오게 되면 실행이 된다
@@ -27,87 +25,35 @@ type WorldListType = {
   current: boolean
 }
 
-// const axiosArr = (char220List) => {
-//   return char220List.map((char: any) =>
-//     Get('https://open.api.nexon.com/maplestory/v1/character/basic', {
-//       headers: {
-//         'x-nxopen-api-key':
-//           '',
-//       },
-//       params: { ocid: char.ocid },
-//     }),
-//   )
-// }
-
-// const getcharacterOcid = async (char220List) => {
-//   const data = await Promise.all(
-//     char220List.map((char: any) =>
-//       Get('https://open.api.nexon.com/maplestory/v1/character/basic', {
-//         headers: {
-//           'x-nxopen-api-key':
-//             '',
-//         },
-//         params: { ocid: char.ocid },
-//       }),
-//     ),
-//   )
-//   return data
-// }
-
-//
 const CharacterSection = () => {
   const [characterName, setCharacterName] = useState<InputType | string>('')
   const [worldList, setWorldList] = useState<WorldListType[]>([])
-  const [characterList, setCharacterList] = useState<MainCharacterResponse[]>(
-    [],
-  )
+  const { characterInfoList, handleCharacterInfo } =
+    useCharacterInfoListContext()
 
   useEffect(() => {
     const uniqueWorldNames = Array.from(
-      new Set(characterList.map((character) => character.world_name)),
+      new Set(characterInfoList.map((character) => character.world_name)),
     )
 
-    setWorldList([
-      ...uniqueWorldNames.map((world) => ({
-        world,
-        current: false,
-      })),
-    ])
-  }, [characterList])
+    if (
+      worldList.length === 0 ||
+      uniqueWorldNames.length !== worldList.length
+    ) {
+      setWorldList([
+        ...uniqueWorldNames.map((world) => ({
+          world,
+          current: false,
+        })),
+      ])
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [characterInfoList])
 
   const handlerSubmit = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       ;(e.target as HTMLInputElement).blur() // 포커스아웃
       if (isApiKeyTypeCheck(characterName)) {
-        // const charList = await axios.get(
-        //   'https://open.api.nexon.com/maplestory/v1/character/list',
-        //   {
-        //     headers: {
-        //       'x-nxopen-api-key':
-        //         '',
-        //     },
-        //   },
-        // )
-        // const char220List = charList.data.account_list[0].character_list.filter(
-        //   (c: any) => {
-        //     if (c.character_level > 220) {
-        //       return true
-        //     }
-        //     return false
-        //   },
-        // )
-        // const char220ListData = await Promise.all(
-        //   char220List.map((char: any) =>
-        //     axios.get('http://localhost:3000/api/maplestory/character', {
-        //       params: { character_name: char.character_name },
-        //     }),
-        //   ),
-        // )
-
-        // char220ListData.forEach((data) => {
-        //   setCharacterList((pre) => [...pre, data.data.data])
-        // })
-
         // apikey를 입력 했을 시 //////////////////////////////////////////////
         const { data } = await getCharList(characterName)
 
@@ -116,16 +62,14 @@ const CharacterSection = () => {
 
           data.forEach((character) => {
             // ocid값이 중복이 아닌 경우에만 배열에 추가
-            // console.log(characterList.length !== 0)
             if (
-              !characterList.some((char) => character.ocid === char.ocid) ||
-              characterList.length === 0
+              !characterInfoList.some((char) => character.ocid === char.ocid) ||
+              characterInfoList.length === 0
             ) {
               UniqueArr.push(character)
             }
           })
-
-          setCharacterList((pre) => [...pre, ...UniqueArr])
+          handleCharacterInfo(UniqueArr)
         }
       } else {
         // 수동으로 원하는 캐릭터를 입력
@@ -133,10 +77,10 @@ const CharacterSection = () => {
 
         if (data) {
           if (
-            characterList.length === 0 ||
-            !characterList.some((character) => character.ocid === data.ocid)
+            characterInfoList.length === 0 ||
+            !characterInfoList.some((character) => character.ocid === data.ocid)
           ) {
-            setCharacterList((pre) => [...pre, data])
+            handleCharacterInfo(data)
           } else {
             alert(
               `중복된 닉네임으로 인해 추가하지 않음: ${data.character_name}`,
@@ -144,6 +88,7 @@ const CharacterSection = () => {
           }
         }
       }
+      setCharacterName('')
     }
   }
 
@@ -175,19 +120,22 @@ const CharacterSection = () => {
       <div className="p-1 h-fit">
         {worldList.map((world) => {
           return (
-            <WorldButton
+            <button
               key={world.world}
-              world={world}
-              handleWorldChange={handleWorldChange}
-            />
+              className="mr-6"
+              type="button"
+              onClick={() => handleWorldChange(world)}
+            >
+              {world.world}
+            </button>
           )
         })}
-        {characterList.map((el) => {
+        {characterInfoList.map((char) => {
           return (
             <CharacterElement
-              key={el.ocid}
+              key={char.ocid}
               currentWorld={worldList.find((world) => world.current)}
-              character={el}
+              character={char}
             />
           )
         })}
