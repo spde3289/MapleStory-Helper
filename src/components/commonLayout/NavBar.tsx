@@ -15,10 +15,10 @@ const NavBar = () => {
   }
 
   return (
-    <nav className={`${navWidth} min-w-52 pt-4 relative transition-all flex-0`}>
+    <nav className={`${navWidth} pt-4 relative transition-all flex-0`}>
       {navWidth === width && (
         <>
-          <div className="flex flex-col items-center mb-6">
+          <div className="flex flex-col items-center mb-6 min-w-52">
             <Link href="/">
               <h1 className="flex items-center font-bold">
                 <Image
