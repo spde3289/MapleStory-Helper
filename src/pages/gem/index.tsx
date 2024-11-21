@@ -1,6 +1,6 @@
-import BossSection from '@/components/gem/BossSection'
-import CharacterSection from '@/components/gem/CharacterSection'
-import GemSection from '@/components/gem/GemSection'
+import BossSection from '@/components/Gem/BossSection'
+import CharacterSection from '@/components/Gem/CharacterSection'
+import GemSection from '@/components/Gem/GemSection'
 
 const GemPage = () => {
   return (
