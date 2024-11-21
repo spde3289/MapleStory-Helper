@@ -1,6 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
+  images: {
+    domains: ['open.api.nexon.com'], // 여기에 도메인 추가
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "open.api.nexon.com",
+        pathname: "/static/maplestory/Character/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

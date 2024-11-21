@@ -1,11 +1,13 @@
-export default function Home() {
+import CharacterCreator from '@/components/CharacterCreator'
+
+const Home = () => {
   return (
-    <>
-      <div> 메인 페이지 </div>
-      <div> 메인 페이지 </div>
-      <div> 메인 페이지 </div>
-      <div> 메인 페이지 </div>
-      <div> 메인 페이지 </div>
-    </>
-  );
+    <main className="h-full flex items-center justify-center">
+      <div>
+        <CharacterCreator />
+      </div>
+    </main>
+  )
 }
+
+export default Home

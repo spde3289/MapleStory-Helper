@@ -1,33 +1,39 @@
-import "@/styles/globals.css";
-import Layout from "@/components/layout";
-import type { AppProps } from "next/app";
-import localFont from "next/font/local";
+import Layout from '@/components/Layout'
+import MainCharacterProvider from '@/context/characterContext'
+import CharacterInfoListProvider from '@/context/characterInfoListContext'
+import '@/styles/globals.css'
+import { AppProps } from 'next/app'
+import localFont from 'next/font/local'
 
 // 폰트 파일 경로를 /public/fonts 에서 가져옴
 const myFont = localFont({
   src: [
     {
-      path: "./fonts/Maplestory-light.ttf",
-      weight: "400",
-      style: "normal",
+      path: './fonts/Maplestory-light.ttf',
+      weight: '400',
+      style: 'normal',
     },
     {
-      path: "./fonts/Maplestory-bold.ttf",
-      weight: "700",
-      style: "bold",
+      path: './fonts/Maplestory-bold.ttf',
+      weight: '700',
+      style: 'bold',
     },
   ],
-  variable: "--font-Maplestory",
-});
+  variable: '--font-Maplestory',
+})
 
-export default function App({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <>
-      <main className={`${myFont.className} flex`}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </main>
-    </>
-  );
+    <div className={`${myFont.className} flex no-drag`}>
+      <CharacterInfoListProvider>
+        <MainCharacterProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </MainCharacterProvider>
+      </CharacterInfoListProvider>
+    </div>
+  )
 }
+
+export default App
