@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   images: {
+    domains: ['open.api.nexon.com'], // 여기에 도메인 추가
     remotePatterns: [
       {
         protocol: "https",

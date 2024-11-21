@@ -4,6 +4,7 @@ import { useCharacterInfoListContext } from '@/context/characterInfoListContext'
 import bosses from '@/data/boss'
 import {
   ChangeEvent,
+  ChangeEventHandler,
   memo,
   MouseEventHandler,
   useEffect,
@@ -79,10 +80,27 @@ const BossSection = () => {
     )
   }
 
+  const handleBossPlayer: ChangeEventHandler<HTMLSelectElement> = (e) => {
+    setCharacterInfoList((prev) =>
+      prev.map((item) => {
+        if (item.ocid !== currentChar.ocid) return item
+
+        const updatedBoss = item.boss.map((boss) => {
+          if (boss.krName !== e.currentTarget.id) return boss
+
+          const changeNum = Number(e.currentTarget.value)
+
+          return { ...boss, player: changeNum }
+        })
+
+        return { ...item, boss: updatedBoss }
+      }),
+    )
+  }
   return (
-    <ItemContainer title="보스 리스트">
+    <ItemContainer title="보스 리스트" className="relative">
       <>
-        <div className="flex gap-4 mb-2">
+        <div className="flex gap-4 mb-2 virtual-text-area w-[520px]">
           <button
             onClick={handleSetBoss}
             id="sde"
@@ -134,45 +152,72 @@ const BossSection = () => {
         </div>
         {currentChar.boss.map((boss) => {
           return (
-            <div className="flex w-[510px]" key={boss.name}>
-              <div className="flex items-center w-48 mb-1">
-                <BossImage className="mr-2" boss={boss.name} />
-                <div>{boss.krName}</div>
-              </div>
-              <form>
-                <fieldset className="flex">
-                  {boss.type.map((type) => {
-                    return (
-                      <label
-                        key={type.difficulty}
-                        className={`flex items-center mr-5 ${
-                          currentBossArr.length < 12
-                            ? ''
-                            : !currentBossArr.includes(boss.name) &&
-                              'text-gray-500'
-                        }`}
-                        htmlFor={`${type.difficulty}${boss.krName}`}
-                      >
-                        <input
-                          disabled={
+            <div className="flex justify-between" key={boss.name}>
+              <div className="flex">
+                <div className="flex items-center w-48 mb-1">
+                  <BossImage className="mr-2" boss={boss.name} />
+                  <div>{boss.krName}</div>
+                </div>
+                <form>
+                  <fieldset className="flex">
+                    {boss.type.map((type) => {
+                      return (
+                        <label
+                          key={type.difficulty}
+                          className={`flex items-center mr-5 ${
                             currentBossArr.length < 12
-                              ? false
-                              : !currentBossArr.includes(boss.name)
-                          }
-                          onChange={haldler}
-                          checked={type.current}
-                          className="mr-1"
-                          type="checkbox"
-                          value={`${boss.krName}`}
-                          id={`${type.difficulty}${boss.krName}`}
-                          name="group"
-                        />
-                        {type.difficulty}
-                      </label>
-                    )
-                  })}
-                </fieldset>
-              </form>
+                              ? ''
+                              : !currentBossArr.includes(boss.name) &&
+                                'text-gray-500'
+                          }`}
+                          htmlFor={`${type.difficulty}${boss.krName}`}
+                        >
+                          <input
+                            disabled={
+                              currentBossArr.length < 12
+                                ? false
+                                : !currentBossArr.includes(boss.name)
+                            }
+                            onChange={haldler}
+                            checked={type.current}
+                            className="mr-1"
+                            type="checkbox"
+                            value={`${boss.krName}`}
+                            id={`${type.difficulty}${boss.krName}`}
+                            name="group"
+                          />
+                          {type.difficulty}
+                        </label>
+                      )
+                    })}
+                  </fieldset>
+
+                  {/* <label htmlFor="cars">Choose a car:</label> */}
+                </form>
+              </div>
+              <select
+                onChange={handleBossPlayer}
+                className={` ${
+                  currentBossArr.length < 12
+                    ? ''
+                    : !currentBossArr.includes(boss.name) && 'text-gray-500'
+                }`}
+                disabled={
+                  currentBossArr.length < 12
+                    ? false
+                    : !currentBossArr.includes(boss.name)
+                }
+                name="player"
+                value={boss.player}
+                id={boss.krName}
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
             </div>
           )
         })}

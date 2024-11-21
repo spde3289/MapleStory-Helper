@@ -15,7 +15,7 @@ const NavBar = () => {
   }
 
   return (
-    <nav className={`${navWidth} w- pt-4 relative transition-all`}>
+    <nav className={`${navWidth} min-w-52 pt-4 relative transition-all flex-0`}>
       {navWidth === width && (
         <>
           <div className="flex flex-col items-center mb-6">

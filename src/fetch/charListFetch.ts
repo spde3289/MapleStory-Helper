@@ -42,7 +42,10 @@ export const getCharList = async (
         )
 
         responses.forEach((response) => {
-          if (response?.data?.data) {
+          if (
+            response?.data?.data &&
+            response.data.data.final_stat[42].stat_value >= 3000000
+          ) {
             level220PlusCharactersResponse.push(response.data.data)
           }
         })
@@ -52,12 +55,7 @@ export const getCharList = async (
     }
 
     return {
-      data: level220PlusCharactersResponse.sort((a, b) => {
-        if (a.character_level === b.character_level) {
-          return b.final_stat[42].stat_value - a.final_stat[42].stat_value
-        }
-        return b.character_level - a.character_level
-      }),
+      data: level220PlusCharactersResponse,
       status: 200,
       statusText: 'OK',
     }

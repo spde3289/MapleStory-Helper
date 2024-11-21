@@ -5,9 +5,10 @@ import irushi from './irushiBoss.json'
 import ruwill from './ruwillBoss.json'
 import sde from './sdeBoss.json'
 
-type Boss = {
+export type Boss = {
   name: string
   krName: string
+  player: number
   type: {
     difficulty: string
     price: number

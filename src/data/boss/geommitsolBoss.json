@@ -2,6 +2,7 @@
   {
     "name": "Zakum",
     "krName": "자쿰",
+    "player": 1,
     "type": [
       { "difficulty": "카오스", "price": 8980000, "current": false }
     ]
@@ -9,6 +10,7 @@
   {
     "name": "Magnus",
     "krName": "매그너스",
+    "player": 1,
     "type": [
       { "difficulty": "하드", "price": 10700000, "current": true }
     ]
@@ -16,6 +18,7 @@
   {
     "name": "Hilla",
     "krName": "힐라",
+    "player": 1,
     "type": [
       { "difficulty": "하드", "price": 6390000, "current": false }
     ]
@@ -23,6 +26,7 @@
   {
     "name": "Papulatus",
     "krName": "파풀라투스",
+    "player": 1,
     "type": [
       { "difficulty": "카오스", "price": 24700000, "current": true }
     ]
@@ -30,6 +34,7 @@
   {
     "name": "Pierre",
     "krName": "피에르",
+    "player": 1,
     "type": [
       { "difficulty": "카오스", "price": 9080000, "current": false }
     ]
@@ -37,6 +42,7 @@
   {
     "name": "BanBan",
     "krName": "반반",
+    "player": 1,
     "type": [
       { "difficulty": "카오스", "price": 9060000, "current": false }
     ]
@@ -44,6 +50,7 @@
   {
     "name": "BloodyQueen",
     "krName": "블러디퀸",
+    "player": 1,
     "type": [
       { "difficulty": "카오스", "price": 9040000, "current": true }
     ]
@@ -51,6 +58,7 @@
   {
     "name": "Vellum",
     "krName": "벨룸",
+    "player": 1,
     "type": [
       { "difficulty": "카오스", "price": 11600000, "current": true }
     ]
@@ -58,6 +66,7 @@
   {
     "name": "PinkBean",
     "krName": "핑크빈",
+    "player": 1,
     "type": [
       { "difficulty": "카오스", "price": 7310000, "current": false }
     ]
@@ -65,6 +74,7 @@
   {
     "name": "Cygnus",
     "krName": "시그너스",
+    "player": 1,
     "type": [
       { "difficulty": "이지", "price": 5060000, "current": false },
       { "difficulty": "노멀", "price": 8330000, "current": false }
@@ -73,6 +83,7 @@
   {
     "name": "Lotus",
     "krName": "스우",
+    "player": 1,
     "type": [
       { "difficulty": "노멀", "price": 31400000, "current": false },
       { "difficulty": "하드", "price": 119000000, "current": true },
@@ -82,6 +93,7 @@
   {
     "name": "Damien",
     "krName": "데미안",
+    "player": 1,
     "type": [
       { "difficulty": "노멀", "price": 32900000, "current": false },
       { "difficulty": "하드", "price": 113000000, "current": true }
@@ -90,6 +102,7 @@
   {
     "name": "GuardianAngelSlime",
     "krName": "가디언 엔젤 슬라임",
+    "player": 1,
     "type": [
       { "difficulty": "노멀", "price": 47800000, "current": false },
       { "difficulty": "카오스", "price": 161000000, "current": true }
@@ -98,6 +111,7 @@
   {
     "name": "Lucid",
     "krName": "루시드",
+    "player": 1,
     "type": [
       { "difficulty": "이지", "price": 49000000, "current": false },
       { "difficulty": "노멀", "price": 58600000, "current": false },
@@ -107,6 +121,7 @@
   {
     "name": "Will",
     "krName": "윌",
+    "player": 1,
     "type": [
       { "difficulty": "이지", "price": 53100000, "current": false },
       { "difficulty": "노멀", "price": 67600000, "current": false },
@@ -116,6 +131,7 @@
   {
     "name": "GiantMonsterGloom",
     "krName": "더스크",
+    "player": 1,
     "type": [
       { "difficulty": "노멀", "price": 72400000, "current": false },
       { "difficulty": "카오스", "price": 150000000, "current": true }
@@ -124,6 +140,7 @@
   {
     "name": "VerusHilla",
     "krName": "진 힐라",
+    "player": 1,
     "type": [
       { "difficulty": "노멀", "price": 153000000, "current": false },
       { "difficulty": "하드", "price": 200000000, "current": true }
@@ -132,6 +149,7 @@
   {
     "name": "GuardCaptainDarknell",
     "krName": "듄켈",
+    "player": 1,
     "type": [
       { "difficulty": "노멀", "price": 78100000, "current": false },
       { "difficulty": "하드", "price": 177000000, "current": true }
@@ -140,6 +158,7 @@
   {
     "name": "ChosenSeren",
     "krName": "선택받은 세렌",
+    "player": 1,
     "type": [
       { "difficulty": "노멀", "price": 227000000, "current": false },
       { "difficulty": "하드", "price": 314000000, "current": false },
@@ -149,6 +168,7 @@
   {
     "name": "KalostheGuardian",
     "krName": "감시자 칼로스",
+    "player": 1,
     "type": [
       { "difficulty": "이지", "price": 265000000, "current": false },
       { "difficulty": "노멀", "price": 364000000, "current": false },
@@ -159,6 +179,7 @@
   {
     "name": "Kaling",
     "krName": "카링",
+    "player": 1,
     "type": [
       { "difficulty": "이지", "price": 293000000, "current": false },
       { "difficulty": "노멀", "price": 425000000, "current": false },
@@ -169,6 +190,7 @@
   {
     "name": "Limbo",
     "krName": "림보",
+    "player": 1,
     "type": [
       { "difficulty": "노멀", "price": 600000000, "current": false },
       { "difficulty": "하드", "price": 1070000000, "current": false }
