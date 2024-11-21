@@ -32,8 +32,8 @@ export const getCharList = async (
       try {
         const responses = await Promise.all(
           level220PlusCharacters.map((character) => {
-            return axios.get<ResponseDataType<MainCharacterResponse>>(
-              `http://localhost:3000/api${Paths.character}`,
+            return Get<ResponseDataType<MainCharacterResponse>>(
+              Paths.character,
               {
                 params: { character_name: character.character_name },
               },
