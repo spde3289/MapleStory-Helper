@@ -1,17 +1,12 @@
 import { useMainCharacterContext } from '@/context/characterContext'
 import { getCharInfo } from '@/fetch/charFetch'
 import { checkHangulRex } from '@/utils/inputUtils'
-import { setYear } from '@/utils/setDate'
-import { setCookie } from 'cookies-next'
+import { setCharacterName } from '@/utils/localStorage/characterName'
 import { useState } from 'react'
 
 const SearchCharacter = () => {
   const { setMainCharacter } = useMainCharacterContext()
   const [character, setCharacter] = useState<string>('')
-
-  const options = {
-    expires: setYear(1),
-  }
 
   const handlerSubmit = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -19,9 +14,10 @@ const SearchCharacter = () => {
       const { data, statusText } = await getCharInfo(character)
 
       if (statusText === 'OK') {
-        // 쿠키에 대표 캐릭터 이름 저장
-        setCookie('characterName', data?.character_name, options)
         if (data) {
+          // 로컬스토리지에 대표 캐릭터 이름 저장
+          setCharacterName(data?.character_name)
+          // localStorage.setItem('characterName', data?.character_name)
           setMainCharacter(data)
         }
       }

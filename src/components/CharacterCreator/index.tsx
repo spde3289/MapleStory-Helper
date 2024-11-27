@@ -2,7 +2,7 @@ import CharacterImage from '@/commonComponents/CharacterImage'
 import ItemContainer from '@/commonComponents/ItemContainer'
 import WorldImage from '@/commonComponents/WorldImage'
 import { useMainCharacterContext } from '@/context/characterContext'
-import { deleteCookie } from 'cookies-next'
+import { removeCharacterName } from '@/utils/localStorage/characterName'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import SearchCharacter from './SearchCharacter'
 
@@ -30,7 +30,7 @@ const CharacterCreator = () => {
             type="button"
             onClick={() => {
               setMainCharacter(null)
-              deleteCookie('ocid')
+              removeCharacterName()
             }}
             className="relative hover:after:content-['삭제'] after:absolute after:w-12 after:-translate-x-1/2 after:left-1/2 after:top-10 after:bg-gray-700 after:text-white after:text-sm hover:after:px-2 hover:after:py-1 after:rounded-md"
           >
