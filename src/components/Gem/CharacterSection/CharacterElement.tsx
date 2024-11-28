@@ -60,7 +60,7 @@ const CharacterElement = ({
 
   const combatPower = formatKoreanNumber(character.final_stat[42].stat_value)
 
-  const currentCss = character.currentCharacter ? 'bg-gray-200 ' : ''
+  const currentCss = character.currentCharacter ? 'bg-white' : ''
 
   return (
     <div
@@ -70,7 +70,7 @@ const CharacterElement = ({
       role="button"
       className={` items-center flex ${currentCss} rounded-lg`}
     >
-      <div className="flex items-center flex-col text-sm mr-4 w-24">
+      <div className="flex items-center flex-col text-sm mr-4 w-24 ">
         <CharacterImage
           width={48}
           height={48}

@@ -31,6 +31,7 @@ const CharacterSection = () => {
   const { characterInfoList, handleCharacterInfo } =
     useCharacterInfoListContext()
 
+  // 월드 리스트 로직
   useEffect(() => {
     const uniqueWorldNames = Array.from(
       new Set(characterInfoList.map((character) => character.world_name)),
@@ -43,13 +44,14 @@ const CharacterSection = () => {
       setWorldList([
         ...uniqueWorldNames.map((world) => ({
           world,
-          current: false,
+          current: uniqueWorldNames[0] === world,
         })),
       ])
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [characterInfoList])
 
+  // 캐릭터 등록 로직
   const handlerSubmit = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       ;(e.target as HTMLInputElement).blur() // 포커스아웃
@@ -92,6 +94,7 @@ const CharacterSection = () => {
     }
   }
 
+  // api키 혹은 캐릭터 이름만 등록 가능
   const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (
       checkHangulRex(e.target.value) ||
@@ -101,7 +104,7 @@ const CharacterSection = () => {
       setCharacterName(e.target.value)
     }
   }
-
+  // 선택 월드 변경 로직
   const handleWorldChange = useCallback((world: WorldListType) => {
     setWorldList((pre) => [
       ...pre.map((item) => ({ ...item, current: world.world === item.world })),
@@ -112,34 +115,38 @@ const CharacterSection = () => {
     <ItemContainer title="캐릭터 등록">
       <div className="w-[780px]">
         <input
-          className="h-8 p-3 w-full rounded-lg outline-none bg-gray-200"
+          className="h-8 p-3 w-full rounded-lg outline-none bg-gray-200 mb-2"
           placeholder="캐릭터 이름 혹은 APIKEY를 입력해 주세요"
           value={characterName}
           onChange={handlerChange}
           onKeyDown={handlerSubmit}
         />
-        <div className="p-1 h-fit">
-          {worldList.map((world) => {
-            return (
-              <button
-                key={world.world}
-                className="mr-6"
-                type="button"
-                onClick={() => handleWorldChange(world)}
-              >
-                {world.world}
-              </button>
-            )
-          })}
-          {characterInfoList.map((char) => {
-            return (
-              <CharacterElement
-                key={char.ocid}
-                currentWorld={worldList.find((world) => world.current)}
-                character={char}
-              />
-            )
-          })}
+        <div className="p-1 h-fit relative">
+          <div className="absolute">
+            {worldList.map((world) => {
+              return (
+                <button
+                  key={world.world}
+                  className={`${world.current ? 'bg-gray-200 rounded-t-md' : ' '} mr-6 p-1 pb-2`}
+                  type="button"
+                  onClick={() => handleWorldChange(world)}
+                >
+                  {world.world}
+                </button>
+              )
+            })}
+          </div>
+          <div className="bg-gray-200 rounded-md mt-8 px-1 py-2">
+            {characterInfoList.map((char) => {
+              return (
+                <CharacterElement
+                  key={char.ocid}
+                  currentWorld={worldList.find((world) => world.current)}
+                  character={char}
+                />
+              )
+            })}
+          </div>
         </div>
       </div>
     </ItemContainer>
