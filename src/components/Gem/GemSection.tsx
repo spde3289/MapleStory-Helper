@@ -98,13 +98,14 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
             </div>
           )}
           <div className="">
-            {worldGemObject.map((world) => {
-              return (
-                <div key={world.name} className="text-right">
-                  {(formatToEokUnit(world.price) * value).toLocaleString()} 원
-                </div>
-              )
-            })}
+            {hidden &&
+              worldGemObject.map((world) => {
+                return (
+                  <div key={world.name} className="text-right">
+                    {(formatToEokUnit(world.price) * value).toLocaleString()} 원
+                  </div>
+                )
+              })}
           </div>
         </div>
         <div className="absolute right-3">

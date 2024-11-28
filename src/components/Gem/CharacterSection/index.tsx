@@ -113,7 +113,7 @@ const CharacterSection = () => {
 
   return (
     <ItemContainer title="캐릭터 등록">
-      <div className="w-[780px]">
+      <div className="w-[820px]">
         <input
           className="h-8 p-3 w-full rounded-lg outline-none bg-gray-200 mb-2"
           placeholder="캐릭터 이름 혹은 APIKEY를 입력해 주세요"
