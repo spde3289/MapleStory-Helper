@@ -25,6 +25,7 @@ const CharacterElement = ({
   const { setCharacterInfoList } = useCharacterInfoListContext()
   const [currentBossList, setCurrentBossList] = useState<any[]>([])
 
+  // 보스 난이도 선택 로직
   useEffect(() => {
     const arr: any[] = []
     character?.boss.forEach((boss) => {
@@ -42,9 +43,9 @@ const CharacterElement = ({
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [character])
-
+  // 선택한 월드 캐릭터만 보여줌
   if (currentWorld?.world !== character.world_name) return null
-
+  // 캐릭터 선택 로직
   const handleCharacter = () => {
     setCharacterInfoList((pre) =>
       pre.map((char) => {

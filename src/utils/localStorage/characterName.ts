@@ -1,5 +1,4 @@
-export const GetCharacterName = () => {
-  // localStorage.getItem('characterName')
+export const getCharacterName = (): string | null => {
   return localStorage.getItem('characterName')
 }
 
