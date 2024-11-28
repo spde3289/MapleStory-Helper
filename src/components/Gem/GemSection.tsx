@@ -108,16 +108,18 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
               })}
           </div>
         </div>
-        <div className="absolute right-3">
-          <button
-            className="px-2 bg-gray-200 rounded-xl right-2"
-            onClick={unitHandler}
-            value={unit}
-            type="button"
-          >
-            {unit}
-          </button>
-        </div>
+        {characterInfoList.length !== 0 && (
+          <div className="absolute right-3">
+            <button
+              className="px-2 bg-gray-200 rounded-xl right-2"
+              onClick={unitHandler}
+              value={unit}
+              type="button"
+            >
+              {unit}
+            </button>
+          </div>
+        )}
       </div>
     </ItemContainer>
   )
