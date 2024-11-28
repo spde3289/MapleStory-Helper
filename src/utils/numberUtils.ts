@@ -17,3 +17,12 @@ export const formatKoreanNumber = (number: number): string => {
 
   return result.trim()
 }
+
+export const formatToEokUnit = (number: number): number => {
+  if (number < 100000000) {
+    return 0 // 1억 미만은 0억으로 처리
+  }
+
+  const eok = Math.floor(number / 100000000) // 억 단위 계산
+  return eok
+}
