@@ -7,6 +7,7 @@ import {
 import { WorldType } from '@/type/character/world'
 import { formatKoreanNumber } from '@/utils/numberUtils'
 import { memo, useEffect, useState } from 'react'
+import { IoTrashOutline } from 'react-icons/io5'
 
 type WorldListType = {
   world: WorldType
@@ -25,6 +26,7 @@ const CharacterElement = ({
   const { setCharacterInfoList } = useCharacterInfoListContext()
   const [currentBossList, setCurrentBossList] = useState<any[]>([])
 
+  // 보스 난이도 선택 로직
   useEffect(() => {
     const arr: any[] = []
     character?.boss.forEach((boss) => {
@@ -42,9 +44,9 @@ const CharacterElement = ({
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [character])
-
+  // 선택한 월드 캐릭터만 보여줌
   if (currentWorld?.world !== character.world_name) return null
-
+  // 캐릭터 선택 로직
   const handleCharacter = () => {
     setCharacterInfoList((pre) =>
       pre.map((char) => {
@@ -59,7 +61,15 @@ const CharacterElement = ({
 
   const combatPower = formatKoreanNumber(character.final_stat[42].stat_value)
 
-  const currentCss = character.currentCharacter ? 'bg-gray-200 ' : ''
+  const currentCss = character.currentCharacter ? 'bg-white' : ''
+
+  const deleteCharacter = () => {
+    setCharacterInfoList((pre) =>
+      pre.filter((char) => {
+        return char.character_name !== character.character_name
+      }),
+    )
+  }
 
   return (
     <div
@@ -67,35 +77,40 @@ const CharacterElement = ({
       onKeyDown={handleCharacter}
       tabIndex={0}
       role="button"
-      className={` items-center flex ${currentCss} rounded-lg`}
+      className={`items-center flex ${currentCss} justify-between rounded-lg pr-3`}
     >
-      <div className="flex items-center flex-col text-sm mr-4 w-24">
-        <CharacterImage
-          width={48}
-          height={48}
-          src={character.character_image}
-        />
-        {character.character_name}
-      </div>
-      <div className="h-fit w-32">
-        <div>
-          <div>LV. {character.character_level}</div>
+      <div className="flex items-center">
+        <div className="flex items-center flex-col text-sm mr-4 w-24 ">
+          <CharacterImage
+            width={48}
+            height={48}
+            src={character.character_image}
+          />
+          {character.character_name}
         </div>
-        <div>
-          <div className="text-xs">{character.final_stat[42].stat_name}</div>
-          <div>{combatPower}</div>
+        <div className="h-fit w-32">
+          <div>
+            <div>LV. {character.character_level}</div>
+          </div>
+          <div>
+            <div className="text-xs">{character.final_stat[42].stat_name}</div>
+            <div>{combatPower}</div>
+          </div>
+        </div>
+        <div className="flex gap-1 mr-3">
+          {currentBossList.map((boss) => {
+            return (
+              <div className="flex flex-col w-10 items-center" key={boss.name}>
+                <BossImage boss={boss.name} />
+                <div className="text-xs">{boss.difficulty}</div>
+              </div>
+            )
+          })}
         </div>
       </div>
-      <div className="flex gap-1">
-        {currentBossList.map((boss) => {
-          return (
-            <div className="flex flex-col w-10 items-center" key={boss.name}>
-              <BossImage boss={boss.name} />
-              <div className="text-xs">{boss.difficulty}</div>
-            </div>
-          )
-        })}
-      </div>
+      <button onClick={deleteCharacter} type="button">
+        <IoTrashOutline />
+      </button>
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import { Boss } from '@/data/boss'
 import { CharListResponse } from '@/type/axios/charListType'
 import { MainCharacterResponse } from '@/type/axios/characterType'
 import {
@@ -8,23 +9,41 @@ import axios from 'axios'
 import { Get } from './client'
 import Paths from './path'
 
+type InputType = `test_${string}` | `live_${string}` // 정상적인 타입 선언
+
+const isApiKeyTypeCheck = (value: any): value is InputType => {
+  return value.startsWith('test_') || value.startsWith('live_')
+}
+
+type localStorageCharListType = {
+  character_name: string
+  boss: Boss
+}[]
+
 export const getCharList = async (
-  ApiKey: string,
+  ApiKey: string | localStorageCharListType,
 ): Promise<ResponseDataType<MainCharacterResponse[]>> => {
   try {
-    const characterListResponse = await Get<ResponseDataType<CharListResponse>>(
-      Paths.characterList,
-      {
+    const level220PlusCharacters: any[] = []
+
+    if (Array.isArray(ApiKey)) {
+      ApiKey.forEach((el) => level220PlusCharacters.push(el.character_name))
+    } else if (isApiKeyTypeCheck(ApiKey)) {
+      const characterListResponse = await Get<
+        ResponseDataType<CharListResponse>
+      >(Paths.characterList, {
         params: {
           ApiKey,
         },
-      },
-    )
-    // 220 레벨을 넘는 캐릭터 리스트
-    const level220PlusCharacters =
-      characterListResponse.data.data?.account_list[0].character_list.filter(
-        (el) => el.character_level >= 220,
+      })
+      // 220 레벨을 넘는 캐릭터 리스트
+      characterListResponse.data.data?.account_list[0].character_list.forEach(
+        (el) => {
+          if (el.character_level >= 220)
+            level220PlusCharacters.push(el.character_name)
+        },
       )
+    }
 
     const level220PlusCharactersResponse: MainCharacterResponse[] = []
 
@@ -35,7 +54,7 @@ export const getCharList = async (
             return Get<ResponseDataType<MainCharacterResponse>>(
               Paths.character,
               {
-                params: { character_name: character.character_name },
+                params: { character_name: character },
               },
             )
           }),

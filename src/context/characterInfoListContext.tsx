@@ -1,12 +1,14 @@
 import bosses, { Boss } from '@/data/boss'
 import BossInfo from '@/data/boss/boss.json'
 import { MainCharacterResponse } from '@/type/axios/characterType'
+import { setCharacterNameList } from '@/utils/localStorage/characterNameList'
 import {
   createContext,
   Dispatch,
   SetStateAction,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react'
@@ -16,10 +18,16 @@ export interface characterInfo extends MainCharacterResponse {
   boss: Boss
 }
 
+type localStorageCharListType = {
+  character_name: string
+  boss: Boss
+}[]
+
 interface CharacterInfoListContextType {
   characterInfoList: characterInfo[]
   handleCharacterInfo: (
     data: MainCharacterResponse | MainCharacterResponse[],
+    charList?: localStorageCharListType,
   ) => void
   setCharacterInfoList: Dispatch<SetStateAction<characterInfo[]>>
 }
@@ -51,14 +59,34 @@ const CharacterInfoListProvider: React.FC<{
     [],
   )
 
+  useEffect(() => {
+    const arr: any[] = []
+
+    if (characterInfoList.length !== 0) {
+      characterInfoList.forEach((info) => {
+        arr.push({ character_name: info.character_name, boss: info.boss })
+      })
+
+      setCharacterNameList(arr)
+    }
+  }, [characterInfoList])
+
   const handleCharacterInfo = useCallback(
-    (data: MainCharacterResponse | MainCharacterResponse[]) => {
+    (
+      data: MainCharacterResponse | MainCharacterResponse[],
+      charList?: localStorageCharListType,
+    ) => {
       if (Array.isArray(data)) {
         const mapingData = data.map((char) => {
+          const charName = charList?.find(
+            (el: any) => el.character_name === char.character_name,
+          )
           return {
             ...char,
             currentCharacter: false,
-            boss: CheckStat(char.final_stat[42].stat_value),
+            boss: charName?.boss
+              ? charName.boss
+              : CheckStat(char.final_stat[42].stat_value),
           }
         })
         setCharacterInfoList((pre) =>

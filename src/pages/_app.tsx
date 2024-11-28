@@ -24,7 +24,7 @@ const myFont = localFont({
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <div className={`${myFont.className} flex no-drag`}>
+    <div className={`${myFont.className} flex no-drag overflow-hidden`}>
       <CharacterInfoListProvider>
         <MainCharacterProvider>
           <Layout>
