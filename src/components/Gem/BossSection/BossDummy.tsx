@@ -4,7 +4,7 @@ import BossData from '@/data/boss/boss.json'
 
 const BossDummy = () => {
   return (
-    <ItemContainer className="relative" title="보스 리스트">
+    <ItemContainer className="relative w-[724px]" title="보스 리스트">
       <>
         <div className="flex gap-4 mb-2 virtual-text-area">
           <button className="px-2 bg-gray-200 rounded-xl" type="button">
@@ -35,7 +35,7 @@ const BossDummy = () => {
                   <div>{boss.krName}</div>
                 </div>
                 <form>
-                  <fieldset className="flex">
+                  <fieldset className="flex w-[300px]">
                     {boss.type.map((type) => {
                       return (
                         <label

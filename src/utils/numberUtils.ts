@@ -4,6 +4,8 @@ export const formatKoreanNumber = (number: number): string => {
   let unitIndex = 0
   let num = number
 
+  if (number === 0) return '0'
+
   while (num > 0) {
     const chunk = num % 10000
     if (chunk > 0) {

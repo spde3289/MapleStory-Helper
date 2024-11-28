@@ -2,6 +2,7 @@ import BossImage from '@/commonComponents/BossImage'
 import ItemContainer from '@/commonComponents/ItemContainer'
 import { useCharacterInfoListContext } from '@/context/characterInfoListContext'
 import bosses from '@/data/boss'
+import { formatKoreanNumber } from '@/utils/numberUtils'
 import {
   ChangeEvent,
   ChangeEventHandler,
@@ -12,14 +13,11 @@ import {
 } from 'react'
 import BossDummy from './BossDummy'
 
-// interface CheckedBoss {
-//   current: boolean
-//   difficulty: string
-//   name: string
-//   price: number
-// }
+interface BossSectionPropsType {
+  unit: '일반' | '유닛'
+}
 
-const BossSection = () => {
+const BossSection = ({ unit }: BossSectionPropsType) => {
   const { characterInfoList, setCharacterInfoList } =
     useCharacterInfoListContext()
   const [currentBossArr, setcurrentBossArr] = useState<any[]>([])
@@ -100,7 +98,7 @@ const BossSection = () => {
   return (
     <ItemContainer title="보스 리스트" className="relative">
       <>
-        <div className="flex gap-4 mb-2 virtual-text-area w-[520px]">
+        <div className="flex gap-4 mb-2 virtual-text-area w-[675px]">
           <button
             onClick={handleSetBoss}
             id="sde"
@@ -152,14 +150,14 @@ const BossSection = () => {
         </div>
         {currentChar.boss.map((boss) => {
           return (
-            <div className="flex justify-between" key={boss.name}>
+            <div className="flex" key={boss.name}>
               <div className="flex">
                 <div className="flex items-center w-48 mb-1">
                   <BossImage className="mr-2" boss={boss.name} />
                   <div>{boss.krName}</div>
                 </div>
                 <form>
-                  <fieldset className="flex">
+                  <fieldset className="flex w-[300px]">
                     {boss.type.map((type) => {
                       return (
                         <label
@@ -191,33 +189,51 @@ const BossSection = () => {
                       )
                     })}
                   </fieldset>
-
-                  {/* <label htmlFor="cars">Choose a car:</label> */}
                 </form>
               </div>
-              <select
-                onChange={handleBossPlayer}
-                className={` ${
-                  currentBossArr.length < 12
-                    ? ''
-                    : !currentBossArr.includes(boss.name) && 'text-gray-500'
-                }`}
-                disabled={
-                  currentBossArr.length < 12
-                    ? false
-                    : !currentBossArr.includes(boss.name)
-                }
-                name="player"
-                value={boss.player}
-                id={boss.krName}
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-              </select>
+              <div className="flex w-52 justify-between">
+                <select
+                  onChange={handleBossPlayer}
+                  className={` ${
+                    currentBossArr.length < 12
+                      ? ''
+                      : !currentBossArr.includes(boss.name) && 'text-gray-500'
+                  }`}
+                  disabled={
+                    currentBossArr.length < 12
+                      ? false
+                      : !currentBossArr.includes(boss.name)
+                  }
+                  name="player"
+                  value={boss.player}
+                  id={boss.krName}
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+                <div className="">
+                  {boss.type.map((el) => {
+                    return (
+                      el.current && (
+                        <div className="ml-2 w-full" key={el.difficulty}>
+                          {unit === '유닛'
+                            ? Math.floor(
+                                el.price / boss.player,
+                              ).toLocaleString()
+                            : formatKoreanNumber(
+                                Math.floor(el.price / boss.player),
+                              )}{' '}
+                          메소
+                        </div>
+                      )
+                    )
+                  })}
+                </div>
+              </div>
             </div>
           )
         })}

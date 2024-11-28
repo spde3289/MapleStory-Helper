@@ -1,9 +1,15 @@
 import ItemContainer from '@/commonComponents/ItemContainer'
 import { useCharacterInfoListContext } from '@/context/characterInfoListContext'
 import { WorldType } from '@/type/character/world'
+import { formatKoreanNumber } from '@/utils/numberUtils'
 import { memo } from 'react'
 
-const GemSection = () => {
+interface GemSectionPropsType {
+  unit: '일반' | '유닛'
+  unitHandler: React.MouseEventHandler<HTMLButtonElement>
+}
+
+const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
   const { characterInfoList } = useCharacterInfoListContext()
 
   const uniqueWorldNames = Array.from(
@@ -52,14 +58,30 @@ const GemSection = () => {
 
   return (
     <ItemContainer title="결정석 판매 가격">
-      <div>
-        {worldGemObject.map((world) => {
-          return (
-            <div key={world.name}>
-              {world.name} : {world.price.toLocaleString()} 메소
-            </div>
-          )
-        })}
+      <div className="flex relative">
+        <div>
+          {worldGemObject.map((world) => {
+            return (
+              <div key={world.name}>
+                {world.name} :{' '}
+                {unit === '유닛'
+                  ? world.price.toLocaleString()
+                  : formatKoreanNumber(world.price)}{' '}
+                메소
+              </div>
+            )
+          })}
+        </div>
+        <div className="absolute right-3">
+          <button
+            className="px-2 bg-gray-200 rounded-xl right-2"
+            onClick={unitHandler}
+            value={unit}
+            type="button"
+          >
+            {unit}
+          </button>
+        </div>
       </div>
     </ItemContainer>
   )

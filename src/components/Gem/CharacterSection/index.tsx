@@ -121,33 +121,35 @@ const CharacterSection = () => {
           onChange={handlerChange}
           onKeyDown={handlerSubmit}
         />
-        <div className="p-1 h-fit relative">
-          <div className="absolute">
-            {worldList.map((world) => {
-              return (
-                <button
-                  key={world.world}
-                  className={`${world.current ? 'bg-gray-200 rounded-t-md' : ' '} mr-6 p-1 pb-2`}
-                  type="button"
-                  onClick={() => handleWorldChange(world)}
-                >
-                  {world.world}
-                </button>
-              )
-            })}
+        {characterInfoList.length !== 0 && (
+          <div className="p-1 h-fit relative">
+            <div className="absolute">
+              {worldList.map((world) => {
+                return (
+                  <button
+                    key={world.world}
+                    className={`${world.current ? 'bg-gray-200 rounded-t-md' : ' '} mr-3 p-1 pb-2`}
+                    type="button"
+                    onClick={() => handleWorldChange(world)}
+                  >
+                    {world.world}
+                  </button>
+                )
+              })}
+            </div>
+            <div className="bg-gray-200 rounded-md mt-8 px-1 py-2">
+              {characterInfoList.map((char) => {
+                return (
+                  <CharacterElement
+                    key={char.ocid}
+                    currentWorld={worldList.find((world) => world.current)}
+                    character={char}
+                  />
+                )
+              })}
+            </div>
           </div>
-          <div className="bg-gray-200 rounded-md mt-8 px-1 py-2">
-            {characterInfoList.map((char) => {
-              return (
-                <CharacterElement
-                  key={char.ocid}
-                  currentWorld={worldList.find((world) => world.current)}
-                  character={char}
-                />
-              )
-            })}
-          </div>
-        </div>
+        )}
       </div>
     </ItemContainer>
   )
