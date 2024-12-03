@@ -10,7 +10,7 @@ export const getBackEndBase = () => process.env.NEXT_PUBLIC_URL
 export const getMapleKey = () => process.env.NEXT_PUBLIC_MAPLEAPI_KEY
 
 const backend = axios.create({
-  timeout: 3000,
+  timeout: 5000,
   baseURL: getBackEndBase(),
   headers: {
     'Content-Type': 'application/json',

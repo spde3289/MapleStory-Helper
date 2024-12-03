@@ -8,7 +8,7 @@ import axios, {
 export const getClientBase = () => process.env.NEXT_PUBLIC_BACKEND_URL
 
 const client = axios.create({
-  timeout: 3000,
+  timeout: 5000,
   baseURL: getClientBase(),
   headers: {
     'Access-Control-Allow-Origin': '*',
