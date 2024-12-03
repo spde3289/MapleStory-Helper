@@ -1,6 +1,7 @@
 import Layout from '@/components/Layout'
 import MainCharacterProvider from '@/context/characterContext'
 import CharacterInfoListProvider from '@/context/characterInfoListContext'
+import GoogleAnalytics from '@/lib/GoogleAnalytics'
 import '@/styles/globals.css'
 import { AppProps } from 'next/app'
 import localFont from 'next/font/local'
@@ -25,6 +26,9 @@ const myFont = localFont({
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <div className={`${myFont.className} flex no-drag overflow-hidden`}>
+      {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
+      ) : null}
       <CharacterInfoListProvider>
         <MainCharacterProvider>
           <Layout>
