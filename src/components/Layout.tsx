@@ -54,7 +54,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <NavBar />
-      <section className="bg-gray-200 w-full h-screen flex-1">
+      <section className="bg-gray-200 w-full h-screen overflow-x-auto overflow-y-auto">
         {children}
       </section>
     </>
