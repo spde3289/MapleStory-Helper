@@ -3,6 +3,7 @@ import MainCharacterProvider from '@/context/characterContext'
 import CharacterInfoListProvider from '@/context/characterInfoListContext'
 import GoogleAnalytics from '@/lib/GoogleAnalytics'
 import '@/styles/globals.css'
+import { Analytics } from '@vercel/analytics/react'
 import { AppProps } from 'next/app'
 import localFont from 'next/font/local'
 
@@ -29,6 +30,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
       ) : null}
+      <Analytics />
       <CharacterInfoListProvider>
         <MainCharacterProvider>
           <Layout>
