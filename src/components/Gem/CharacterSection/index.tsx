@@ -5,9 +5,9 @@ import { getCharList } from '@/fetch/charListFetch'
 import { MainCharacterResponse } from '@/type/axios/characterType'
 import { WorldType } from '@/type/character/world'
 import { checkHangulRex } from '@/utils/inputUtils'
+import Link from 'next/link'
 import { memo, useCallback, useEffect, useState } from 'react'
 import CharacterElement from './CharacterElement'
-
 // then은 요청에 대한 응답을 기다리고 다음 줄을 실행한다.
 // 함수가 종료 되어도 요청에 대한 응답이 오게 되면 실행이 된다
 
@@ -112,8 +112,16 @@ const CharacterSection = () => {
   }, [])
 
   return (
-    <ItemContainer title="캐릭터 등록">
-      <div className="w-[820px]">
+    <ItemContainer className="relative" title="캐릭터 등록">
+      <div className="w-[820px] ">
+        <div className="absolute top-3 right-4 underline">
+          <Link
+            target="_blank"
+            href="https://openapi.nexon.com/ko/guide/prepare-in-advance/"
+          >
+            API KEY 발급
+          </Link>
+        </div>
         <input
           className="h-8 p-3 w-full rounded-lg outline-none bg-gray-200 mb-2"
           placeholder="캐릭터 이름 혹은 APIKEY를 입력해 주세요"
