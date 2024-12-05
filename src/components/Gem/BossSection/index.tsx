@@ -98,7 +98,7 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
   return (
     <ItemContainer title="보스 리스트" className="relative">
       <>
-        <div className="flex gap-4 mb-2 virtual-text-area w-[675px]">
+        <div className="flex gap-4 mb-2 virtual-text-area w-[675px] xs:w-full xxxs:flex-wrap xxxs:gap-2 xxxs:mb-4">
           <button
             onClick={handleSetBoss}
             id="sde"
@@ -150,19 +150,22 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
         </div>
         {currentChar.boss.map((boss) => {
           return (
-            <div className="flex" key={boss.name}>
-              <div className="flex">
-                <div className="flex items-center w-48 mb-1">
+            <div
+              className="flex xs:justify-between xxxs:mb-3 xxxs:border-b-[1px]"
+              key={boss.name}
+            >
+              <div className="flex w-fit xxxs:flex-col">
+                <div className="flex items-center w-48 xxs:w-44 xxxs:w-36 min-w-44 xxxs:min-w-36 mb-1">
                   <BossImage className="mr-2" boss={boss.name} />
                   <div>{boss.krName}</div>
                 </div>
-                <form>
-                  <fieldset className="flex w-[300px]">
+                <form className="">
+                  <fieldset className="flex xxs:flex-wrap min-w-40  w-full">
                     {boss.type.map((type) => {
                       return (
                         <label
                           key={type.difficulty}
-                          className={`flex items-center mr-5 ${
+                          className={`flex items-center mr-5 xxxs:mr-3 ${
                             currentBossArr.length < 12
                               ? ''
                               : !currentBossArr.includes(boss.name) &&
@@ -191,7 +194,7 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
                   </fieldset>
                 </form>
               </div>
-              <div className="flex w-52 justify-between">
+              <div className="flex w-52 min-w-52 xxs:min-w-48 xxs:w-48 xxxs:w-3/12 xxxs:min-w-24 justify-between xxxs:items-center">
                 <select
                   onChange={handleBossPlayer}
                   className={` ${
@@ -219,7 +222,10 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
                   {boss.type.map((el) => {
                     return (
                       el.current && (
-                        <div className="ml-2 w-full" key={el.difficulty}>
+                        <div
+                          className="ml-2 w-full break-all"
+                          key={el.difficulty}
+                        >
                           {unit === '유닛'
                             ? Math.floor(
                                 el.price / boss.player,

@@ -73,7 +73,7 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
     <ItemContainer title="결정석 판매 가격">
       <div className="flex relative">
         <div className="flex items-center">
-          <div className="mr-4">
+          <div className="mr-4  xxxs:w-full">
             {worldGemObject.map((world) => {
               return (
                 <div key={world.name} className="">
@@ -109,9 +109,9 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
           </div>
         </div>
         {characterInfoList.length !== 0 && (
-          <div className="absolute right-3">
+          <div className="absolute right-3 xxxs:-top-10 xxxs:right-0">
             <button
-              className="px-2 bg-gray-200 rounded-xl right-2"
+              className="px-2 bg-gray-200 rounded-xl "
               onClick={unitHandler}
               value={unit}
               type="button"

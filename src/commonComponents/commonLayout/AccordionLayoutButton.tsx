@@ -1,23 +1,29 @@
 import { IoIosArrowBack } from 'react-icons/io'
 
 interface PropsInterface {
-  navWidth: string
+  navSize: string
   width: string
-  handelNavWidth: () => void
+  handelNavSize: () => void
 }
 
 const AccordionLayoutButton = ({
-  navWidth,
+  navSize,
   width,
-  handelNavWidth,
+  handelNavSize,
 }: PropsInterface) => {
+  const lgClass =
+    'lg:top-1/2 lg:-right-6 lg:w-6 lg:h-10 lg:-translate-y-1/2 lg:rounded-r-xl'
   return (
     <button
       type="button"
-      onClick={handelNavWidth}
-      className="absolute flex items-center justify-center bg-white top-1/2 -translate-y-1/2 -right-6 w-6 h-10 rounded-r-xl"
+      onClick={handelNavSize}
+      className={`${
+        navSize === width ? '' : ''
+      } xs:right-1/2 xs:-bottom-5 absolute z-50 w-10 h-6 xs:rounded-b-xl ${lgClass} flex items-center justify-center bg-white`}
     >
-      <IoIosArrowBack className={navWidth === width ? '' : 'rotate-180'} />
+      <IoIosArrowBack
+        className={`${navSize === width ? 'xs:rotate-90 lg:rotate-0' : 'xs:-rotate-90 lg:rotate-180'}`}
+      />
     </button>
   )
 }

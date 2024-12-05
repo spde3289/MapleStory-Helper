@@ -113,7 +113,7 @@ const CharacterSection = () => {
 
   return (
     <ItemContainer className="relative" title="캐릭터 등록">
-      <div className="w-[820px] ">
+      <div className="w-[820px] xs:w-full ">
         <div className="absolute top-3 right-4 underline">
           <Link
             target="_blank"

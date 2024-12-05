@@ -12,6 +12,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const { setMainCharacter } = useMainCharacterContext()
   const { characterInfoList, handleCharacterInfo } =
     useCharacterInfoListContext()
+
   useEffect(() => {
     const fetchData = async () => {
       const characterName = getCharacterName() // 캐릭터이름저장
@@ -43,8 +44,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           })
           handleCharacterInfo(UniqueArr, getCharacterNameList())
         }
-
-        // handleCharacterInfo()
       }
       response()
     }
@@ -52,12 +51,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   }, [])
 
   return (
-    <>
+    <div className="flex h-screen flex-col lg:flex-row no-drag overflow-hidden">
       <NavBar />
-      <section className="bg-gray-200 w-full h-screen overflow-x-auto overflow-y-auto">
+      <section className="bg-gray-200 lg:w-full lg:h-screen xs:w-full xs:h-full overflow-x-auto ">
         {children}
       </section>
-    </>
+    </div>
   )
 }
 

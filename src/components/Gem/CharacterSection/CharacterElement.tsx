@@ -77,27 +77,31 @@ const CharacterElement = ({
       onKeyDown={handleCharacter}
       tabIndex={0}
       role="button"
-      className={`items-center flex ${currentCss} justify-between rounded-lg pr-3`}
+      className={`items-center flex ${currentCss} lg:justify-between rounded-lg pr-3 xxxs:px-1 xxs:py-2 xxxs:relative`}
     >
-      <div className="flex items-center">
-        <div className="flex items-center flex-col text-sm mr-4 w-24 ">
-          <CharacterImage
-            width={48}
-            height={48}
-            src={character.character_image}
-          />
-          {character.character_name}
-        </div>
-        <div className="h-fit w-32">
-          <div>
-            <div>LV. {character.character_level}</div>
+      <div className="flex items-center xxxs:flex-col xxxs:w-full w-full flex-1">
+        <div className="flex items-center w-52 xxxs:mb-1">
+          <div className="flex items-center flex-col text-sm lg:mr-4 w-32 ">
+            <CharacterImage
+              width={48}
+              height={48}
+              src={character.character_image}
+            />
+            {character.character_name}
           </div>
-          <div>
-            <div className="text-xs">{character.final_stat[42].stat_name}</div>
-            <div>{combatPower}</div>
+          <div className="h-fit w-32">
+            <div>
+              <div>LV. {character.character_level}</div>
+            </div>
+            <div>
+              <div className="text-xs">
+                {character.final_stat[42].stat_name}
+              </div>
+              <div>{combatPower}</div>
+            </div>
           </div>
         </div>
-        <div className="flex gap-1 mr-3">
+        <div className="flex justify-around items-center lg:gap-1 mr-3 xxxs:mr-0 flex-1 xxs:grid xxs:grid-cols-6 xxxs:gap-4 xxxs:w-full justify-items-center">
           {currentBossList.map((boss) => {
             return (
               <div className="flex flex-col w-10 items-center" key={boss.name}>
@@ -108,8 +112,12 @@ const CharacterElement = ({
           })}
         </div>
       </div>
-      <button onClick={deleteCharacter} type="button">
-        <IoTrashOutline />
+      <button
+        onClick={deleteCharacter}
+        className="xs:w-6 xs:h-6 xxxs:w-5 xxxs:h-5 xxxs:absolute xxxs:top-2 xxxs:right-2"
+        type="button"
+      >
+        <IoTrashOutline className="w-full h-full" />
       </button>
     </div>
   )

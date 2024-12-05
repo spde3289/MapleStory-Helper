@@ -26,7 +26,7 @@ const myFont = localFont({
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <div className={`${myFont.className} flex no-drag overflow-hidden`}>
+    <div className={`${myFont.className}`}>
       {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
       ) : null}
