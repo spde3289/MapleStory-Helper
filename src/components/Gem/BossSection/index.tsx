@@ -160,7 +160,7 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
                   <div>{boss.krName}</div>
                 </div>
                 <form className="">
-                  <fieldset className="flex xxs:flex-wrap min-w-40  w-full">
+                  <fieldset className="flex xxs:flex-wrap min-w-40 w-full">
                     {boss.type.map((type) => {
                       return (
                         <label
