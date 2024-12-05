@@ -151,11 +151,11 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
         {currentChar.boss.map((boss) => {
           return (
             <div
-              className="flex xs:justify-between xxxs:mb-3 xxxs:border-b-[1px]"
+              className="flex justify-between xxxs:mb-3 xxxs:border-b-[1px]"
               key={boss.name}
             >
               <div className="flex w-fit xxxs:flex-col">
-                <div className="flex items-center w-48 xxs:w-44 xxxs:w-36 min-w-44 xxxs:min-w-36 mb-1">
+                <div className="flex items-center w-44 xxxs:w-36 min-w-44 xxxs:min-w-36 mb-1">
                   <BossImage className="mr-2" boss={boss.name} />
                   <div>{boss.krName}</div>
                 </div>
@@ -194,7 +194,7 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
                   </fieldset>
                 </form>
               </div>
-              <div className="flex w-52 min-w-52 xxs:min-w-48 xxs:w-48 xxxs:w-3/12 xxxs:min-w-24 justify-between xxxs:items-center">
+              <div className="flex w-48 min-w-48 xxs:min-w-48 xxs:w-48 xxxs:w-3/12 xxxs:min-w-24 justify-between xxxs:items-center">
                 <select
                   onChange={handleBossPlayer}
                   className={` ${
