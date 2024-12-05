@@ -18,9 +18,9 @@ const GemPage = () => {
   }
 
   return (
-    <main className="flex w-full h-full p-3 pl-12 gap-3 box-border overflow-x-auto ">
+    <main className="flex xs:flex-col w-full h-full p-3 xs:pt-12 lg:pl-12 gap-3 box-border overflow-x-auto ">
       <CharacterSection />
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 xs:flex-col-reverse mb-5">
         <GemSection unit={unit} unitHandler={unitHandler} />
         <BossSection unit={unit} />
       </div>
