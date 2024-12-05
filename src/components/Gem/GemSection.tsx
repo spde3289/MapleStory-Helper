@@ -20,12 +20,14 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
   type worldGemObjectType = {
     name: WorldType
     price: number
+    count: number
   }[]
 
   const worldGemObject: worldGemObjectType = uniqueWorldNames.map((world) => {
     return {
       name: world,
       price: 0,
+      count: 0,
     }
   })
 
@@ -37,6 +39,7 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
     const targetWorld = Object.find((world) => world.name === name)
     if (targetWorld) {
       targetWorld.price += amount
+      targetWorld.count += 1
     }
   }
 
@@ -73,15 +76,22 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
     <ItemContainer title="결정석 판매 가격">
       <div className="flex relative">
         <div className="flex items-center">
-          <div className="mr-4  xxxs:w-full">
+          <div className="mr-4 xxxs:w-full">
             {worldGemObject.map((world) => {
               return (
-                <div key={world.name} className="">
-                  {world.name} :{' '}
-                  {unit === '유닛'
-                    ? world.price.toLocaleString()
-                    : formatKoreanNumber(world.price)}{' '}
-                  메소
+                <div key={world.name} className="flex justify-between">
+                  <div key={world.name} className="">
+                    {world.name} :{' '}
+                    {unit === '유닛'
+                      ? world.price.toLocaleString()
+                      : formatKoreanNumber(world.price)}{' '}
+                    메소
+                  </div>
+                  <div
+                    className={`ml-4 ${world.count > 180 ? 'text-red-600' : ''}`}
+                  >
+                    {world.count} / 180{' '}
+                  </div>
                 </div>
               )
             })}

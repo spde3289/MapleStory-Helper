@@ -33,7 +33,7 @@ const BossDummy = () => {
               key={boss.name}
             >
               <div className="flex w-fit xxxs:flex-col">
-                <div className="flex items-center w-48 xxs:w-44 xxxs:w-36 min-w-44 xxxs:min-w-36 mb-1">
+                <div className="flex items-center w-44 xxxs:w-36 min-w-44 xxxs:min-w-36 mb-1">
                   <BossImage className="mr-2" boss={boss.name} />
                   <div>{boss.krName}</div>
                 </div>
