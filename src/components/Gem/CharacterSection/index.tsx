@@ -131,13 +131,13 @@ const CharacterSection = () => {
           onKeyDown={handlerSubmit}
         />
         {characterInfoList.length !== 0 && (
-          <div className="p-1 h-fit relative">
-            <div className="absolute">
+          <div className="p-1 h-fit w-full relative ">
+            <div className="absolute w-full flex overflow-y-scroll scrollBar">
               {worldList.map((world) => {
                 return (
                   <button
                     key={world.world}
-                    className={`${world.current ? 'bg-gray-200 rounded-t-md' : ' '} mr-3 p-1 pb-2`}
+                    className={`${world.current ? 'bg-gray-200 rounded-t-md' : ' '} whitespace-nowrap mr-3 p-1 pb-2`}
                     type="button"
                     onClick={() => handleWorldChange(world)}
                   >
@@ -146,7 +146,7 @@ const CharacterSection = () => {
                 )
               })}
             </div>
-            <div className="bg-gray-200 rounded-md mt-8 px-1 py-2">
+            <div className="bg-gray-200 rounded-md mt-8 px-1 py-2 pt-3">
               {characterInfoList.map((char) => {
                 return (
                   <CharacterElement

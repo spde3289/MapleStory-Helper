@@ -57,4 +57,20 @@ a {
     -ms-user-select: none;
     user-select: none;
   }
+
+  .scrollBar::-webkit-scrollbar {
+    padding: 4px;
+    width: 8px; /* 스크롤바의 너비 */
+    height: 4px;
+    opacity: 0;
+  }
+
+  .scrollBar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.397); /* 스크롤바의 색상 */
+    border-radius: 10px;
+  }
+
+  .scrollBarController:hover .scrollBar::-webkit-scrollbar-thumb {
+    background-color: rgb(255, 255, 255); /* 스크롤바의 색상 */
+  }
 }
