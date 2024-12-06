@@ -80,8 +80,8 @@ const CharacterElement = ({
       className={`items-center flex ${currentCss} lg:justify-between rounded-lg pr-3 xxxs:px-1 xxs:py-2 xxxs:relative`}
     >
       <div className="flex items-center xxxs:flex-col xxxs:w-full w-full flex-1">
-        <div className="flex items-center w-52 xxxs:mb-1">
-          <div className="flex items-center flex-col text-sm lg:mr-4 w-32 ">
+        <div className="flex items-center min-w-52 xxxs:mb-1">
+          <div className="flex items-center flex-col text-sm lg:mr-4 w-24 min-w-24 xs:mr-2 ">
             <CharacterImage
               width={48}
               height={48}
@@ -89,7 +89,7 @@ const CharacterElement = ({
             />
             {character.character_name}
           </div>
-          <div className="h-fit w-32">
+          <div className="h-fit w-32 min-w-32">
             <div>
               <div>LV. {character.character_level}</div>
             </div>
@@ -101,7 +101,7 @@ const CharacterElement = ({
             </div>
           </div>
         </div>
-        <div className="flex justify-around items-center lg:gap-1 mr-3 xxxs:mr-0 flex-1 xxs:grid xxs:grid-cols-6 xxxs:gap-4 xxxs:w-full justify-items-center">
+        <div className="flex justify-around w-full items-center lg:gap-1 mr-3 xxxs:mr-0 flex-1 xxs:grid xxs:grid-cols-6 xxxs:gap-4 xxxs:w-full justify-items-center">
           {currentBossList.map((boss) => {
             return (
               <div className="flex flex-col w-10 items-center" key={boss.name}>

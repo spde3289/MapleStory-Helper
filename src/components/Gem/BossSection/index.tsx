@@ -11,16 +11,36 @@ import {
   useEffect,
   useState,
 } from 'react'
+import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa'
+import BossButton from './BossButton'
 import BossDummy from './BossDummy'
 
 interface BossSectionPropsType {
   unit: '일반' | '유닛'
 }
 
+interface sortType {
+  value: 'default' | 'up' | 'down'
+  icon: JSX.Element
+}
+
+const bossBottons = [
+  { id: 'sde', name: '스데', tip: '전투력 500 이상' },
+  { id: 'gaenseul', name: '가엔슬', tip: '전투럭 1천 이상' },
+  { id: 'irushi', name: '이루시', tip: '전투럭 1천 500 이상' },
+  { id: 'ruwill', name: '이루윌', tip: '전투럭 2천 이상' },
+  { id: 'geommitsol', name: '검밑솔', tip: '전투럭 1억 이상' },
+  { id: 'haseikal', name: '하세이칼', tip: '전투럭 1억 5천 이상' },
+]
+
 const BossSection = ({ unit }: BossSectionPropsType) => {
   const { characterInfoList, setCharacterInfoList } =
     useCharacterInfoListContext()
   const [currentBossArr, setcurrentBossArr] = useState<any[]>([])
+  const [sort, setSort] = useState<sortType>({
+    value: 'default',
+    icon: <FaSort />,
+  })
 
   const currentChar = characterInfoList.find(
     (char) => char.currentCharacter === true,
@@ -84,7 +104,8 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
         if (item.ocid !== currentChar.ocid) return item
 
         const updatedBoss = item.boss.map((boss) => {
-          if (boss.krName !== e.currentTarget.id) return boss
+          if (boss.krName + boss.type[0].difficulty !== e.currentTarget.id)
+            return boss
 
           const changeNum = Number(e.currentTarget.value)
 
@@ -95,64 +116,92 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
       }),
     )
   }
+
+  const handelPriceSort = () => {
+    if (sort.value === 'default') {
+      setSort({
+        value: 'up',
+        icon: <FaSortUp />,
+      })
+    }
+    if (sort.value === 'up') {
+      setSort({
+        value: 'down',
+        icon: <FaSortDown />,
+      })
+    }
+    if (sort.value === 'down') {
+      setSort({
+        value: 'default',
+        icon: <FaSort />,
+      })
+    }
+  }
+
+  const bossSort = currentChar.boss.flatMap((boss) => {
+    if (sort.value === 'default') {
+      return [boss] // 기본 정렬의 경우 배열로 반환
+    }
+    return boss.type.map((type) => ({
+      name: boss.name,
+      krName: boss.krName,
+      player: boss.player,
+      type: [type],
+    }))
+  })
+
+  // 정렬 수행
+  if (sort.value !== 'default') {
+    bossSort.sort((a, b) => {
+      if (sort.value === 'up') {
+        return a.type[0].price - b.type[0].price // 가격 오름차순
+      }
+      return b.type[0].price - a.type[0].price // 가격 내림차순
+    })
+  }
+
   return (
     <ItemContainer title="보스 리스트" className="relative">
       <>
         <div className="flex gap-4 mb-2 virtual-text-area w-[675px] xs:w-full xxxs:flex-wrap xxxs:gap-2 xxxs:mb-4">
-          <button
-            onClick={handleSetBoss}
-            id="sde"
-            className="px-2 bg-gray-200 rounded-xl"
-            type="button"
-          >
-            스데
-          </button>
-          <button
-            onClick={handleSetBoss}
-            id="gaenseul"
-            className="px-2 bg-gray-200 rounded-xl"
-            type="button"
-          >
-            가엔슬
-          </button>
-          <button
-            onClick={handleSetBoss}
-            id="irushi"
-            className="px-2 bg-gray-200 rounded-xl"
-            type="button"
-          >
-            이루시
-          </button>
-          <button
-            onClick={handleSetBoss}
-            id="ruwill"
-            className="px-2 bg-gray-200 rounded-xl"
-            type="button"
-          >
-            이루윌
-          </button>
-          <button
-            onClick={handleSetBoss}
-            id="geommitsol"
-            className="px-2 bg-gray-200 rounded-xl"
-            type="button"
-          >
-            검밑솔
-          </button>
-          <button
-            onClick={handleSetBoss}
-            id="haseikal"
-            className="px-2 bg-gray-200 rounded-xl"
-            type="button"
-          >
-            하세이칼
-          </button>
+          {bossBottons.map((el) => {
+            return (
+              <BossButton
+                key={el.name}
+                handleSetBoss={handleSetBoss}
+                id={el.id}
+                name={el.name}
+                tip={el.tip}
+              />
+            )
+          })}
         </div>
-        {currentChar.boss.map((boss) => {
+        <div className="flex xxxs:justify-between">
+          <div className="text-center items-center w-44 xxxs:w-fit min-w-44 xxxs:min-w-fit">
+            보스
+          </div>
+          <div className="min-w-40 w-full xxxs:w-fit xxxs:min-w-fit text-center">
+            난이도
+          </div>
+          <div className="flex w-48  min-w-48 xxs:min-w-48 xxs:w-48 xxxs:w-3/12 xxxs:min-w-24">
+            <div className="whitespace-nowrap">파티원</div>
+            <div
+              role="button"
+              tabIndex={0}
+              onKeyDown={handelPriceSort}
+              onClick={handelPriceSort}
+              className="w-full text-center flex items-center justify-center gap-1"
+            >
+              가격
+              {sort.icon}
+            </div>
+          </div>
+        </div>
+        {bossSort.map((boss) => {
           return (
             <div
               className="flex justify-between xxxs:mb-3 xxxs:border-b-[1px]"
-              key={boss.name}
+              key={boss.name + boss.type[0].difficulty}
             >
               <div className="flex w-fit xxxs:flex-col">
                 <div className="flex items-center w-44 xxxs:w-36 min-w-44 xxxs:min-w-36 mb-1">
@@ -209,7 +258,7 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
                   }
                   name="player"
                   value={boss.player}
-                  id={boss.krName}
+                  id={boss.krName + boss.type[0].difficulty}
                 >
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -221,9 +270,9 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
                 <div className="">
                   {boss.type.map((el) => {
                     return (
-                      el.current && (
+                      (el.current || sort.value !== 'default') && (
                         <div
-                          className="ml-2 w-full break-all"
+                          className={`ml-2 w-full break-all ${el.current ? 'text-black' : 'text-gray-500'}`}
                           key={el.difficulty}
                         >
                           {unit === '유닛'

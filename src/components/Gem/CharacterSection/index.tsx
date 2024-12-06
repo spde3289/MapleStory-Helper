@@ -123,6 +123,7 @@ const CharacterSection = () => {
           </Link>
         </div>
         <input
+          id="캐릭터등록"
           className="h-8 p-3 w-full rounded-lg outline-none bg-gray-200 mb-2"
           placeholder="캐릭터 이름 혹은 APIKEY를 입력해 주세요"
           value={characterName}
