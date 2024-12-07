@@ -53,7 +53,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex h-screen flex-col lg:flex-row no-drag overflow-hidden">
       <NavBar />
-      <section className="bg-gray-200 lg:w-full lg:h-screen xs:w-full xs:h-full overflow-x-auto ">
+      <section className="bg-gray-200 lg:w-full lg:h-screen xs:w-full xs:h-full overflow-x-auto">
         {children}
       </section>
     </div>

@@ -40,6 +40,8 @@ const CheckStat = (value: number) => {
   if (value >= 150000000) return bosses.haseikal
   // 검밑솔
   if (value >= 100000000) return bosses.geommitsol
+  // 하스우
+  if (value >= 30000000) return bosses.hasuu
   // 이루윌
   if (value >= 20000000) return bosses.ruwill
   // 이루시

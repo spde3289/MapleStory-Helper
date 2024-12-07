@@ -1,12 +1,22 @@
 import ItemContainer from '@/commonComponents/ItemContainer'
 import { useCharacterInfoListContext } from '@/context/characterInfoListContext'
-import { WorldType } from '@/type/character/world'
 import { formatKoreanNumber, formatToEokUnit } from '@/utils/numberUtils'
 import { memo, useState } from 'react'
 
 interface GemSectionPropsType {
   unit: '일반' | '유닛'
   unitHandler: React.MouseEventHandler<HTMLButtonElement>
+}
+
+const manageArrayLength = (arr: any[], maxLength = 180) => {
+  if (arr.length > maxLength) {
+    arr.splice(0, arr.length - maxLength) // 초과된 요소를 한꺼번에 삭제
+  }
+  return arr
+}
+
+const addPrice = (numbers: number[]): number => {
+  return numbers.reduce((sum, current) => sum + current, 0)
 }
 
 const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
@@ -17,47 +27,29 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
     new Set(characterInfoList.map((character) => character.world_name)),
   )
 
-  type worldGemObjectType = {
-    name: WorldType
-    price: number
-    count: number
-  }[]
+  const worldGemObject = uniqueWorldNames.map((world) => {
+    const currentBossList = characterInfoList
+      .flatMap((char) => {
+        if (world === char.world_name) {
+          return char.boss
+            .filter((boss) => boss.type.some((type) => type.current))
+            .map((boss) => {
+              const currentType = boss.type.find((type) => type.current)
+              if (!currentType) return null
+              return currentType.price / boss.player
+            })
+            .filter((item): item is number => item !== null) // null을 제거
+        }
+        return []
+      })
+      .sort((a, b) => a - b) // 가격 오름차순 정렬
 
-  const worldGemObject: worldGemObjectType = uniqueWorldNames.map((world) => {
+    const managecurrentBossList = manageArrayLength(currentBossList)
     return {
       name: world,
-      price: 0,
-      count: 0,
+      count: managecurrentBossList.length,
+      price: addPrice(managecurrentBossList),
     }
-  })
-
-  const addPrice = (
-    Object: worldGemObjectType,
-    name: string,
-    amount: number,
-  ) => {
-    const targetWorld = Object.find((world) => world.name === name)
-    if (targetWorld) {
-      targetWorld.price += amount
-      targetWorld.count += 1
-    }
-  }
-
-  characterInfoList.forEach((el) => {
-    el.boss.forEach((boss) => {
-      const currentBoss = boss.type.find((type) => type.current === true)
-      if (currentBoss !== undefined) {
-        worldGemObject.forEach((world) => {
-          if (world.name === el.world_name) {
-            addPrice(
-              worldGemObject,
-              el.world_name,
-              Math.floor(currentBoss.price / boss.player),
-            )
-          }
-        })
-      }
-    })
   })
 
   const hidden = characterInfoList.some(
@@ -73,10 +65,13 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
   }
 
   return (
-    <ItemContainer title="결정석 판매 가격">
-      <div className="flex relative">
+    <ItemContainer
+      className="relative gem-virtual-text-area "
+      title="결정석 판매 가격"
+    >
+      <div className="flex relative pt-4">
         <div className="flex items-center">
-          <div className="mr-4 xxxs:w-full">
+          <div className="mr-4 xxxs:gap-4 xxxs:w-full">
             {worldGemObject.map((world) => {
               return (
                 <div key={world.name} className="flex justify-between">
@@ -107,7 +102,7 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
               원
             </div>
           )}
-          <div className="">
+          <div className="w-fit whitespace-nowrap ">
             {hidden &&
               worldGemObject.map((world) => {
                 return (
