@@ -38,7 +38,7 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
               if (!currentType) return null
               return currentType.price / boss.player
             })
-            .filter((item) => item !== null)
+            .filter((item): item is number => item !== null) // null을 제거
         }
         return []
       })
