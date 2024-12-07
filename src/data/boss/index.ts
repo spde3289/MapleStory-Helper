@@ -1,6 +1,7 @@
 import gaenseul from './gaenseulBoss.json'
 import geommitsol from './geommitsolBoss.json'
 import haseikal from './haseikalBoss.json'
+import hasuu from './hasuuBoss.json'
 import irushi from './irushiBoss.json'
 import ruwill from './ruwillBoss.json'
 import sde from './sdeBoss.json'
@@ -31,6 +32,7 @@ const bosses: Record<string, Boss> = {
   haseikal,
   irushi,
   ruwill,
+  hasuu,
   sde,
 }
 

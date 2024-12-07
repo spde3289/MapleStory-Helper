@@ -29,6 +29,7 @@ const bossBottons = [
   { id: 'gaenseul', name: '가엔슬', tip: '전투럭 1천 이상' },
   { id: 'irushi', name: '이루시', tip: '전투럭 1천 500 이상' },
   { id: 'ruwill', name: '이루윌', tip: '전투럭 2천 이상' },
+  { id: 'hasuu', name: '하스우', tip: '전투럭 3천 이상' },
   { id: 'geommitsol', name: '검밑솔', tip: '전투럭 1억 이상' },
   { id: 'haseikal', name: '하세이칼', tip: '전투럭 1억 5천 이상' },
 ]
@@ -41,7 +42,7 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
     value: 'default',
     icon: <FaSort />,
   })
-
+  // 캐릭터 선택
   const currentChar = characterInfoList.find(
     (char) => char.currentCharacter === true,
   )
@@ -59,6 +60,7 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [characterInfoList])
 
+  // 만약 선택한 캐릭터가 없으면 더미데이터
   if (!currentChar) return <BossDummy />
 
   const haldler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +87,7 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
       }),
     )
   }
-
+  // 보스돌이 선택버튼
   const handleSetBoss: MouseEventHandler<HTMLButtonElement> = (e) => {
     const key = e.currentTarget.id
 
@@ -97,7 +99,7 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
       }),
     )
   }
-
+  // 보스 파티원 수
   const handleBossPlayer: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setCharacterInfoList((prev) =>
       prev.map((item) => {

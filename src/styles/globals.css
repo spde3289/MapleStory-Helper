@@ -51,6 +51,16 @@ a {
     font-style: italic; /* 텍스트 기울임 (선택 사항) */
   }
 
+  .gem-virtual-text-area::after {
+    position: absolute;
+    content: '상위 180개의 결정석만 계산합니다.';
+    left: 12px;
+    top: 36px;
+    font-size: 12px; /* 텍스트 크기 */
+    font-weight: bold; /* 텍스트 굵기 (선택 사항) */
+    font-style: italic; /* 텍스트 기울임 (선택 사항) */
+  }
+
   .no-drag {
     -webkit-user-select: none;
     -moz-user-select: none;
