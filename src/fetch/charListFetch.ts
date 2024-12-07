@@ -61,9 +61,13 @@ export const getCharList = async (
         )
 
         responses.forEach((response) => {
+          const checkList = level220PlusCharacters.some(
+            (el) => el === response.data.data?.character_name,
+          )
           if (
             response?.data?.data &&
-            response.data.data.final_stat[42].stat_value >= 3000000
+            (response.data.data.final_stat[42].stat_value >= 3000000 ||
+              checkList)
           ) {
             level220PlusCharactersResponse.push(response.data.data)
           }
