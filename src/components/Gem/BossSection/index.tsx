@@ -24,6 +24,8 @@ interface sortType {
   icon: JSX.Element
 }
 
+type currentBossArrType = string[]
+
 const bossBottons = [
   { id: 'sde', name: '스데', tip: '전투력 500 이상' },
   { id: 'gaenseul', name: '가엔슬', tip: '전투럭 1천 이상' },
@@ -37,11 +39,12 @@ const bossBottons = [
 const BossSection = ({ unit }: BossSectionPropsType) => {
   const { characterInfoList, setCharacterInfoList } =
     useCharacterInfoListContext()
-  const [currentBossArr, setcurrentBossArr] = useState<any[]>([])
+  const [currentBossArr, setcurrentBossArr] = useState<currentBossArrType>([])
   const [sort, setSort] = useState<sortType>({
     value: 'default',
     icon: <FaSort />,
   })
+
   // 캐릭터 선택
   const currentChar = characterInfoList.find(
     (char) => char.currentCharacter === true,
@@ -99,25 +102,6 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
       }),
     )
   }
-  // 보스 파티원 수
-  const handleBossPlayer: ChangeEventHandler<HTMLSelectElement> = (e) => {
-    setCharacterInfoList((prev) =>
-      prev.map((item) => {
-        if (item.ocid !== currentChar.ocid) return item
-
-        const updatedBoss = item.boss.map((boss) => {
-          if (boss.krName + boss.type[0].difficulty !== e.currentTarget.id)
-            return boss
-
-          const changeNum = Number(e.currentTarget.value)
-
-          return { ...boss, player: changeNum }
-        })
-
-        return { ...item, boss: updatedBoss }
-      }),
-    )
-  }
 
   const handelPriceSort = () => {
     if (sort.value === 'default') {
@@ -161,6 +145,30 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
       return b.type[0].price - a.type[0].price // 가격 내림차순
     })
   }
+  // 보스 파티원 수
+  const handleBossPlayer: ChangeEventHandler<HTMLSelectElement> = (e) => {
+    setCharacterInfoList((prev) =>
+      prev.map((item) => {
+        if (item.ocid !== currentChar.ocid) return item
+
+        const updatedBoss = item.boss.map((boss) => {
+          // console.log(e.currentTarget.id.split('_')[0])
+          // const target =
+          //   boss.type.length >= 2
+          //     ? boss.name
+          //     : `${boss.name}_${boss.type[0].difficulty}`
+
+          if (boss.name !== e.currentTarget.id.split('_')[0]) return boss
+
+          const changeNum = Number(e.currentTarget.value)
+
+          return { ...boss, player: changeNum }
+        })
+
+        return { ...item, boss: updatedBoss }
+      }),
+    )
+  }
 
   return (
     <ItemContainer title="보스 리스트" className="relative">
@@ -203,7 +211,11 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
           return (
             <div
               className="flex justify-between xxxs:mb-3 xxxs:border-b-[1px]"
-              key={boss.name + boss.type[0].difficulty}
+              key={
+                boss.type.length >= 2
+                  ? boss.name
+                  : `${boss.name}_${boss.type[0].difficulty}`
+              }
             >
               <div className="flex w-fit xxxs:flex-col">
                 <div className="flex items-center w-44 xxxs:w-36 min-w-44 xxxs:min-w-36 mb-1">
@@ -260,7 +272,11 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
                   }
                   name="player"
                   value={boss.player}
-                  id={boss.krName + boss.type[0].difficulty}
+                  id={
+                    boss.type.length >= 2
+                      ? boss.name
+                      : `${boss.name}_${boss.type[0].difficulty}`
+                  }
                 >
                   <option value="1">1</option>
                   <option value="2">2</option>
