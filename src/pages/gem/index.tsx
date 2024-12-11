@@ -21,6 +21,7 @@ const GemPage = () => {
   return (
     <main className="flex xs:flex-col w-full h-full p-3 xs:pt-12 lg:pl-12 gap-3 box-border overflow-x-auto scrollBar">
       <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>보스결정석 - 메이플 헬퍼</title>
       </Head>
       <CharacterSection />
