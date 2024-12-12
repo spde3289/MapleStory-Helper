@@ -1,7 +1,7 @@
+import HeadMeta from '@/commonComponents/HeadMeta'
 import BossSection from '@/components/Gem/BossSection'
 import CharacterSection from '@/components/Gem/CharacterSection'
 import GemSection from '@/components/Gem/GemSection'
-import Head from 'next/head'
 import { useState } from 'react'
 
 type UnitType = '일반' | '유닛'
@@ -20,10 +20,10 @@ const GemPage = () => {
 
   return (
     <main className="flex xs:flex-col w-full h-full p-3 xs:pt-12 lg:pl-12 gap-3 box-border overflow-x-auto scrollBar">
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>보스결정석 - 메이플 헬퍼</title>
-      </Head>
+      <HeadMeta
+        title="보스결정석 - 메이플 헬퍼"
+        description="편리하게 보스 결정석 수익을 확인해 보세요."
+      />
       <CharacterSection />
       <div className="flex flex-col gap-3 xs:flex-col-reverse mb-5">
         <GemSection unit={unit} unitHandler={unitHandler} />
