@@ -6,6 +6,7 @@ import '@/styles/globals.css'
 import { Analytics } from '@vercel/analytics/react'
 import { AppProps } from 'next/app'
 import localFont from 'next/font/local'
+import Head from 'next/head'
 
 // 폰트 파일 경로를 /public/fonts 에서 가져옴
 const myFont = localFont({
@@ -27,10 +28,12 @@ const myFont = localFont({
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <div className={`${myFont.className}`}>
-      {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
-      ) : null}
-      <Analytics />
+      <Head>
+        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
+        ) : null}
+        <Analytics />
+      </Head>
       <CharacterInfoListProvider>
         <MainCharacterProvider>
           <Layout>
