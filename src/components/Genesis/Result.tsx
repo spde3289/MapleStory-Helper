@@ -1,7 +1,8 @@
 import ItemContainer from '@/commonComponents/ItemContainer'
 import quest from '@/data/genesis/quest.json'
 import { bossListType, currentQuestType } from '@/type/genesis'
-import { convertTime } from '@/utils/setDate'
+import { calculateRewards, convertTime } from '@/utils/numberUtils'
+import { getDateAfterWeeks } from '@/utils/setDate'
 
 interface ResultProps {
   currentQuest: currentQuestType
@@ -11,13 +12,22 @@ interface ResultProps {
 const Result = ({ currentQuest, bossList }: ResultProps) => {
   const startIndex = quest.findIndex((item) => item.quest === currentQuest.boss)
 
-  let sum_darkness = 0
-
-  for (let i = startIndex; i < quest.length; i += 1) {
-    sum_darkness += quest[i].required_darkness
+  const result = {
+    need_darkness: 0,
+    bossReward: 0,
+    blackMageReward: 0,
+    totalReward: 0,
+    date: 0,
   }
 
-  let totalReward = Math.round(
+  for (let i = startIndex; i < quest.length; i += 1) {
+    result.need_darkness += quest[i].required_darkness
+    if (i >= quest.length - 1) {
+      result.need_darkness -= currentQuest.gauge
+    }
+  }
+
+  result.bossReward = Math.round(
     bossList.slice(0, -1).reduce((sum, boss) => {
       return (
         sum +
@@ -31,33 +41,45 @@ const Result = ({ currentQuest, bossList }: ResultProps) => {
   const checkBlackMage = bossList.find((item) => item.krName === '검은 마법사')
 
   if (checkBlackMage?.type.some((type) => type.current === true)) {
-    totalReward += Math.round(500 / checkBlackMage.player)
+    result.blackMageReward += Math.round(500 / checkBlackMage.player)
   }
 
-  const date = Number.isFinite(
-    (sum_darkness - currentQuest.gauge) / totalReward,
-  )
-    ? (sum_darkness - currentQuest.gauge) / totalReward
-    : 0
+  const value =
+    result.need_darkness !== 0 &&
+    (result.bossReward !== 0 || result.blackMageReward !== 0)
+
+  if (value) {
+    result.date = calculateRewards(result).date
+    result.totalReward = calculateRewards(result).totalReward
+  }
 
   return (
-    <ItemContainer title="결과">
+    <ItemContainer className="relative gmQuest-text-area " title="결과">
       <div className="w-full">
         <table className="mb-3 w-full table-auto ">
           <tbody className="border-b-[1px] border-b-gray-200">
             <tr className="leading-8">
-              <td className="w-32">요구 어둠의 흔적</td>
-              <td className="w-20 text-right">
-                {sum_darkness - currentQuest.gauge}
-              </td>
+              <td className="w-44">요구 어둠의 흔적</td>
+              <td className="w-20 text-right">{result.need_darkness}</td>
             </tr>
             <tr className="leading-8">
-              <td className="w-32">어둠의 흔적</td>
-              <td className="w-20 text-right">{totalReward} / 주</td>
+              <td className="w-44">보스 어둠의 흔적</td>
+              <td className="w-20 text-right">{result.bossReward} / 주</td>
+            </tr>
+            <tr className="leading-8">
+              <td className="w-44">검은 마법사 어둠의 흔적</td>
+              <td className="w-20 text-right">{result.blackMageReward} / 월</td>
             </tr>
           </tbody>
         </table>
-        <div className="text-right h-6">{convertTime(date)}</div>
+        <div className="text-right h-6">
+          {convertTime(result.date)}{' '}
+          <span className="text-sm">({result.date} 주)</span>
+        </div>
+        <div className="text-right h-6 flex justify-between">
+          <div className="text-left">예상 해방 날짜</div>
+          {getDateAfterWeeks(result.date)}
+        </div>
       </div>
     </ItemContainer>
   )
