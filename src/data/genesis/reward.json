@@ -1,0 +1,77 @@
+[
+  {
+    "name": "Lotus",
+    "krName": "스우",
+    "player": 1,
+    "type": [
+      { "difficulty": "노멀", "reward": 10, "current": false },
+      { "difficulty": "하드", "reward": 50, "current": false },
+      { "difficulty": "익스트림", "reward": 50, "current": false }
+    ]
+  },
+  {
+    "name": "Damien",
+    "krName": "데미안",
+    "player": 1,
+    "type": [
+      { "difficulty": "노멀", "reward": 10, "current": false },
+      { "difficulty": "하드", "reward": 50, "current": false }
+    ]
+  },
+  {
+    "name": "Lucid",
+    "krName": "루시드",
+    "player": 1,
+    "type": [
+      { "difficulty": "이지", "reward": 15, "current": false },
+      { "difficulty": "노멀", "reward": 20, "current": false },
+      { "difficulty": "하드", "reward": 65, "current": false }
+    ]
+  },
+  {
+    "name": "GiantMonsterGloom",
+    "krName": "더스크",
+    "player": 1,
+    "type": [
+      { "difficulty": "노멀", "reward": 20, "current": false },
+      { "difficulty": "카오스", "reward": 65, "current": false }
+    ]
+  },
+  {
+    "name": "Will",
+    "krName": "윌",
+    "player": 1,
+    "type": [
+      { "difficulty": "이지", "reward": 15, "current": false },
+      { "difficulty": "노멀", "reward": 25, "current": false },
+      { "difficulty": "하드", "reward": 75, "current": false }
+    ]
+  },
+  {
+    "name": "GuardCaptainDarknell",
+    "krName": "듄켈",
+    "player": 1,
+    "type": [
+      { "difficulty": "노멀", "reward": 25, "current": false },
+      { "difficulty": "하드", "reward": 75, "current": false }
+    ]
+  },
+  {
+    "name": "VerusHilla",
+    "krName": "진 힐라",
+    "player": 1,
+    "type": [
+      { "difficulty": "노멀", "reward": 45, "current": false },
+      { "difficulty": "하드", "reward": 90, "current": false }
+    ]
+  },
+  {
+    "name": "BlackMage",
+    "krName": "검은 마법사",
+    "player": 1,
+    "type": [
+      { "difficulty": "하드", "reward": 500, "current": false },
+      { "difficulty": "익스트림", "reward": 500, "current": false }
+    ]
+  }
+]

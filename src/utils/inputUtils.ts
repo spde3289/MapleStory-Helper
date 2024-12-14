@@ -3,3 +3,9 @@ export const checkHangulRex = (value: string): boolean => {
   if (regex.test(value)) return true
   return false
 }
+
+export const checkNumberRex = (value: string): boolean => {
+  const regex = /^\d*$/
+  if (regex.test(value)) return true
+  return false
+}
