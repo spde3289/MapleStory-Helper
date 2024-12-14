@@ -42,10 +42,15 @@ const NavBar = () => {
             </Link>
             <div className="xs:hidden h-[1px] mt-4 bg-gray-100 w-7/12" />
           </div>
-          <ul className="flex xs:space-x-4 xs:items-center w-full ml-3 mr-3 lg:space-y-6 font-bold">
+          <ul className="flex lg:flex-col xs:space-x-4 xs:items-center w-full ml-3 mr-3 lg:space-y-6 font-bold">
             <li className="pl-3">
               <h2>
                 <Link href="/gem">보스 결정석</Link>
+              </h2>
+            </li>
+            <li className="pl-3">
+              <h2>
+                <Link href="/genesis">해방 퀘스트 계산기</Link>
               </h2>
             </li>
           </ul>

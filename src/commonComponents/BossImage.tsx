@@ -1,6 +1,5 @@
 import bossIcons from '@/icons/boss'
 import Image from 'next/image'
-import { memo } from 'react'
 
 interface BossImagePropsType {
   boss: string
@@ -8,6 +7,7 @@ interface BossImagePropsType {
 }
 
 const BossImage = ({ boss, className = '' }: BossImagePropsType) => {
+  // console.log(bossIcons[boss])
   return (
     <Image
       className={className}
@@ -19,4 +19,4 @@ const BossImage = ({ boss, className = '' }: BossImagePropsType) => {
   )
 }
 
-export default memo(BossImage)
+export default BossImage

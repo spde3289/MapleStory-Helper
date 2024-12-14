@@ -19,7 +19,7 @@ const GemPage = () => {
   }
 
   return (
-    <main className="flex xs:flex-col w-full h-full p-3 xs:pt-12 lg:pl-12 gap-3 box-border overflow-x-auto scrollBar">
+    <main className="flex xs:flex-col w-full p-3 h-full xs:pt-12 lg:pl-12 gap-3 box-border overflow-x-auto scrollBar">
       <HeadMeta
         title="보스결정석 - 메이플 헬퍼"
         description="편리하게 보스 결정석 수익을 확인해 보세요."

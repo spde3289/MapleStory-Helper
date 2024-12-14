@@ -20,7 +20,7 @@ const HeadMeta = ({ title, description, Keywords }: HeadMetaProps) => {
         name="Keywords"
         content={
           Keywords ||
-          '메이플스토리, 메이플스토리 헬퍼, 메이플 헬퍼, 주간 보스결정석, 주보돌이, 캐릭터 검색'
+          '메이플스토리, 메이플스토리 헬퍼, 메이플 헬퍼, 주간 보스결정석, 주보돌이, 캐릭터 검색, 해방 퀘스트, 제네시스 무기, 해방퀘'
         }
       />
       <meta property="og:type" content="website" />
@@ -34,7 +34,7 @@ const HeadMeta = ({ title, description, Keywords }: HeadMetaProps) => {
         name="og:Keywords"
         content={
           Keywords ||
-          '메이플스토리, 메이플스토리 헬퍼, 메이플 헬퍼, 주간 보스결정석, 주보돌이, 캐릭터 검색'
+          '메이플스토리, 메이플스토리 헬퍼, 메이플 헬퍼, 주간 보스결정석, 주보돌이, 캐릭터 검색, 해방 퀘스트, 제네시스 무기, 해방퀘'
         }
       />
       <meta property="og:url" content="https://www.maple-helper.com/" />
