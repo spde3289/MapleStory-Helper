@@ -34,6 +34,12 @@ const Result = ({ currentQuest, bossList }: ResultProps) => {
     totalReward += Math.round(500 / checkBlackMage.player)
   }
 
+  const date = Number.isFinite(
+    (sum_darkness - currentQuest.gauge) / totalReward,
+  )
+    ? (sum_darkness - currentQuest.gauge) / totalReward
+    : 0
+
   return (
     <ItemContainer title="결과">
       <div className="w-full">
@@ -51,9 +57,7 @@ const Result = ({ currentQuest, bossList }: ResultProps) => {
             </tr>
           </tbody>
         </table>
-        <div className="text-right">
-          {convertTime((sum_darkness - currentQuest.gauge) / totalReward)}
-        </div>
+        <div className="text-right h-6">{convertTime(date)}</div>
       </div>
     </ItemContainer>
   )
