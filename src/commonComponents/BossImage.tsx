@@ -7,9 +7,9 @@ interface BossImagePropsType {
 }
 
 const BossImage = ({ boss, className = '' }: BossImagePropsType) => {
-  // console.log(bossIcons[boss])
   return (
     <Image
+      unoptimized={boss === 'BlackMage'}
       className={className}
       src={bossIcons[boss]}
       width={25}

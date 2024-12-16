@@ -24,6 +24,7 @@ const CharacterImage = ({
 
   return (
     <Image
+      unoptimized={false}
       width={width}
       height={height}
       src={characterImage}
