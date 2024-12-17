@@ -15,6 +15,7 @@ const AccordionLayoutButton = ({
     'lg:top-1/2 lg:-right-6 lg:w-6 lg:h-10 lg:-translate-y-1/2 lg:rounded-r-xl'
   return (
     <button
+      aria-label="메뉴바 버튼"
       type="button"
       onClick={handelNavSize}
       className={`${

@@ -86,6 +86,7 @@ const Genesis = () => {
       <HeadMeta
         title="해방 퀘스트 계산기 - 메이플 헬퍼"
         description="해방까지 남은 시간을 계산해드려요"
+        Keywords="해방퀘, 해방예상, 해방예상시간, 제네시스무기, 제네무기, 제네해방, 어둠의 흔적"
       />
       <Calculate
         handleBossList={handleBossList}
