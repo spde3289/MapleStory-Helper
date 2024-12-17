@@ -116,6 +116,7 @@ const CharacterElement = ({
         onClick={deleteCharacter}
         className="xs:w-6 xs:h-6 xxxs:w-5 xxxs:h-5 xxxs:absolute xxxs:top-2 xxxs:right-2"
         type="button"
+        aria-label={`${character.character_name} 삭제 버튼`}
       >
         <IoTrashOutline className="w-full h-full" />
       </button>

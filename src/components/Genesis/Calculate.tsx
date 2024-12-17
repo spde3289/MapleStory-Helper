@@ -44,6 +44,7 @@ const Calculate = ({
             className="bg-[#db7ef5] transition-colors duration-300 ease-in-out flex h-8 text-center border-[1px] rounded-xl justify-center items-center"
           >
             <input
+              alt="보유 어둠의 흔적"
               className="w-12 h-7 bg-transparent outline-none "
               maxLength={4}
               onChange={handleGauge}
