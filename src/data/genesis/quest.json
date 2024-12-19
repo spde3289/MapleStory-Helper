@@ -13,11 +13,11 @@
   },
   {
     "quest": "윙 마스터 스우",
-    "required_darkness": 800
+    "required_darkness": 1000
   },
   {
     "quest": "파멸의 검 데미안",
-    "required_darkness": 800
+    "required_darkness": 1000
   },
   {
     "quest": "거미의 왕 윌",
@@ -29,6 +29,6 @@
   },
   {
     "quest": "붉은 마녀 진 힐라",
-    "required_darkness": 1500
+    "required_darkness": 1000
   }
 ]

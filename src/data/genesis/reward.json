@@ -70,8 +70,8 @@
     "krName": "검은 마법사",
     "player": 1,
     "type": [
-      { "difficulty": "하드", "reward": 500, "current": false },
-      { "difficulty": "익스트림", "reward": 500, "current": false }
+      { "difficulty": "하드", "reward": 600, "current": false },
+      { "difficulty": "익스트림", "reward": 600, "current": false }
     ]
   }
 ]
