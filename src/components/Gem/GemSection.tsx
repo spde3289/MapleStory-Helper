@@ -8,7 +8,7 @@ interface GemSectionPropsType {
   unitHandler: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const manageArrayLength = (arr: any[], maxLength = 180) => {
+const manageArrayLength = (arr: any[], maxLength = 90) => {
   if (arr.length > maxLength) {
     arr.splice(0, arr.length - maxLength) // 초과된 요소를 한꺼번에 삭제
   }
