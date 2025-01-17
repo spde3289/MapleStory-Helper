@@ -53,7 +53,7 @@ a {
 
   .gem-virtual-text-area::after {
     position: absolute;
-    content: '상위 180개의 결정석만 계산합니다.';
+    content: '상위 90개의 결정석만 계산합니다.';
     left: 12px;
     top: 36px;
     font-size: 12px; /* 텍스트 크기 */
