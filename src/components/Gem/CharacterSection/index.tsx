@@ -146,7 +146,7 @@ const CharacterSection = () => {
                 )
               })}
             </div>
-            <div className="bg-gray-200 rounded-md mt-8 px-1 py-2 pt-3">
+            <div className="bg-gray-200 rounded-md mt-8 px-1 py-2 pt-3 flex flex-col gap-1">
               {characterInfoList.map((char) => {
                 return (
                   <CharacterElement
