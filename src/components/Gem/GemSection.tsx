@@ -8,9 +8,11 @@ interface GemSectionPropsType {
   unitHandler: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const manageArrayLength = (arr: any[], maxLength = 90) => {
-  if (arr.length > maxLength) {
-    arr.splice(0, arr.length - maxLength) // 초과된 요소를 한꺼번에 삭제
+const maxGem = 90
+
+const manageArrayLength = (arr: any[]) => {
+  if (arr.length > maxGem) {
+    arr.splice(0, arr.length - maxGem) // 초과된 요소를 한꺼번에 삭제
   }
   return arr
 }
@@ -83,9 +85,9 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
                     메소
                   </div>
                   <div
-                    className={`ml-4 ${world.count > 180 ? 'text-red-600' : ''}`}
+                    className={`ml-4 ${world.count > maxGem ? 'text-red-600' : ''}`}
                   >
-                    {world.count} / 90{' '}
+                    {world.count} / {maxGem}{' '}
                   </div>
                 </div>
               )
