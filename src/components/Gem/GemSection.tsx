@@ -85,7 +85,7 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
                   <div
                     className={`ml-4 ${world.count > 180 ? 'text-red-600' : ''}`}
                   >
-                    {world.count} / 180{' '}
+                    {world.count} / 90{' '}
                   </div>
                 </div>
               )
