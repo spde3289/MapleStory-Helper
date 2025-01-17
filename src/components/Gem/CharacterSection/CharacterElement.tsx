@@ -36,6 +36,7 @@ const CharacterElement = ({
           krName: boss.krName,
           difficulty: boss.type.find((type) => type.current === true)
             ?.difficulty,
+          price: boss.type.find((type) => type.current === true)?.price,
         })
         setCurrentBossList(arr)
       } else if (arr.length === 0) {
@@ -71,6 +72,11 @@ const CharacterElement = ({
     )
   }
 
+  const totalPrice = currentBossList.reduce((acc, cur) => {
+    return acc + cur.price
+  }, 0)
+  console.log(totalPrice)
+
   return (
     <div
       onClick={handleCharacter}
@@ -88,16 +94,18 @@ const CharacterElement = ({
               src={character.character_image}
             />
             {character.character_name}
+            <span>LV. {character.character_level}</span>
           </div>
           <div className="h-fit w-32 min-w-32">
-            <div>
-              <div>LV. {character.character_level}</div>
-            </div>
             <div>
               <div className="text-xs">
                 {character.final_stat[42].stat_name}
               </div>
               <div>{combatPower}</div>
+            </div>
+            <div>
+              <div className="text-xs">수익</div>
+              <div>{formatKoreanNumber(totalPrice)} 메소</div>
             </div>
           </div>
         </div>
