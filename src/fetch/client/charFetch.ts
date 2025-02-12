@@ -1,6 +1,6 @@
 import { MainCharacterResponse } from '@/type/axios/characterType'
 import { ResponseDataType } from '@/type/axios/commonType'
-import { Get } from './client'
+import { Get } from '.'
 import Paths from './path'
 
 export const getCharInfo = async (

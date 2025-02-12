@@ -2,7 +2,7 @@ import { Boss } from '@/data/boss'
 import { CharListResponse } from '@/type/axios/charListType'
 import { MainCharacterResponse } from '@/type/axios/characterType'
 import { ResponseDataType } from '@/type/axios/commonType'
-import { Get } from './client'
+import { Get } from '.'
 import Paths from './path'
 
 type InputType = `test_${string}` | `live_${string}` // 정상적인 타입 선언
