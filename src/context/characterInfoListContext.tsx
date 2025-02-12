@@ -1,3 +1,5 @@
+'use client'
+
 import bosses, { Boss } from '@/data/boss'
 import BossInfo from '@/data/boss/boss.json'
 import { MainCharacterResponse } from '@/type/axios/characterType'

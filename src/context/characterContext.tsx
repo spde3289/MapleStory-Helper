@@ -1,3 +1,5 @@
+'use client'
+
 import { MainCharacterResponse } from '@/type/axios/characterType'
 import { createContext, useContext, useMemo, useState } from 'react'
 
