@@ -1,10 +1,10 @@
 // import Header from '@/components/layout/Header'
 // import { GoogleAnalytics } from '@next/third-parties/google'
 import NavBar from '@/components/layout/NavBar'
+import DataFetchProvider from '@/components/porvider/DataFetchProvider'
 import MainCharacterProvider from '@/context/characterContext'
 import CharacterInfoListProvider from '@/context/characterInfoListContext'
 import type { Metadata } from 'next'
-import DataFetchProvider from './components/DataFetchProvider'
 import './globals.css'
 
 // const GA_ID = process.env.NEXT_PUBLIC_GA_ID

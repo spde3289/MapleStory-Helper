@@ -80,6 +80,7 @@ const CharacterInfoListProvider: React.FC<{
       data: MainCharacterResponse | MainCharacterResponse[],
       charList?: localStorageCharListType,
     ) => {
+      console.log(data)
       if (Array.isArray(data)) {
         const mapingData = data.map((char) => {
           const charName = charList?.find(

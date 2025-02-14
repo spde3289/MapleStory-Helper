@@ -24,9 +24,6 @@ const onRequest = (config: InternalAxiosRequestConfig) => {
   console.log(`[API - REQUEST] ${method?.toUpperCase()} ${url}`)
   return config
 }
-;(error: any) => {
-  return Promise.reject(error)
-}
 
 const onResponse = (res: AxiosResponse) => {
   const { method, url } = res.config
@@ -53,14 +50,19 @@ const onError = (error: AxiosError | Error): Promise<AxiosError> => {
         `🚨 [API - ERROR] ${method?.toUpperCase()} ${url} | ${name} : ${message}`,
       )
     }
-    return Promise.reject({
-      status: error.response?.status || 400,
-      statusText: error.response?.data.error.message,
-      name: error.response?.data.error.name,
-    })
-  } else {
-    console.log(`🚨 [API] | Error ${error.message}`)
+    return Promise.reject(
+      new Error(
+        JSON.stringify({
+          status: error.response?.status || 400,
+          statusText: error.response?.data.error.message,
+          name: error.response?.data.error.name,
+        }),
+      ),
+    )
   }
+
+  console.log(`🚨 [API] | Error ${error.message}`)
+
   return Promise.reject(error)
 }
 

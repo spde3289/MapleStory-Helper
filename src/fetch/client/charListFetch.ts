@@ -1,7 +1,6 @@
 import { Boss } from '@/data/boss'
 import { CharListResponse } from '@/type/axios/charListType'
 import { MainCharacterResponse } from '@/type/axios/characterType'
-import { ResponseDataType } from '@/type/axios/commonType'
 import { Get } from '.'
 import Paths from './path'
 
@@ -17,37 +16,34 @@ type localStorageCharListType = {
 }[]
 
 export const getCharList = async (
-  ApiKey: string | localStorageCharListType,
-): Promise<ResponseDataType<MainCharacterResponse[]>> => {
+  data: string | localStorageCharListType,
+): Promise<MainCharacterResponse[]> => {
   const level220PlusCharacters: any[] = []
 
-  if (Array.isArray(ApiKey)) {
-    ApiKey.forEach((el) => level220PlusCharacters.push(el.character_name))
-  } else if (isApiKeyTypeCheck(ApiKey)) {
-    const characterListResponse = await Get<ResponseDataType<CharListResponse>>(
+  if (Array.isArray(data)) {
+    data.forEach((el) => level220PlusCharacters.push(el.character_name))
+  } else if (isApiKeyTypeCheck(data)) {
+    const characterListResponse = await Get<CharListResponse>(
       Paths.characterList,
       {
         params: {
-          ApiKey,
+          ApiKey: data,
         },
       },
     )
     // 220 레벨을 넘는 캐릭터 리스트
-    characterListResponse.data.data?.account_list[0].character_list.forEach(
-      (el) => {
-        if (el.character_level >= 220)
-          level220PlusCharacters.push(el.character_name)
-      },
-    )
+    characterListResponse.data?.account_list[0].character_list.forEach((el) => {
+      if (el.character_level >= 220)
+        level220PlusCharacters.push(el.character_name)
+    })
   }
-
   const level220PlusCharactersResponse: MainCharacterResponse[] = []
 
   if (level220PlusCharacters?.length) {
     try {
       const responses = await Promise.all(
         level220PlusCharacters.map((character) => {
-          return Get<ResponseDataType<MainCharacterResponse>>(Paths.character, {
+          return Get<MainCharacterResponse>(Paths.character, {
             params: { character_name: character },
           })
         }),
@@ -55,13 +51,13 @@ export const getCharList = async (
 
       responses.forEach((response) => {
         const checkList = level220PlusCharacters.some(
-          (el) => el === response.data.data?.character_name,
+          (el) => el === response.data?.character_name,
         )
         if (
-          response?.data?.data &&
-          (response.data.data.final_stat[42].stat_value >= 3000000 || checkList)
+          response.data &&
+          (response.data.final_stat[42].stat_value >= 3000000 || checkList)
         ) {
-          level220PlusCharactersResponse.push(response.data.data)
+          level220PlusCharactersResponse.push(response.data)
         }
       })
     } catch (error) {
@@ -69,9 +65,5 @@ export const getCharList = async (
     }
   }
 
-  return {
-    data: level220PlusCharactersResponse,
-    status: 200,
-    statusText: 'OK',
-  }
+  return level220PlusCharactersResponse
 }

@@ -1,14 +1,15 @@
+'use client'
+
 import { useMainCharacterContext } from '@/context/characterContext'
 import { useCharacterInfoListContext } from '@/context/characterInfoListContext'
-import { getCharInfo } from '@/fetch/charFetch'
-import { getCharList } from '@/fetch/charListFetch'
+import { getCharInfo } from '@/fetch/client/charFetch'
+import { getCharList } from '@/fetch/client/charListFetch'
 import { MainCharacterResponse } from '@/type/axios/characterType'
 import { getCharacterName } from '@/utils/localStorage/characterName'
 import { getCharacterNameList } from '@/utils/localStorage/characterNameList'
 import { useEffect } from 'react'
-import NavBar from '../commonComponents/commonLayout/NavBar'
 
-function Layout({ children }: { children: React.ReactNode }) {
+const DataFetchProvider = ({ children }: { children: React.ReactNode }) => {
   const { setMainCharacter } = useMainCharacterContext()
   const { characterInfoList, handleCharacterInfo } =
     useCharacterInfoListContext()
@@ -17,8 +18,8 @@ function Layout({ children }: { children: React.ReactNode }) {
     const fetchData = async () => {
       const characterName = getCharacterName() // 캐릭터이름저장
       if (typeof characterName === 'string') {
-        const { data, statusText } = await getCharInfo(characterName)
-        if (statusText === 'OK' && data) {
+        const data = await getCharInfo(characterName)
+        if (data) {
           setMainCharacter(data)
         }
       }
@@ -29,7 +30,8 @@ function Layout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (getCharacterNameList()?.length !== 0) {
       const response = async () => {
-        const { data } = await getCharList(getCharacterNameList())
+        const data = await getCharList(getCharacterNameList())
+        console.log(data)
         if (data) {
           const UniqueArr: MainCharacterResponse[] = []
 
@@ -50,14 +52,7 @@ function Layout({ children }: { children: React.ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return (
-    <div className="flex h-screen flex-col lg:flex-row no-drag overflow-hidden">
-      <NavBar />
-      <section className="bg-gray-200 lg:w-full lg:h-screen xs:w-full xs:h-full overflow-x-auto">
-        {children}
-      </section>
-    </div>
-  )
+  return children
 }
 
-export default Layout
+export default DataFetchProvider

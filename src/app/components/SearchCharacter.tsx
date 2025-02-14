@@ -13,8 +13,8 @@ const SearchCharacter = () => {
   const handlerSubmit = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       ;(e.target as HTMLInputElement).blur() // 포커스아웃
-      const { data } = await getCharInfo(character)
-
+      const data = await getCharInfo(character)
+      console.log('data ===================', data)
       if (data) {
         // 로컬스토리지에 대표 캐릭터 이름 저장
         setCharacterName(data?.character_name)

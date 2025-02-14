@@ -83,7 +83,7 @@ function Genesis() {
   }, [handleGauge])
 
   return (
-    <main className="flex xs:flex-col p-3 lg:justify-center lg:items-center w-full h-full xs:pt-12 lg:pl-12 gap-3 box-border overflow-x-auto scrollBar">
+    <>
       <Calculate
         handleBossList={handleBossList}
         bossList={bossList}
@@ -91,7 +91,7 @@ function Genesis() {
         handleQuest={handleQuest}
       />
       <Result bossList={bossList} currentQuest={currentQuest} />
-    </main>
+    </>
   )
 }
 

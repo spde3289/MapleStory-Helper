@@ -58,7 +58,7 @@ const CharacterSection = () => {
       ;(e.target as HTMLInputElement).blur() // 포커스아웃
       if (isApiKeyTypeCheck(characterName)) {
         // apikey를 입력 했을 시 //////////////////////////////////////////////
-        const { data } = await getCharList(characterName)
+        const data = await getCharList(characterName)
 
         if (data) {
           const UniqueArr: MainCharacterResponse[] = []
@@ -76,7 +76,7 @@ const CharacterSection = () => {
         }
       } else {
         // 수동으로 원하는 캐릭터를 입력
-        const { data } = await getCharInfo(characterName)
+        const data = await getCharInfo(characterName)
 
         if (data) {
           if (
@@ -138,11 +138,11 @@ const CharacterSection = () => {
                 return (
                   <button
                     key={world.world}
-                    className={`${world.current ? 'bg-gray-200 rounded-t-md' : ' '} flex gap-2 whitespace-nowrap mr-3 p-1 pb-2`}
+                    className={`${world.current ? 'bg-gray-200 rounded-t-md' : ' '} flex items-center gap-2 whitespace-nowrap mr-3 p-1 pb-2`}
                     type="button"
                     onClick={() => handleWorldChange(world)}
                   >
-                    <WorldImage world_name={world.world} size={24} />
+                    <WorldImage world_name={world.world} size={20} />
                     {world.world}
                   </button>
                 )

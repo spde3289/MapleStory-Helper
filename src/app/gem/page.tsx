@@ -20,13 +20,13 @@ function GemPage() {
   }
 
   return (
-    <main className="flex xs:flex-col  w-full p-3 h-full xs:pt-12 lg:pl-12 gap-3 box-border overflow-x-auto scrollBar ">
+    <>
       <CharacterSection />
       <div className="flex flex-col gap-3 xs:flex-col-reverse mb-5">
         <GemSection unit={unit} unitHandler={unitHandler} />
         <BossSection unit={unit} />
       </div>
-    </main>
+    </>
   )
 }
 

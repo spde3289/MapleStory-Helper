@@ -32,7 +32,6 @@ const onError = (error: AxiosError | Error): Promise<AxiosError> => {
   if (axios.isAxiosError(error)) {
     if (error?.response) {
       const errorCode = error.response?.data?.name || ''
-
       switch (errorCode) {
         case 'OPENAPI00001':
           alert('서버 내부 오류')
@@ -65,7 +64,9 @@ const onError = (error: AxiosError | Error): Promise<AxiosError> => {
           alert('API 점검 중')
           break
         default:
-          alert('알 수 없는 에러가 발생했습니다.')
+          alert(
+            error.response.data.statusText || '알 수 없는 에러가 발생했습니다.',
+          )
           break
       }
     }

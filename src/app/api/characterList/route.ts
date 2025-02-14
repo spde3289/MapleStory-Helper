@@ -18,7 +18,7 @@ export async function GET(req: Request) {
   if (!ApiKey) {
     return NextResponse.json(
       {
-        statusText: 'ApiKey가 필요합니다.',
+        statusText: '올바른 API KEY를 입력해 주세요',
         name: 'MissingApiKey',
       },
       { status: 400 },
