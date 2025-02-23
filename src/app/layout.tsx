@@ -1,15 +1,13 @@
-// import Header from '@/components/layout/Header'
-// import { GoogleAnalytics } from '@next/third-parties/google'
 import NavBar from '@/components/layout/NavBar'
 import DataFetchProvider from '@/components/porvider/DataFetchProvider'
 import MainCharacterProvider from '@/context/characterContext'
 import CharacterInfoListProvider from '@/context/characterInfoListContext'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import type { Metadata } from 'next'
+import localFont from 'next/font/local'
 import './globals.css'
 
-// const GA_ID = process.env.NEXT_PUBLIC_GA_ID
-
-import localFont from 'next/font/local'
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 // 폰트 파일 경로를 /public/fonts 에서 가져옴
 const mapleFont = localFont({
@@ -45,7 +43,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${mapleFont.className} antialiased`}>
         {/* Google Analytics Script */}
-        {/* {GA_ID && <GoogleAnalytics gaId={GA_ID} />} */}
+        {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.css"
           rel="stylesheet"
