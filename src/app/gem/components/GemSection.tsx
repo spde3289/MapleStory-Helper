@@ -1,4 +1,4 @@
-import ItemContainer from '@/components/ItemContainer'
+import ItemContainer from '@/components/common/ItemContainer'
 import { useCharacterInfoListContext } from '@/context/characterInfoListContext'
 import { formatKoreanNumber, formatToEokUnit } from '@/utils/numberUtils'
 import { memo, useState } from 'react'

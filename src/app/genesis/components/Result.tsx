@@ -1,4 +1,4 @@
-import ItemContainer from '@/components/ItemContainer'
+import ItemContainer from '@/components/common/ItemContainer'
 import quest from '@/data/genesis/quest.json'
 import { bossListType, currentQuestType } from '@/type/genesis'
 import { calculateRewards, convertTime } from '@/utils/numberUtils'
@@ -54,7 +54,10 @@ const Result = ({ currentQuest, bossList }: ResultProps) => {
   }
 
   return (
-    <ItemContainer className="relative gmQuest-text-area " title="결과">
+    <ItemContainer
+      className="relative gmQuest-text-area flex-1"
+      title="계산 결과"
+    >
       <div className="w-full">
         <table className="mb-3 w-full table-auto ">
           <tbody className="border-b-[1px] border-b-gray-200">

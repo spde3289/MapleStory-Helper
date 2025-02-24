@@ -1,5 +1,5 @@
-import ItemContainer from '@/components/ItemContainer'
-import WorldImage from '@/components/WorldImage'
+import ItemContainer from '@/components/common/ItemContainer'
+import WorldImage from '@/components/common/WorldImage'
 import { useCharacterInfoListContext } from '@/context/characterInfoListContext'
 import { getCharInfo } from '@/fetch/client/charFetch'
 import { getCharList } from '@/fetch/client/charListFetch'

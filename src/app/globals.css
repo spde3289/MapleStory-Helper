@@ -2,45 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  box-sizing: border-box;
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    /* background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1)); */
+    margin: 0;
+    padding: 0;
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
+    color: #070707;
+  }
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
+  }
 }
 
-html,
-body,
-ul {
-  margin: 0;
-  padding: 0;
-  color: #070707;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-}
-
-li {
-  list-style: none;
-}
-
-button {
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-
-a {
-  text-decoration: none;
-}
-
-@layer utilities {
+@layer components {
   .virtual-text-area::after {
     position: absolute;
     content: '주관적인 쾌적함 기준입니다.';
@@ -92,5 +95,34 @@ a {
 
   .scrollBarController:hover .scrollBar::-webkit-scrollbar-thumb {
     background-color: rgb(255, 255, 255); /* 스크롤바의 색상 */
+  }
+
+  .menu-item {
+    @apply font-medium rounded-lg text-theme-sm;
+  }
+  .menu-item-active {
+    @apply bg-brand-50 text-brand-500 dark:bg-brand-500/[0.12] dark:text-brand-400;
+  }
+  .menu-item-inactive {
+    @apply rounded-lg hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-white/5 dark:hover:text-gray-300;
+  }
+  .menu-item-icon {
+    @apply text-gray-500 group-hover:text-gray-700 dark:text-gray-400;
+  }
+  .menu-item-icon-active {
+    @apply text-brand-500 dark:text-brand-400;
+  }
+  .menu-item-icon-inactive {
+    @apply text-gray-500 group-hover:text-gray-700 dark:text-gray-400 dark:group-hover:text-gray-300;
+  }
+
+  .menu-item-arrow {
+    @apply relative;
+  }
+  .menu-item-arrow-active {
+    @apply rotate-180 text-brand-500 dark:text-brand-400;
+  }
+  .menu-item-arrow-inactive {
+    @apply text-gray-500 group-hover:text-gray-700 dark:text-gray-400 dark:group-hover:text-gray-300;
   }
 }

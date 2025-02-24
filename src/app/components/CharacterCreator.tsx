@@ -1,15 +1,17 @@
 'use client'
 
-import CharacterImage from '@/components/CharacterImage'
-import ItemContainer from '@/components/ItemContainer'
-import WorldImage from '@/components/WorldImage'
+import CharacterImage from '@/components/common/CharacterImage'
+import ItemContainer from '@/components/common/ItemContainer'
+import WorldImage from '@/components/common/WorldImage'
 import { useMainCharacterContext } from '@/context/characterContext'
 import { removeCharacterName } from '@/utils/localStorage/characterName'
 import { FaRegTrashAlt } from 'react-icons/fa'
+import { useTheme } from '../../context/ThemeContext'
 import SearchCharacter from './SearchCharacter'
 
 function CharacterCreator() {
   const { mainCharacter, setMainCharacter } = useMainCharacterContext()
+  const { toggleTheme } = useTheme()
 
   if (mainCharacter === null) return <SearchCharacter />
 
@@ -21,7 +23,7 @@ function CharacterCreator() {
         </div>
         <div className="text-center">{mainCharacter.character_name}</div>
         <div className="flex gap-2 text-sm">
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
             <WorldImage world_name={mainCharacter.world_name} />
             {mainCharacter.world_name}
           </div>
@@ -40,6 +42,13 @@ function CharacterCreator() {
           </button>
         </div>
       </div>
+      <button
+        type="button"
+        onClick={toggleTheme}
+        className="relative flex items-center justify-center text-gray-500 transition-colors bg-white border border-gray-200 rounded-full hover:text-dark-900 h-11 w-11 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
+      >
+        dasdasdas
+      </button>
     </ItemContainer>
   )
 }

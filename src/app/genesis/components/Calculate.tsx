@@ -1,6 +1,7 @@
-import BossImage from '@/components/BossImage'
+import BossImage from '@/components/common/BossImage'
 
-import ItemContainer from '@/components/ItemContainer'
+import ItemContainer from '@/components/common/ItemContainer'
+import { useTheme } from '@/context/ThemeContext'
 import quest from '@/data/genesis/quest.json'
 import { CalculateProps } from '@/type/genesis'
 
@@ -10,38 +11,47 @@ const Calculate = ({
   bossList,
   handleBossList,
 }: CalculateProps) => {
+  const { theme } = useTheme()
   const { handleBoss, handleGauge } = handleQuest
   const { handleType, handlePlayer } = handleBossList
 
   const currentBoss = quest.find((el) => el.quest === currentQuest.boss)
+
+  const dark = theme === 'dark' ? '#1d2939' : '#f5f5f5'
 
   const progress = currentBoss?.required_darkness
     ? (currentQuest.gauge / currentBoss.required_darkness) * 100
     : 0 // 퍼센트 계산, required_darkness가 없으면 0%
 
   return (
-    <ItemContainer title="진행중인 퀘스트">
-      <div className="flex xxxs:flex-col gap-3 items-center mb-4">
-        <select onChange={handleBoss} className="h-8 mr-4 outline-none">
-          {quest.map((item) => {
-            return (
-              <option
-                key={item.quest}
-                id={item.quest}
-                value={item.required_darkness}
-              >
-                {item.quest}
-              </option>
-            )
-          })}
-        </select>
+    <ItemContainer className=" xl:w-8/12" title="설정">
+      <div className="flex flex-col sm:flex-row gap-3 items-center mb-4">
+        <div>
+          <div className="text-sm">진행중인 보스</div>
+          <select
+            onChange={handleBoss}
+            className="mr-4 outline-none px-4 py-2 border rounded-lg dark:bg-gray-800"
+          >
+            {quest.map((item) => {
+              return (
+                <option
+                  key={item.quest}
+                  id={item.quest}
+                  value={item.required_darkness}
+                >
+                  {item.quest}
+                </option>
+              )
+            })}
+          </select>
+        </div>
         <div className="w-full">
           <div className="text-sm">어둠의 흔적</div>
           <div
             style={{
-              background: `linear-gradient(to right, #db7ef5 ${progress}%, #f5f5f5 ${progress}%)`,
+              background: `linear-gradient(to right, #b260c9 ${progress}%, ${dark} ${progress}%)`,
             }}
-            className="bg-[#db7ef5] transition-colors duration-300 ease-in-out flex h-8 text-center border-[1px] rounded-xl justify-center items-center"
+            className="transition-colors duration-300 ease-in-out flex h-8 text-center border-[1px] rounded-xl justify-center items-center"
           >
             <input
               alt="보유 어둠의 흔적"
@@ -55,51 +65,61 @@ const Calculate = ({
         </div>
       </div>
       <div>
-        <div className="flex xxxs:justify-between mb-3 text-sm">
-          <div className="text-center xxxs:w-20 xxxs:min-w-20 items-center w-44 min-w-44">
-            보스
+        <div className="flex justify-between mb-1 text-sm border-b">
+          <div className="flex w-full">
+            <div className="text-center sm:text-left w-20 sm:min-w-44">
+              보스
+            </div>
+            <div className="w-fit sm:m-0 mx-auto">
+              난이도{' '}
+              <span className="text-gray-500 dark:text-gray-400 ">
+                (획득 어둠의 흔적)
+              </span>
+            </div>
           </div>
-          <div className="min-w-40 w-full xxxs:w-fit xxxs:min-w-fit text-center">
-            난이도
-          </div>
-          <div className="min-w-fit">파티원</div>
+          <div className="w-[67px] sm:min-w-[51px]">파티원</div>
         </div>
         {bossList.map((item) => {
           return (
-            <div className="flex justify-between " key={item.krName}>
-              <div className="flex w-fit xxxs:flex-col">
-                <div className="flex w-44 xxxs:w-32 xxxs:min-w-32">
+            <div
+              className="flex justify-between border-b py-2 items-center"
+              key={item.krName}
+            >
+              <div className="flex w-full items-center">
+                <div className="flex flex-col items-center w-20 sm:w-44 sm:flex-row ">
                   <BossImage className="mr-2 w-6 h-6" boss={item.name} />
                   <div>{item.krName}</div>
                 </div>
-                <fieldset className="flex xxs:flex-wrap min-w-40 flex-1  w-full">
+                <fieldset className="flex flex-col sm:flex-row min-w-32 w-fit sm:m-0 mx-auto ">
                   {item.type.map((type) => {
                     return (
                       <label
                         key={type.difficulty}
-                        className={`flex flex-col items-center mr-5 text-gray-500 xxxs:mr-3 mb-3 `}
+                        className="flex flex-col items-start sm:items-center md:mr-5 mr-3"
                         htmlFor={`${type.difficulty}${item.krName}`}
                       >
-                        <div className="text-black">
+                        <div className="">
                           <input
                             onChange={handleType}
                             checked={type.current}
-                            className="mr-1 "
+                            className="mr-1 text-right"
                             type="checkbox"
                             value={`${item.krName}`}
                             id={`${type.difficulty}${item.krName}`}
                             name="group"
                           />
-                          {type.difficulty}
+                          {type.difficulty}{' '}
+                          <span className="text-gray-500 dark:text-gray-400 ">
+                            ({Math.round(type.reward / item.player)})
+                          </span>
                         </div>
-                        {Math.round(type.reward / item.player)}
                       </label>
                     )
                   })}
                 </fieldset>
               </div>
               <select
-                className="outline-none"
+                className="outline-none dark:bg-gray-800 px-4 py-2 border rounded-lg h-fit md:px-2 md:py-1 "
                 id={item.krName}
                 value={item.player}
                 onChange={handlePlayer}

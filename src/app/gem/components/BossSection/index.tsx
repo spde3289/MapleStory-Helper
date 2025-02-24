@@ -1,5 +1,5 @@
-import BossImage from '@/components/BossImage'
-import ItemContainer from '@/components/ItemContainer'
+import BossImage from '@/components/common/BossImage'
+import ItemContainer from '@/components/common/ItemContainer'
 import { useCharacterInfoListContext } from '@/context/characterInfoListContext'
 import bosses from '@/data/boss'
 import { formatKoreanNumber } from '@/utils/numberUtils'

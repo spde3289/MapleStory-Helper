@@ -1,5 +1,5 @@
-import BossImage from '@/components/BossImage'
-import CharacterImage from '@/components/CharacterImage'
+import BossImage from '@/components/common/BossImage'
+import CharacterImage from '@/components/common/CharacterImage'
 import {
   characterInfo,
   useCharacterInfoListContext,

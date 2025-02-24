@@ -1,5 +1,5 @@
-import BossImage from '@/components/BossImage'
-import ItemContainer from '@/components/ItemContainer'
+import BossImage from '@/components/common/BossImage'
+import ItemContainer from '@/components/common/ItemContainer'
 import BossData from '@/data/boss/boss.json'
 import { FaSort } from 'react-icons/fa'
 

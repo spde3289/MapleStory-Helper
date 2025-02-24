@@ -37,6 +37,10 @@
     "next/typescript"
   ],
   "rules": {
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": ["**/tailwind.config.{js,ts}"] }
+    ],
     "@typescript-eslint/naming-convention": [
       "error",
       {
