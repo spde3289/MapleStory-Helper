@@ -1,11 +1,48 @@
 'use client'
 
+import { useSidebar } from '@/context/SidebarContext'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 
-import { useSidebar } from '@/context/SidebarContext'
+interface NavBarItemProps {
+  isActive: boolean
+  toggleMobileSidebar: () => void
+  name: string
+  path: string
+}
 
-function NavBar() {
+const NavBarItem = ({
+  isActive,
+  toggleMobileSidebar,
+  name,
+  path,
+}: NavBarItemProps) => {
+  return (
+    <Link href={path} onClick={() => toggleMobileSidebar()}>
+      <li
+        className={`pl-3 py-2  ${
+          isActive ? 'menu-item-active' : 'menu-item-inactive'
+        }`}
+      >
+        <h2>{name}</h2>
+      </li>
+    </Link>
+  )
+}
+
+const navItems = [
+  {
+    path: '/gem',
+    name: '주보 수익 계산기',
+  },
+  {
+    path: '/genesis',
+    name: '해방 퀘스트 계산기',
+  },
+]
+
+const NavBar = () => {
   const {
     isExpanded,
     isMobileOpen,
@@ -13,6 +50,7 @@ function NavBar() {
     setIsHovered,
     toggleMobileSidebar,
   } = useSidebar()
+  const pathname = usePathname()
 
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -55,16 +93,15 @@ function NavBar() {
           계산기
         </h3>
         <ul className="flex flex-col w-full ml-3 mr-3 font-bold">
-          <Link href="/gem" onClick={() => toggleMobileSidebar()}>
-            <li className="pl-3 menu-item-inactive py-2">
-              <h2>보스 결정석</h2>
-            </li>
-          </Link>
-          <Link href="/genesis" onClick={() => toggleMobileSidebar()}>
-            <li className="pl-3 menu-item-inactive py-2">
-              <h2>해방 퀘스트 계산기</h2>
-            </li>
-          </Link>
+          {navItems.map((item) => (
+            <NavBarItem
+              path={item.path}
+              name={item.name}
+              key={item.name}
+              toggleMobileSidebar={toggleMobileSidebar}
+              isActive={item.path === pathname}
+            />
+          ))}
         </ul>
       </div>
     </nav>

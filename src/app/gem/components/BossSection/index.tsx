@@ -1,5 +1,7 @@
 import BossImage from '@/components/common/BossImage'
 import ItemContainer from '@/components/common/ItemContainer'
+
+import Button from '@/components/ui/button/Button'
 import { useCharacterInfoListContext } from '@/context/characterInfoListContext'
 import bosses from '@/data/boss'
 import { formatKoreanNumber } from '@/utils/numberUtils'
@@ -12,8 +14,6 @@ import {
   useState,
 } from 'react'
 import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa'
-import BossButton from './BossButton'
-import BossDummy from './BossDummy'
 
 interface BossSectionPropsType {
   unit: '일반' | '유닛'
@@ -64,12 +64,12 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
   }, [characterInfoList])
 
   // 만약 선택한 캐릭터가 없으면 더미데이터
-  if (!currentChar) return <BossDummy />
+  // if (!currentChar) return <BossDummy />
 
   const haldler = (e: ChangeEvent<HTMLInputElement>) => {
     setCharacterInfoList((prev) =>
       prev.map((item) => {
-        if (item.ocid !== currentChar.ocid) return item
+        if (item.ocid !== currentChar?.ocid) return item
 
         const updatedBoss = item.boss.map((boss) => {
           if (boss.krName !== e.target.value) return boss
@@ -96,7 +96,7 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
 
     setCharacterInfoList((prev) =>
       prev.map((item) => {
-        if (item.ocid !== currentChar.ocid) return item
+        if (item.ocid !== currentChar?.ocid) return item
 
         return { ...item, boss: bosses[key] }
       }),
@@ -124,7 +124,7 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
     }
   }
 
-  const bossSort = currentChar.boss.flatMap((boss) => {
+  const bossSort = currentChar?.boss.flatMap((boss) => {
     if (sort.value === 'default') {
       return [boss] // 기본 정렬의 경우 배열로 반환
     }
@@ -138,18 +138,19 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
 
   // 정렬 수행
   if (sort.value !== 'default') {
-    bossSort.sort((a, b) => {
+    bossSort?.sort((a, b) => {
       if (sort.value === 'up') {
         return a.type[0].price - b.type[0].price // 가격 오름차순
       }
       return b.type[0].price - a.type[0].price // 가격 내림차순
     })
   }
+
   // 보스 파티원 수
   const handleBossPlayer: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setCharacterInfoList((prev) =>
       prev.map((item) => {
-        if (item.ocid !== currentChar.ocid) return item
+        if (item.ocid !== currentChar?.ocid) return item
 
         const updatedBoss = item.boss.map((boss) => {
           // console.log(e.currentTarget.id.split('_')[0])
@@ -171,64 +172,65 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
   }
 
   return (
-    <ItemContainer title="보스 리스트" className="relative">
+    <ItemContainer
+      title="보스 리스트"
+      className="relative no-drag w-full overflow-x-scroll scrollBar lg:overflow-hidden lg:w-[720px] lg:min-w-[720px]"
+    >
       <>
-        <div className="flex gap-4 mb-2 virtual-text-area w-[675px] xs:w-full xxxs:flex-wrap xxxs:gap-2 xxxs:mb-4">
+        <div className="flex gap-4 mb-2 virtual-text-area boss-table-min-w flex-wrap ">
           {bossBottons.map((el) => {
             return (
-              <BossButton
+              <Button
                 key={el.name}
-                handleSetBoss={handleSetBoss}
+                onClick={handleSetBoss}
                 id={el.id}
-                name={el.name}
                 tip={el.tip}
-              />
+              >
+                {el.name}
+              </Button>
             )
           })}
         </div>
-        <div className="flex xxxs:justify-between">
-          <div className="text-center items-center w-44 xxxs:w-fit min-w-44 xxxs:min-w-fit">
-            보스
-          </div>
-          <div className="min-w-40 w-full xxxs:w-fit xxxs:min-w-fit text-center">
-            난이도
-          </div>
-          <div className="flex w-48  min-w-48 xxs:min-w-48 xxs:w-48 xxxs:w-3/12 xxxs:min-w-24">
-            <div className="whitespace-nowrap">파티원</div>
-            <div
-              role="button"
-              tabIndex={0}
-              onKeyDown={handelPriceSort}
-              onClick={handelPriceSort}
-              className="w-full text-center flex items-center justify-center gap-1"
-            >
-              가격
-              {sort.icon}
-            </div>
+        <div className="boss-table border-b boss-table-min-w w-full dark:border-white/[0.2]">
+          <div className="text-center ">보스</div>
+          <div className="text-center">난이도</div>
+          <div className="whitespace-nowrap text-center ">파티원</div>
+          <div
+            role="button"
+            tabIndex={0}
+            onKeyDown={handelPriceSort}
+            onClick={handelPriceSort}
+            className="w-full flex items-center justify-center gap-1 cursor-pointer"
+          >
+            가격
+            {sort.icon}
           </div>
         </div>
-        {bossSort.map((boss) => {
-          return (
-            <div
-              className="flex justify-between xxxs:mb-3 xxxs:border-b-[1px]"
-              key={
-                boss.type.length >= 2
-                  ? boss.name
-                  : `${boss.name}_${boss.type[0].difficulty}`
-              }
-            >
-              <div className="flex w-fit xxxs:flex-col">
-                <div className="flex items-center w-44 xxxs:w-36 min-w-44 xxxs:min-w-36 mb-1">
+        <div className="flex flex-col items-start boss-table-min-w">
+          {bossSort?.map((boss) => {
+            return (
+              <div
+                className="boss-table py-2 dark:border-white/[0.2] border-b"
+                key={
+                  boss.type.length >= 2
+                    ? boss.name
+                    : `${boss.name}_${boss.type[0].difficulty}`
+                }
+              >
+                {/* 1번째 열: 보스명 + 이미지 */}
+                <div className="flex items-center">
                   <BossImage className="mr-2" boss={boss.name} />
-                  <div>{boss.krName}</div>
+                  <div className="hidden xsm:block">{boss.krName}</div>
                 </div>
-                <form className="">
-                  <fieldset className="flex xxs:flex-wrap min-w-40 w-full">
+
+                {/* 2번째 열: 난이도 체크박스 */}
+                <form className="lg:w-[680px]">
+                  <fieldset className="flex flex-col sm:flex-row gap-4 2xl:flex-row">
                     {boss.type.map((type) => {
                       return (
                         <label
                           key={type.difficulty}
-                          className={`flex items-center mr-5 xxxs:mr-3 ${
+                          className={`flex items-center ${
                             currentBossArr.length < 12
                               ? ''
                               : !currentBossArr.includes(boss.name) &&
@@ -246,7 +248,7 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
                             checked={type.current}
                             className="mr-1"
                             type="checkbox"
-                            value={`${boss.krName}`}
+                            value={boss.krName}
                             id={`${type.difficulty}${boss.krName}`}
                             name="group"
                           />
@@ -256,15 +258,15 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
                     })}
                   </fieldset>
                 </form>
-              </div>
-              <div className="flex w-48 min-w-48 xxs:min-w-48 xxs:w-48 xxxs:w-3/12 xxxs:min-w-24 justify-between xxxs:items-center">
+
+                {/* 3번째 열: 파티원 Select */}
                 <select
                   onChange={handleBossPlayer}
-                  className={` ${
+                  className={`${
                     currentBossArr.length < 12
                       ? ''
                       : !currentBossArr.includes(boss.name) && 'text-gray-500'
-                  }`}
+                  } w-fit dark:bg-gray-800 dark:border-white/[0.2] border rounded-lg h-fit px-2 py-1 outline-none`}
                   disabled={
                     currentBossArr.length < 12
                       ? false
@@ -285,12 +287,18 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
                   <option value="5">5</option>
                   <option value="6">6</option>
                 </select>
-                <div className="">
+
+                {/* 4번째 열: 가격(메소) 정보 */}
+                <div className="min-w-fit whitespace-nowrap text-xs md:text-sm">
                   {boss.type.map((el) => {
                     return (
                       (el.current || sort.value !== 'default') && (
                         <div
-                          className={`ml-2 w-full break-all ${el.current ? 'text-black' : 'text-gray-500'}`}
+                          className={` text-right ${
+                            el.current
+                              ? 'text-gray-900 dark:text-white/90'
+                              : 'text-gray-500'
+                          }`}
                           key={el.difficulty}
                         >
                           {unit === '유닛'
@@ -307,9 +315,9 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
                   })}
                 </div>
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </>
     </ItemContainer>
   )

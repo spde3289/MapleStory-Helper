@@ -43,7 +43,18 @@
   }
 }
 
+@layer utilities {
+}
+
 @layer components {
+  .boss-table {
+    @apply w-full grid grid-cols-[3rem_6rem_4rem_auto] gap-1 xsm:grid-cols-[11rem_9rem_4rem_auto] sm:grid-cols-[11rem_18rem_4rem_auto] items-center;
+  }
+
+  .boss-table-min-w {
+    @apply min-w-[340px] xsm:min-w-[520px] sm:min-w-[640px];
+  }
+
   .virtual-text-area::after {
     position: absolute;
     content: '주관적인 쾌적함 기준입니다.';

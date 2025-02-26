@@ -60,7 +60,7 @@ const Result = ({ currentQuest, bossList }: ResultProps) => {
     >
       <div className="w-full">
         <table className="mb-3 w-full table-auto ">
-          <tbody className="border-b-[1px] border-b-gray-200">
+          <tbody className="border-b-[1px] border-b-gray-200 dark:border-white/[0.2]">
             <tr className="leading-8">
               <td className="w-44">요구 어둠의 흔적</td>
               <td className="w-20 text-right">{result.need_darkness}</td>

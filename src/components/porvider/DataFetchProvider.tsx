@@ -32,7 +32,6 @@ const DataFetchProvider = ({ children }: { children: React.ReactNode }) => {
     if (getCharacterNameList()?.length !== 0) {
       const response = async () => {
         const data = await getCharList(getCharacterNameList())
-        console.log(data)
         if (data) {
           const UniqueArr: MainCharacterResponse[] = []
 

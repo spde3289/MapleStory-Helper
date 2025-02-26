@@ -11,10 +11,10 @@ function GemPage() {
   const [unit, setUnit] = useState<UnitType>('일반')
 
   const unitHandler: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    if (e.currentTarget.value === '일반') {
+    if (e.currentTarget.innerText === '일반') {
       setUnit('유닛')
     }
-    if (e.currentTarget.value === '유닛') {
+    if (e.currentTarget.innerText === '유닛') {
       setUnit('일반')
     }
   }
@@ -22,10 +22,9 @@ function GemPage() {
   return (
     <>
       <CharacterSection />
-      <div className="flex flex-col gap-3 xs:flex-col-reverse mb-5">
-        <GemSection unit={unit} unitHandler={unitHandler} />
-        <BossSection unit={unit} />
-      </div>
+      <BossSection unit={unit} />
+      <GemSection unit={unit} unitHandler={unitHandler} />
+      <div className="flex flex-col gap-3 xs:flex-col-reverse mb-5" />
     </>
   )
 }

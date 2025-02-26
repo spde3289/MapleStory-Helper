@@ -7,7 +7,7 @@ import {
 import { WorldType } from '@/type/character/world'
 import { formatKoreanNumber } from '@/utils/numberUtils'
 import { memo, useEffect, useState } from 'react'
-import { IoTrashOutline } from 'react-icons/io5'
+import { IoCloseOutline } from 'react-icons/io5'
 
 type WorldListType = {
   world: WorldType
@@ -62,7 +62,9 @@ const CharacterElement = ({
 
   const combatPower = formatKoreanNumber(character.final_stat[42].stat_value)
 
-  const currentCss = character.currentCharacter ? 'bg-white' : ''
+  const currentCss = character.currentCharacter
+    ? 'dark:bg-gray-900 bg-gray-200 '
+    : ''
 
   const deleteCharacter = () => {
     setCharacterInfoList((pre) =>
@@ -82,50 +84,56 @@ const CharacterElement = ({
       onKeyDown={handleCharacter}
       tabIndex={0}
       role="button"
-      className={`items-center flex ${currentCss} lg:justify-between rounded-lg pr-3 xxxs:px-1 xxs:py-2 xxxs:relative`}
+      className={`border rounded-lg justify-center items-center dark:border-white/[0.2] border-b flex ${currentCss} lg:justify-between relative`}
     >
-      <div className="flex items-center xxxs:flex-col xxxs:w-full w-full flex-1">
-        <div className="flex items-center min-w-52 xxxs:mb-1">
-          <div className="flex items-center flex-col text-sm lg:mr-4 w-24 min-w-24 xs:mr-2 ">
-            <CharacterImage
-              width={48}
-              height={48}
-              src={character.character_image}
-            />
+      <div className="flex flex-col sm:w-full xsm:items-end xsm:flex-row px-4 xsm:gap-0 lg:w-fit ">
+        <div className="flex min-w-32 items-end xsm:items-start lg:items-start gap-4 xsm:gap-1 mb-2 xsm:flex-col sm:gap-0 sm:mb-0">
+          <div className=" flex items-center flex-col text-sm lg:mr-4 h-24 w-24 min-w-24 ">
+            <CharacterImage className="h-24" src={character.character_image} />
             {character.character_name}
-            <span>LV. {character.character_level}</span>
           </div>
-          <div className="h-fit w-32 min-w-32">
+          <div>
+            <div className="sm:w-full sm:text-center">
+              LV. {character.character_level}
+            </div>
             <div>
               <div className="text-xs">
                 {character.final_stat[42].stat_name}
               </div>
               <div>{combatPower}</div>
             </div>
-            <div>
-              <div className="text-xs">수익</div>
-              <div>{formatKoreanNumber(totalPrice)} 메소</div>
-            </div>
           </div>
         </div>
-        <div className="flex justify-around w-full items-center lg:gap-1 mr-3 xxxs:mr-0 flex-1 xxs:grid xxs:grid-cols-6 xxxs:gap-4 xxxs:w-full justify-items-center">
-          {currentBossList.map((boss) => {
-            return (
-              <div className="flex flex-col w-10 items-center" key={boss.name}>
-                <BossImage boss={boss.name} />
-                <div className="text-xs">{boss.difficulty}</div>
-              </div>
-            )
-          })}
+        <div className="sm:w-full">
+          <div className="justify-around w-full items-center lg:gap-1 flex-1 grid grid-cols-6 gap-2 justify-items-center mb-2 ">
+            {currentBossList.map((boss) => {
+              return (
+                <div
+                  className="flex flex-col w-10 items-center"
+                  key={boss.name}
+                >
+                  <BossImage size={32} boss={boss.name} />
+                  <div className="text-xs">{boss.difficulty}</div>
+                </div>
+              )
+            })}
+          </div>
+          <div className="text-right flex justify-end items-end">
+            {/* <span className="ml-1">{currentBossList.length} / 12</span> */}
+            <span>
+              <div className="text-xs">수익</div>
+              <div>{formatKoreanNumber(totalPrice)} 메소</div>
+            </span>
+          </div>
         </div>
       </div>
       <button
         onClick={deleteCharacter}
-        className="xs:w-6 xs:h-6 xxxs:w-5 xxxs:h-5 xxxs:absolute xxxs:top-2 xxxs:right-2"
+        className="w-4 h-4 absolute -top-2 -right-2 rounded-full  bg-red-400"
         type="button"
         aria-label={`${character.character_name} 삭제 버튼`}
       >
-        <IoTrashOutline className="w-full h-full" />
+        <IoCloseOutline className="w-full h-full text-white" />
       </button>
     </div>
   )

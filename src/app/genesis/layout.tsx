@@ -13,10 +13,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return (
-    <main className="sm:p-4 md:p-5 flex flex-col xl:flex-row gap-2 sm:gap-5">
-      {children}
-    </main>
-  )
+  return children
 }
-// flex xs:flex-col p-3 lg:justify-center lg:items-center w-full h-full xs:pt-12 lg:pl-12 gap-3 box-border overflow-x-auto scrollBar

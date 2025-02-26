@@ -30,7 +30,7 @@ const Calculate = ({
           <div className="text-sm">진행중인 보스</div>
           <select
             onChange={handleBoss}
-            className="mr-4 outline-none px-4 py-2 border rounded-lg dark:bg-gray-800"
+            className="mr-4 outline-none px-4 py-2 border dark:border-white/[0.2] rounded-lg dark:bg-gray-800"
           >
             {quest.map((item) => {
               return (
@@ -51,11 +51,11 @@ const Calculate = ({
             style={{
               background: `linear-gradient(to right, #b260c9 ${progress}%, ${dark} ${progress}%)`,
             }}
-            className="transition-colors duration-300 ease-in-out flex h-8 text-center border-[1px] rounded-xl justify-center items-center"
+            className="transition-colors duration-300 ease-in-out flex h-8 text-center border dark:border-white/[0.2] rounded-xl justify-center items-center"
           >
             <input
               alt="보유 어둠의 흔적"
-              className="w-12 h-7 bg-transparent outline-none "
+              className="w-12 h-7  bg-transparent outline-none "
               maxLength={4}
               onChange={handleGauge}
               value={currentQuest.gauge}
@@ -65,7 +65,7 @@ const Calculate = ({
         </div>
       </div>
       <div>
-        <div className="flex justify-between mb-1 text-sm border-b">
+        <div className="flex justify-between mb-1 text-sm border-b dark:border-white/[0.2]">
           <div className="flex w-full">
             <div className="text-center sm:text-left w-20 sm:min-w-44">
               보스
@@ -82,7 +82,7 @@ const Calculate = ({
         {bossList.map((item) => {
           return (
             <div
-              className="flex justify-between border-b py-2 items-center"
+              className="flex justify-between border-b dark:border-white/[0.2] py-2 items-center"
               key={item.krName}
             >
               <div className="flex w-full items-center">
@@ -119,7 +119,7 @@ const Calculate = ({
                 </fieldset>
               </div>
               <select
-                className="outline-none dark:bg-gray-800 px-4 py-2 border rounded-lg h-fit md:px-2 md:py-1 "
+                className="outline-none dark:border-white/[0.2] dark:bg-gray-800 px-4 py-2 border rounded-lg h-fit md:px-2 md:py-1 "
                 id={item.krName}
                 value={item.player}
                 onChange={handlePlayer}
