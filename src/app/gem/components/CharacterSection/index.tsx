@@ -115,7 +115,7 @@ const CharacterSection = () => {
 
   return (
     <ItemContainer
-      className="relative lg:w-fit lg:min-w-[460px]"
+      className="relative lg:min-w-[460px] lg:max-w-[460px]"
       title="캐릭터 등록"
     >
       <div className="w-full ">

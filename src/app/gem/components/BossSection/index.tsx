@@ -1,10 +1,8 @@
-import BossImage from '@/components/common/BossImage'
 import ItemContainer from '@/components/common/ItemContainer'
 
 import Button from '@/components/ui/button/Button'
 import { useCharacterInfoListContext } from '@/context/characterInfoListContext'
 import bosses from '@/data/boss'
-import { formatKoreanNumber } from '@/utils/numberUtils'
 import {
   ChangeEvent,
   ChangeEventHandler,
@@ -14,6 +12,7 @@ import {
   useState,
 } from 'react'
 import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa'
+import BossField from './BossField'
 
 interface BossSectionPropsType {
   unit: '일반' | '유닛'
@@ -174,153 +173,86 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
   return (
     <ItemContainer
       title="보스 리스트"
-      className="relative no-drag w-full overflow-x-scroll scrollBar lg:overflow-hidden lg:w-[720px] lg:min-w-[720px]"
+      className="relative text-nowrap no-drag overflow-x-scroll scrollBar"
     >
       <>
-        <div className="flex gap-4 mb-2 virtual-text-area boss-table-min-w flex-wrap ">
-          {bossBottons.map((el) => {
-            return (
-              <Button
-                key={el.name}
-                onClick={handleSetBoss}
-                id={el.id}
-                tip={el.tip}
-              >
-                {el.name}
-              </Button>
-            )
-          })}
-        </div>
-        <div className="boss-table border-b boss-table-min-w w-full dark:border-white/[0.2]">
-          <div className="text-center ">보스</div>
-          <div className="text-center">난이도</div>
-          <div className="whitespace-nowrap text-center ">파티원</div>
-          <div
-            role="button"
-            tabIndex={0}
-            onKeyDown={handelPriceSort}
-            onClick={handelPriceSort}
-            className="w-full flex items-center justify-center gap-1 cursor-pointer"
-          >
-            가격
-            {sort.icon}
+        {!bossSort && (
+          <div className="lg:w-max mx-4 text-lg text-center break-keep  whitespace-normal break-words">
+            캐릭터를 선택해 클리어하고 있는 보스를 선택해 주세요
           </div>
-        </div>
-        <div className="flex flex-col items-start boss-table-min-w">
-          {bossSort?.map((boss) => {
-            return (
-              <div
-                className="boss-table py-2 dark:border-white/[0.2] border-b"
-                key={
-                  boss.type.length >= 2
-                    ? boss.name
-                    : `${boss.name}_${boss.type[0].difficulty}`
-                }
-              >
-                {/* 1번째 열: 보스명 + 이미지 */}
-                <div className="flex items-center">
-                  <BossImage className="mr-2" boss={boss.name} />
-                  <div className="hidden xsm:block">{boss.krName}</div>
-                </div>
-
-                {/* 2번째 열: 난이도 체크박스 */}
-                <form className="lg:w-[680px]">
-                  <fieldset className="flex flex-col sm:flex-row gap-4 2xl:flex-row">
-                    {boss.type.map((type) => {
-                      return (
-                        <label
-                          key={type.difficulty}
-                          className={`flex items-center ${
-                            currentBossArr.length < 12
-                              ? ''
-                              : !currentBossArr.includes(boss.name) &&
-                                'text-gray-500'
-                          }`}
-                          htmlFor={`${type.difficulty}${boss.krName}`}
-                        >
-                          <input
-                            disabled={
-                              currentBossArr.length < 12
-                                ? false
-                                : !currentBossArr.includes(boss.name)
-                            }
-                            onChange={haldler}
-                            checked={type.current}
-                            className="mr-1"
-                            type="checkbox"
-                            value={boss.krName}
-                            id={`${type.difficulty}${boss.krName}`}
-                            name="group"
-                          />
-                          {type.difficulty}
-                        </label>
-                      )
-                    })}
-                  </fieldset>
-                </form>
-
-                {/* 3번째 열: 파티원 Select */}
-                <select
-                  onChange={handleBossPlayer}
-                  className={`${
-                    currentBossArr.length < 12
-                      ? ''
-                      : !currentBossArr.includes(boss.name) && 'text-gray-500'
-                  } w-fit dark:bg-gray-800 dark:border-white/[0.2] border rounded-lg h-fit px-2 py-1 outline-none`}
-                  disabled={
-                    currentBossArr.length < 12
-                      ? false
-                      : !currentBossArr.includes(boss.name)
-                  }
-                  name="player"
-                  value={boss.player}
-                  id={
-                    boss.type.length >= 2
-                      ? boss.name
-                      : `${boss.name}_${boss.type[0].difficulty}`
-                  }
-                >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                </select>
-
-                {/* 4번째 열: 가격(메소) 정보 */}
-                <div className="min-w-fit whitespace-nowrap text-xs md:text-sm">
-                  {boss.type.map((el) => {
-                    return (
-                      (el.current || sort.value !== 'default') && (
-                        <div
-                          className={` text-right ${
-                            el.current
-                              ? 'text-gray-900 dark:text-white/90'
-                              : 'text-gray-500'
-                          }`}
-                          key={el.difficulty}
-                        >
-                          {unit === '유닛'
-                            ? Math.floor(
-                                el.price / boss.player,
-                              ).toLocaleString()
-                            : formatKoreanNumber(
-                                Math.floor(el.price / boss.player),
-                              )}{' '}
-                          메소
-                        </div>
-                      )
-                    )
-                  })}
-                </div>
-              </div>
-            )
-          })}
-        </div>
+        )}
+        {bossSort && (
+          <>
+            <div className="flex gap-2 mb-2 virtual-text-area flex-wrap ">
+              {bossBottons.map((el) => {
+                return (
+                  <Button
+                    key={el.name}
+                    onClick={handleSetBoss}
+                    id={el.id}
+                    tip={el.tip}
+                  >
+                    {el.name}
+                  </Button>
+                )
+              })}
+            </div>
+            <table cellPadding={8} className="w-full">
+              <thead>
+                <tr className="border-b w-full dark:border-white/[0.2]">
+                  <th className="text-center">보스</th>
+                  <th className="text-center">난이도</th>
+                  <th className="whitespace-nowrap text-center ">파티원</th>
+                  <th
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={handelPriceSort}
+                    onClick={handelPriceSort}
+                    className="w-full flex items-center justify-center gap-1 cursor-pointer"
+                  >
+                    가격
+                    {sort.icon}
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="">
+                {bossSort?.map((boss) => {
+                  return (
+                    <BossField
+                      sort={sort}
+                      unit={unit}
+                      currentBossArr={currentBossArr}
+                      key={
+                        boss.type.length >= 2
+                          ? boss.name
+                          : `${boss.name}_${boss.type[0].difficulty}`
+                      }
+                      boss={boss}
+                      haldler={haldler}
+                      handleBossPlayer={handleBossPlayer}
+                    />
+                  )
+                })}
+              </tbody>
+            </table>
+          </>
+        )}
       </>
     </ItemContainer>
   )
 }
 
 export default memo(BossSection)
+
+// {
+//   !bossSort && (
+//     <tr className="w-[600px] ">
+//       {/* <div>캐릭터를 선택해 주간 보스를 선택해주세요</div> */}
+//       <td className="relative h-15">
+//         <div className="absolute ">
+//           캐릭터를 선택해 주간 보스를 선택해주세요.
+//         </div>
+//       </td>
+//     </tr>
+//   )
+// }

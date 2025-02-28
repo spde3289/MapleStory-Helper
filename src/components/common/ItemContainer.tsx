@@ -2,7 +2,7 @@ import { memo } from 'react'
 
 interface ItemContainerPropsType {
   children: React.ReactNode
-  title: string
+  title?: string
   className?: string
 }
 

@@ -24,7 +24,6 @@ function GemPage() {
       <CharacterSection />
       <BossSection unit={unit} />
       <GemSection unit={unit} unitHandler={unitHandler} />
-      <div className="flex flex-col gap-3 xs:flex-col-reverse mb-5" />
     </>
   )
 }

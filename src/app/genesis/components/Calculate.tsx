@@ -102,14 +102,14 @@ const Calculate = ({
                           <input
                             onChange={handleType}
                             checked={type.current}
-                            className="mr-1 text-right"
+                            className="text-sm md:text-base mr-1 text-right"
                             type="checkbox"
                             value={`${item.krName}`}
                             id={`${type.difficulty}${item.krName}`}
                             name="group"
                           />
                           {type.difficulty}{' '}
-                          <span className="text-gray-500 dark:text-gray-400 ">
+                          <span className="text-sm md:text-base text-gray-500 dark:text-gray-400 ">
                             ({Math.round(type.reward / item.player)})
                           </span>
                         </div>

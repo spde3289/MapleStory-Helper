@@ -45,10 +45,11 @@
 
 @layer utilities {
 }
-
+/* grid grid-cols-[3rem_6rem_4rem_auto] gap-1 xsm:grid-cols-[11rem_9rem_4rem_auto] sm:grid-cols-[11rem_18rem_4rem_auto] items-center
+ */
 @layer components {
   .boss-table {
-    @apply w-full grid grid-cols-[3rem_6rem_4rem_auto] gap-1 xsm:grid-cols-[11rem_9rem_4rem_auto] sm:grid-cols-[11rem_18rem_4rem_auto] items-center;
+    @apply w-full grid grid-cols-4 items-center;
   }
 
   .boss-table-min-w {

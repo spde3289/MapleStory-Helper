@@ -55,8 +55,8 @@ export default function RootLayout({
                 <AppHeader />
                 <NavBar />
                 <Backdrop />
-                <div className="h-[calc(100vh-65px)] flex-1 scrollBar lg:pl-[290px] overflow-scroll ">
-                  <main className='className="sm:p-4 md:p-5 flex flex-col xl:flex-row gap-2 sm:gap-5"'>
+                <div className="h-[calc(100vh-65px)] lg:pl-[290px] ">
+                  <main className="h-full p-1 overflow-scroll scrollBar sm:p-4 md:p-5 flex flex-col lg:flex-row gap-2 sm:gap-5">
                     {children}
                   </main>
                 </div>
