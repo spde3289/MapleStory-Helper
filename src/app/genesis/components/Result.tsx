@@ -55,7 +55,7 @@ const Result = ({ currentQuest, bossList }: ResultProps) => {
 
   return (
     <ItemContainer
-      className="relative gmQuest-text-area flex-1"
+      className="relative gmQuest-text-area lg:min-w-96 flex-1 "
       title="계산 결과"
     >
       <div className="w-full">

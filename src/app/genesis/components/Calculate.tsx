@@ -24,8 +24,11 @@ const Calculate = ({
     : 0 // 퍼센트 계산, required_darkness가 없으면 0%
 
   return (
-    <ItemContainer className=" xl:w-8/12" title="설정">
-      <div className="flex flex-col sm:flex-row gap-3 items-center mb-4">
+    <ItemContainer
+      className="no-drag lg:min-w-[800px] text-nowrap overflow-x-scroll scrollBar"
+      title="설정"
+    >
+      <div className=" flex flex-col sm:flex-row gap-3 items-center mb-4">
         <div>
           <div className="text-sm">진행중인 보스</div>
           <select
@@ -64,77 +67,72 @@ const Calculate = ({
           </div>
         </div>
       </div>
-      <div>
-        <div className="flex justify-between mb-1 text-sm border-b dark:border-white/[0.2]">
-          <div className="flex w-full">
-            <div className="text-center sm:text-left w-20 sm:min-w-44">
-              보스
-            </div>
-            <div className="w-fit sm:m-0 mx-auto">
+      <table className="w-full border-collapse dark:border-white/[0.2] text-base">
+        <thead>
+          <tr className="border-b dark:border-white/[0.2] ">
+            <th className="">보스</th>
+            <th className="">
               난이도{' '}
-              <span className="text-gray-500 dark:text-gray-400 ">
+              <span className="text-gray-500 dark:text-gray-400">
                 (획득 어둠의 흔적)
               </span>
-            </div>
-          </div>
-          <div className="w-[67px] sm:min-w-[51px]">파티원</div>
-        </div>
-        {bossList.map((item) => {
-          return (
-            <div
-              className="flex justify-between border-b dark:border-white/[0.2] py-2 items-center"
-              key={item.krName}
-            >
-              <div className="flex w-full items-center">
-                <div className="flex flex-col items-center w-20 sm:w-44 sm:flex-row ">
-                  <BossImage className="mr-2 w-6 h-6" boss={item.name} />
-                  <div>{item.krName}</div>
+            </th>
+            <th className="">파티원</th>
+          </tr>
+        </thead>
+        <tbody>
+          {bossList.map((item) => (
+            <tr key={item.krName} className="border-b dark:border-white/[0.2]">
+              <td className="p-2 flex items-center">
+                <div className="size-8 rounded-lg overflow-hidden mr-2">
+                  <BossImage boss={item.name} />
                 </div>
-                <fieldset className="flex flex-col sm:flex-row min-w-32 w-fit sm:m-0 mx-auto ">
-                  {item.type.map((type) => {
-                    return (
-                      <label
-                        key={type.difficulty}
-                        className="flex flex-col items-start sm:items-center md:mr-5 mr-3"
-                        htmlFor={`${type.difficulty}${item.krName}`}
-                      >
-                        <div className="">
-                          <input
-                            onChange={handleType}
-                            checked={type.current}
-                            className="text-sm md:text-base mr-1 text-right"
-                            type="checkbox"
-                            value={`${item.krName}`}
-                            id={`${type.difficulty}${item.krName}`}
-                            name="group"
-                          />
-                          {type.difficulty}{' '}
-                          <span className="text-sm md:text-base text-gray-500 dark:text-gray-400 ">
-                            ({Math.round(type.reward / item.player)})
-                          </span>
-                        </div>
-                      </label>
-                    )
-                  })}
-                </fieldset>
-              </div>
-              <select
-                className="outline-none dark:border-white/[0.2] dark:bg-gray-800 px-4 py-2 border rounded-lg h-fit md:px-2 md:py-1 "
-                id={item.krName}
-                value={item.player}
-                onChange={handlePlayer}
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-              </select>
-            </div>
-          )
-        })}
-      </div>
+                {item.krName}
+              </td>
+              <td className="">
+                <form className="flex gap-4">
+                  {item.type.map((type) => (
+                    <label
+                      key={type.difficulty}
+                      htmlFor={`${type.difficulty}${item.krName}`}
+                      className="flex items-center "
+                    >
+                      <input
+                        onChange={handleType}
+                        checked={type.current}
+                        className="mr-1 size-4"
+                        type="checkbox"
+                        value={item.krName}
+                        id={`${type.difficulty}${item.krName}`}
+                        name="group"
+                      />
+                      {type.difficulty}{' '}
+                      <span className="text-gray-500 dark:text-gray-400 ml-1">
+                        ({Math.round(type.reward / item.player)})
+                      </span>
+                    </label>
+                  ))}
+                </form>
+              </td>
+              <td className="p-2">
+                <select
+                  className="outline-none dark:border-white/[0.2] dark:bg-gray-800 px-4 py-2 border rounded-lg"
+                  id={item.krName}
+                  value={item.player}
+                  onChange={handlePlayer}
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </ItemContainer>
   )
 }

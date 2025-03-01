@@ -177,8 +177,8 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
     >
       <>
         {!bossSort && (
-          <div className="lg:w-max mx-4 text-lg text-center break-keep  whitespace-normal break-words">
-            캐릭터를 선택해 클리어하고 있는 보스를 선택해 주세요
+          <div className="lg:w-max text-gray-500 dark:text-gray-400 mx-4 text-lg text-center break-keep  whitespace-normal break-words">
+            캐릭터를 선택해 클리어하고 있는 보스를 설정해 보세요!
           </div>
         )}
         {bossSort && (

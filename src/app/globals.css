@@ -79,8 +79,8 @@
   .gmQuest-text-area::after {
     position: absolute;
     content: '보스 클리어는 입력일 기준으로 계산합니다';
-    right: 12px;
-    top: 16px;
+    left: 12px;
+    top: 36px;
     font-size: 12px; /* 텍스트 크기 */
     font-weight: bold; /* 텍스트 굵기 (선택 사항) */
     font-style: italic; /* 텍스트 기울임 (선택 사항) */
