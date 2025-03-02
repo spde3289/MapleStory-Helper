@@ -37,6 +37,11 @@
     "next/typescript"
   ],
   "rules": {
+    "@next/next/no-img-element": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": ["**/tailwind.config.{js,ts}"] }
+    ],
     "@typescript-eslint/naming-convention": [
       "error",
       {

@@ -1,7 +1,9 @@
+import AppHeader from '@/components/layout/AppHeader'
+import Backdrop from '@/components/layout/Backdrop'
 import NavBar from '@/components/layout/NavBar'
 import DataFetchProvider from '@/components/porvider/DataFetchProvider'
-import MainCharacterProvider from '@/context/characterContext'
-import CharacterInfoListProvider from '@/context/characterInfoListContext'
+import DesigeProvider from '@/components/porvider/DesigeProvider'
+import GlobalStateProvider from '@/components/porvider/GlobalStateProvider'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
@@ -41,25 +43,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${mapleFont.className} antialiased`}>
+      <body
+        className={`${mapleFont.className} antialiased dark:bg-gray-900 dark:text-white/90`}
+      >
         {/* Google Analytics Script */}
         {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
-        <link
-          href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.css"
-          rel="stylesheet"
-        />
-        <CharacterInfoListProvider>
-          <MainCharacterProvider>
-            <DataFetchProvider>
-              <main className="flex h-screen flex-col lg:flex-row no-drag overflow-hidden">
+        <GlobalStateProvider>
+          <DataFetchProvider>
+            <DesigeProvider>
+              <main className="">
+                <AppHeader />
                 <NavBar />
-                <section className="bg-gray-200 lg:w-full lg:h-screen xs:w-full xs:h-full overflow-x-auto">
-                  {children}
-                </section>
+                <Backdrop />
+                <div className="h-[calc(100vh-65px)] lg:pl-[290px] ">
+                  <main className="h-full p-1 overflow-scroll scrollBar sm:p-4 md:p-5 flex flex-col lg:flex-row gap-2 sm:gap-5">
+                    {children}
+                  </main>
+                </div>
               </main>
-            </DataFetchProvider>
-          </MainCharacterProvider>
-        </CharacterInfoListProvider>
+            </DesigeProvider>
+          </DataFetchProvider>
+        </GlobalStateProvider>
       </body>
     </html>
   )

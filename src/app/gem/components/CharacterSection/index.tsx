@@ -1,5 +1,6 @@
-import ItemContainer from '@/components/ItemContainer'
-import WorldImage from '@/components/WorldImage'
+import ItemContainer from '@/components/common/ItemContainer'
+import WorldImage from '@/components/common/WorldImage'
+import Button from '@/components/ui/button/Button'
 import { useCharacterInfoListContext } from '@/context/characterInfoListContext'
 import { getCharInfo } from '@/fetch/client/charFetch'
 import { getCharList } from '@/fetch/client/charListFetch'
@@ -113,9 +114,12 @@ const CharacterSection = () => {
   }, [])
 
   return (
-    <ItemContainer className="relative" title="캐릭터 등록">
-      <div className="w-[820px] xs:w-full ">
-        <div className="absolute top-3 right-4 underline">
+    <ItemContainer
+      className="relative lg:min-w-[460px] lg:max-w-[460px]"
+      title="캐릭터 등록"
+    >
+      <div className="w-full ">
+        <div className="absolute top-3 right-4 underline ">
           <Link
             target="_blank"
             href="https://openapi.nexon.com/ko/guide/prepare-in-advance/"
@@ -125,30 +129,30 @@ const CharacterSection = () => {
         </div>
         <input
           id="캐릭터등록"
-          className="h-8 p-3 w-full rounded-lg outline-none bg-gray-200 mb-2"
+          className="h-8 p-3 border w-full rounded-lg outline-none bg-gray-100 dark:bg-gray-800 mb-2 dark:border-white/[0.2]"
           placeholder="캐릭터 이름 혹은 APIKEY를 입력해 주세요"
           value={characterName}
           onChange={handlerChange}
           onKeyDown={handlerSubmit}
         />
         {characterInfoList.length !== 0 && (
-          <div className="p-1 h-fit w-full relative ">
-            <div className="absolute w-full flex overflow-y-scroll scrollBar">
+          <div className="p-1 h-fit w-full relative no-drag ">
+            <div className="absolute w-full flex overflow-y-scroll scrollBar gap-2">
               {worldList.map((world) => {
                 return (
-                  <button
+                  <Button
                     key={world.world}
-                    className={`${world.current ? 'bg-gray-200 rounded-t-md' : ' '} flex items-center gap-2 whitespace-nowrap mr-3 p-1 pb-2`}
-                    type="button"
+                    size="md"
+                    className={`${world.current ? ' bg-orange-400 rounded-md' : ''} flex items-center gap-2 whitespace-nowrap `}
                     onClick={() => handleWorldChange(world)}
                   >
                     <WorldImage world_name={world.world} size={20} />
                     {world.world}
-                  </button>
+                  </Button>
                 )
               })}
             </div>
-            <div className="bg-gray-200 rounded-md mt-8 px-1 py-2 pt-3 flex flex-col gap-1">
+            <div className=" rounded-md mt-11 gap-2 flex flex-col dark:border-white/[0.05] dark:bg-white/[0.03]">
               {characterInfoList.map((char) => {
                 return (
                   <CharacterElement

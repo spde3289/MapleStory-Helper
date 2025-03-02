@@ -1,4 +1,6 @@
-import ItemContainer from '@/components/ItemContainer'
+import ItemContainer from '@/components/common/ItemContainer'
+import WorldImage from '@/components/common/WorldImage'
+import Button from '@/components/ui/button/Button'
 import { useCharacterInfoListContext } from '@/context/characterInfoListContext'
 import { formatKoreanNumber, formatToEokUnit } from '@/utils/numberUtils'
 import { memo, useState } from 'react'
@@ -68,66 +70,75 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
 
   return (
     <ItemContainer
-      className="relative gem-virtual-text-area "
+      className="relative gem-virtual-text-area lg:min-w-72"
       title="결정석 판매 가격"
     >
-      <div className="flex relative pt-4">
-        <div className="flex items-center">
-          <div className="mr-4 xxxs:gap-4 xxxs:w-full">
-            {worldGemObject.map((world) => {
-              return (
-                <div key={world.name} className="flex justify-between">
-                  <div key={world.name} className="">
-                    {world.name} :{' '}
-                    {unit === '유닛'
-                      ? world.price.toLocaleString()
-                      : formatKoreanNumber(world.price)}{' '}
-                    메소
-                  </div>
-                  <div
-                    className={`ml-4 ${world.count > maxGem ? 'text-red-600' : ''}`}
+      <div className="flex flex-col w-full">
+        {worldGemObject.map((world) => {
+          return (
+            <div
+              key={world.name}
+              className="flex xsm:flex-col lg:flex-row justify-between border-b p-2 gap-2"
+            >
+              <span className="flex gap-1 h-fit">
+                <WorldImage world_name={world.name} size={24} />
+                {world.name}
+              </span>
+              <span className="flex gap-2 flex-col xsm:flex-row lg:flex-col justify-between text-right">
+                <span
+                // className={`${world.count > maxGem ? 'text-red-600' : 'text-green-600'}`}
+                >
+                  결정석 제한 :
+                  <span
+                    style={
+                      world.count > maxGem
+                        ? { color: '#dc2626' }
+                        : { color: '#16a34a' }
+                    }
+                    className="text-gray-900 dark:text-white/90"
                   >
-                    {world.count} / {maxGem}{' '}
-                  </div>
+                    {world.count}{' '}
+                  </span>
+                  / {maxGem}
+                </span>
+                <span key={world.name} className="">
+                  수익 :
+                  {unit === '유닛'
+                    ? Math.floor(world.price).toLocaleString()
+                    : formatKoreanNumber(Math.floor(world.price))}{' '}
+                  메소
+                </span>
+              </span>
+            </div>
+          )
+        })}
+        {hidden && (
+          <div className="flex h-fit mr-4">
+            X
+            <input
+              onChange={inputHandler}
+              value={value}
+              className="bg-gray-200 rounded-lg outline-none w-20 p-2 h-7 ml-2"
+            />
+            원
+          </div>
+        )}
+        <div className="w-fit whitespace-nowrap ">
+          {hidden &&
+            worldGemObject.map((world) => {
+              return (
+                <div key={world.name} className="text-right">
+                  {(formatToEokUnit(world.price) * value).toLocaleString()} 원
                 </div>
               )
             })}
-          </div>
-          {hidden && (
-            <div className="flex h-fit mr-4">
-              X
-              <input
-                onChange={inputHandler}
-                value={value}
-                className="bg-gray-200 rounded-lg outline-none w-20 p-2 h-7 ml-2"
-              />
-              원
-            </div>
-          )}
-          <div className="w-fit whitespace-nowrap ">
-            {hidden &&
-              worldGemObject.map((world) => {
-                return (
-                  <div key={world.name} className="text-right">
-                    {(formatToEokUnit(world.price) * value).toLocaleString()} 원
-                  </div>
-                )
-              })}
-          </div>
         </div>
-        {characterInfoList.length !== 0 && (
-          <div className="absolute right-3 xxxs:-top-10 xxxs:right-0">
-            <button
-              className="px-2 bg-gray-200 rounded-xl "
-              onClick={unitHandler}
-              value={unit}
-              type="button"
-            >
-              {unit}
-            </button>
-          </div>
-        )}
       </div>
+      {characterInfoList.length !== 0 && (
+        <div className="absolute right-3 top-4">
+          <Button onClick={unitHandler}>{unit}</Button>
+        </div>
+      )}
     </ItemContainer>
   )
 }

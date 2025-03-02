@@ -13,9 +13,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return (
-    <main className="flex xs:flex-col p-3 lg:justify-center lg:items-center w-full h-full xs:pt-12 lg:pl-12 gap-3 box-border overflow-x-auto scrollBar">
-      {children}
-    </main>
-  )
+  return <div className="flex flex-col lg:flex-row gap-2">{children}</div>
 }

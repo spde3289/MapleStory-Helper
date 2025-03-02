@@ -9,6 +9,7 @@ import { getCharacterName } from '@/utils/localStorage/characterName'
 import { getCharacterNameList } from '@/utils/localStorage/characterNameList'
 import { useEffect } from 'react'
 
+/** 페이지 로딩시 로컬스토리지에 있는 값을 가져와 데이터 패칭해 전역 상태로 등록하는 Provider */
 const DataFetchProvider = ({ children }: { children: React.ReactNode }) => {
   const { setMainCharacter } = useMainCharacterContext()
   const { characterInfoList, handleCharacterInfo } =
@@ -31,7 +32,6 @@ const DataFetchProvider = ({ children }: { children: React.ReactNode }) => {
     if (getCharacterNameList()?.length !== 0) {
       const response = async () => {
         const data = await getCharList(getCharacterNameList())
-        console.log(data)
         if (data) {
           const UniqueArr: MainCharacterResponse[] = []
 

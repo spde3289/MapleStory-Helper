@@ -1,70 +1,110 @@
 'use client'
 
-import maple from '@/assets/icons/maple.ico'
-import useWindowSize from '@/hooks/useWindowSize'
-import Image from 'next/image'
+import { useSidebar } from '@/context/SidebarContext'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import AccordionLayoutButton from './AccordionLayoutButton'
+import { usePathname } from 'next/navigation'
+import { useEffect, useRef } from 'react'
 
-function NavBar() {
-  const [navSize, setNavSize] = useState<string>('h-screen w-52')
-  const { windowWidth } = useWindowSize()
+interface NavBarItemProps {
+  isActive: boolean
+  toggleMobileSidebar: () => void
+  name: string
+  path: string
+}
 
-  const width = windowWidth < 1024 ? 'w-full h-14' : 'h-screen w-52'
+const NavBarItem = ({
+  isActive,
+  toggleMobileSidebar,
+  name,
+  path,
+}: NavBarItemProps) => {
+  return (
+    <Link href={path} onClick={() => toggleMobileSidebar()}>
+      <li
+        className={`pl-3 py-2  ${
+          isActive ? 'menu-item-active' : 'menu-item-inactive'
+        }`}
+      >
+        <h2>{name}</h2>
+      </li>
+    </Link>
+  )
+}
+
+const navItems = [
+  {
+    path: '/gem',
+    name: '주보 수익 계산기',
+  },
+  {
+    path: '/genesis',
+    name: '해방 퀘스트 계산기',
+  },
+]
+
+const NavBar = () => {
+  const {
+    isExpanded,
+    isMobileOpen,
+    isHovered,
+    setIsHovered,
+    toggleMobileSidebar,
+  } = useSidebar()
+  const pathname = usePathname()
+
+  const inputRef = useRef<HTMLInputElement>(null)
+
   useEffect(() => {
-    setNavSize(width)
-  }, [width])
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
+        event.preventDefault()
+        inputRef.current?.focus()
+      }
+    }
 
-  const handelNavSize = () => {
-    if (navSize === width) setNavSize('h-screen w-0')
-    if (navSize === 'h-screen w-0') setNavSize(width)
-    if (navSize === 'w-full h-14') setNavSize('w-full t-0')
-    if (navSize === 'w-full t-0') setNavSize(width)
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+
+  let navWidth
+
+  if (isExpanded || isMobileOpen) {
+    navWidth = 'w-[290px]'
+  } else if (isHovered) {
+    navWidth = 'w-[290px]'
+  } else {
+    navWidth = 'w-[90px]'
   }
 
   return (
     <nav
-      className={`${navSize} lg:pt-4 relative xs:flex flex-1 transition-all`}
+      className={`flex flex-col h-[calc(100vh-65px)] fixed top-16 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
+        ${navWidth}
+        ${isMobileOpen ? 'translate-x-0' : '-translate-x-full'}
+        lg:translate-x-0`}
+      onMouseEnter={() => !isExpanded && setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {navSize === width && (
-        <>
-          <div className="flex xs:w-14 flex-col xs:h-full xs:pt-2 items-center mb-6 xs:mb-3 lg:min-w-52 ">
-            <Link href="/">
-              <h1 className="flex w-fit items-center font-bold">
-                <Image
-                  className="lg:mr-2"
-                  src={maple}
-                  width={32}
-                  height={32}
-                  alt="메이플 아이콘"
-                />
-                <div className="xs:hidden">Maple Helper</div>
-              </h1>
-            </Link>
-            <div className="xs:hidden h-[1px] mt-4 bg-gray-100 w-7/12" />
-          </div>
-          <ul className="flex lg:flex-col xs:space-x-4 xs:items-center w-full ml-3 mr-3 lg:space-y-6 font-bold">
-            <li className="pl-3">
-              <h2>
-                <Link href="/gem">보스 결정석</Link>
-              </h2>
-            </li>
-            <li className="pl-3">
-              <h2>
-                <Link href="/genesis">해방 퀘스트 계산기</Link>
-              </h2>
-            </li>
-          </ul>
-        </>
-      )}
-      <AccordionLayoutButton
-        navSize={navSize}
-        width={width}
-        handelNavSize={handelNavSize}
-      />
+      <div className="mt-5">
+        <h3 className="mb-2 text-xs uppercase flex leading-[20px] text-gray-400 justify-start">
+          계산기
+        </h3>
+        <ul className="flex flex-col w-full ml-3 mr-3 font-bold">
+          {navItems.map((item) => (
+            <NavBarItem
+              path={item.path}
+              name={item.name}
+              key={item.name}
+              toggleMobileSidebar={toggleMobileSidebar}
+              isActive={item.path === pathname}
+            />
+          ))}
+        </ul>
+      </div>
     </nav>
   )
 }
-
 export default NavBar

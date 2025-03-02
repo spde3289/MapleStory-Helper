@@ -1,13 +1,12 @@
 // import HeadMeta from '@/commonComponents/HeadMeta'
-import CharacterCreator from './components/CharacterCreator'
+// import CharacterCreator from './components/CharacterCreator'
+import NavigationContainer from './components/NavigationContainer'
 
 function Home() {
   return (
-    <main className="h-full flex-1 p-3 flex items-center justify-center">
-      <div>
-        <CharacterCreator />
-      </div>
-    </main>
+    <div className="w-full h-full flex lg:items-center lg:justify-center">
+      <NavigationContainer />
+    </div>
   )
 }
 
