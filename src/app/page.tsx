@@ -3,7 +3,11 @@
 import NavigationContainer from './components/NavigationContainer'
 
 function Home() {
-  return <NavigationContainer />
+  return (
+    <div className="w-full h-full flex lg:items-center lg:justify-center">
+      <NavigationContainer />
+    </div>
+  )
 }
 
 export default Home

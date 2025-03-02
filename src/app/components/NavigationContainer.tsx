@@ -15,7 +15,7 @@ const navItems = [
 
 const NavigationContainer = () => {
   return (
-    <section className="bg-white mt-5 lg:px-10 lg:py-6 border-gray-200 p-4 h-fit text-center rounded-3xl border dark:border-gray-800 dark:bg-white/[0.03]">
+    <section className="w-full bg-white mt-5 lg:px-10 lg:py-6 border-gray-200 p-4 h-fit text-center rounded-3xl border dark:border-gray-800 dark:bg-white/[0.03]">
       <h2 className="text-lg lg:text-2xl font-bold">
         메이플 헬퍼 - Maple Helper
       </h2>
