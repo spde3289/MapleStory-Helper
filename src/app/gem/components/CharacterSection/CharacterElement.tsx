@@ -19,11 +19,13 @@ type WorldListType = {
 interface CharacterElementPropsType {
   character: characterInfo
   currentWorld: WorldListType | undefined
+  unit: '일반' | '유닛'
 }
 
 const CharacterElement = ({
   character,
   currentWorld,
+  unit,
 }: CharacterElementPropsType) => {
   const { setCharacterInfoList } = useCharacterInfoListContext()
   const [currentBossList, setCurrentBossList] = useState<any[]>([])
@@ -31,23 +33,31 @@ const CharacterElement = ({
 
   // 보스 난이도 선택 로직
   useEffect(() => {
-    const arr: any[] = []
-    character?.boss.forEach((boss) => {
-      if (boss.type.filter((type) => type.current === true).length !== 0) {
-        arr.push({
+    if (!character?.boss) {
+      setCurrentBossList([])
+      return
+    }
+
+    const bossList = character.boss
+      .filter((boss) => boss.type.some((type) => type.current))
+      .map((boss) => {
+        const currentType = boss.type.find((type) => type.current)
+        const price =
+          currentType?.price && boss.player && boss.player !== 0
+            ? currentType.price / boss.player
+            : 0
+
+        return {
           name: boss.name,
           krName: boss.krName,
-          difficulty: boss.type.find((type) => type.current === true)
-            ?.difficulty,
-          price: boss.type.find((type) => type.current === true)?.price,
-        })
-        setCurrentBossList(arr)
-      } else if (arr.length === 0) {
-        setCurrentBossList([])
-      }
-    })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+          difficulty: currentType?.difficulty,
+          price,
+        }
+      })
+
+    setCurrentBossList(bossList)
   }, [character])
+
   // 선택한 월드 캐릭터만 보여줌
   if (currentWorld?.world !== character.world_name) return null
   // 캐릭터 선택 로직
@@ -132,7 +142,13 @@ const CharacterElement = ({
         </div>
         <div className="flex gap-1">
           <span>수익: </span>
-          <span>{formatKoreanNumber(totalPrice)} 메소</span>
+          <span>
+            {/* {formatKoreanNumber(totalPrice)} */}
+            {unit === '유닛'
+              ? Math.floor(totalPrice).toLocaleString()
+              : formatKoreanNumber(Math.floor(totalPrice))}
+            메소
+          </span>
         </div>
       </div>
       <button

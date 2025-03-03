@@ -77,7 +77,6 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
       <Button onClick={unitHandler}>{unit}</Button>
       <div className="flex mt-2 group flex-col w-full">
         {worldGemObject.map((world, index) => {
-          console.log(worldGemObject.length - 1 === index)
           return (
             <div
               key={world.name}

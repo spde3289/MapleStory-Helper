@@ -185,19 +185,17 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
         {bossSort && (
           <>
             <div className="flex gap-2 mb-2 flex-wrap ">
+              <div id="tooltip-root" />
               {bossBottons.map((el) => {
                 return (
-                  <div className="relative" key={el.tip}>
-                    <div id="tooltip-root" />
-                    <Button
-                      key={el.name}
-                      onClick={handleSetBoss}
-                      id={el.id}
-                      tip={el.tip}
-                    >
-                      {el.name}
-                    </Button>
-                  </div>
+                  <Button
+                    key={el.name}
+                    onClick={handleSetBoss}
+                    id={el.id}
+                    tip={el.tip}
+                  >
+                    {el.name}
+                  </Button>
                 )
               })}
             </div>
