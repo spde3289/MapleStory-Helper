@@ -1,5 +1,6 @@
 import AppHeader from '@/components/layout/AppHeader'
 import Backdrop from '@/components/layout/Backdrop'
+import { Analytics } from '@vercel/analytics/next'
 import NavBar from '@/components/layout/NavBar'
 import DataFetchProvider from '@/components/porvider/DataFetchProvider'
 import DesigeProvider from '@/components/porvider/DesigeProvider'
@@ -46,6 +47,7 @@ export default function RootLayout({
       <body
         className={`${mapleFont.className} antialiased dark:bg-gray-900 dark:text-white/90`}
       >
+        <Analytics />
         {/* Google Analytics Script */}
         {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
         <GlobalStateProvider>
