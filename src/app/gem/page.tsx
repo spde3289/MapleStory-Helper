@@ -21,7 +21,7 @@ function GemPage() {
 
   return (
     <>
-      <CharacterSection />
+      <CharacterSection unit={unit} />
       <BossSection unit={unit} />
       <GemSection unit={unit} unitHandler={unitHandler} />
     </>

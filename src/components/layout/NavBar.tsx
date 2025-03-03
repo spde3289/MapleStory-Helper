@@ -92,7 +92,7 @@ const NavBar = () => {
         <h3 className="mb-2 text-xs uppercase flex leading-[20px] text-gray-400 justify-start">
           계산기
         </h3>
-        <ul className="flex flex-col w-full ml-3 mr-3 font-bold">
+        <ul className="flex gap-1 flex-col w-full ml-3 mr-3 font-bold">
           {navItems.map((item) => (
             <NavBarItem
               path={item.path}

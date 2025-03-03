@@ -19,11 +19,13 @@ type WorldListType = {
 interface CharacterElementPropsType {
   character: characterInfo
   currentWorld: WorldListType | undefined
+  unit: '일반' | '유닛'
 }
 
 const CharacterElement = ({
   character,
   currentWorld,
+  unit,
 }: CharacterElementPropsType) => {
   const { setCharacterInfoList } = useCharacterInfoListContext()
   const [currentBossList, setCurrentBossList] = useState<any[]>([])
@@ -31,23 +33,31 @@ const CharacterElement = ({
 
   // 보스 난이도 선택 로직
   useEffect(() => {
-    const arr: any[] = []
-    character?.boss.forEach((boss) => {
-      if (boss.type.filter((type) => type.current === true).length !== 0) {
-        arr.push({
+    if (!character?.boss) {
+      setCurrentBossList([])
+      return
+    }
+
+    const bossList = character.boss
+      .filter((boss) => boss.type.some((type) => type.current))
+      .map((boss) => {
+        const currentType = boss.type.find((type) => type.current)
+        const price =
+          currentType?.price && boss.player && boss.player !== 0
+            ? currentType.price / boss.player
+            : 0
+
+        return {
           name: boss.name,
           krName: boss.krName,
-          difficulty: boss.type.find((type) => type.current === true)
-            ?.difficulty,
-          price: boss.type.find((type) => type.current === true)?.price,
-        })
-        setCurrentBossList(arr)
-      } else if (arr.length === 0) {
-        setCurrentBossList([])
-      }
-    })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+          difficulty: currentType?.difficulty,
+          price,
+        }
+      })
+
+    setCurrentBossList(bossList)
   }, [character])
+
   // 선택한 월드 캐릭터만 보여줌
   if (currentWorld?.world !== character.world_name) return null
   // 캐릭터 선택 로직
@@ -92,7 +102,7 @@ const CharacterElement = ({
           ? { backgroundColor: theme === 'dark' ? '#111827' : '#e5e7eb' }
           : {}
       }
-      className="p-4 border relative rounded-lg flex flex-col dark:border-white/[0.2]"
+      className="p-4 group border relative rounded-lg flex flex-col dark:border-white/[0.2]"
     >
       <div className="flex flex-col xsm:flex-row justify-between items-center gap-4 ">
         <div>
@@ -118,19 +128,32 @@ const CharacterElement = ({
           })}
         </div>
       </div>
-      <div className="flex flex-col xsm:flex-row justify-between items-center mt-3 border-t pt-2 ">
+      <div
+        style={
+          character.currentCharacter
+            ? { borderColor: theme === 'dark' ? '#e5e7eb' : '#111827' }
+            : {}
+        }
+        className="flex flex-col xsm:flex-row justify-between items-center mt-3 border-t pt-2 "
+      >
         <div className="flex gap-1 items-center">
           <span>{character.final_stat[42].stat_name}:</span>
           <span>{combatPower}</span>
         </div>
         <div className="flex gap-1">
           <span>수익: </span>
-          <span>{formatKoreanNumber(totalPrice)} 메소</span>
+          <span>
+            {/* {formatKoreanNumber(totalPrice)} */}
+            {unit === '유닛'
+              ? Math.floor(totalPrice).toLocaleString()
+              : formatKoreanNumber(Math.floor(totalPrice))}
+            메소
+          </span>
         </div>
       </div>
       <button
         onClick={deleteCharacter}
-        className="w-4 h-4 absolute -top-2 -right-2 rounded-full  bg-red-400"
+        className="size-4 group-hover:block hidden absolute -top-1 -right-1 rounded-full bg-red-400"
         type="button"
         aria-label={`${character.character_name} 삭제 버튼`}
       >

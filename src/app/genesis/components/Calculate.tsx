@@ -83,11 +83,13 @@ const Calculate = ({
         <tbody>
           {bossList.map((item) => (
             <tr key={item.krName} className="border-b dark:border-white/[0.2]">
-              <td className="p-2 flex items-center">
-                <div className="size-8 rounded-lg overflow-hidden mr-2">
-                  <BossImage boss={item.name} />
+              <td className="">
+                <div className="flex items-center">
+                  <div className="size-8 rounded-lg overflow-hidden mr-2">
+                    <BossImage boss={item.name} />
+                  </div>
+                  {item.krName}
                 </div>
-                {item.krName}
               </td>
               <td className="">
                 <form className="flex gap-4">
@@ -114,7 +116,7 @@ const Calculate = ({
                   ))}
                 </form>
               </td>
-              <td className="p-2">
+              <td align="center" className="p-2">
                 <select
                   className="outline-none dark:border-white/[0.2] dark:bg-gray-800 px-4 py-2 border rounded-lg"
                   id={item.krName}

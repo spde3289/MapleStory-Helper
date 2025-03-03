@@ -55,8 +55,9 @@ const Result = ({ currentQuest, bossList }: ResultProps) => {
 
   return (
     <ItemContainer
-      className="relative gmQuest-text-area lg:min-w-96 flex-1 "
+      className="relative lg:min-w-96 flex-1 "
       title="계산 결과"
+      tip="보스 클리어는 입력일 기준으로 계산합니다"
     >
       <div className="w-full">
         <table className="mb-3 w-full table-auto ">

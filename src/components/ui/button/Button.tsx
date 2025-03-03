@@ -1,4 +1,7 @@
-import { MouseEventHandler } from 'react'
+'use client'
+
+import React, { MouseEventHandler, useRef, useState } from 'react'
+import Tooltip from './Tooltip'
 
 interface ButtonProps {
   id?: string
@@ -14,32 +17,42 @@ const Button = ({
   onClick,
   children,
   tip,
-  className,
+  className = '',
   size = 'sm',
 }: ButtonProps) => {
+  const buttonRef = useRef<HTMLButtonElement>(null)
+  const [isHovered, setIsHovered] = useState(false)
+  const [targetRect, setTargetRect] = useState<DOMRect | null>(null)
+
   const sizeClasses = {
     sm: 'px-2 py-0.5 text-sm',
     md: 'px-2 py-1 text-base',
   }
 
+  const handleMouseEnter = () => {
+    setIsHovered(true)
+    if (buttonRef.current) {
+      setTargetRect(buttonRef.current.getBoundingClientRect())
+    }
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovered(false)
+  }
   return (
-    <div className="relative group rounded-lg border border-gray-300 bg-white text-theme-sm font-medium text-gray-900 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-white/[0.03] dark:hover:text-gray-200">
+    <div className="w-max group rounded-lg border border-gray-300 bg-white text-theme-sm font-medium text-gray-900 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-white/[0.03] dark:hover:text-gray-200">
       <button
+        ref={buttonRef}
         onClick={onClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         id={id}
-        className={`${sizeClasses[size]} ${className} `}
+        className={`${sizeClasses[size]} ${className}`}
         type="button"
       >
         {children}
       </button>
-      {tip && (
-        <div
-          role="tooltip"
-          className="absolute z-40 bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-700 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap"
-        >
-          {tip}
-        </div>
-      )}
+      {isHovered && tip && <Tooltip tip={tip} targetRect={targetRect} />}
     </div>
   )
 }

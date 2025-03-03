@@ -27,7 +27,11 @@ type WorldListType = {
   current: boolean
 }
 
-const CharacterSection = () => {
+interface CharacterSectionPropsType {
+  unit: '일반' | '유닛'
+}
+
+const CharacterSection = ({ unit }: CharacterSectionPropsType) => {
   const [characterName, setCharacterName] = useState<InputType | string>('')
   const [worldList, setWorldList] = useState<WorldListType[]>([])
   const { characterInfoList, handleCharacterInfo } =
@@ -157,6 +161,7 @@ const CharacterSection = () => {
                 return (
                   <CharacterElement
                     key={char.ocid}
+                    unit={unit}
                     currentWorld={worldList.find((world) => world.current)}
                     character={char}
                   />
