@@ -92,7 +92,7 @@ const CharacterElement = ({
           ? { backgroundColor: theme === 'dark' ? '#111827' : '#e5e7eb' }
           : {}
       }
-      className="p-4 border relative rounded-lg flex flex-col dark:border-white/[0.2]"
+      className="p-4 group border relative rounded-lg flex flex-col dark:border-white/[0.2]"
     >
       <div className="flex flex-col xsm:flex-row justify-between items-center gap-4 ">
         <div>
@@ -118,7 +118,14 @@ const CharacterElement = ({
           })}
         </div>
       </div>
-      <div className="flex flex-col xsm:flex-row justify-between items-center mt-3 border-t pt-2 ">
+      <div
+        style={
+          character.currentCharacter
+            ? { borderColor: theme === 'dark' ? '#e5e7eb' : '#111827' }
+            : {}
+        }
+        className="flex flex-col xsm:flex-row justify-between items-center mt-3 border-t pt-2 "
+      >
         <div className="flex gap-1 items-center">
           <span>{character.final_stat[42].stat_name}:</span>
           <span>{combatPower}</span>
@@ -130,7 +137,7 @@ const CharacterElement = ({
       </div>
       <button
         onClick={deleteCharacter}
-        className="w-4 h-4 absolute -top-2 -right-2 rounded-full  bg-red-400"
+        className="size-4 group-hover:block hidden absolute -top-1 -right-1 rounded-full bg-red-400"
         type="button"
         aria-label={`${character.character_name} 삭제 버튼`}
       >

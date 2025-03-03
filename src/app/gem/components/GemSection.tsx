@@ -70,17 +70,25 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
 
   return (
     <ItemContainer
-      className="relative gem-virtual-text-area lg:min-w-72"
+      className="relative lg:min-w-96"
       title="결정석 판매 가격"
+      tip="상위 90개의 결정석만 계산합니다."
     >
-      <div className="flex flex-col w-full">
-        {worldGemObject.map((world) => {
+      <Button onClick={unitHandler}>{unit}</Button>
+      <div className="flex mt-2 group flex-col w-full">
+        {worldGemObject.map((world, index) => {
+          console.log(worldGemObject.length - 1 === index)
           return (
             <div
               key={world.name}
-              className="flex xsm:flex-col lg:flex-row justify-between border-b p-2 gap-2"
+              style={
+                worldGemObject.length - 1 === index
+                  ? { borderBottom: ' ' }
+                  : { borderBottom: '1px solid #e5e7eb' }
+              }
+              className="py-4 flex xsm:flex-col lg:flex-row justify-between gap-2"
             >
-              <span className="flex gap-1 h-fit">
+              <span className="flex gap-2 h-fit">
                 <WorldImage world_name={world.name} size={24} />
                 {world.name}
               </span>
@@ -134,10 +142,9 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
             })}
         </div>
       </div>
+
       {characterInfoList.length !== 0 && (
-        <div className="absolute right-3 top-4">
-          <Button onClick={unitHandler}>{unit}</Button>
-        </div>
+        <div className="absolute right-3 top-4" />
       )}
     </ItemContainer>
   )

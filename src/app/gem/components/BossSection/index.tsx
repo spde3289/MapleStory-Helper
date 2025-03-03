@@ -174,6 +174,7 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
     <ItemContainer
       title="보스 리스트"
       className="relative text-nowrap no-drag overflow-x-scroll scrollBar"
+      tip="주관적인 쾌적함 기준입니다."
     >
       <>
         {!bossSort && (
@@ -183,17 +184,20 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
         )}
         {bossSort && (
           <>
-            <div className="flex gap-2 mb-2 virtual-text-area flex-wrap ">
+            <div className="flex gap-2 mb-2 flex-wrap ">
               {bossBottons.map((el) => {
                 return (
-                  <Button
-                    key={el.name}
-                    onClick={handleSetBoss}
-                    id={el.id}
-                    tip={el.tip}
-                  >
-                    {el.name}
-                  </Button>
+                  <div className="relative" key={el.tip}>
+                    <div id="tooltip-root" />
+                    <Button
+                      key={el.name}
+                      onClick={handleSetBoss}
+                      id={el.id}
+                      tip={el.tip}
+                    >
+                      {el.name}
+                    </Button>
+                  </div>
                 )
               })}
             </div>
