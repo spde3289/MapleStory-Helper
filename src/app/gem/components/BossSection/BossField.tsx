@@ -47,7 +47,14 @@ const BossField = ({
         <div className="hidden xsm:block">{boss.krName}</div>
       </td>
       <td className="">
-        <form className="flex gap-4 ">
+        <form
+          style={
+            sort.value === 'default'
+              ? { justifyContent: '' }
+              : { justifyContent: 'center' }
+          }
+          className="flex gap-4 w-[262px]"
+        >
           {boss.type.map((type) => {
             return (
               <label
