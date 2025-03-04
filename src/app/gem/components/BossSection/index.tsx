@@ -152,12 +152,6 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
         if (item.ocid !== currentChar?.ocid) return item
 
         const updatedBoss = item.boss.map((boss) => {
-          // console.log(e.currentTarget.id.split('_')[0])
-          // const target =
-          //   boss.type.length >= 2
-          //     ? boss.name
-          //     : `${boss.name}_${boss.type[0].difficulty}`
-
           if (boss.name !== e.currentTarget.id.split('_')[0]) return boss
 
           const changeNum = Number(e.currentTarget.value)
@@ -173,12 +167,12 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
   return (
     <ItemContainer
       title="보스 리스트"
-      className="relative text-nowrap no-drag overflow-x-scroll scrollBar"
+      className="relative lg:w-[698px] text-nowrap no-drag overflow-x-scroll scrollBar"
       tip="주관적인 쾌적함 기준입니다."
     >
       <>
         {!bossSort && (
-          <div className="lg:w-max text-gray-500 dark:text-gray-400 mx-4 text-lg text-center break-keep  whitespace-normal break-words">
+          <div className="w-full m-0 mx-auto text-gray-500 dark:text-gray-400 text-lg text-center break-keep whitespace-normal break-words">
             캐릭터를 선택해 클리어하고 있는 보스를 설정해 보세요!
           </div>
         )}
@@ -199,7 +193,7 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
                 )
               })}
             </div>
-            <table cellPadding={8} className="w-full">
+            <table align="center" cellPadding={8} className="w-full">
               <thead>
                 <tr className="border-b w-full dark:border-white/[0.2]">
                   <th className="text-center">보스</th>
