@@ -1,6 +1,4 @@
 import ItemContainer from '@/components/common/ItemContainer'
-import WorldImage from '@/components/common/WorldImage'
-import Button from '@/components/ui/button/Button'
 import { useCharacterInfoListContext } from '@/context/characterInfoListContext'
 import { getCharInfo } from '@/fetch/client/charFetch'
 import { getCharList } from '@/fetch/client/charListFetch'
@@ -9,7 +7,8 @@ import { WorldType } from '@/type/character/world'
 import { checkHangulRex } from '@/utils/inputUtils'
 import Link from 'next/link'
 import { memo, useCallback, useEffect, useState } from 'react'
-import CharacterElement from './CharacterElement'
+import CharacterContainer from './CharacterContainer'
+
 // then은 요청에 대한 응답을 기다리고 다음 줄을 실행한다.
 // 함수가 종료 되어도 요청에 대한 응답이 오게 되면 실행이 된다
 
@@ -139,36 +138,12 @@ const CharacterSection = ({ unit }: CharacterSectionPropsType) => {
           onChange={handlerChange}
           onKeyDown={handlerSubmit}
         />
-        {characterInfoList.length !== 0 && (
-          <div className="p-1 h-fit w-full relative no-drag ">
-            <div className="absolute w-full flex overflow-y-scroll scrollBar gap-2">
-              {worldList.map((world) => {
-                return (
-                  <Button
-                    key={world.world}
-                    size="md"
-                    className={`${world.current ? ' bg-orange-400 rounded-md' : ''} flex items-center gap-2 whitespace-nowrap `}
-                    onClick={() => handleWorldChange(world)}
-                  >
-                    <WorldImage world_name={world.world} size={20} />
-                    {world.world}
-                  </Button>
-                )
-              })}
-            </div>
-            <div className=" rounded-md mt-11 gap-2 flex flex-col dark:border-white/[0.05] dark:bg-white/[0.03]">
-              {characterInfoList.map((char) => {
-                return (
-                  <CharacterElement
-                    key={char.ocid}
-                    unit={unit}
-                    currentWorld={worldList.find((world) => world.current)}
-                    character={char}
-                  />
-                )
-              })}
-            </div>
-          </div>
+        {characterInfoList.length > 0 && (
+          <CharacterContainer
+            worldList={worldList}
+            unit={unit}
+            handleWorldChange={handleWorldChange}
+          />
         )}
       </div>
     </ItemContainer>

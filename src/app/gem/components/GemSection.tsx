@@ -126,7 +126,10 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
           )
         })}
         {worldGemObject.length > 1 && (
-          <div className="border-t pt-4 text-right">
+          <div
+            style={hidden ? { marginBottom: '8px' } : undefined}
+            className="border-t pt-2 text-right"
+          >
             총 수익 :{' '}
             {unit === '유닛'
               ? Math.floor(TotalPrice).toLocaleString()

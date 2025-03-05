@@ -1,8 +1,8 @@
-import { Boss } from '@/data/boss'
+import { BossType } from '@/data/boss'
 
 type localStorageCharListType = {
   character_name: string
-  boss: Boss
+  boss: BossType
 }[]
 
 export const getCharacterNameList = (): localStorageCharListType => {

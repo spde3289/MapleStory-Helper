@@ -1,4 +1,3 @@
-// import bossIcons from '@/assets/icons/boss'
 import BossImage from '@/components/common/BossImage'
 import CharacterImage from '@/components/common/CharacterImage'
 import {
@@ -74,10 +73,6 @@ const CharacterElement = ({
   }
 
   const combatPower = formatKoreanNumber(character.final_stat[42].stat_value)
-
-  // const currentCss = character.currentCharacter
-  //   ? 'dark:bg-gray-900 bg-gray-200 '
-  //   : ''
 
   const deleteCharacter = () => {
     setCharacterInfoList((pre) =>
@@ -164,58 +159,3 @@ const CharacterElement = ({
 }
 
 export default memo(CharacterElement)
-
-// <div
-//   onClick={handleCharacter}
-//   onKeyDown={handleCharacter}
-//   tabIndex={0}
-//   role="button"
-//   className={`border rounded-lg justify-center items-center dark:border-white/[0.2] border-b flex ${currentCss} lg:justify-between relative`}
-// >
-//   <div className="flex flex-col sm:w-full xsm:items-end xsm:flex-row px-4 xsm:gap-0 lg:w-fit ">
-//     <div className="flex min-w-32 items-end xsm:items-start lg:items-start gap-4 xsm:gap-1 mb-2 xsm:flex-col sm:gap-0 sm:mb-0">
-//       <div className=" flex items-center flex-col text-sm lg:mr-4 min-w-24 h-32 ">
-//         <CharacterImage className="" src={character.character_image} />
-//         {character.character_name}
-//       </div>
-//       <div>
-//         <div className="sm:w-full sm:text-center">
-//           LV. {character.character_level}
-//         </div>
-//         <div>
-//           <div className="text-xs">
-//             {character.final_stat[42].stat_name}
-//           </div>
-//           <div>{combatPower}</div>
-//         </div>
-//       </div>
-//     </div>
-//     <div className="sm:w-full">
-//       <div className="justify-around w-full items-center lg:gap-1 flex-1 grid grid-cols-6 gap-2 justify-items-center mb-2 ">
-//         {currentBossList.map((boss) => {
-//           return (
-//             <div className="flex flex-col items-center" key={boss.name}>
-//               <BossImage boss={boss.name} />
-//               <div className="text-xs">{boss.difficulty}</div>
-//             </div>
-//           )
-//         })}
-//       </div>
-//       <div className="text-right flex justify-end items-end">
-//         {/* <span className="ml-1">{currentBossList.length} / 12</span> */}
-//         <span>
-//           <div className="text-xs">수익</div>
-//           <div>{formatKoreanNumber(totalPrice)} 메소</div>
-//         </span>
-//       </div>
-//     </div>
-//   </div>
-//   <button
-//     onClick={deleteCharacter}
-//     className="w-4 h-4 absolute -top-2 -right-2 rounded-full  bg-red-400"
-//     type="button"
-//     aria-label={`${character.character_name} 삭제 버튼`}
-//   >
-//     <IoCloseOutline className="w-full h-full text-white" />
-//   </button>
-// </div>

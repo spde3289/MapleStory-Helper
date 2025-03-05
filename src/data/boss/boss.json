@@ -3,73 +3,55 @@
     "name": "Zakum",
     "krName": "자쿰",
     "player": 1,
-    "type": [
-      { "difficulty": "카오스", "price": 8980000, "current": false }
-    ]
+    "type": [{ "difficulty": "카오스", "price": 8980000, "current": false }]
   },
   {
     "name": "Magnus",
     "krName": "매그너스",
     "player": 1,
-    "type": [
-      { "difficulty": "하드", "price": 10700000, "current": false }
-    ]
+    "type": [{ "difficulty": "하드", "price": 10700000, "current": false }]
   },
   {
     "name": "Hilla",
     "krName": "힐라",
     "player": 1,
-    "type": [
-      { "difficulty": "하드", "price": 6390000, "current": false }
-    ]
+    "type": [{ "difficulty": "하드", "price": 6390000, "current": false }]
   },
   {
     "name": "Papulatus",
     "krName": "파풀라투스",
     "player": 1,
-    "type": [
-      { "difficulty": "카오스", "price": 24700000, "current": false }
-    ]
+    "type": [{ "difficulty": "카오스", "price": 24700000, "current": false }]
   },
   {
     "name": "Pierre",
     "krName": "피에르",
     "player": 1,
-    "type": [
-      { "difficulty": "카오스", "price": 9080000, "current": false }
-    ]
+    "type": [{ "difficulty": "카오스", "price": 9080000, "current": false }]
   },
   {
     "name": "BanBan",
     "krName": "반반",
     "player": 1,
-    "type": [
-      { "difficulty": "카오스", "price": 9060000, "current": false }
-    ]
+    "type": [{ "difficulty": "카오스", "price": 9060000, "current": false }]
   },
   {
     "name": "BloodyQueen",
     "krName": "블러디퀸",
     "player": 1,
-    "type": [
-      { "difficulty": "카오스", "price": 9040000, "current": false }
-    ]
+    "type": [{ "difficulty": "카오스", "price": 9040000, "current": false }]
   },
   {
     "name": "Vellum",
     "krName": "벨룸",
     "player": 1,
-    "type": [
-      { "difficulty": "카오스", "price": 11600000, "current": false }
-    ]
+    "type": [{ "difficulty": "카오스", "price": 11600000, "current": false }]
   },
   {
     "name": "PinkBean",
     "krName": "핑크빈",
     "player": 1,
-    "type": [
-      { "difficulty": "카오스", "price": 7310000, "current": false }
-    ]
+    "type": [{ "difficulty": "카오스", "price": 7310000, "current": false }]
   },
   {
     "name": "Cygnus",
@@ -194,6 +176,15 @@
     "type": [
       { "difficulty": "노멀", "price": 600000000, "current": false },
       { "difficulty": "하드", "price": 1070000000, "current": false }
+    ]
+  },
+  {
+    "name": "Baldrix",
+    "krName": "발드릭스",
+    "player": 1,
+    "type": [
+      { "difficulty": "노멀", "price": 800000000, "current": false },
+      { "difficulty": "하드", "price": 1200000000, "current": false }
     ]
   }
 ]

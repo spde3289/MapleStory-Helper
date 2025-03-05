@@ -116,12 +116,17 @@ const BossField = ({
           <option value="6">6</option>
         </select>
       </td>
-      <td className="min-w-fit  whitespace-nowrap text-xs md:text-sm">
+      <td className="min-w-fit w-36 whitespace-nowrap text-xs md:text-sm">
         {boss.type.map((el) => {
           return (
             (el.current || sort.value !== 'default') && (
               <div
-                className={` text-center ${
+                style={
+                  unit === '유닛'
+                    ? { textAlign: 'right' }
+                    : { textAlign: 'center' }
+                }
+                className={` ${
                   el.current
                     ? 'text-gray-900 dark:text-white/90'
                     : 'text-gray-500'
