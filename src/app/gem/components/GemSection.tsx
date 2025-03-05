@@ -5,6 +5,8 @@ import { useCharacterInfoListContext } from '@/context/characterInfoListContext'
 import { formatKoreanNumber, formatToEokUnit } from '@/utils/numberUtils'
 import { memo, useState } from 'react'
 
+const EasterEgg = process.env.NEXT_PUBLIC_EASTER_EGG
+
 interface GemSectionPropsType {
   unit: '일반' | '유닛'
   unitHandler: React.MouseEventHandler<HTMLButtonElement>
@@ -57,7 +59,7 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
   })
 
   const hidden = characterInfoList.some(
-    (info) => info.character_name === '완강식',
+    (info) => info.character_name === EasterEgg,
   )
 
   const inputHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -67,6 +69,10 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
       setValue(Number(inputValue))
     }
   }
+
+  const TotalPrice = worldGemObject.reduce((acc, cur) => {
+    return acc + cur.price
+  }, 0)
 
   return (
     <ItemContainer
@@ -119,27 +125,31 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
             </div>
           )
         })}
-        {hidden && (
-          <div className="flex h-fit mr-4">
-            X
-            <input
-              onChange={inputHandler}
-              value={value}
-              className="bg-gray-200 rounded-lg outline-none w-20 p-2 h-7 ml-2"
-            />
-            원
+        {worldGemObject.length > 1 && (
+          <div className="border-t pt-4 text-right">
+            총 수익 :{' '}
+            {unit === '유닛'
+              ? Math.floor(TotalPrice).toLocaleString()
+              : formatKoreanNumber(Math.floor(TotalPrice))}{' '}
+            메소
           </div>
         )}
-        <div className="w-fit whitespace-nowrap ">
-          {hidden &&
-            worldGemObject.map((world) => {
-              return (
-                <div key={world.name} className="text-right">
-                  {(formatToEokUnit(world.price) * value).toLocaleString()} 원
-                </div>
-              )
-            })}
-        </div>
+        {hidden && (
+          <div className="flex gap-2 items-center justify-end border-t pt-2">
+            <div>{formatToEokUnit(TotalPrice)}억</div>X
+            <div>
+              <input
+                onChange={inputHandler}
+                value={value}
+                className=" rounded-lg outline-none w-20 p-1 bg-gray-100 dark:bg-gray-800 dark:border-white/[0.2]"
+              />
+              원
+            </div>
+            <div className="text-right w-28">
+              {(formatToEokUnit(TotalPrice) * value).toLocaleString()} 원
+            </div>
+          </div>
+        )}
       </div>
 
       {characterInfoList.length !== 0 && (
