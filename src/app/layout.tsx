@@ -1,16 +1,16 @@
 import AppHeader from '@/components/layout/AppHeader'
 import Backdrop from '@/components/layout/Backdrop'
-import { Analytics } from '@vercel/analytics/next'
 import NavBar from '@/components/layout/NavBar'
 import DataFetchProvider from '@/components/porvider/DataFetchProvider'
 import DesigeProvider from '@/components/porvider/DesigeProvider'
 import GlobalStateProvider from '@/components/porvider/GlobalStateProvider'
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
 
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID
+const GOOGLE_ANALYTICS = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
 
 // 폰트 파일 경로를 /public/fonts 에서 가져옴
 const mapleFont = localFont({
@@ -49,7 +49,7 @@ export default function RootLayout({
       >
         <Analytics />
         {/* Google Analytics Script */}
-        {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
+        {GOOGLE_ANALYTICS && <GoogleAnalytics gaId={GOOGLE_ANALYTICS} />}
         <GlobalStateProvider>
           <DataFetchProvider>
             <DesigeProvider>
