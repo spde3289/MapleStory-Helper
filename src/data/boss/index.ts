@@ -6,7 +6,7 @@ import irushi from './irushiBoss.json'
 import ruwill from './ruwillBoss.json'
 import sde from './sdeBoss.json'
 
-export type Boss = {
+export type BossType = {
   name: string
   krName: string
   player: number
@@ -17,16 +17,17 @@ export type Boss = {
   }[]
 }[]
 
-export type Bosses = {
-  gaenseul: Boss
-  geommitsol: Boss
-  haseikal: Boss
-  irushi: Boss
-  ruwill: Boss
-  sde: Boss
+export type BossesType = {
+  gaenseul: BossType
+  geommitsol: BossType
+  haseikal: BossType
+  irushi: BossType
+  ruwill: BossType
+  hasuu: BossType
+  sde: BossType
 }
 
-const bosses: Record<string, Boss> = {
+const bosses: Record<string, BossType> = {
   gaenseul,
   geommitsol,
   haseikal,

@@ -1,6 +1,6 @@
 'use client'
 
-import bosses, { Boss } from '@/data/boss'
+import bosses, { BossType } from '@/data/boss'
 import BossInfo from '@/data/boss/boss.json'
 import { MainCharacterResponse } from '@/type/axios/characterType'
 import { setCharacterNameList } from '@/utils/localStorage/characterNameList'
@@ -17,12 +17,12 @@ import {
 
 export interface characterInfo extends MainCharacterResponse {
   currentCharacter: boolean
-  boss: Boss
+  boss: BossType
 }
 
 type localStorageCharListType = {
   character_name: string
-  boss: Boss
+  boss: BossType
 }[]
 
 interface CharacterInfoListContextType {
@@ -56,6 +56,26 @@ const CheckStat = (value: number) => {
   return BossInfo // 기본 보스 리스트
 }
 
+const AddBoss = (stat_value: number, currentBoss: BossType) => {
+  const mergedBossInfo = [...CheckStat(stat_value)]
+
+  currentBoss.forEach((newBoss) => {
+    const existingIndex = mergedBossInfo.findIndex(
+      (boss) => boss.name === newBoss.name,
+    )
+
+    if (existingIndex !== -1) {
+      // 기존 보스가 있으면 업데이트
+      mergedBossInfo[existingIndex] = newBoss
+    } else {
+      // 새로운 보스면 추가
+      mergedBossInfo.push(newBoss)
+    }
+  })
+
+  return mergedBossInfo
+}
+
 const CharacterInfoListProvider: React.FC<{
   children: React.ReactNode
 }> = ({ children }) => {
@@ -66,13 +86,11 @@ const CharacterInfoListProvider: React.FC<{
   useEffect(() => {
     const arr: any[] = []
 
-    if (characterInfoList.length !== 0) {
-      characterInfoList.forEach((info) => {
-        arr.push({ character_name: info.character_name, boss: info.boss })
-      })
+    characterInfoList.forEach((info) => {
+      arr.push({ character_name: info.character_name, boss: info.boss })
+    })
 
-      setCharacterNameList(arr)
-    }
+    setCharacterNameList(arr)
   }, [characterInfoList])
 
   const handleCharacterInfo = useCallback(
@@ -89,7 +107,7 @@ const CharacterInfoListProvider: React.FC<{
             ...char,
             currentCharacter: false, // access_flag
             boss: charName?.boss
-              ? charName.boss
+              ? AddBoss(char.final_stat[42].stat_value, charName.boss)
               : CheckStat(char.final_stat[42].stat_value),
           }
         })

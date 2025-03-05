@@ -1,4 +1,4 @@
-import { Boss } from '@/data/boss'
+import { BossType } from '@/data/boss'
 import { CharListResponse } from '@/type/axios/charListType'
 import { MainCharacterResponse } from '@/type/axios/characterType'
 import { Get } from '.'
@@ -12,7 +12,7 @@ const isApiKeyTypeCheck = (value: any): value is InputType => {
 
 type localStorageCharListType = {
   character_name: string
-  boss: Boss
+  boss: BossType
 }[]
 
 export const getCharList = async (
