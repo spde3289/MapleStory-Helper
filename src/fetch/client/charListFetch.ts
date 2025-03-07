@@ -41,25 +41,27 @@ export const getCharList = async (
 
   if (level220PlusCharacters?.length) {
     try {
-      const responses = await Promise.all(
-        level220PlusCharacters.map((character) => {
-          return Get<MainCharacterResponse>(Paths.character, {
-            params: { character_name: character },
-          })
-        }),
+      const responses = await Promise.allSettled(
+        level220PlusCharacters.map((character) =>
+          Get<MainCharacterResponse>(Paths.character, {
+            params: { character_name: `${character}mk1` },
+          }),
+        ),
       )
 
-      responses.forEach((response) => {
-        const checkList = level220PlusCharacters.some(
-          (el) => el === response.data?.character_name,
+      const filteredData = responses
+        .filter(
+          (result): result is PromiseFulfilledResult<any> =>
+            result.status === 'fulfilled',
         )
-        if (
-          response.data &&
-          (response.data.final_stat[42].stat_value >= 3000000 || checkList)
-        ) {
-          level220PlusCharactersResponse.push(response.data)
-        }
-      })
+        .map((result) => result.value.data)
+        .filter(
+          (characterData) =>
+            characterData &&
+            characterData.final_stat[42]?.stat_value >= 3000000,
+        )
+
+      level220PlusCharactersResponse.push(...filteredData)
     } catch (error) {
       console.error('요청 중 오류가 발생했습니다:', error)
     }
