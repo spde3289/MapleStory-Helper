@@ -1,6 +1,7 @@
 import { BossType } from '@/data/boss'
 import { CharListResponse } from '@/type/axios/charListType'
 import { MainCharacterResponse } from '@/type/axios/characterType'
+import { AxiosResponse } from 'axios'
 import { Get } from '.'
 import Paths from './path'
 
@@ -44,15 +45,18 @@ export const getCharList = async (
       const responses = await Promise.allSettled(
         level220PlusCharacters.map((character) =>
           Get<MainCharacterResponse>(Paths.character, {
-            params: { character_name: `${character}mk1` },
+            params: { character_name: `${character}` },
           }),
         ),
       )
 
       const filteredData = responses
         .filter(
-          (result): result is PromiseFulfilledResult<any> =>
-            result.status === 'fulfilled',
+          (
+            result,
+          ): result is PromiseFulfilledResult<
+            AxiosResponse<MainCharacterResponse, any>
+          > => result.status === 'fulfilled',
         )
         .map((result) => result.value.data)
         .filter(
