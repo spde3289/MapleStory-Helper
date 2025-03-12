@@ -45,7 +45,7 @@ export const getCharList = async (
       const responses = await Promise.allSettled(
         level220PlusCharacters.map((character) =>
           Get<MainCharacterResponse>(Paths.character, {
-            params: { character_name: `${character}` },
+            params: { character_name: character },
           }),
         ),
       )

@@ -39,6 +39,7 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
   const { characterInfoList, setCharacterInfoList } =
     useCharacterInfoListContext()
   const [currentBossArr, setcurrentBossArr] = useState<currentBossArrType>([])
+  const [hideCheckBoss, setHideCheckBoss] = useState<boolean>(false)
   const [sort, setSort] = useState<sortType>({
     value: 'default',
     icon: <FaSort />,
@@ -164,6 +165,10 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
     )
   }
 
+  const handleCheckBoss: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setHideCheckBoss(e.currentTarget.checked)
+  }
+
   return (
     <ItemContainer
       title="보스 리스트"
@@ -179,7 +184,6 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
         {bossSort && (
           <>
             <div className="flex gap-2 mb-2 flex-wrap ">
-              <div id="tooltip-root" />
               {bossBottons.map((el) => {
                 return (
                   <Button
@@ -188,11 +192,25 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
                     id={el.id}
                     tip={el.tip}
                   >
+                    <div id="tooltip-root" />
                     {el.name}
                   </Button>
                 )
               })}
             </div>
+            <label
+              className="flex gap-2 w-fit hover:cursor-pointer hover:text-gray-800 dark:hover:text-gray-300"
+              htmlFor="보스 숨기기"
+            >
+              <input
+                checked={hideCheckBoss}
+                onChange={handleCheckBoss}
+                className="hover:cursor-pointer"
+                type="checkbox"
+                id="보스 숨기기"
+              />{' '}
+              보스 숨기기
+            </label>
             <table align="center" cellPadding={8} className="w-full">
               <thead>
                 <tr className="border-b w-full dark:border-white/[0.2]">
@@ -213,6 +231,8 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
               </thead>
               <tbody className="">
                 {bossSort?.map((boss) => {
+                  if (hideCheckBoss && !boss.type.find((type) => type.current))
+                    return null
                   return (
                     <BossField
                       sort={sort}
