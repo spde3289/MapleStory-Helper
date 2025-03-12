@@ -40,7 +40,7 @@ const BossField = ({
           : `${boss.name}_${boss.type[0].difficulty}`
       }
     >
-      <td className="flex items-center gap-2">
+      <td className="flex items-center gap-2 w-fit xsm:w-[180px]">
         <div className="size-8 rounded-lg overflow-hidden">
           <BossImage boss={boss.name} />
         </div>
@@ -61,7 +61,7 @@ const BossField = ({
                 key={type.difficulty}
                 className={`flex items-center ${
                   currentBossArr.length < 12
-                    ? ''
+                    ? 'hover:text-gray-600 dark:hover:text-gray-400'
                     : !currentBossArr.includes(boss.name) && 'text-gray-500'
                 }`}
                 htmlFor={`${type.difficulty}${boss.krName}`}

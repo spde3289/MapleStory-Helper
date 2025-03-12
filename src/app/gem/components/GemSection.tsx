@@ -101,7 +101,7 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
                 <span
                 // className={`${world.count > maxGem ? 'text-red-600' : 'text-green-600'}`}
                 >
-                  결정석 제한 :
+                  결정석 제한 :{' '}
                   <span
                     style={
                       world.count > maxGem
@@ -115,7 +115,7 @@ const GemSection = ({ unit, unitHandler }: GemSectionPropsType) => {
                   / {maxGem}
                 </span>
                 <span key={world.name} className="">
-                  수익 :
+                  수익 :{' '}
                   {unit === '유닛'
                     ? Math.floor(world.price).toLocaleString()
                     : formatKoreanNumber(Math.floor(world.price))}{' '}
