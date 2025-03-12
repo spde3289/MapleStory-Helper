@@ -199,7 +199,7 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
               })}
             </div>
             <label
-              className="flex gap-2 w-fit hover:cursor-pointer hover:text-gray-800 dark:hover:text-gray-300"
+              className="flex gap-2 w-fit hover:cursor-pointer hover:text-gray-600 dark:hover:text-gray-400"
               htmlFor="보스 숨기기"
             >
               <input
@@ -259,16 +259,3 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
 }
 
 export default memo(BossSection)
-
-// {
-//   !bossSort && (
-//     <tr className="w-[600px] ">
-//       {/* <div>캐릭터를 선택해 주간 보스를 선택해주세요</div> */}
-//       <td className="relative h-15">
-//         <div className="absolute ">
-//           캐릭터를 선택해 주간 보스를 선택해주세요.
-//         </div>
-//       </td>
-//     </tr>
-//   )
-// }

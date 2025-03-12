@@ -16,12 +16,14 @@ type WorldListType = {
 }
 
 interface CharacterElementPropsType {
+  simpleMode: boolean
   character: characterInfo
   currentWorld: WorldListType | undefined
   unit: '일반' | '유닛'
 }
 
 const CharacterElement = ({
+  simpleMode,
   character,
   currentWorld,
   unit,
@@ -101,14 +103,20 @@ const CharacterElement = ({
     >
       <div className="flex flex-col xsm:flex-row justify-between items-center gap-4 ">
         <div>
-          <div className="w-24 h-24 overflow-hidden">
+          <div
+            style={simpleMode ? { display: 'none' } : {}}
+            className="w-24 h-24 overflow-hidden"
+          >
             <CharacterImage src={character.character_image} />
           </div>
           <div className="text-center">
-            <span>{character.character_name}</span>
+            <span className="">{character.character_name}</span>
           </div>
         </div>
-        <div className="flex w-60 xsm:w-full justify-start flex-wrap gap-2 ">
+        <div
+          style={simpleMode ? { display: 'none' } : {}}
+          className="flex w-60 xsm:w-full justify-start flex-wrap gap-2 "
+        >
           {currentBossList?.map((boss) => {
             return (
               <div className="" key={boss.name}>
@@ -122,26 +130,38 @@ const CharacterElement = ({
             )
           })}
         </div>
+        <div
+          style={{
+            ...(simpleMode ? {} : { display: 'none' }),
+            ...(currentBossList.length < 12
+              ? { color: '#dc2626' }
+              : { color: '#16a34a' }),
+          }}
+        >
+          {currentBossList.length}{' '}
+          <span className="text-gray-900 dark:text-white/90"> / 12 </span>
+        </div>
       </div>
       <div
-        style={
-          character.currentCharacter
+        style={{
+          ...(character.currentCharacter
             ? { borderColor: theme === 'dark' ? '#e5e7eb' : '#111827' }
-            : {}
-        }
+            : {}),
+          ...(simpleMode ? { marginTop: '4px', paddingTop: '4px' } : {}),
+        }}
         className="flex flex-col xsm:flex-row justify-between items-center mt-3 border-t pt-2 "
       >
         <div className="flex gap-1 items-center">
-          <span>{character.final_stat[42].stat_name}:</span>
+          <span>{character.final_stat[42].stat_name} : </span>
           <span>{combatPower}</span>
         </div>
         <div className="flex gap-1">
-          <span>수익: </span>
+          <span>수익 : </span>
           <span>
             {/* {formatKoreanNumber(totalPrice)} */}
             {unit === '유닛'
               ? Math.floor(totalPrice).toLocaleString()
-              : formatKoreanNumber(Math.floor(totalPrice))}
+              : formatKoreanNumber(Math.floor(totalPrice))}{' '}
             메소
           </span>
         </div>
