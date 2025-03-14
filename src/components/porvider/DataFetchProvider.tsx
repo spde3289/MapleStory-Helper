@@ -31,7 +31,8 @@ const DataFetchProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (getCharacterNameList()?.length !== 0) {
       const response = async () => {
-        const data = await getCharList(getCharacterNameList())
+        const localStorageDate = await getCharacterNameList()
+        const data = await getCharList(localStorageDate)
         if (data) {
           const UniqueArr: MainCharacterResponse[] = []
 
@@ -44,7 +45,7 @@ const DataFetchProvider = ({ children }: { children: React.ReactNode }) => {
               UniqueArr.push(character)
             }
           })
-          handleCharacterInfo(UniqueArr, getCharacterNameList())
+          handleCharacterInfo(UniqueArr, localStorageDate)
         }
       }
       response()

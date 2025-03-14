@@ -105,7 +105,7 @@ const CharacterInfoListProvider: React.FC<{
           )
           return {
             ...char,
-            currentCharacter: false, // access_flag
+            currentCharacter: false,
             boss: charName?.boss
               ? AddBoss(char.final_stat[42].stat_value, charName.boss)
               : CheckStat(char.final_stat[42].stat_value),
