@@ -1,0 +1,49 @@
+[
+  {
+    "name": "ChosenSeren",
+    "krName": "세렌",
+    "player": 1,
+    "type": [
+      { "difficulty": "하드", "reward": 6, "current": false },
+      { "difficulty": "익스트림", "reward": 80, "current": false }
+    ]
+  },
+  {
+    "name": "KalostheGuardian",
+    "krName": "칼로스",
+    "player": 1,
+    "type": [
+      { "difficulty": "노멀", "reward": 10, "current": false },
+      { "difficulty": "카오스", "reward": 70, "current": false },
+      { "difficulty": "익스트림", "reward": 400, "current": false }
+    ]
+  },
+  {
+    "name": "Kaling",
+    "krName": "카링",
+    "player": 1,
+    "type": [
+      { "difficulty": "노멀", "reward": 20, "current": false },
+      { "difficulty": "하드", "reward": 160, "current": false },
+      { "difficulty": "익스트림", "reward": 1200, "current": false }
+    ]
+  },
+  {
+    "name": "Limbo",
+    "krName": "림보",
+    "player": 1,
+    "type": [
+      { "difficulty": "노멀", "reward": 120, "current": false },
+      { "difficulty": "하드", "reward": 300, "current": false }
+    ]
+  },
+  {
+    "name": "Baldrix",
+    "krName": "발드릭스",
+    "player": 1,
+    "type": [
+      { "difficulty": "노멀", "reward": 180, "current": false },
+      { "difficulty": "하드", "reward": 420, "current": false }
+    ]
+  }
+]

@@ -2,7 +2,7 @@ import BossImage from '@/components/common/BossImage'
 
 import ItemContainer from '@/components/common/ItemContainer'
 import { useTheme } from '@/context/ThemeContext'
-import quest from '@/data/genesis/quest.json'
+import quest from '@/data/destiny/quest.json'
 import { CalculateProps } from '@/type/genesis'
 
 const Calculate = ({
@@ -49,7 +49,7 @@ const Calculate = ({
           </select>
         </div>
         <div className="w-full">
-          <div className="text-sm">어둠의 흔적</div>
+          <div className="text-sm">대적자의 결의</div>
           <div
             style={{
               background: `linear-gradient(to right, #b260c9 ${progress}%, ${dark} ${progress}%)`,
@@ -57,7 +57,7 @@ const Calculate = ({
             className="transition-colors duration-300 ease-in-out flex h-8 text-center border dark:border-white/[0.2] rounded-xl justify-center items-center"
           >
             <input
-              alt="보유 어둠의 흔적"
+              alt="보유 대적자의 결의"
               className="w-12 h-7  bg-transparent outline-none "
               maxLength={4}
               onChange={handleGauge}
@@ -74,7 +74,7 @@ const Calculate = ({
             <th className="">
               난이도{' '}
               <span className="text-gray-500 dark:text-gray-400">
-                (획득 어둠의 흔적)
+                (획득 대적자의 결의)
               </span>
             </th>
             <th className="">파티원</th>
