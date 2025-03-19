@@ -38,7 +38,11 @@ const navItems = [
   },
   {
     path: '/genesis',
-    name: '해방 퀘스트 계산기',
+    name: '제네시스 해방 퀘스트 계산기',
+  },
+  {
+    path: '/destiny',
+    name: '데스티니 해방 퀘스트 계산기',
   },
 ]
 

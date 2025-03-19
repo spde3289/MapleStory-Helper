@@ -3,16 +3,17 @@ import Image from 'next/image'
 
 interface BossImagePropsType {
   boss: string
+  alt?: string
 }
 
 /** 보스 이미지 컨테이너 */
-const BossImage = ({ boss }: BossImagePropsType) => {
+const BossImage = ({ boss, alt = '보스 이미지' }: BossImagePropsType) => {
   return (
     <Image
       quality={100}
       className="w-full h-full object-cover"
       src={bossIcons[boss]}
-      alt="보스 이미지"
+      alt={alt}
     />
   )
 }

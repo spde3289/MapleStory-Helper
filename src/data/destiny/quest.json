@@ -1,0 +1,14 @@
+[
+  {
+    "quest": "결전, 선택받은 세렌",
+    "required_darkness": 2000
+  },
+  {
+    "quest": "결전, 감시자 칼로스",
+    "required_darkness": 2500
+  },
+  {
+    "quest": "결전, 사도 카링",
+    "required_darkness": 3000
+  }
+]

@@ -8,8 +8,15 @@ const navItems = [
   },
   {
     path: '/genesis',
-    name: '해방 퀘스트 계산기',
-    description: '복잡한 조건 없이 해방퀘 완료 일정을 계산해드려요',
+    name: '제네시스 해방 퀘스트 계산기',
+    description:
+      '복잡한 조건 없이 제네시스 해방 퀘스트 완료 일정을 계산해드려요',
+  },
+  {
+    path: '/destiny',
+    name: '데스티니 해방 퀘스트 계산기',
+    description:
+      '복잡한 조건 없이 데스티니 해방 퀘스트 완료 일정을 계산해드려요',
   },
 ]
 

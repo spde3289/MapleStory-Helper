@@ -121,7 +121,7 @@ const CharacterElement = ({
             return (
               <div className="" key={boss.name}>
                 <div className="size-8 md:size-10 rounded-lg overflow-hidden">
-                  <BossImage boss={boss.name} />
+                  <BossImage boss={boss.name} alt={boss.krName} />
                 </div>
                 <div className="text-xs w-[32px] text-center truncate">
                   <span>{boss.difficulty}</span>

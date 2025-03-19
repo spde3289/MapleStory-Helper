@@ -42,7 +42,7 @@ const BossField = ({
     >
       <td className="flex items-center gap-2 w-fit xsm:w-[180px]">
         <div className="size-8 rounded-lg overflow-hidden">
-          <BossImage boss={boss.name} />
+          <BossImage boss={boss.name} alt={boss.krName} />
         </div>
         <div className="hidden xsm:block">{boss.krName}</div>
       </td>
