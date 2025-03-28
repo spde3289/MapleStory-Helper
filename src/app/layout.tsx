@@ -1,6 +1,6 @@
 import AppHeader from '@/components/layout/AppHeader'
 import Backdrop from '@/components/layout/Backdrop'
-import NavBar from '@/components/layout/NavBar'
+import NavBar from '@/components/layout/Navbar'
 import DataFetchProvider from '@/components/porvider/DataFetchProvider'
 import DesigeProvider from '@/components/porvider/DesigeProvider'
 import GlobalStateProvider from '@/components/porvider/GlobalStateProvider'
