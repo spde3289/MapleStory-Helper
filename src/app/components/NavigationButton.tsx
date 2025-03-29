@@ -1,24 +1,15 @@
-// import { StaticImageData } from 'next/image'
+import { ItemType } from '@/constants/route'
 import Link from 'next/link'
 
 interface NavigationButtonProps {
-  name: string
-  path: string
-  description: string
+  item: ItemType
 }
 
-const NavigationButton = ({
-  name,
-  path,
-  description,
-}: NavigationButtonProps) => {
+const NavigationButton = ({ item }: NavigationButtonProps) => {
   return (
-    <Link
-      className="rounded-lg px-3 py-2 lg:px-8 lg:py-4 transition-all bg-orange-500 hover:bg-orange-400 text-white/90"
-      href={path}
-    >
-      <h2 className="text-2xl font-bold">{name}</h2>
-      <p className="text-sm break-keep text-balance ">{description}</p>
+    <Link className=" item-button hover:item-button-active" href={item.path}>
+      <h2 className="text-lg font-bold ">{item.name}</h2>
+      <p className="text-sm break-keep text-balance ">{item.description}</p>
     </Link>
   )
 }

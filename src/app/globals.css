@@ -44,9 +44,38 @@
 }
 
 @layer utilities {
+  .item-frame-top {
+    @apply absolute top-0 left-0 w-full h-[24px] bg-gradient-to-b from-[#3f4f5e] to-transparent pointer-events-none;
+  }
+
+  .item-frame {
+    @apply relative rounded-[10px] bg-[#2c2f34] border border-[#1e2024] 
+  shadow-[inset_0_0_0_2px_rgb(101,119,130)] overflow-hidden;
+  }
+
+  .item-frame-container {
+    @apply flex flex-col gap-2 bg-[#eeeeee] rounded-md w-full h-full shadow-[inset_0_0_0_2px_rgb(255,255,255)] p-[8px];
+  }
+
+  .item-frame-title {
+    @apply absolute top-[8px] left-[12px] text-[14px] font-semibold text-[#e3ff3f] tracking-wider;
+  }
+
+  .item-button {
+    @apply w-full text-white/90 text-start rounded 
+  bg-gradient-to-t from-[#9aa3a8] to-[#a5afb5]
+  border-[2px] border-[#c5cbcf] border-b-0 
+  shadow-[0_0_0_1px_rgb(140,148,151)] px-4 py-2  
+  p-0;
+  }
+
+  .item-button-active {
+    @apply bg-gradient-to-t from-[#36b8d0] to-[#15a5d4]
+  border-[2px] border-[#92d9e6] border-b-0
+  shadow-[0_0_0_1px_rgb(63,119,137)];
+  }
 }
-/* grid grid-cols-[3rem_6rem_4rem_auto] gap-1 xsm:grid-cols-[11rem_9rem_4rem_auto] sm:grid-cols-[11rem_18rem_4rem_auto] items-center
- */
+
 @layer components {
   .boss-table {
     @apply w-full grid grid-cols-4 items-center;
