@@ -3,6 +3,7 @@ import geommitsol from './geommitsolBoss.json'
 import haseikal from './haseikalBoss.json'
 import hasuu from './hasuuBoss.json'
 import irushi from './irushiBoss.json'
+import nokallica from './nokallicaBoss.json'
 import ruwill from './ruwillBoss.json'
 import sde from './sdeBoss.json'
 
@@ -18,6 +19,7 @@ export type BossType = {
 }[]
 
 export type BossesType = {
+  nokallica: BossType
   gaenseul: BossType
   geommitsol: BossType
   haseikal: BossType
@@ -29,6 +31,7 @@ export type BossesType = {
 
 const bosses: Record<string, BossType> = {
   gaenseul,
+  nokallica,
   geommitsol,
   haseikal,
   irushi,
