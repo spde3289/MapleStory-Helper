@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     '해방퀘, 해방예상, 해방예상시간, 데스티니무기, 데티무기, 데티해방, 대적저의 결의',
 }
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode

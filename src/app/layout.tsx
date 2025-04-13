@@ -32,7 +32,7 @@ const mapleFont = localFont({
 export const metadata: Metadata = {
   title: '메이플 헬퍼',
   description:
-    '메이플을 즐길 수 있게 도와주는 메이플 헬퍼 입니다. 주간보스 결정석, 해방 일정 계산등 여러 기능들을 편리하게 이용할 수 있습니다.',
+    '메이플을 즐길 수 있게 도와주는 메이플 헬퍼 입니다. 주간보스 결정석, 해방 일정 계산등 여러 기능들을 제공하는 오픈서비스 입니다. ',
   keywords:
     '메이플스토리, 메이플스토리 헬퍼, 메이플 헬퍼, 주간 보스결정석, 주보돌이, 캐릭터 검색, 해방 퀘스트, 제네시스 무기, 해방퀘스트, 메이플계산기',
 }
@@ -57,7 +57,7 @@ export default function RootLayout({
                 <AppHeader />
                 <NavBar />
                 <Backdrop />
-                <div className="h-[calc(100vh-65px)] lg:pl-[290px] ">
+                <div className="h-[calc(100vh-65px)] lg:pl-[255px] ">
                   <main className="h-full p-1 overflow-scroll scrollBar sm:p-4 md:p-5 flex flex-col lg:flex-row gap-2 sm:gap-5">
                     {children}
                   </main>

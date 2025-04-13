@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     '해방퀘, 해방예상, 해방예상시간, 제네시스무기, 제네무기, 제네해방, 어둠의 흔적',
 }
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode
