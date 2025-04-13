@@ -33,6 +33,7 @@ const bossBottons = [
   { id: 'hasuu', name: '하스우', tip: '전투럭 3천 이상' },
   { id: 'geommitsol', name: '검밑솔', tip: '전투럭 1억 이상' },
   { id: 'haseikal', name: '하세이칼', tip: '전투럭 1억 5천 이상' },
+  { id: 'nokallica', name: '노칼이카', tip: '전투럭 2억 이상' },
 ]
 
 const BossSection = ({ unit }: BossSectionPropsType) => {

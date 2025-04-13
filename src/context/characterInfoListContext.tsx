@@ -38,6 +38,8 @@ const CharacterInfoListContext =
   createContext<CharacterInfoListContextType | null>(null)
 
 const CheckStat = (value: number) => {
+  // 노칼이카
+  if (value >= 200000000) return bosses.nokallica
   // 하세이칼
   if (value >= 150000000) return bosses.haseikal
   // 검밑솔
