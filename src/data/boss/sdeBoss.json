@@ -67,7 +67,7 @@
     "krName": "스우",
     "player": 1,
     "type": [
-      { "difficulty": "노멀", "price": 22000000, "current": false },
+      { "difficulty": "노멀", "price": 22000000, "current": true },
       { "difficulty": "하드", "price": 77400000, "current": false },
       { "difficulty": "익스트림", "price": 549000000, "current": false }
     ]
@@ -77,7 +77,7 @@
     "krName": "데미안",
     "player": 1,
     "type": [
-      { "difficulty": "노멀", "price": 23000000, "current": false },
+      { "difficulty": "노멀", "price": 23000000, "current": true },
       { "difficulty": "하드", "price": 73500000, "current": false }
     ]
   },
