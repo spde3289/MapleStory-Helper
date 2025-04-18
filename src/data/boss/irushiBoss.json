@@ -3,7 +3,7 @@
     "name": "Zakum",
     "krName": "자쿰",
     "player": 1,
-    "type": [{ "difficulty": "카오스", "price": 8080000, "current": false }]
+    "type": [{ "difficulty": "카오스", "price": 8080000, "current": true }]
   },
   {
     "name": "Magnus",

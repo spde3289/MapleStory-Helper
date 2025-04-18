@@ -9,7 +9,7 @@
     "name": "Magnus",
     "krName": "매그너스",
     "player": 1,
-    "type": [{ "difficulty": "하드", "price": 8560000, "current": false }]
+    "type": [{ "difficulty": "하드", "price": 8560000, "current": true }]
   },
   {
     "name": "Hilla",
@@ -21,7 +21,7 @@
     "name": "Papulatus",
     "krName": "파풀라투스",
     "player": 1,
-    "type": [{ "difficulty": "카오스", "price": 17300000, "current": false }]
+    "type": [{ "difficulty": "카오스", "price": 17300000, "current": true }]
   },
   {
     "name": "Pierre",
@@ -39,13 +39,13 @@
     "name": "BloodyQueen",
     "krName": "블러디퀸",
     "player": 1,
-    "type": [{ "difficulty": "카오스", "price": 8140000, "current": false }]
+    "type": [{ "difficulty": "카오스", "price": 8140000, "current": true }]
   },
   {
     "name": "Vellum",
     "krName": "벨룸",
     "player": 1,
-    "type": [{ "difficulty": "카오스", "price": 9280000, "current": false }]
+    "type": [{ "difficulty": "카오스", "price": 9280000, "current": true }]
   },
   {
     "name": "PinkBean",
