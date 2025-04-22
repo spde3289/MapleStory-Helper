@@ -3,19 +3,19 @@
     "name": "Zakum",
     "krName": "자쿰",
     "player": 1,
-    "type": [{ "difficulty": "카오스", "price": 8080000, "current": true }]
+    "type": [{ "difficulty": "카오스", "price": 8080000, "current": false }]
   },
   {
     "name": "Magnus",
     "krName": "매그너스",
     "player": 1,
-    "type": [{ "difficulty": "하드", "price": 8560000, "current": true }]
+    "type": [{ "difficulty": "하드", "price": 8560000, "current": false }]
   },
   {
     "name": "Hilla",
     "krName": "힐라",
     "player": 1,
-    "type": [{ "difficulty": "하드", "price": 5750000, "current": true }]
+    "type": [{ "difficulty": "하드", "price": 5750000, "current": false }]
   },
   {
     "name": "Papulatus",
@@ -27,31 +27,31 @@
     "name": "Pierre",
     "krName": "피에르",
     "player": 1,
-    "type": [{ "difficulty": "카오스", "price": 8170000, "current": true }]
+    "type": [{ "difficulty": "카오스", "price": 8170000, "current": false }]
   },
   {
     "name": "BanBan",
     "krName": "반반",
     "player": 1,
-    "type": [{ "difficulty": "카오스", "price": 8150000, "current": true }]
+    "type": [{ "difficulty": "카오스", "price": 8150000, "current": false }]
   },
   {
     "name": "BloodyQueen",
     "krName": "블러디퀸",
     "player": 1,
-    "type": [{ "difficulty": "카오스", "price": 8140000, "current": true }]
+    "type": [{ "difficulty": "카오스", "price": 8140000, "current": false }]
   },
   {
     "name": "Vellum",
     "krName": "벨룸",
     "player": 1,
-    "type": [{ "difficulty": "카오스", "price": 9280000, "current": true }]
+    "type": [{ "difficulty": "카오스", "price": 9280000, "current": false }]
   },
   {
     "name": "PinkBean",
     "krName": "핑크빈",
     "player": 1,
-    "type": [{ "difficulty": "카오스", "price": 6580000, "current": true }]
+    "type": [{ "difficulty": "카오스", "price": 6580000, "current": false }]
   },
   {
     "name": "Cygnus",
@@ -59,7 +59,7 @@
     "player": 1,
     "type": [
       { "difficulty": "이지", "price": 4550000, "current": false },
-      { "difficulty": "노멀", "price": 7500000, "current": true }
+      { "difficulty": "노멀", "price": 7500000, "current": false }
     ]
   },
   {
@@ -67,8 +67,8 @@
     "krName": "스우",
     "player": 1,
     "type": [
-      { "difficulty": "노멀", "price": 22000000, "current": true },
-      { "difficulty": "하드", "price": 77400000, "current": false },
+      { "difficulty": "노멀", "price": 22000000, "current": false },
+      { "difficulty": "하드", "price": 77400000, "current": true },
       { "difficulty": "익스트림", "price": 549000000, "current": false }
     ]
   },
@@ -77,8 +77,8 @@
     "krName": "데미안",
     "player": 1,
     "type": [
-      { "difficulty": "노멀", "price": 23000000, "current": true },
-      { "difficulty": "하드", "price": 73500000, "current": false }
+      { "difficulty": "노멀", "price": 23000000, "current": false },
+      { "difficulty": "하드", "price": 73500000, "current": true }
     ]
   },
   {
@@ -87,7 +87,7 @@
     "player": 1,
     "type": [
       { "difficulty": "노멀", "price": 33500000, "current": false },
-      { "difficulty": "카오스", "price": 113000000, "current": false }
+      { "difficulty": "카오스", "price": 113000000, "current": true }
     ]
   },
   {
@@ -97,7 +97,7 @@
     "type": [
       { "difficulty": "이지", "price": 39200000, "current": false },
       { "difficulty": "노멀", "price": 46900000, "current": false },
-      { "difficulty": "하드", "price": 94500000, "current": false }
+      { "difficulty": "하드", "price": 94500000, "current": true }
     ]
   },
   {
@@ -107,7 +107,7 @@
     "type": [
       { "difficulty": "이지", "price": 42500000, "current": false },
       { "difficulty": "노멀", "price": 54100000, "current": false },
-      { "difficulty": "하드", "price": 116000000, "current": false }
+      { "difficulty": "하드", "price": 116000000, "current": true }
     ]
   },
   {
@@ -116,7 +116,7 @@
     "player": 1,
     "type": [
       { "difficulty": "노멀", "price": 57900000, "current": false },
-      { "difficulty": "카오스", "price": 105000000, "current": false }
+      { "difficulty": "카오스", "price": 105000000, "current": true }
     ]
   },
   {
@@ -125,7 +125,7 @@
     "player": 1,
     "type": [
       { "difficulty": "노멀", "price": 107000000, "current": false },
-      { "difficulty": "하드", "price": 160000000, "current": false }
+      { "difficulty": "하드", "price": 160000000, "current": true }
     ]
   },
   {
@@ -134,7 +134,7 @@
     "player": 1,
     "type": [
       { "difficulty": "노멀", "price": 62500000, "current": false },
-      { "difficulty": "하드", "price": 142000000, "current": false }
+      { "difficulty": "하드", "price": 142000000, "current": true }
     ]
   },
   {
@@ -143,7 +143,7 @@
     "player": 1,
     "type": [
       { "difficulty": "노멀", "price": 295000000, "current": false },
-      { "difficulty": "하드", "price": 440000000, "current": false },
+      { "difficulty": "하드", "price": 440000000, "current": true },
       { "difficulty": "익스트림", "price": 2420000000, "current": false }
     ]
   },
@@ -153,7 +153,7 @@
     "player": 1,
     "type": [
       { "difficulty": "이지", "price": 345000000, "current": false },
-      { "difficulty": "노멀", "price": 510000000, "current": false },
+      { "difficulty": "노멀", "price": 510000000, "current": true },
       { "difficulty": "카오스", "price": 1120000000, "current": false },
       { "difficulty": "익스트림", "price": 2700000000, "current": false }
     ]
@@ -163,7 +163,7 @@
     "krName": "카링",
     "player": 1,
     "type": [
-      { "difficulty": "이지", "price": 381000000, "current": false },
+      { "difficulty": "이지", "price": 381000000, "current": true },
       { "difficulty": "노멀", "price": 595000000, "current": false },
       { "difficulty": "하드", "price": 1310000000, "current": false },
       { "difficulty": "익스트림", "price": 3150000000, "current": false }
