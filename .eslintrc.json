@@ -41,14 +41,9 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": [
-          "**/*.test.{js,ts,tsx}",
-          "**/*.spec.{js,ts,tsx}",
-          "**/*.stories.{js,ts,tsx}",
-          "**/setupTests.{js,ts}",
-          "**/tailwind.config.{js,ts}",
-          "**/vite.config.{js,ts}"
-        ]
+        "devDependencies": false,
+        "optionalDependencies": false,
+        "peerDependencies": false
       }
     ],
     "@typescript-eslint/naming-convention": [

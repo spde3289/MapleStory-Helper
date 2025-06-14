@@ -1,3 +1,4 @@
+// 년
 export const setYear = (year: number) => {
   const date = new Date()
   date.setFullYear(date.getFullYear() + year)
@@ -5,6 +6,7 @@ export const setYear = (year: number) => {
   return date
 }
 
+// 주를 년 월 일 형식으로 바꾸는 함수
 export const getDateAfterWeeks = (n: number) => {
   const currentDate = new Date()
 
@@ -18,3 +20,4 @@ export const getDateAfterWeeks = (n: number) => {
 
   return koreanDate
 }
+dasdas

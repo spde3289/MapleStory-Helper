@@ -3,10 +3,19 @@
 import { IncomeRecord } from '@/type/income'
 import { useState } from 'react'
 
+function getTodayString(): string {
+  const today = new Date()
+  const year = today.getFullYear()
+  const month = String(today.getMonth() + 1).padStart(2, '0')
+  const day = String(today.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
 export default function IncomeTable() {
+  // const addLog = useHuntingStore((state) => state.addLog)
   const [records, setRecords] = useState<IncomeRecord[]>([
     {
-      date: '',
+      date: getTodayString(),
       duration: 0,
       pieces: 0,
       meso: 0,
@@ -30,7 +39,7 @@ export default function IncomeTable() {
       { date: '', duration: 0, pieces: 0, meso: 0, memo: '' },
     ])
   }
-
+  console.log(records)
   return (
     <div>
       <table className="table-auto w-full border">
