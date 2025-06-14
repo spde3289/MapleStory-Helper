@@ -14,6 +14,7 @@ function Genesis() {
     gauge: 0,
   })
   const [bossList, setBossList] = useState<bossListType>(reward)
+  const [isPass, setIsPass] = useState<boolean>(false)
 
   const handleBoss: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setCurrentQuest((pre) => {
@@ -81,16 +82,18 @@ function Genesis() {
   const handleQuest = useMemo(() => {
     return { handleBoss, handleGauge }
   }, [handleGauge])
-
+  console.log(isPass)
   return (
     <>
       <Calculate
+        isPass={isPass}
+        setIsPass={setIsPass}
         handleBossList={handleBossList}
         bossList={bossList}
         currentQuest={currentQuest}
         handleQuest={handleQuest}
       />
-      <Result bossList={bossList} currentQuest={currentQuest} />
+      <Result isPass={isPass} bossList={bossList} currentQuest={currentQuest} />
     </>
   )
 }

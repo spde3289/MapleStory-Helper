@@ -61,7 +61,7 @@ export const calculateRewards = (result: RewardResult): RewardResult => {
     if (reward.date % 4 === 0 || reward.date === 0) {
       reward.totalReward += reward.blackMageReward
     }
-    reward.date += 1
+    if (reward.totalReward < reward.need_darkness) reward.date += 1
   }
   return reward
 }

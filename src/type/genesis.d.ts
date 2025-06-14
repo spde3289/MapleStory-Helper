@@ -17,6 +17,8 @@ export type bossListType = {
 }[]
 
 export interface CalculateProps {
+  isPass: boolean
+  setIsPass: Dispatch<SetStateAction<boolean>>
   currentQuest: currentQuestType
   bossList: bossListType
   handleBossList: {
