@@ -82,7 +82,6 @@ function Genesis() {
   const handleQuest = useMemo(() => {
     return { handleBoss, handleGauge }
   }, [handleGauge])
-  console.log(isPass)
   return (
     <>
       <Calculate

@@ -1,9 +1,15 @@
 import BossImage from '@/components/common/BossImage'
+import { Dispatch, SetStateAction } from 'react'
 
 import ItemContainer from '@/components/common/ItemContainer'
 import { useTheme } from '@/context/ThemeContext'
 import quest from '@/data/genesis/quest.json'
 import { CalculateProps } from '@/type/genesis'
+
+interface Props extends CalculateProps {
+  isPass: boolean
+  setIsPass: Dispatch<SetStateAction<boolean>>
+}
 
 const Calculate = ({
   isPass,
@@ -12,7 +18,7 @@ const Calculate = ({
   handleQuest,
   bossList,
   handleBossList,
-}: CalculateProps) => {
+}: Props) => {
   const { theme } = useTheme()
   const { handleBoss, handleGauge } = handleQuest
   const { handleType, handlePlayer } = handleBossList
