@@ -5,11 +5,12 @@ import { calculateRewards, convertTime } from '@/utils/numberUtils'
 import { getDateAfterWeeks } from '@/utils/setDate'
 
 interface ResultProps {
+  isPass: boolean
   currentQuest: currentQuestType
   bossList: bossListType
 }
 
-const Result = ({ currentQuest, bossList }: ResultProps) => {
+const Result = ({ currentQuest, bossList, isPass }: ResultProps) => {
   const startIndex = quest.findIndex((item) => item.quest === currentQuest.boss)
 
   const result = {
@@ -33,7 +34,11 @@ const Result = ({ currentQuest, bossList }: ResultProps) => {
         sum +
         boss.type
           .filter((t) => t.current)
-          .reduce((rewardSum, t) => rewardSum + t.reward / boss.player, 0)
+          .reduce(
+            (rewardSum, t) =>
+              rewardSum + (t.reward * (isPass ? 3 : 1)) / boss.player,
+            0,
+          )
       )
     }, 0),
   )
@@ -49,8 +54,9 @@ const Result = ({ currentQuest, bossList }: ResultProps) => {
     (result.bossReward !== 0 || result.blackMageReward !== 0)
 
   if (value) {
-    result.date = calculateRewards(result).date
-    result.totalReward = calculateRewards(result).totalReward
+    const finalReward = calculateRewards(result)
+    result.date = finalReward.date
+    result.totalReward = finalReward.totalReward
   }
 
   return (

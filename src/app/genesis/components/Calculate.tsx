@@ -1,16 +1,24 @@
 import BossImage from '@/components/common/BossImage'
+import { Dispatch, SetStateAction } from 'react'
 
 import ItemContainer from '@/components/common/ItemContainer'
 import { useTheme } from '@/context/ThemeContext'
 import quest from '@/data/genesis/quest.json'
 import { CalculateProps } from '@/type/genesis'
 
+interface Props extends CalculateProps {
+  isPass: boolean
+  setIsPass: Dispatch<SetStateAction<boolean>>
+}
+
 const Calculate = ({
+  isPass,
+  setIsPass,
   currentQuest,
   handleQuest,
   bossList,
   handleBossList,
-}: CalculateProps) => {
+}: Props) => {
   const { theme } = useTheme()
   const { handleBoss, handleGauge } = handleQuest
   const { handleType, handlePlayer } = handleBossList
@@ -28,6 +36,22 @@ const Calculate = ({
       className="no-drag lg:min-w-[800px] text-nowrap overflow-x-scroll scrollBar"
       title="설정"
     >
+      <div className="p-1 px-2">
+        <label className="flex items-center" htmlFor="제네시스 패스">
+          {' '}
+          제네시스 패스 적용하기
+          <img src="/imgs/genesis_pass.png" alt="제네시스 패스" />
+          <input
+            className="ml-2"
+            checked={isPass}
+            onChange={(e) => {
+              setIsPass(e.target.checked)
+            }}
+            id="제네시스 패스"
+            type="checkbox"
+          />
+        </label>
+      </div>
       <div className=" flex flex-col sm:flex-row gap-3 items-center mb-4">
         <div>
           <div className="text-sm">진행중인 보스</div>
@@ -110,7 +134,11 @@ const Calculate = ({
                       />
                       {type.difficulty}{' '}
                       <span className="text-gray-500 dark:text-gray-400 ml-1">
-                        ({Math.round(type.reward / item.player)})
+                        (
+                        {Math.round(
+                          (type.reward * (isPass ? 3 : 1)) / item.player,
+                        )}
+                        )
                       </span>
                     </label>
                   ))}
