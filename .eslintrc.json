@@ -40,7 +40,11 @@
     "@next/next/no-img-element": "off",
     "import/no-extraneous-dependencies": [
       "error",
-      { "devDependencies": ["**/tailwind.config.{js,ts}"] }
+      {
+        "devDependencies": false,
+        "optionalDependencies": false,
+        "peerDependencies": false
+      }
     ],
     "@typescript-eslint/naming-convention": [
       "error",
