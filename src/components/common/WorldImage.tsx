@@ -10,9 +10,14 @@ interface CharacterImagePropsType {
 /** 월드 이미지 컨테이너 */
 const WorldImage = ({ world_name, size }: CharacterImagePropsType) => {
   const worldSrc = (worldName: string): string => {
-    const burning: string[] = ['버닝', '버닝2', '버닝3']
+    const burning: string[] = [
+      '챌린저스',
+      '챌린저스2',
+      '챌린저스3',
+      '챌린저스3',
+    ]
 
-    if (burning.includes(worldName)) return '버닝'
+    if (burning.includes(worldName)) return '챌린저스'
     return worldName
   }
 
