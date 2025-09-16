@@ -159,6 +159,17 @@
     ]
   },
   {
+    "name": "TheFirstAdversary",
+    "krName": "최초의 대적자",
+    "player": 1,
+    "type": [
+      { "difficulty": "이지", "price": 361000000, "current": false },
+      { "difficulty": "노멀", "price": 530000000, "current": false },
+      { "difficulty": "하드", "price": 1260000000, "current": false },
+      { "difficulty": "익스트림", "price": 2920000000, "current": false }
+    ]
+  },
+  {
     "name": "Kaling",
     "krName": "카링",
     "player": 1,
