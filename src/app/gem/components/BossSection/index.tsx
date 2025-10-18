@@ -1,8 +1,11 @@
 import ItemContainer from '@/components/common/ItemContainer'
-
 import Button from '@/components/ui/button/Button'
-import { useCharacterInfoListContext } from '@/context/characterInfoListContext'
-import bosses from '@/data/boss'
+import {
+  BOSS_PRESET,
+  useCharacterInfoListContext,
+} from '@/context/characterInfoListContext'
+import BossInfo from '@/data/boss/boss.json'
+import currentBossInfo from '@/data/boss/current/boss.json'
 import {
   ChangeEvent,
   ChangeEventHandler,
@@ -15,6 +18,7 @@ import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa'
 import BossField from './BossField'
 
 interface BossSectionPropsType {
+  currentValue: boolean
   unit: '일반' | '유닛'
 }
 
@@ -36,7 +40,7 @@ const bossBottons = [
   { id: 'nokallica', name: '노칼이카', tip: '전투럭 2억 이상' },
 ]
 
-const BossSection = ({ unit }: BossSectionPropsType) => {
+const BossSection = ({ unit, currentValue }: BossSectionPropsType) => {
   const { characterInfoList, setCharacterInfoList } =
     useCharacterInfoListContext()
   const [currentBossArr, setcurrentBossArr] = useState<currentBossArrType>([])
@@ -52,6 +56,35 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
   )
 
   useEffect(() => {
+    const ss = characterInfoList.map((item) => {
+      const newBossList = item.boss.map((boss) => {
+        const newCurBoss = currentBossInfo.find(
+          (curboss) => curboss.name === boss.name,
+        )
+        const newBoss = BossInfo.find((curboss) => curboss.name === boss.name)
+
+        return {
+          ...boss,
+          type: boss.type.map((t) => ({
+            ...t,
+            price: currentValue
+              ? (newBoss?.type.find((newT) => newT.difficulty === t.difficulty)
+                  ?.price ?? t.price)
+              : (newCurBoss?.type.find(
+                  (newT) => newT.difficulty === t.difficulty,
+                )?.price ?? t.price),
+          })),
+        }
+      })
+
+      return { ...item, boss: newBossList }
+    })
+    setCharacterInfoList(ss)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentValue, setCharacterInfoList])
+
+  useEffect(() => {
     const arr: any[] = []
     currentChar?.boss.forEach((boss) => {
       if (boss.type.filter((type) => type.current === true).length !== 0) {
@@ -63,9 +96,6 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [characterInfoList])
-
-  // 만약 선택한 캐릭터가 없으면 더미데이터
-  // if (!currentChar) return <BossDummy />
 
   const haldler = (e: ChangeEvent<HTMLInputElement>) => {
     setCharacterInfoList((prev) =>
@@ -91,15 +121,37 @@ const BossSection = ({ unit }: BossSectionPropsType) => {
       }),
     )
   }
-  // 보스돌이 선택버튼
+
+  type PresetKey = keyof typeof BOSS_PRESET
+  // "sde" | "gaenseul" | "irushi" | "ruwill" | "hasu" | "geommitsol" | "haseikal" | "nokallica"
+
+  // 보스돌이 선택 이벤트 핸들러
   const handleSetBoss: MouseEventHandler<HTMLButtonElement> = (e) => {
-    const key = e.currentTarget.id
+    const key = e.currentTarget.id as PresetKey
 
     setCharacterInfoList((prev) =>
       prev.map((item) => {
         if (item.ocid !== currentChar?.ocid) return item
 
-        return { ...item, boss: bosses[key] }
+        // 4) 빠른 매칭을 위한 Map 구성 (krName → difficulty)
+        const targetByKrName = new Map<string, string>(
+          BOSS_PRESET[key].map((p) => [p.name, p.difficulty]), // preset의 name이 krName과 동일하다고 가정
+        )
+
+        // 5) currentBossInfo 갱신
+        const newBossList = item.boss.map((boss) => {
+          const targetDifficulty = targetByKrName.get(boss.krName)
+          // if (!targetDifficulty) return boss
+
+          const updatedType = boss.type.map((t) => ({
+            ...t,
+            current: t.difficulty === targetDifficulty, // 매칭된 난이도만 true
+          }))
+
+          return { ...boss, type: updatedType }
+        })
+
+        return { ...item, boss: newBossList }
       }),
     )
   }

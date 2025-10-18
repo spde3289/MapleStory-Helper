@@ -6,14 +6,8 @@ import { MainCharacterResponse } from '@/type/axios/characterType'
 import { WorldType } from '@/type/character/world'
 import { checkHangulRex } from '@/utils/inputUtils'
 import Link from 'next/link'
-import { memo, useCallback, useEffect, useState } from 'react'
+import { ChangeEvent, memo, useCallback, useEffect, useState } from 'react'
 import CharacterContainer from './CharacterContainer'
-
-// then은 요청에 대한 응답을 기다리고 다음 줄을 실행한다.
-// 함수가 종료 되어도 요청에 대한 응답이 오게 되면 실행이 된다
-
-// async/await는 요청에 대한 응답을 받을 때 까지 기다린 후 다음 줄을 실행한다.
-// then보다 좋은 점은 코드의 실행 순서를 내가 원하는 대로 제어 할 수 있다는 점이 장점이다.
 
 type InputType = `test_${string}` | `live_${string}` // 정상적인 타입 선언
 
@@ -27,10 +21,16 @@ type WorldListType = {
 }
 
 interface CharacterSectionPropsType {
+  currentValue: boolean
+  handlerCurrentValue: (e: ChangeEvent<HTMLInputElement>) => void
   unit: '일반' | '유닛'
 }
 
-const CharacterSection = ({ unit }: CharacterSectionPropsType) => {
+const CharacterSection = ({
+  unit,
+  currentValue,
+  handlerCurrentValue,
+}: CharacterSectionPropsType) => {
   const [characterName, setCharacterName] = useState<InputType | string>('')
   const [worldList, setWorldList] = useState<WorldListType[]>([])
   const { characterInfoList, handleCharacterInfo } =
@@ -140,6 +140,8 @@ const CharacterSection = ({ unit }: CharacterSectionPropsType) => {
         />
         {characterInfoList.length > 0 && (
           <CharacterContainer
+            currentValue={currentValue}
+            handlerCurrentValue={handlerCurrentValue}
             worldList={worldList}
             unit={unit}
             handleWorldChange={handleWorldChange}

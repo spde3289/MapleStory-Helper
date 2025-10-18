@@ -6,7 +6,13 @@ import { useCharacterInfoListContext } from '@/context/characterInfoListContext'
 import { BossType } from '@/data/boss'
 import { MainCharacterResponse } from '@/type/axios/characterType'
 import { WorldType } from '@/type/character/world'
-import { ChangeEventHandler, useMemo, useReducer, useState } from 'react'
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  useMemo,
+  useReducer,
+  useState,
+} from 'react'
 
 import CharacterElement from './CharacterElement'
 
@@ -21,6 +27,8 @@ type WorldListType = {
 }
 
 export interface characterNamePropsType {
+  currentValue: boolean
+  handlerCurrentValue: (e: ChangeEvent<HTMLInputElement>) => void
   worldList: WorldListType[]
   unit: '일반' | '유닛'
   handleWorldChange: (world: WorldListType) => void
@@ -53,6 +61,8 @@ const sortReducer = (state: SortState, action: SortAction): SortState => {
 }
 
 const CharacterContainer = ({
+  currentValue,
+  handlerCurrentValue,
   worldList,
   unit,
   handleWorldChange,
@@ -131,6 +141,19 @@ const CharacterContainer = ({
                 (sortState.order === 'asc' ? '▲' : '▼')}
             </button>
           </div>
+          <label
+            className="flex items-center text-nowrap gap-1 hover:cursor-pointer hover:text-gray-600 dark:hover:text-gray-400"
+            htmlFor="결정석 패치후"
+          >
+            <input
+              onChange={handlerCurrentValue}
+              checked={currentValue}
+              className="hover:cursor-pointer"
+              type="checkbox"
+              id="결정석 패치후"
+            />
+            결정석 패치후
+          </label>
           <label
             className="flex items-center text-nowrap gap-1 hover:cursor-pointer hover:text-gray-600 dark:hover:text-gray-400"
             htmlFor="간단모드"
