@@ -5,7 +5,7 @@ import {
   useCharacterInfoListContext,
 } from '@/context/characterInfoListContext'
 import BossInfo from '@/data/boss/boss.json'
-import currentBossInfo from '@/data/boss/current/boss.json'
+// import currentBossInfo from '@/data/boss/current/boss.json'
 import {
   ChangeEvent,
   ChangeEventHandler,
@@ -18,7 +18,6 @@ import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa'
 import BossField from './BossField'
 
 interface BossSectionPropsType {
-  currentValue: boolean
   unit: '일반' | '유닛'
 }
 
@@ -40,7 +39,7 @@ const bossBottons = [
   { id: 'nokallica', name: '노칼이카', tip: '전투럭 2억 이상' },
 ]
 
-const BossSection = ({ unit, currentValue }: BossSectionPropsType) => {
+const BossSection = ({ unit }: BossSectionPropsType) => {
   const { characterInfoList, setCharacterInfoList } =
     useCharacterInfoListContext()
   const [currentBossArr, setcurrentBossArr] = useState<currentBossArrType>([])
@@ -58,21 +57,18 @@ const BossSection = ({ unit, currentValue }: BossSectionPropsType) => {
   useEffect(() => {
     const ss = characterInfoList.map((item) => {
       const newBossList = item.boss.map((boss) => {
-        const newCurBoss = currentBossInfo.find(
-          (curboss) => curboss.name === boss.name,
-        )
+        // const newCurBoss = currentBossInfo.find(
+        //   (curboss) => curboss.name === boss.name,
+        // )
         const newBoss = BossInfo.find((curboss) => curboss.name === boss.name)
 
         return {
           ...boss,
           type: boss.type.map((t) => ({
             ...t,
-            price: currentValue
-              ? (newBoss?.type.find((newT) => newT.difficulty === t.difficulty)
-                  ?.price ?? t.price)
-              : (newCurBoss?.type.find(
-                  (newT) => newT.difficulty === t.difficulty,
-                )?.price ?? t.price),
+            price:
+              newBoss?.type.find((newT) => newT.difficulty === t.difficulty)
+                ?.price ?? t.price,
           })),
         }
       })
@@ -82,7 +78,7 @@ const BossSection = ({ unit, currentValue }: BossSectionPropsType) => {
     setCharacterInfoList(ss)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentValue, setCharacterInfoList])
+  }, [setCharacterInfoList])
 
   useEffect(() => {
     const arr: any[] = []

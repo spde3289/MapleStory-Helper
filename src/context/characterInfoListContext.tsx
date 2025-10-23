@@ -1,8 +1,8 @@
 'use client'
 
 import { BossType } from '@/data/boss'
-// import BossInfo from '@/data/boss/boss.json'
-import currentBossInfo from '@/data/boss/current/boss.json'
+import BossInfo from '@/data/boss/boss.json'
+// import currentBossInfo from '@/data/boss/current/boss.json'
 import { MainCharacterResponse } from '@/type/axios/characterType'
 import { setCharacterNameList } from '@/utils/localStorage/characterNameList'
 import {
@@ -207,15 +207,15 @@ const pickPreset = (value: number): PresetEntry[] | null => {
 // 3) 메인 함수: BossInfo를 갱신하여 반환
 const checkStat = (value: number): Boss[] => {
   const preset = pickPreset(value)
-  if (!preset) return currentBossInfo
+  if (!preset) return BossInfo
 
   // 4) 빠른 매칭을 위한 Map 구성 (krName → difficulty)
   const targetByKrName = new Map<string, string>(
     preset.map((p) => [p.name, p.difficulty]), // preset의 name이 krName과 동일하다고 가정
   )
 
-  // 5) currentBossInfo 갱신
-  return currentBossInfo.map((boss) => {
+  // 5) BossInfo 갱신
+  return BossInfo.map((boss) => {
     const targetDifficulty = targetByKrName.get(boss.krName)
     if (!targetDifficulty) return boss
 

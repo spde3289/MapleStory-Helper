@@ -7,7 +7,7 @@ import { BossType } from '@/data/boss'
 import { MainCharacterResponse } from '@/type/axios/characterType'
 import { WorldType } from '@/type/character/world'
 import {
-  ChangeEvent,
+  // ChangeEvent,
   ChangeEventHandler,
   useMemo,
   useReducer,
@@ -27,8 +27,8 @@ type WorldListType = {
 }
 
 export interface characterNamePropsType {
-  currentValue: boolean
-  handlerCurrentValue: (e: ChangeEvent<HTMLInputElement>) => void
+  // currentValue: boolean
+  // handlerCurrentValue: (e: ChangeEvent<HTMLInputElement>) => void
   worldList: WorldListType[]
   unit: '일반' | '유닛'
   handleWorldChange: (world: WorldListType) => void
@@ -61,8 +61,8 @@ const sortReducer = (state: SortState, action: SortAction): SortState => {
 }
 
 const CharacterContainer = ({
-  currentValue,
-  handlerCurrentValue,
+  // currentValue,
+  // handlerCurrentValue,
   worldList,
   unit,
   handleWorldChange,
@@ -141,7 +141,7 @@ const CharacterContainer = ({
                 (sortState.order === 'asc' ? '▲' : '▼')}
             </button>
           </div>
-          <label
+          {/* <label
             className="flex items-center text-nowrap gap-1 hover:cursor-pointer hover:text-gray-600 dark:hover:text-gray-400"
             htmlFor="결정석 패치후"
           >
@@ -153,7 +153,7 @@ const CharacterContainer = ({
               id="결정석 패치후"
             />
             결정석 패치후
-          </label>
+          </label> */}
           <label
             className="flex items-center text-nowrap gap-1 hover:cursor-pointer hover:text-gray-600 dark:hover:text-gray-400"
             htmlFor="간단모드"
