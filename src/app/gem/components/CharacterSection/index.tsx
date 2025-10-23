@@ -6,7 +6,7 @@ import { MainCharacterResponse } from '@/type/axios/characterType'
 import { WorldType } from '@/type/character/world'
 import { checkHangulRex } from '@/utils/inputUtils'
 import Link from 'next/link'
-import { ChangeEvent, memo, useCallback, useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import CharacterContainer from './CharacterContainer'
 
 type InputType = `test_${string}` | `live_${string}` // 정상적인 타입 선언
@@ -21,15 +21,15 @@ type WorldListType = {
 }
 
 interface CharacterSectionPropsType {
-  currentValue: boolean
-  handlerCurrentValue: (e: ChangeEvent<HTMLInputElement>) => void
+  // currentValue: boolean
+  // handlerCurrentValue: (e: ChangeEvent<HTMLInputElement>) => void
   unit: '일반' | '유닛'
 }
 
 const CharacterSection = ({
   unit,
-  currentValue,
-  handlerCurrentValue,
+  // currentValue,
+  // handlerCurrentValue,
 }: CharacterSectionPropsType) => {
   const [characterName, setCharacterName] = useState<InputType | string>('')
   const [worldList, setWorldList] = useState<WorldListType[]>([])
@@ -140,8 +140,8 @@ const CharacterSection = ({
         />
         {characterInfoList.length > 0 && (
           <CharacterContainer
-            currentValue={currentValue}
-            handlerCurrentValue={handlerCurrentValue}
+            // currentValue={currentValue}
+            // handlerCurrentValue={handlerCurrentValue}
             worldList={worldList}
             unit={unit}
             handleWorldChange={handleWorldChange}
