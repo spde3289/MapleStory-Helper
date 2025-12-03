@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import BossSection from './components/BossSection'
-import CharacterSection from './components/CharacterSection'
+import BossSection from './components/_BossSection/BossSection'
+import CharacterSection from './components/_CharacterSection/CharacterSection'
 import GemSection from './components/GemSection'
 
 type UnitType = '일반' | '유닛'

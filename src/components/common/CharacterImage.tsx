@@ -18,7 +18,7 @@ const CharacterImage = ({ src }: CharacterImagePropsType) => {
     // 캐릭터 정보가 로드되면 이미지 변경
     if (src)
       setCharacterImage(
-        `https://avatar.maplestory.nexon.com/Character/180/${src.split('/')[7]}.png`,
+        `https://avatar.maplestory.nexon.com/Character/180/${src.split('/')[7].split('?')[0]}.png`,
       )
   }, [src])
 
