@@ -5,8 +5,8 @@ import reward from '@/data/destiny/reward.json'
 import { bossListType, currentQuestType } from '@/type/genesis'
 import { checkNumberRex } from '@/utils/inputUtils'
 import { ChangeEventHandler, useCallback, useMemo, useState } from 'react'
-import Calculate from './components/Calculate'
-import Result from './components/Result'
+import Calculate from './_components/Calculate'
+import Result from './_components/Result'
 
 function Destiny() {
   const [currentQuest, setCurrentQuest] = useState<currentQuestType>({

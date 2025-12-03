@@ -1,15 +1,15 @@
-import worldIcons from '@/assets/icons/world'
+import worldIcons, { KOR_TO_ENG } from '@/assets/icons/world'
 import Image from 'next/image'
 import { memo } from 'react'
 
 interface CharacterImagePropsType {
-  world_name: string
+  world_name: keyof typeof KOR_TO_ENG
   size?: number
 }
 
 /** 월드 이미지 컨테이너 */
 const WorldImage = ({ world_name, size }: CharacterImagePropsType) => {
-  const worldSrc = (worldName: string): string => {
+  const worldSrc = (worldName: keyof typeof KOR_TO_ENG): string => {
     const burning: string[] = [
       '챌린저스',
       '챌린저스2',
@@ -18,7 +18,7 @@ const WorldImage = ({ world_name, size }: CharacterImagePropsType) => {
     ]
 
     if (burning.includes(worldName)) return '챌린저스'
-    return worldName
+    return KOR_TO_ENG[worldName]
   }
 
   return (
