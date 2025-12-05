@@ -158,7 +158,6 @@ const CharacterElement = ({
         <div className="flex gap-1">
           <span>수익 : </span>
           <span>
-            {/* {formatKoreanNumber(totalPrice)} */}
             {unit === '유닛'
               ? Math.floor(totalPrice).toLocaleString()
               : formatKoreanNumber(Math.floor(totalPrice))}{' '}

@@ -9,7 +9,7 @@ import { FaRegTrashAlt } from 'react-icons/fa'
 import { useTheme } from '../../context/ThemeContext'
 import SearchCharacter from './SearchCharacter'
 
-function CharacterCreator() {
+const CharacterCreator = () => {
   const { mainCharacter, setMainCharacter } = useMainCharacterContext()
   const { toggleTheme } = useTheme()
 

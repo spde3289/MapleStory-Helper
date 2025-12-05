@@ -21,16 +21,10 @@ type WorldListType = {
 }
 
 interface CharacterSectionPropsType {
-  // currentValue: boolean
-  // handlerCurrentValue: (e: ChangeEvent<HTMLInputElement>) => void
   unit: '일반' | '유닛'
 }
 
-const CharacterSection = ({
-  unit,
-  // currentValue,
-  // handlerCurrentValue,
-}: CharacterSectionPropsType) => {
+const CharacterSection = ({ unit }: CharacterSectionPropsType) => {
   const [characterName, setCharacterName] = useState<InputType | string>('')
   const [worldList, setWorldList] = useState<WorldListType[]>([])
   const { characterInfoList, handleCharacterInfo } =
@@ -61,7 +55,7 @@ const CharacterSection = ({
     if (e.key === 'Enter') {
       ;(e.target as HTMLInputElement).blur() // 포커스아웃
       if (isApiKeyTypeCheck(characterName)) {
-        // apikey를 입력 했을 시 //////////////////////////////////////////////
+        // apikey를 입력 했을 시
         const data = await getCharList(characterName)
 
         if (data) {
@@ -140,8 +134,6 @@ const CharacterSection = ({
         />
         {characterInfoList.length > 0 && (
           <CharacterContainer
-            // currentValue={currentValue}
-            // handlerCurrentValue={handlerCurrentValue}
             worldList={worldList}
             unit={unit}
             handleWorldChange={handleWorldChange}

@@ -8,7 +8,7 @@ import { ChangeEventHandler, useCallback, useMemo, useState } from 'react'
 import Calculate from './_components/Calculate'
 import Result from './_components/Result'
 
-function Genesis() {
+const Genesis = () => {
   const [currentQuest, setCurrentQuest] = useState<currentQuestType>({
     boss: '사자왕 반 레온',
     gauge: 0,

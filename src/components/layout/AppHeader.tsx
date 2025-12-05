@@ -73,7 +73,6 @@ const AppHeader: React.FC = () => {
                 className="mr-2"
                 src={maple}
                 width={32}
-                height={32}
                 alt="메이플 아이콘"
               />
               <div className="">Maple Helper</div>
@@ -87,4 +86,5 @@ const AppHeader: React.FC = () => {
     </header>
   )
 }
+
 export default AppHeader

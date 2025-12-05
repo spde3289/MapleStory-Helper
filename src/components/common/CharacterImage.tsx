@@ -33,8 +33,6 @@ const CharacterImage = ({ src }: CharacterImagePropsType) => {
         onError={() => setCharacterImage(noChar)} // 에러 발생 시 기본 이미지로 변경
         alt="대표 캐릭터 이미지"
         priority
-        // objectFit을 'contain'으로 지정하면 이미지 비율을 유지하며 컨테이너 내에 맞춤
-        // style={{ objectFit: 'contain' }}
       />
     </div>
   )

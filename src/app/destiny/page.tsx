@@ -8,7 +8,7 @@ import { ChangeEventHandler, useCallback, useMemo, useState } from 'react'
 import Calculate from './_components/Calculate'
 import Result from './_components/Result'
 
-function Destiny() {
+const Destiny = () => {
   const [currentQuest, setCurrentQuest] = useState<currentQuestType>({
     boss: '결전, 선택받은 세렌',
     gauge: 0,

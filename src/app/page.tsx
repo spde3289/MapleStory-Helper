@@ -1,5 +1,3 @@
-// import HeadMeta from '@/commonComponents/HeadMeta'
-// import CharacterCreator from './components/CharacterCreator'
 import NavigationContainer from './_components/NavigationContainer'
 
 function Home() {
