@@ -2,7 +2,6 @@
 
 import { BossType } from '@/data/boss'
 import BossInfo from '@/data/boss/boss.json'
-// import currentBossInfo from '@/data/boss/current/boss.json'
 import { MainCharacterResponse } from '@/type/axios/characterType'
 import { setCharacterNameList } from '@/utils/localStorage/characterNameList'
 import {
@@ -174,19 +173,6 @@ type Boss = {
   type: BossTypeItem[]
 }
 
-// // 외부에서 주어지는 데이터
-// declare const BossInfo: Boss[]
-// declare const BOSS_PRESET: {
-//   nokallica: PresetEntry[]
-//   haseikal: PresetEntry[]
-//   geommitsol: PresetEntry[]
-//   hasu: PresetEntry[]
-//   ruwill: PresetEntry[]
-//   irushi: PresetEntry[]
-//   gaenseul: PresetEntry[]
-//   sde: PresetEntry[]
-// }
-
 // 1) 임계값 테이블: 큰 값부터 나열 (내림차순)
 const THRESHOLDS: Array<{ limit: number; preset: PresetEntry[] }> = [
   { limit: 200_000_000, preset: BOSS_PRESET.nokallica }, // 노칼이카
@@ -227,44 +213,9 @@ const checkStat = (value: number): Boss[] => {
     return { ...boss, type: updatedType }
   })
 }
-// const updatedBossData = BossInfo.map((boss) => {
-//   // nokallica 배열에서 일치하는 보스 찾기
-//   const match = currentBoss?.find((n) => n.name === boss.krName)
-
-//   // 일치하는 항목이 없으면 그대로 반환
-//   if (!match) return boss
-
-//   // 일치하는 항목이 있으면 difficulty 수정
-//   const updatedType = boss.type.map((t) => ({
-//     ...t,
-//     current: t.difficulty === match.difficulty, // 일치하는 난이도만 current true
-//   }))
-
-//   return { ...boss, type: updatedType }
-// })
-
-// console.log(updatedBossData)
-
-// return updatedBossData // 기본 보스 리스트
 
 const SetBossList = (stat_value: number, currentBoss: BossType) => {
   const mergedBossInfo = [...checkStat(stat_value)]
-
-  // const updatedBossData = BossInfo.map((boss) => {
-  //   // nokallica 배열에서 일치하는 보스 찾기
-  //   const match = currentBoss?.find((n) => n.name === boss.krName)
-
-  //   // 일치하는 항목이 없으면 그대로 반환
-  //   if (!match) return boss
-
-  //   // 일치하는 항목이 있으면 difficulty 수정
-  //   const updatedType = boss.type.map((t) => ({
-  //     ...t,
-  //     current: t.difficulty === match.difficulty, // 일치하는 난이도만 current true
-  //   }))
-
-  //   return { ...boss, type: updatedType }
-  // })
 
   currentBoss.forEach((newBoss) => {
     const existingIndex = mergedBossInfo.findIndex(

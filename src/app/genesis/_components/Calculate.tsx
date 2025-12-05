@@ -1,10 +1,12 @@
 import BossImage from '@/components/common/BossImage'
 import { Dispatch, SetStateAction } from 'react'
 
+import genesis_pass from '@/assets/imgs/genesis_pass.png'
 import ItemContainer from '@/components/common/ItemContainer'
 import { useTheme } from '@/context/ThemeContext'
 import quest from '@/data/genesis/quest.json'
 import { CalculateProps } from '@/type/genesis'
+import Image from 'next/image'
 
 interface Props extends CalculateProps {
   isPass: boolean
@@ -40,7 +42,7 @@ const Calculate = ({
         <label className="flex items-center" htmlFor="제네시스 패스">
           {' '}
           제네시스 패스 적용하기
-          <img src="/imgs/genesis_pass.png" alt="제네시스 패스" />
+          <Image src={genesis_pass} alt="제네시스 패스" />
           <input
             className="ml-2"
             checked={isPass}

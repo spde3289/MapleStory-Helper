@@ -1,3 +1,4 @@
+import { KOR_TO_ENG } from '@/assets/icons/world'
 import { WorldType } from '@/type/character/world'
 
 export interface ResponseErrorType {
@@ -12,7 +13,7 @@ export interface ResponseErrorType {
 export interface MainCharacterResponse {
   date: string
   character_name: string
-  world_name: WorldType
+  world_name: keyof typeof KOR_TO_ENG
   character_gender: string
   character_class: string
   character_class_level: string

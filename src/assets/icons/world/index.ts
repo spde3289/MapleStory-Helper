@@ -1,5 +1,26 @@
 const woridIcons: { [key: string]: string } = {}
 
+export const KOR_TO_ENG = {
+  노바: 'noba',
+  레드: 'red',
+  루나: 'luna',
+  리부트: 'reboot',
+  버닝: 'burning',
+  베라: 'bera',
+  스카니아: 'scania',
+  아케인: 'arcane',
+  에오스: 'eos',
+  엘리시움: 'elysium',
+  오로라: 'aurora',
+  유니온: 'union',
+  이노시스: 'inosys',
+  제니스: 'zenith',
+  챌린저스: 'challengers',
+  크로아: 'croa',
+  핼리오스: 'helios',
+  스페셜: 'special',
+}
+
 declare const require: {
   context(
     path: string,
