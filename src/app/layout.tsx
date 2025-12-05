@@ -12,7 +12,6 @@ import './globals.css'
 
 const GOOGLE_ANALYTICS = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
 
-// 폰트 파일 경로를 /public/fonts 에서 가져옴
 const mapleFont = localFont({
   src: [
     {
