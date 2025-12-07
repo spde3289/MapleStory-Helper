@@ -44,7 +44,7 @@ const getCharacter = async (
   }
 }
 
-export async function GET(req: Request) {
+export const GET = async (req: Request) => {
   const { searchParams } = new URL(req.url)
   const character_name = searchParams.get('character_name')
 
