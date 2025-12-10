@@ -2,7 +2,7 @@ import { getCharacterList } from '@/lib/nexonApi/characterApi'
 import { ApiError } from '@/lib/nexonApi/nexonClient'
 import { fetchCharacterFullInfo } from '@/lib/sever/fetchCharacterInfo' // 위치에 맞게 수정
 
-export const splitSettled = <T>(results: PromiseSettledResult<T>[]) => {
+const splitSettled = <T>(results: PromiseSettledResult<T>[]) => {
   const success: T[] = []
   const errors: any[] = []
 
