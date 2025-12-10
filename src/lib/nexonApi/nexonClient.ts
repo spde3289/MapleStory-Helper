@@ -40,6 +40,29 @@ const onResponse = (res: AxiosResponse) => {
   return res
 }
 
+export class ApiError extends Error {
+  status: number
+  type: string
+  payload?: any
+
+  constructor({
+    message,
+    status = 500,
+    type = 'InternalServerError',
+    payload,
+  }: {
+    message: string
+    status?: number
+    type?: string
+    payload?: any
+  }) {
+    super(message)
+    this.status = status
+    this.type = type
+    this.payload = payload
+  }
+}
+
 const onError = (error: AxiosError | Error): Promise<never> => {
   if (axios.isAxiosError(error)) {
     const { method, url } = error.config as InternalAxiosRequestConfig
@@ -49,26 +72,34 @@ const onError = (error: AxiosError | Error): Promise<never> => {
     const message = nexonError?.message ?? 'Unknown error'
     const status = error.response?.status ?? 400
 
-    // 에러 로깅하는 로직 추가 예정
     console.log(
       `🚨 [API - ERROR] ${method?.toUpperCase()} ${url} | ${name} : ${message}`,
     )
 
-    return Promise.reject({
-      type: 'NexonApiError',
-      nexonError,
-      status,
-      method,
-      url,
-    })
+    return Promise.reject(
+      new ApiError({
+        message,
+        status,
+        type: 'NexonApiError',
+        payload: {
+          name,
+          method,
+          url,
+        },
+      }),
+    )
   }
 
   console.log(`🚨 [API] | Error ${error.message}`)
 
-  return Promise.reject({
-    type: 'UnknownError',
-    message: error.message,
-  })
+  return Promise.reject(
+    new ApiError({
+      message: error.message,
+      status: 500,
+      type: 'UnknownError',
+    }),
+  )
 }
+
 // 리스폰스 인터셉터
 nexonClient.interceptors.response.use(onResponse, onError)

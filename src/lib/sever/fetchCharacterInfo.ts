@@ -3,6 +3,7 @@ import {
   getCharacterOcid,
   getCharacterStat,
 } from '@/lib/nexonApi/characterApi'
+import { ApiError } from '../nexonApi/nexonClient'
 
 export interface CharacterFullInfo {
   ocid: string
@@ -21,10 +22,27 @@ export const fetchCharacterFullInfo = async (characterName: string) => {
       userInfo: basicData,
       userStat,
     }
-  } catch (err) {
-    throw {
-      characterName,
-      error: err,
+  } catch (err: any) {
+    if (err instanceof ApiError) {
+      console.log(err)
+      throw new ApiError({
+        ...err,
+        message: err.message,
+        payload: {
+          ...(err.payload ?? {}),
+          characterName,
+        },
+      })
     }
+
+    throw new ApiError({
+      message: '캐릭터 전체 정보를 불러오는 동안 오류 발생',
+      type: 'FetchCharacterFullInfoError',
+      status: 500,
+      payload: {
+        characterName,
+        originalError: err,
+      },
+    })
   }
 }

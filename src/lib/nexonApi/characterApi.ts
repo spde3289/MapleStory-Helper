@@ -9,7 +9,7 @@ import {
   CharacterListResponse,
   CharacterStatResponse,
 } from '@/types/nexon/character'
-import { MAPLE_ENDPOINTS, nexonClient } from './nexonClient'
+import { ApiError, MAPLE_ENDPOINTS, nexonClient } from './nexonClient'
 
 // 캐릭터 리스트
 export const getCharacterList = async (
@@ -68,22 +68,31 @@ export const getCharacterStat = async (
     const key = STAT_KEY[stat.stat_name as keyof StatKeyMap]
 
     if (!key) {
-      throw {
+      throw new ApiError({
         type: 'StatParseError',
-        statName: stat.stat_name,
-        statValue: stat.stat_value,
+        status: 500,
         message: `매핑되지 않은 스탯: ${stat.stat_name}`,
-      }
+        payload: {
+          reason: 'UNMAPPED_STAT',
+          rawStatName: stat.stat_name,
+          rawStatValue: stat.stat_value,
+        },
+      })
     }
 
     const value = Number(stat.stat_value)
+
     if (Number.isNaN(value)) {
-      throw {
+      throw new ApiError({
         type: 'StatParseError',
-        statName: stat.stat_name,
-        statValue: stat.stat_value,
+        status: 500,
         message: `stat_value 숫자 변환 실패`,
-      }
+        payload: {
+          reason: 'INVALID_STAT_VALUE',
+          rawStatName: stat.stat_name,
+          rawStatValue: stat.stat_value,
+        },
+      })
     }
 
     acc[key] = value
