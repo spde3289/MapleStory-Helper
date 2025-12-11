@@ -61,6 +61,15 @@ export class ApiError extends Error {
     this.type = type
     this.payload = payload
   }
+
+  toJSON() {
+    return {
+      message: this.message,
+      status: this.status,
+      type: this.type,
+      payload: this.payload,
+    }
+  }
 }
 
 const onError = (error: AxiosError | Error): Promise<never> => {
