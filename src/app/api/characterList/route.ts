@@ -11,7 +11,7 @@ const getCharacterList = async (ApiKey: string): Promise<CharListResponse> => {
   return response.data
 }
 
-export async function GET(req: Request) {
+export const GET = async (req: Request) => {
   const { searchParams } = new URL(req.url)
   const ApiKey = searchParams.get('ApiKey')
 
