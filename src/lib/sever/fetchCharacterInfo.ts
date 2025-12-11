@@ -4,6 +4,7 @@ import {
   getCharacterStat,
 } from '@/lib/nexonApi/characterApi'
 import { ApiError } from '../nexonApi/nexonClient'
+import { ERROR_TYPES } from '@/constants/errorTypes'
 
 export interface CharacterFullInfo {
   ocid: string
@@ -36,7 +37,7 @@ export const fetchCharacterFullInfo = async (characterName: string) => {
 
     throw new ApiError({
       message: '캐릭터 전체 정보를 불러오는 동안 오류 발생',
-      type: 'FetchCharacterFullInfoError',
+      type: ERROR_TYPES.CHARACTER_FULL_INFO_FETCH_ERROR,
       status: 500,
       payload: {
         characterName,
