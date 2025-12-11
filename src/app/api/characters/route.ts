@@ -1,4 +1,4 @@
-import { ERROR_TYPES } from '@/constants/errorTypes'
+import { SEVER_ERROR_TYPES } from '@/constants/severErrorTypes'
 import { getCharacterList } from '@/lib/nexonApi/characterApi'
 import { ApiError } from '@/lib/nexonApi/nexonClient'
 import { fetchCharacterFullInfo } from '@/lib/sever/fetchCharacterInfo' // 위치에 맞게 수정
@@ -33,7 +33,7 @@ export const GET = async (req: Request) => {
       throw new ApiError({
         status: 400,
         message: 'minPower는 minLevel과 함께 사용해야 합니다.',
-        type: ERROR_TYPES.POWER_FILTER_MIN_LEVEL,
+        type: SEVER_ERROR_TYPES.POWER_FILTER_MIN_LEVEL,
       })
     }
 
@@ -96,7 +96,7 @@ export const GET = async (req: Request) => {
 
     return Response.json(
       {
-        type: ERROR_TYPES.CHARACTERS_FETCH_ERROR,
+        type: SEVER_ERROR_TYPES.CHARACTERS_FETCH_ERROR,
         message: '알 수 없는 서버 에러입니다.',
       },
       { status: 500 },

@@ -1,4 +1,4 @@
-import { ERROR_TYPES, ErrorType } from '@/constants/errorTypes'
+import { ErrorType, SEVER_ERROR_TYPES } from '@/constants/severErrorTypes'
 import axios, {
   AxiosError,
   AxiosResponse,
@@ -9,33 +9,34 @@ const NEXON_BASE_URL = process.env.NEXT_PUBLIC_URL
 const MAPLE_API_KEY = process.env.NEXT_PUBLIC_MAPLEAPI_KEY
 
 const NEXON_ERROR_TYPE_BY_CODE: Record<string, ErrorType> = {
-  OPENAPI00001: ERROR_TYPES.NEXON_SERVER,
-  OPENAPI00002: ERROR_TYPES.NEXON_PER_MISSION,
-  OPENAPI00003: ERROR_TYPES.NEXON_INVALID_IDENTIFIER,
-  OPENAPI00004: ERROR_TYPES.NEXON_INVALID_PARAMETER,
-  OPENAPI00005: ERROR_TYPES.NEXON_INVALID_API_KEY,
-  OPENAPI00006: ERROR_TYPES.NEXON_INVALID_PATH,
-  OPENAPI00007: ERROR_TYPES.NEXON_RATE_LIMIT,
-  OPENAPI00009: ERROR_TYPES.NEXON_DATA_PREPARING,
-  OPENAPI00010: ERROR_TYPES.NEXON_GAME_MAINTENANCE,
-  OPENAPI00011: ERROR_TYPES.NEXON_API_MAINTENANCE,
+  OPENAPI00001: SEVER_ERROR_TYPES.NEXON_SERVER,
+  OPENAPI00002: SEVER_ERROR_TYPES.NEXON_PER_MISSION,
+  OPENAPI00003: SEVER_ERROR_TYPES.NEXON_INVALID_IDENTIFIER,
+  OPENAPI00004: SEVER_ERROR_TYPES.NEXON_INVALID_PARAMETER,
+  OPENAPI00005: SEVER_ERROR_TYPES.NEXON_INVALID_API_KEY,
+  OPENAPI00006: SEVER_ERROR_TYPES.NEXON_INVALID_PATH,
+  OPENAPI00007: SEVER_ERROR_TYPES.NEXON_RATE_LIMIT,
+  OPENAPI00009: SEVER_ERROR_TYPES.NEXON_DATA_PREPARING,
+  OPENAPI00010: SEVER_ERROR_TYPES.NEXON_GAME_MAINTENANCE,
+  OPENAPI00011: SEVER_ERROR_TYPES.NEXON_API_MAINTENANCE,
 }
 
+type ApiErrorPayload = Record<string, unknown>
 export class ApiError extends Error {
   status: number
-  type: string
-  payload?: any
+  type: ErrorType
+  payload?: ApiErrorPayload
 
   constructor({
     message,
     status = 500,
-    type = ERROR_TYPES.INTERNAL,
+    type = SEVER_ERROR_TYPES.INTERNAL,
     payload,
   }: {
-    type: string
+    type: ErrorType
     message: string
     status?: number
-    payload?: any
+    payload?: ApiErrorPayload
   }) {
     super(message)
     this.message = message
@@ -83,7 +84,8 @@ export const onError = (error: AxiosError | Error): Promise<ApiError> => {
     const name = nexonError?.name ?? 'UnknownError'
     const message = nexonError?.message ?? 'Unknown error'
     const status = error.response?.status ?? 400
-    const mappedType = NEXON_ERROR_TYPE_BY_CODE[name] ?? ERROR_TYPES.NEXON_API
+    const mappedType =
+      NEXON_ERROR_TYPE_BY_CODE[name] ?? 'SEVER_ERROR_TYPES.NEXON_API'
 
     console.log(
       `🚨 [API - ERROR] ${method?.toUpperCase()} ${url} | ${name} : ${message}`,
@@ -109,7 +111,7 @@ export const onError = (error: AxiosError | Error): Promise<ApiError> => {
     new ApiError({
       message: error.message,
       status: 500,
-      type: ERROR_TYPES.UNKNOWN,
+      type: SEVER_ERROR_TYPES.UNKNOWN,
     }),
   )
 }

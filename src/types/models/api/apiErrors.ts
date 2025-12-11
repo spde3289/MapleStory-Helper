@@ -1,6 +1,3 @@
-export interface ApiErrorResponse {
-  message: string
-  status: number
-  type: string
-  payload?: Record<string, any>
-}
+import { ApiError } from '@/lib/nexonApi/nexonClient'
+
+export type ApiErrorResponse = ReturnType<ApiError['toJSON']>

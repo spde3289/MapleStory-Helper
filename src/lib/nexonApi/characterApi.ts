@@ -1,6 +1,6 @@
 import { CharacterStats, STAT_KEY, StatKeyMap } from '@/constants/characterStat'
-import { ERROR_TYPES } from '@/constants/errorTypes'
 import { MAPLE_ENDPOINTS } from '@/constants/mapleEndpoints'
+import { ERROR_TYPES } from '@/constants/severErrorTypes'
 import {
   CharacterBasicResponse,
   CharacterIdResponse,
