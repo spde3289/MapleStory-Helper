@@ -1,3 +1,4 @@
+import { ERROR_TYPES, ErrorType } from '@/constants/errorTypes'
 import axios, {
   AxiosError,
   AxiosResponse,
@@ -7,17 +8,51 @@ import axios, {
 const NEXON_BASE_URL = process.env.NEXT_PUBLIC_URL
 const MAPLE_API_KEY = process.env.NEXT_PUBLIC_MAPLEAPI_KEY
 
-export const MAPLE_ENDPOINTS = {
-  character: {
-    ocid: '/v1/id', // 캐릭터 식별자(ocid) 조회
-    list: '/v1/character/list', // 캐릭터 목록 조회
-    basic: '/v1/character/basic', // 기본 정보
-    stat: '/v1/character/stat', // 종합 능력치
-  },
-  user: {
-    raider: '/v1/user/union-raider', // 유니온 공격대 정보 조회
-  },
-} as const
+const NEXON_ERROR_TYPE_BY_CODE: Record<string, ErrorType> = {
+  OPENAPI00001: ERROR_TYPES.NEXON_SERVER,
+  OPENAPI00002: ERROR_TYPES.NEXON_PER_MISSION,
+  OPENAPI00003: ERROR_TYPES.NEXON_INVALID_IDENTIFIER,
+  OPENAPI00004: ERROR_TYPES.NEXON_INVALID_PARAMETER,
+  OPENAPI00005: ERROR_TYPES.NEXON_INVALID_API_KEY,
+  OPENAPI00006: ERROR_TYPES.NEXON_INVALID_PATH,
+  OPENAPI00007: ERROR_TYPES.NEXON_RATE_LIMIT,
+  OPENAPI00009: ERROR_TYPES.NEXON_DATA_PREPARING,
+  OPENAPI00010: ERROR_TYPES.NEXON_GAME_MAINTENANCE,
+  OPENAPI00011: ERROR_TYPES.NEXON_API_MAINTENANCE,
+}
+
+export class ApiError extends Error {
+  status: number
+  type: string
+  payload?: any
+
+  constructor({
+    message,
+    status = 500,
+    type = ERROR_TYPES.INTERNAL,
+    payload,
+  }: {
+    type: string
+    message: string
+    status?: number
+    payload?: any
+  }) {
+    super(message)
+    this.message = message
+    this.status = status
+    this.type = type
+    this.payload = payload
+  }
+
+  toJSON() {
+    return {
+      message: this.message,
+      status: this.status,
+      type: this.type,
+      payload: this.payload,
+    }
+  }
+}
 
 export const nexonClient = axios.create({
   baseURL: NEXON_BASE_URL,
@@ -40,46 +75,15 @@ const onResponse = (res: AxiosResponse) => {
   return res
 }
 
-export class ApiError extends Error {
-  status: number
-  type: string
-  payload?: any
-
-  constructor({
-    message,
-    status = 500,
-    type = 'InternalServerError',
-    payload,
-  }: {
-    message: string
-    status?: number
-    type?: string
-    payload?: any
-  }) {
-    super(message)
-    this.status = status
-    this.type = type
-    this.payload = payload
-  }
-
-  toJSON() {
-    return {
-      message: this.message,
-      status: this.status,
-      type: this.type,
-      payload: this.payload,
-    }
-  }
-}
-
-const onError = (error: AxiosError | Error): Promise<never> => {
+export const onError = (error: AxiosError | Error): Promise<ApiError> => {
   if (axios.isAxiosError(error)) {
     const { method, url } = error.config as InternalAxiosRequestConfig
-
     const nexonError = (error.response?.data as any)?.error
+
     const name = nexonError?.name ?? 'UnknownError'
     const message = nexonError?.message ?? 'Unknown error'
     const status = error.response?.status ?? 400
+    const mappedType = NEXON_ERROR_TYPE_BY_CODE[name] ?? ERROR_TYPES.NEXON_API
 
     console.log(
       `🚨 [API - ERROR] ${method?.toUpperCase()} ${url} | ${name} : ${message}`,
@@ -87,9 +91,9 @@ const onError = (error: AxiosError | Error): Promise<never> => {
 
     return Promise.reject(
       new ApiError({
-        message,
         status,
-        type: 'NexonApiError',
+        type: mappedType,
+        message,
         payload: {
           name,
           method,
@@ -105,7 +109,7 @@ const onError = (error: AxiosError | Error): Promise<never> => {
     new ApiError({
       message: error.message,
       status: 500,
-      type: 'UnknownError',
+      type: ERROR_TYPES.UNKNOWN,
     }),
   )
 }

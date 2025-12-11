@@ -1,3 +1,4 @@
+import { ERROR_TYPES } from '@/constants/errorTypes'
 import { ApiError } from '@/lib/nexonApi/nexonClient'
 import { fetchCharacterFullInfo } from '@/lib/sever/fetchCharacterInfo'
 import { NextResponse } from 'next/server'
@@ -15,16 +16,17 @@ export const GET = async (
   } catch (error: any) {
     if (error instanceof ApiError) {
       return NextResponse.json(
-        {
+        new ApiError({
           ...error,
-        },
+          message: error.message,
+        }),
         { status: error.status ?? 500 },
       )
     }
 
     return NextResponse.json(
       {
-        errorType: 'FETCH_CHARACTER_ERROR',
+        type: ERROR_TYPES.CHARACTER_FETCH_ERROR,
         message:
           error?.message ?? '캐릭터 정보를 불러오는 중 오류가 발생했습니다.',
         payload: {

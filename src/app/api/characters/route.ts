@@ -1,3 +1,4 @@
+import { ERROR_TYPES } from '@/constants/errorTypes'
 import { getCharacterList } from '@/lib/nexonApi/characterApi'
 import { ApiError } from '@/lib/nexonApi/nexonClient'
 import { fetchCharacterFullInfo } from '@/lib/sever/fetchCharacterInfo' // 위치에 맞게 수정
@@ -30,9 +31,9 @@ export const GET = async (req: Request) => {
   try {
     if (minPower !== undefined && minLevel === undefined) {
       throw new ApiError({
-        message: 'minPower는 minLevel과 함께 사용해야 합니다.',
         status: 400,
-        type: 'PowerFilterRequiresLevel',
+        message: 'minPower는 minLevel과 함께 사용해야 합니다.',
+        type: ERROR_TYPES.POWER_FILTER_MIN_LEVEL,
       })
     }
 
@@ -85,15 +86,19 @@ export const GET = async (req: Request) => {
   } catch (error: any) {
     if (error instanceof ApiError) {
       return Response.json(
-        {
+        new ApiError({
           ...error,
-        },
-        { status: error.status },
+          message: error.message,
+        }),
+        { status: error.status ?? 500 },
       )
     }
 
     return Response.json(
-      { errorType: 'UnknownError', message: '알 수 없는 서버 에러입니다.' },
+      {
+        type: ERROR_TYPES.CHARACTERS_FETCH_ERROR,
+        message: '알 수 없는 서버 에러입니다.',
+      },
       { status: 500 },
     )
   }

@@ -1,15 +1,13 @@
-import {
-  CharacterStats,
-  STAT_KEY,
-  StatKeyMap,
-} from '@/types/models/character/characterStat'
+import { CharacterStats, STAT_KEY, StatKeyMap } from '@/constants/characterStat'
+import { ERROR_TYPES } from '@/constants/errorTypes'
+import { MAPLE_ENDPOINTS } from '@/constants/mapleEndpoints'
 import {
   CharacterBasicResponse,
   CharacterIdResponse,
   CharacterListResponse,
   CharacterStatResponse,
 } from '@/types/nexon/character'
-import { ApiError, MAPLE_ENDPOINTS, nexonClient } from './nexonClient'
+import { ApiError, nexonClient } from './nexonClient'
 
 // 캐릭터 리스트
 export const getCharacterList = async (
@@ -69,7 +67,7 @@ export const getCharacterStat = async (
 
     if (!key) {
       throw new ApiError({
-        type: 'StatParseError',
+        type: ERROR_TYPES.STAT_PARSE_ERROR,
         status: 500,
         message: `매핑되지 않은 스탯: ${stat.stat_name}`,
         payload: {
@@ -84,7 +82,7 @@ export const getCharacterStat = async (
 
     if (Number.isNaN(value)) {
       throw new ApiError({
-        type: 'StatParseError',
+        type: ERROR_TYPES.STAT_PARSE_ERROR,
         status: 500,
         message: `stat_value 숫자 변환 실패`,
         payload: {

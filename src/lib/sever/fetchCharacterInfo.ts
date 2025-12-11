@@ -24,7 +24,6 @@ export const fetchCharacterFullInfo = async (characterName: string) => {
     }
   } catch (err: any) {
     if (err instanceof ApiError) {
-      console.log(err)
       throw new ApiError({
         ...err,
         message: err.message,
