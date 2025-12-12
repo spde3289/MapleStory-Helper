@@ -1,4 +1,5 @@
-import { ErrorType, SEVER_ERROR_TYPES } from '@/constants/severErrorTypes'
+import { SEVER_ERROR_TYPES, SeverErrorType } from '@/constants/severErrorTypes'
+import { ApiErrorPayload } from '@/types/models/api/apiErrors'
 import axios, {
   AxiosError,
   AxiosResponse,
@@ -8,7 +9,7 @@ import axios, {
 const NEXON_BASE_URL = process.env.NEXT_PUBLIC_URL
 const MAPLE_API_KEY = process.env.NEXT_PUBLIC_MAPLEAPI_KEY
 
-const NEXON_ERROR_TYPE_BY_CODE: Record<string, ErrorType> = {
+const NEXON_ERROR_TYPE_BY_CODE: Record<string, SeverErrorType> = {
   OPENAPI00001: SEVER_ERROR_TYPES.NEXON_SERVER,
   OPENAPI00002: SEVER_ERROR_TYPES.NEXON_PER_MISSION,
   OPENAPI00003: SEVER_ERROR_TYPES.NEXON_INVALID_IDENTIFIER,
@@ -20,11 +21,9 @@ const NEXON_ERROR_TYPE_BY_CODE: Record<string, ErrorType> = {
   OPENAPI00010: SEVER_ERROR_TYPES.NEXON_GAME_MAINTENANCE,
   OPENAPI00011: SEVER_ERROR_TYPES.NEXON_API_MAINTENANCE,
 }
-
-type ApiErrorPayload = Record<string, unknown>
 export class ApiError extends Error {
+  type: SeverErrorType
   status: number
-  type: ErrorType
   payload?: ApiErrorPayload
 
   constructor({
@@ -33,7 +32,7 @@ export class ApiError extends Error {
     type = SEVER_ERROR_TYPES.INTERNAL,
     payload,
   }: {
-    type: ErrorType
+    type: SeverErrorType
     message: string
     status?: number
     payload?: ApiErrorPayload

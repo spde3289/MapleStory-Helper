@@ -1,9 +1,10 @@
-// 클라이언트 전용: src/constants/clientErrorTypes.ts
-
 import { SEVER_ERROR_TYPES } from './severErrorTypes'
 
 export const CLIENT_ERROR_TYPES = {
-  ...SEVER_ERROR_TYPES, // ✅ 서버에서 내려오는 에러 타입 전부 포함
+  // 서버 에러 타입들
+  ...SEVER_ERROR_TYPES,
+
+  // 클라이언트 common 에러
   NETWORK_ERROR: 'NETWORK_ERROR',
   UNEXPECTED_CLIENT_ERROR: 'UNEXPECTED_CLIENT_ERROR',
 } as const

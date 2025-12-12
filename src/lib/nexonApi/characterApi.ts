@@ -1,6 +1,6 @@
 import { CharacterStats, STAT_KEY, StatKeyMap } from '@/constants/characterStat'
 import { MAPLE_ENDPOINTS } from '@/constants/mapleEndpoints'
-import { ERROR_TYPES } from '@/constants/severErrorTypes'
+import { SEVER_ERROR_TYPES } from '@/constants/severErrorTypes'
 import {
   CharacterBasicResponse,
   CharacterIdResponse,
@@ -67,7 +67,7 @@ export const getCharacterStat = async (
 
     if (!key) {
       throw new ApiError({
-        type: ERROR_TYPES.STAT_PARSE_ERROR,
+        type: SEVER_ERROR_TYPES.STAT_PARSE_ERROR,
         status: 500,
         message: `매핑되지 않은 스탯: ${stat.stat_name}`,
         payload: {
@@ -82,7 +82,7 @@ export const getCharacterStat = async (
 
     if (Number.isNaN(value)) {
       throw new ApiError({
-        type: ERROR_TYPES.STAT_PARSE_ERROR,
+        type: SEVER_ERROR_TYPES.STAT_PARSE_ERROR,
         status: 500,
         message: `stat_value 숫자 변환 실패`,
         payload: {

@@ -26,5 +26,5 @@ export const SEVER_ERROR_TYPES = {
   NEXON_API_MAINTENANCE: 'NEXON_API_MAINTENANCE',
 } as const
 
-export type ErrorType =
+export type SeverErrorType =
   (typeof SEVER_ERROR_TYPES)[keyof typeof SEVER_ERROR_TYPES]
