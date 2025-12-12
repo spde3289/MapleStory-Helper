@@ -2,10 +2,11 @@ import { SEVER_ERROR_TYPES } from '@/constants/severErrorTypes'
 import { getCharacterList } from '@/lib/nexonApi/characterApi'
 import { ApiError } from '@/lib/nexonApi/nexonClient'
 import { fetchCharacterFullInfo } from '@/lib/sever/fetchCharacterInfo' // 위치에 맞게 수정
+import { ApiErrorResponse } from '@/types/api/apiErrors'
 
 const splitSettled = <T>(results: PromiseSettledResult<T>[]) => {
   const success: T[] = []
-  const errors: any[] = []
+  const errors: ApiErrorResponse[] = []
 
   for (const r of results) {
     if (r.status === 'fulfilled') {
@@ -95,10 +96,11 @@ export const GET = async (req: Request) => {
     }
 
     return Response.json(
-      {
+      new ApiError({
+        ...error,
         type: SEVER_ERROR_TYPES.CHARACTERS_FETCH_ERROR,
         message: '알 수 없는 서버 에러입니다.',
-      },
+      }),
       { status: 500 },
     )
   }

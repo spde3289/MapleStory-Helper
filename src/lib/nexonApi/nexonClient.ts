@@ -1,5 +1,5 @@
 import { SEVER_ERROR_TYPES, SeverErrorType } from '@/constants/severErrorTypes'
-import { ApiErrorPayload } from '@/types/models/api/apiErrors'
+import { ApiErrorPayload } from '@/types/api/apiErrors'
 import axios, {
   AxiosError,
   AxiosResponse,
@@ -34,7 +34,7 @@ export class ApiError extends Error {
   }: {
     type: SeverErrorType
     message: string
-    status?: number
+    status: number
     payload?: ApiErrorPayload
   }) {
     super(message)
@@ -47,8 +47,8 @@ export class ApiError extends Error {
   toJSON() {
     return {
       message: this.message,
-      status: this.status,
       type: this.type,
+      status: this.status,
       payload: this.payload,
     }
   }

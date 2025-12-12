@@ -4,15 +4,12 @@ import {
   getCharacterOcid,
   getCharacterStat,
 } from '@/lib/nexonApi/characterApi'
+import { CharacterFullInfo } from '@/types/api/character'
 import { ApiError } from '../nexonApi/nexonClient'
 
-export interface CharacterFullInfo {
-  ocid: string
-  userInfo: Awaited<ReturnType<typeof getCharacterBasic>>
-  userStat: Awaited<ReturnType<typeof getCharacterStat>>
-}
-
-export const fetchCharacterFullInfo = async (characterName: string) => {
+export const fetchCharacterFullInfo = async (
+  characterName: string,
+): Promise<CharacterFullInfo> => {
   try {
     const { ocid } = await getCharacterOcid(characterName)
     const basicData = await getCharacterBasic(ocid)

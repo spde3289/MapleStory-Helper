@@ -25,14 +25,15 @@ export const GET = async (
     }
 
     return NextResponse.json(
-      {
+      new ApiError({
+        ...error,
         type: SEVER_ERROR_TYPES.CHARACTER_FETCH_ERROR,
         message:
           error?.message ?? '캐릭터 정보를 불러오는 중 오류가 발생했습니다.',
         payload: {
           characterName,
         },
-      },
+      }),
       { status: 500 },
     )
   }
