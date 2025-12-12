@@ -44,7 +44,3 @@ export const STAT_KEY = {
   '크리티컬 데미지': 'critical_damage',
   '크리티컬 확률': 'critical_rate',
 } as const
-
-export type StatKeyMap = typeof STAT_KEY
-export type StatKeyEnglish = StatKeyMap[keyof StatKeyMap]
-export type CharacterStats = Record<StatKeyEnglish, number>

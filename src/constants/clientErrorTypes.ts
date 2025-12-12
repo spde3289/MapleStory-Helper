@@ -8,7 +8,3 @@ export const CLIENT_ERROR_TYPES = {
   NETWORK_ERROR: 'NETWORK_ERROR',
   UNEXPECTED_CLIENT_ERROR: 'UNEXPECTED_CLIENT_ERROR',
 } as const
-
-// 서버 + 클라 전부 포함하는 확장 타입
-export type ClientErrorType =
-  (typeof CLIENT_ERROR_TYPES)[keyof typeof CLIENT_ERROR_TYPES]

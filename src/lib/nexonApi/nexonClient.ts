@@ -1,5 +1,5 @@
-import { SEVER_ERROR_TYPES, SeverErrorType } from '@/constants/severErrorTypes'
-import { ApiErrorPayload } from '@/types/api/apiErrors'
+import { SEVER_ERROR_TYPES } from '@/constants/severErrorTypes'
+import { ApiErrorPayload, SeverErrorType } from '@/types/api/apiErrors'
 import axios, {
   AxiosError,
   AxiosResponse,
