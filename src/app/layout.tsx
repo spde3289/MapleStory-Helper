@@ -1,7 +1,6 @@
 import AppHeader from '@/components/layout/AppHeader'
 import Backdrop from '@/components/layout/Backdrop'
 import NavBar from '@/components/layout/NavBar'
-import DataFetchProvider from '@/components/porvider/DataFetchProvider'
 import DesigeProvider from '@/components/porvider/DesigeProvider'
 import GlobalStateProvider from '@/components/porvider/GlobalStateProvider'
 import { GoogleAnalytics } from '@next/third-parties/google'
@@ -50,20 +49,18 @@ export default function RootLayout({
         {/* Google Analytics Script */}
         {GOOGLE_ANALYTICS && <GoogleAnalytics gaId={GOOGLE_ANALYTICS} />}
         <GlobalStateProvider>
-          <DataFetchProvider>
-            <DesigeProvider>
-              <main className="">
-                <AppHeader />
-                <NavBar />
-                <Backdrop />
-                <div className="h-[calc(100vh-65px)] lg:pl-[290px] ">
-                  <main className="h-full p-1 overflow-scroll scrollBar sm:p-4 md:p-5 flex flex-col lg:flex-row gap-2 sm:gap-5">
-                    {children}
-                  </main>
-                </div>
-              </main>
-            </DesigeProvider>
-          </DataFetchProvider>
+          <DesigeProvider>
+            <main className="">
+              <AppHeader />
+              <NavBar />
+              <Backdrop />
+              <div className="h-[calc(100vh-65px)] lg:pl-[290px] ">
+                <main className="h-full p-1 overflow-scroll scrollBar sm:p-4 md:p-5 flex flex-col lg:flex-row gap-2 sm:gap-5">
+                  {children}
+                </main>
+              </div>
+            </main>
+          </DesigeProvider>
         </GlobalStateProvider>
       </body>
     </html>

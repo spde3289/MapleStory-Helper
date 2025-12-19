@@ -81,7 +81,8 @@ export const GET = async (req: Request) => {
       )
 
       return Response.json({
-        characters: powerFiltered,
+        success: powerFiltered,
+        errors,
       })
     }
   } catch (error: any) {

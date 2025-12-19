@@ -1,15 +1,14 @@
 'use client'
 
 import { useState } from 'react'
-import BossSection from './_components/bossSection/BossSection'
-import CharacterSection from './_components/characterSection/CharacterSection'
-import GemSection from './_components/GemSection'
+import BossListSection from './_components/bossListSection/BossListSection'
+import CharacterListSection from './_components/characterListSection/CharacterListSection'
+import CrystalSalePriceSection from './_components/crystalSalePriceSection/CrystalSalePriceSection'
 
 type UnitType = '일반' | '유닛'
 
 const GemPage = () => {
   const [unit, setUnit] = useState<UnitType>('일반')
-  // const [currentValue, setCurrentValue] = useState(false)
 
   const unitHandler: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     if (e.currentTarget.innerText === '일반') {
@@ -19,12 +18,12 @@ const GemPage = () => {
       setUnit('일반')
     }
   }
-
+  // console.log(unitHandler)
   return (
     <>
-      <CharacterSection unit={unit} />
-      <BossSection unit={unit} />
-      <GemSection unit={unit} unitHandler={unitHandler} />
+      <CharacterListSection unit={unit} />
+      <BossListSection unit={unit} />
+      <CrystalSalePriceSection unit={unit} unitHandler={unitHandler} />
     </>
   )
 }
