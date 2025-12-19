@@ -2,7 +2,7 @@ import { STAT_KEY } from '@/constants/characterStat'
 import { MAPLE_ENDPOINTS } from '@/constants/mapleEndpoints'
 import { SEVER_ERROR_TYPES } from '@/constants/severErrorTypes'
 
-import { CharacterStats, StatKeyMap } from '@/types/models/character/stat'
+import { CharacterStats, StatKeyMap } from '@/types/models/character/Stat'
 import {
   CharacterBasicResponse,
   CharacterIdResponse,

@@ -33,3 +33,7 @@ export const fetchCharacter = async (
 
   return data
 }
+
+export const fetchCharactersByNames = async (characterNames: string[]) => {
+  return Promise.all(characterNames.map(fetchCharacter))
+}
