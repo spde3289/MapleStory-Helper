@@ -1,3 +1,5 @@
+import { BossId } from '@/constants/bosses'
+
 export type BossDifficultyType =
   | '이지'
   | '노멀'
@@ -5,15 +7,15 @@ export type BossDifficultyType =
   | '카오스'
   | '익스트림'
 
-export type BossDifficulty = {
+export interface BossDifficulty {
   difficulty: BossDifficultyType
   price: number
 }
 
-export type BossInfo = {
-  bossId: string
+export interface BossInfo {
+  bossId: BossId
   bossName: string
-  difficulties: BossDifficulty[]
+  difficulties: readonly BossDifficulty[]
 }
 
 export type BossInfoList = BossInfo[]
