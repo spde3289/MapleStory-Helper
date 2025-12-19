@@ -175,3 +175,5 @@ export const BOSSES = [
     ],
   },
 ] as const
+
+export type BossId = (typeof BOSSES)[number]['bossId']
