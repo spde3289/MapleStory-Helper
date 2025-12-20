@@ -1,16 +1,8 @@
 'use client'
 
-import { MainCharacterResponse } from '@/type/axios/characterType'
-
-import { BossInfo } from '@/types/models/game/Boss'
 import { WorldType } from '@/types/models/game/World'
 import { JuboCharacter } from '@/types/storage/JubocCharacter'
 import CharacterCard from './CharacterCard'
-
-export interface characterInfo extends MainCharacterResponse {
-  currentCharacter: boolean
-  boss: BossInfo
-}
 
 export interface Props {
   characters: JuboCharacter[]

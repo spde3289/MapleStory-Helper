@@ -5,7 +5,7 @@ import genesis_pass from '@/assets/imgs/genesis_pass.png'
 import ItemContainer from '@/components/common/ItemContainer'
 import { useTheme } from '@/context/ThemeContext'
 import quest from '@/data/genesis/quest.json'
-import { CalculateProps } from '@/type/genesis'
+import { CalculateProps } from '@/types/models/game/genesis'
 import Image from 'next/image'
 
 interface Props extends CalculateProps {

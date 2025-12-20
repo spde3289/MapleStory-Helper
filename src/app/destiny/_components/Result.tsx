@@ -1,6 +1,6 @@
 import ItemContainer from '@/components/common/ItemContainer'
 import quest from '@/data/destiny/quest.json'
-import { bossListType, currentQuestType } from '@/type/genesis'
+import { bossListType, currentQuestType } from '@/types/models/game/genesis'
 import { calculateRewards, convertTime } from '@/utils/numberUtils'
 import { getDateAfterWeeks } from '@/utils/setDate'
 

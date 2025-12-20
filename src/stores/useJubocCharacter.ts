@@ -3,6 +3,7 @@
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 
+import { PRESET_BOSSES } from '@/constants/presetBosses'
 import { CharacterFullInfo } from '@/types/api/character'
 import type { ClearedBoss, JuboCharacter } from '@/types/storage/JubocCharacter'
 
@@ -45,6 +46,16 @@ interface JuboCharacterStore {
   clearAll: () => void
 }
 
+const pickPresetByPower = (power: number) => {
+  const sorted = [...PRESET_BOSSES].sort((a, b) => a.minPower - b.minPower)
+
+  let picked: (typeof PRESET_BOSSES)[number] | null = null
+  for (const preset of sorted) {
+    if (power >= preset.minPower) picked = preset
+  }
+  return picked?.bossEntries
+}
+
 export const useJuboCharacterStore = create<JuboCharacterStore>()(
   persist(
     (set, get) => ({
@@ -72,7 +83,7 @@ export const useJuboCharacterStore = create<JuboCharacterStore>()(
             {
               characterName: character.userInfo.character_name,
               characterInfo: character,
-              bosses: [],
+              bosses: pickPresetByPower(character.userStat.combat_power) ?? [],
             },
           ],
         })

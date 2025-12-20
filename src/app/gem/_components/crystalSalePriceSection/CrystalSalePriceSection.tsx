@@ -10,10 +10,6 @@ import { formatKoreanNumber, formatToEokUnit } from '@/utils/numberUtils'
 
 import { memo, useMemo, useState } from 'react'
 
-// 너 프로젝트에 이미 있던 유틸/컴포넌트라고 가정
-// import WorldImage from '...'
-// import { formatKoreanNumber, formatToEokUnit } from '...'
-
 const EasterEgg = process.env.NEXT_PUBLIC_EASTER_EGG
 
 interface GemSectionPropsType {
@@ -25,7 +21,7 @@ const maxGem = 90
 
 const manageArrayLength = (arr: number[]) => {
   if (arr.length > maxGem) {
-    arr.splice(0, arr.length - maxGem) // 초과된 요소를 한꺼번에 삭제 (오름차순이면 상위 90개만 남음)
+    arr.splice(0, arr.length - maxGem)
   }
   return arr
 }
