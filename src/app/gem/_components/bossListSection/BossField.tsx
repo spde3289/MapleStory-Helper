@@ -51,7 +51,7 @@ const BossField = ({ sort, unit, boss }: Props) => {
     nextPartySize: number,
   ) => {
     if (!selectedCharacter) return
-    console.log(nextDifficulty)
+
     setBossSelection(selectedCharacter, {
       bossId: boss.bossId,
       difficulty: nextDifficulty,

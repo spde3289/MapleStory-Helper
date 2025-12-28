@@ -18,7 +18,7 @@ const GemPage = () => {
       setUnit('일반')
     }
   }
-  // console.log(unitHandler)
+
   return (
     <>
       <CharacterListSection unit={unit} />
