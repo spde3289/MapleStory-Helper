@@ -1,9 +1,7 @@
 import AppHeader from '@/components/layout/AppHeader'
 import Backdrop from '@/components/layout/Backdrop'
 import NavBar from '@/components/layout/NavBar'
-import DataFetchProvider from '@/components/porvider/DataFetchProvider'
 import DesigeProvider from '@/components/porvider/DesigeProvider'
-import GlobalStateProvider from '@/components/porvider/GlobalStateProvider'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
@@ -13,7 +11,6 @@ import './globals.css'
 
 const GOOGLE_ANALYTICS = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
 
-// 폰트 파일 경로를 /public/fonts 에서 가져옴
 const mapleFont = localFont({
   src: [
     {
@@ -61,22 +58,19 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1891953654573817"
           crossOrigin="anonymous"
         ></Script>
-        <GlobalStateProvider>
-          <DataFetchProvider>
-            <DesigeProvider>
-              <main className="">
-                <AppHeader />
-                <NavBar />
-                <Backdrop />
-                <div className="h-[calc(100vh-65px)] lg:pl-[290px] ">
-                  <main className="h-full p-1 overflow-scroll scrollBar sm:p-4 md:p-5 flex flex-col lg:flex-row gap-2 sm:gap-5">
-                    {children}
-                  </main>
-                </div>
+
+        <DesigeProvider>
+          <main className="">
+            <AppHeader />
+            <NavBar />
+            <Backdrop />
+            <div className="h-[calc(100vh-65px)] lg:pl-[290px] ">
+              <main className="h-full p-1 overflow-scroll scrollBar sm:p-4 md:p-5 flex flex-col lg:flex-row gap-2 sm:gap-5">
+                {children}
               </main>
-            </DesigeProvider>
-          </DataFetchProvider>
-        </GlobalStateProvider>
+            </div>
+          </main>
+        </DesigeProvider>
       </body>
     </html>
   )

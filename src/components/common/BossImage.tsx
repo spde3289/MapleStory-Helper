@@ -19,5 +19,3 @@ const BossImage = ({ boss, alt = '보스 이미지' }: BossImagePropsType) => {
 }
 
 export default BossImage
-
-//   w-full h-full object-cover

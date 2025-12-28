@@ -8,10 +8,12 @@ export const metadata: Metadata = {
     '해방퀘, 해방예상, 해방예상시간, 데스티니무기, 데티무기, 데티해방, 대적저의 결의',
 }
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode
-}>) {
+}>) => {
   return <div className="flex flex-col lg:flex-row gap-2">{children}</div>
 }
+
+export default RootLayout
