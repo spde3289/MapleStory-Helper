@@ -3,8 +3,8 @@
 import BossImage from '@/components/common/BossImage'
 import { useJuboCharacterStore } from '@/stores/useJubocCharacter'
 import { BossDifficultyType, BossInfo } from '@/types/models/game/Boss'
-import { formatKoreanNumber } from '@/utils/numberUtils'
 import { useEffect, useMemo, useState } from 'react'
+import BossPrice from './BossPrice'
 
 interface Props {
   boss: BossInfo
@@ -93,7 +93,6 @@ const BossField = ({ sort, unit, boss }: Props) => {
         </div>
         <div className="hidden xsm:block">{boss.bossName}</div>
       </td>
-
       <td>
         <form
           style={
@@ -117,14 +116,13 @@ const BossField = ({ sort, unit, boss }: Props) => {
                 value={boss.bossName}
                 id={`${type.difficulty}${boss.bossName}`}
                 name={`difficulty-${boss.bossId}`}
-                disabled={isSelectionDisabled} // 캐릭터 선택 안 했으면 막기(원하면 제거)
+                disabled={isSelectionDisabled}
               />
               {type.difficulty}
             </label>
           ))}
         </form>
       </td>
-
       <td>
         <select
           onChange={handlePartySize}
@@ -136,7 +134,7 @@ const BossField = ({ sort, unit, boss }: Props) => {
               ? boss.bossId
               : `${boss.bossName}_${boss.difficulties[0].difficulty}`
           }
-          disabled={isSelectionDisabled} // 캐릭터 선택 안 했으면 막기(원하면 제거)
+          disabled={isSelectionDisabled}
         >
           <option value="1">1</option>
           <option value="2">2</option>
@@ -146,22 +144,13 @@ const BossField = ({ sort, unit, boss }: Props) => {
           <option value="6">6</option>
         </select>
       </td>
-
       <td className="min-w-fit w-36 whitespace-nowrap text-xs md:text-sm">
-        {boss.difficulties.map((el) => (
-          <div
-            key={el.difficulty}
-            style={
-              unit === '유닛' ? { textAlign: 'right' } : { textAlign: 'center' }
-            }
-            className="text-gray-900 dark:text-white/90"
-          >
-            {unit === '유닛'
-              ? Math.floor(el.price).toLocaleString()
-              : formatKoreanNumber(Math.floor(el.price))}{' '}
-            메소
-          </div>
-        ))}
+        <BossPrice
+          boss={boss}
+          selectedDifficulty={selectedDifficulty}
+          partySize={partySize}
+          unit={unit}
+        />
       </td>
     </tr>
   )

@@ -122,7 +122,6 @@ const CrystalSalePriceSection = ({
       tip="상위 90개의 결정석만 계산합니다."
     >
       <Button onClick={unitHandler}>{unit}</Button>
-
       <div className="flex mt-2 group flex-col w-full">
         {worldGemObject.map((world, index) => (
           <div
@@ -138,7 +137,6 @@ const CrystalSalePriceSection = ({
               {/* <WorldImage world_name={world.name} size={24} /> */}
               {world.name}
             </span>
-
             <span className="flex gap-2 flex-col xsm:flex-row lg:flex-col justify-between text-right">
               <span>
                 결정석 제한 :{' '}
@@ -159,7 +157,6 @@ const CrystalSalePriceSection = ({
                   </span>
                 )}
               </span>
-
               <span>
                 수익 :{' '}
                 {unit === '유닛'
@@ -170,7 +167,6 @@ const CrystalSalePriceSection = ({
             </span>
           </div>
         ))}
-
         {worldGemObject.length > 1 && (
           <div
             style={hidden ? { marginBottom: '8px' } : undefined}
@@ -183,7 +179,6 @@ const CrystalSalePriceSection = ({
             메소
           </div>
         )}
-
         {hidden && (
           <div className="flex gap-2 items-center justify-end border-t pt-2">
             <div>{formatToEokUnit(totalPrice)}억</div>X
@@ -201,7 +196,6 @@ const CrystalSalePriceSection = ({
           </div>
         )}
       </div>
-
       {characters.length !== 0 && <div className="absolute right-3 top-4" />}
     </ItemContainer>
   )
