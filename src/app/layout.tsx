@@ -1,6 +1,4 @@
-import AppHeader from '@/components/layout/AppHeader'
-import Backdrop from '@/components/layout/Backdrop'
-import NavBar from '@/components/layout/NavBar'
+import RootHeader from '@/components/layout/rootHeader/RootHeader'
 import DesigeProvider from '@/components/porvider/DesigeProvider'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Analytics } from '@vercel/analytics/next'
@@ -61,9 +59,7 @@ export default function RootLayout({
 
         <DesigeProvider>
           <main className="">
-            <AppHeader />
-            <NavBar />
-            <Backdrop />
+            <RootHeader />
             <div className="h-[calc(100vh-65px)] lg:pl-[290px] ">
               <main className="h-full p-1 overflow-scroll scrollBar sm:p-4 md:p-5 flex flex-col lg:flex-row gap-2 sm:gap-5">
                 {children}
