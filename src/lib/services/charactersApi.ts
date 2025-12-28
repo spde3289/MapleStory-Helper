@@ -1,5 +1,6 @@
 import { ROUTER_ENDPOINTS } from '@/constants/routerEndpoints'
 import { CharacterFullInfo, CharactersInfo } from '@/types/api/character'
+import { splitSettled } from '@/utils/promise'
 import { services } from './servicesClient'
 
 type FetchCharactersParams = {
@@ -35,5 +36,13 @@ export const fetchCharacter = async (
 }
 
 export const fetchCharactersByNames = async (characterNames: string[]) => {
-  return Promise.all(characterNames.map(fetchCharacter))
+  const fullList = await Promise.allSettled(
+    characterNames.map((name) => fetchCharacter(name)),
+  )
+
+  const { success, errors } = splitSettled(fullList)
+  return {
+    success,
+    errors,
+  }
 }

@@ -2,7 +2,11 @@ import ItemContainer from '@/components/common/ItemContainer'
 import WorldImage from '@/components/common/WorldImage'
 import Button from '@/components/ui/button/Button'
 import { useSubmitInput } from '@/hooks/useSubmitInput'
-import { fetchCharacter, fetchCharacters } from '@/lib/services/charactersApi'
+import {
+  fetchCharacter,
+  fetchCharacters,
+  fetchCharactersByNames,
+} from '@/lib/services/charactersApi'
 import { useJuboCharacterStore } from '@/stores/useJubocCharacter'
 import { WorldType } from '@/types/models/game/World'
 import Link from 'next/link'
@@ -54,6 +58,7 @@ interface Props {
 const CharacterListSection = ({ unit }: Props) => {
   const characters = useJuboCharacterStore((s) => s.characters)
   const addCharacter = useJuboCharacterStore((s) => s.addCharacter)
+  const updateCharacter = useJuboCharacterStore((s) => s.updateCharacter)
 
   const { worlds, selectWorld, currentWorld } = useWorldSelector(characters)
   const { inputValue, handleChange, handleKeyDown } = useSubmitInput({
@@ -76,6 +81,20 @@ const CharacterListSection = ({ unit }: Props) => {
 
   const SimpleModehandler: ChangeEventHandler<HTMLInputElement> = (e) => {
     setSimpleMode(e.currentTarget.checked)
+  }
+
+  const handleRefresh = async () => {
+    const charNameList = characters.map((char) => char.characterName)
+
+    const data = await fetchCharactersByNames(charNameList)
+
+    data.success.forEach((char) =>
+      updateCharacter(char.userInfo.character_name, char),
+    )
+
+    data.errors.forEach((err) =>
+      alert(`캐릭터 이름 : ${err.payload?.characterName} - ${err.message}`),
+    )
   }
 
   const sortedCharacters = useMemo(() => {
@@ -154,19 +173,25 @@ const CharacterListSection = ({ unit }: Props) => {
                   (sortState.order === 'asc' ? '▲' : '▼')}
               </button>
             </div>
-            <label
-              className="flex items-center text-nowrap gap-1 hover:cursor-pointer hover:text-gray-600 dark:hover:text-gray-400"
-              htmlFor="간단모드"
-            >
-              <input
-                onChange={SimpleModehandler}
-                checked={simpleMode}
-                className="hover:cursor-pointer"
-                type="checkbox"
-                id="간단모드"
-              />
-              간단모드
-            </label>
+            <div className="flex gap-3">
+              <label
+                className="flex items-center text-nowrap gap-1 hover:cursor-pointer hover:text-gray-600 dark:hover:text-gray-400"
+                htmlFor="간단모드"
+              >
+                <input
+                  onChange={SimpleModehandler}
+                  checked={simpleMode}
+                  className="hover:cursor-pointer"
+                  type="checkbox"
+                  id="간단모드"
+                />
+                간단모드
+              </label>
+              <Button size="sm" onClick={handleRefresh}>
+                {' '}
+                새로고침
+              </Button>
+            </div>
           </div>
         </div>
         <CharacterCardContainer

@@ -30,10 +30,7 @@ interface JuboCharacterStore {
   removeCharacter: (characterName: string) => void
 
   /** 캐릭터 업데이트 */
-  updateCharacter: (
-    characterName: string,
-    updater: (prev: JuboCharacter) => JuboCharacter,
-  ) => void
+  updateCharacter: (characterName: string, character: CharacterFullInfo) => void
 
   /** 특정 캐릭터의 bosses 추가(중복 방지: bossId+difficulty) */
   setBossSelection: (characterName: string, boss: ClearedBoss) => AddBossResult
@@ -98,10 +95,16 @@ export const useJuboCharacterStore = create<JuboCharacterStore>()(
         }))
       },
 
-      updateCharacter: (characterName, updater) => {
+      updateCharacter: (characterName, character) => {
         set((state) => ({
-          characters: state.characters.map((c) =>
-            c.characterName === characterName ? updater(c) : c,
+          characters: state.characters.map((char) =>
+            char.characterName === characterName
+              ? {
+                  ...char,
+                  characterName: char.characterName,
+                  characterInfo: character,
+                }
+              : char,
           ),
         }))
       },
