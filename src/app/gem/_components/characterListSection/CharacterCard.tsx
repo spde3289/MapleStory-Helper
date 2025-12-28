@@ -31,12 +31,8 @@ const CharacterCard = ({
 
   const meso =
     unit === '유닛'
-      ? Math.floor(
-          calcSelectedBossesTotalPrice(character.bosses).total,
-        ).toLocaleString()
-      : formatKoreanNumber(
-          Math.floor(calcSelectedBossesTotalPrice(character.bosses).total),
-        )
+      ? calcSelectedBossesTotalPrice(character.bosses).toLocaleString()
+      : formatKoreanNumber(calcSelectedBossesTotalPrice(character.bosses))
 
   return (
     <div

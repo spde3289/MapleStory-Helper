@@ -4,41 +4,28 @@ import { ClearedBoss } from '@/types/storage/JubocCharacter'
 
 type PriceKey = `${BossId}__${BossDifficultyType}`
 
-/** BOSSES -> (bossId+difficulty)로 price 빠르게 찾는 인덱스 */
-const buildBossPriceIndex = () => {
-  const map = new Map<PriceKey, number>()
+const toKey = (bossId: BossId, difficulty: BossDifficultyType): PriceKey =>
+  `${bossId}__${difficulty}`
 
-  for (const boss of BOSSES) {
-    for (const d of boss.difficulties) {
-      map.set(`${boss.bossId}__${d.difficulty}`, d.price)
-    }
-  }
+const BOSS_PRICE_INDEX: Record<PriceKey, number> = BOSSES.reduce(
+  (acc, boss) => {
+    boss.difficulties.forEach(({ difficulty, price }) => {
+      acc[`${boss.bossId}__${difficulty}` as PriceKey] = price
+    })
+    return acc
+  },
+  {} as Record<PriceKey, number>,
+)
 
-  return map
-}
-
-/** 선택한 보스 목록의 price 총합 계산 */
 export const calcSelectedBossesTotalPrice = (selectedBosses: ClearedBoss[]) => {
-  const priceIndex = buildBossPriceIndex()
-
   let total = 0
-  const missing: { bossId: BossId; difficulty: BossDifficultyType }[] = []
 
-  for (const b of selectedBosses) {
-    const key = `${b.bossId}__${b.difficulty as BossDifficultyType}` as const
-    const price = priceIndex.get(key)
+  for (const { bossId, difficulty, partySize } of selectedBosses) {
+    const diff = difficulty as BossDifficultyType
+    const price = BOSS_PRICE_INDEX[toKey(bossId, diff)] as number
 
-    if (price == null) {
-      missing.push({
-        bossId: b.bossId,
-        difficulty: b.difficulty as BossDifficultyType,
-      })
-      continue
-    }
-
-    const party = b.partySize > 0 ? b.partySize : 1 // 0 방지
-    total += price / party
+    total += price / Math.max(partySize)
   }
 
-  return { total: Math.floor(total), missing }
+  return Math.floor(total)
 }
