@@ -8,7 +8,7 @@ import maple from '@/assets/icons/maple.ico'
 import HeaderNav from './HeaderNav'
 const RootHeader = () => {
   return (
-    <header className="bg-white border-b border-gray-200 py-2.5 dark:border-neutral-700 dark:bg-neutral-900 w-full">
+    <header className="bg-white border-b border-gray-200 py-2.5 dark:border-neutral-700 dark:bg-neutral-950 w-full">
       <div className="w-full xl:w-[1200px] xl:m-0 xl:mx-auto px-2.5 xl:px-0">
         <div className="flex justify-between items-center">
           <Link href="/">

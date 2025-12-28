@@ -1,5 +1,6 @@
+import RootFooter from '@/components/layout/rootFooter/RootFooter'
 import RootHeader from '@/components/layout/rootHeader/RootHeader'
-import DesigeProvider from '@/components/porvider/DesigeProvider'
+import { ThemeProvider } from '@/context/ThemeContext'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
@@ -44,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${mapleFont.className} antialiased dark:bg-gray-900 dark:text-white/90`}
+        className={`${mapleFont.className} antialiased bg-white dark:bg-neutral-900 dark:text-white/90`}
       >
         {/* Vercel Analytics Script */}
         <Analytics />
@@ -56,17 +57,11 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1891953654573817"
           crossOrigin="anonymous"
         ></Script>
-
-        <DesigeProvider>
-          <main className="">
-            <RootHeader />
-            <div className="h-[calc(100vh-65px)] lg:pl-[290px] ">
-              <main className="h-full p-1 overflow-scroll scrollBar sm:p-4 md:p-5 flex flex-col lg:flex-row gap-2 sm:gap-5">
-                {children}
-              </main>
-            </div>
-          </main>
-        </DesigeProvider>
+        <ThemeProvider>
+          <RootHeader />
+          <main className="w-full xl:w-[1200px] my-0 mx-auto">{children}</main>
+          <RootFooter />
+        </ThemeProvider>
       </body>
     </html>
   )

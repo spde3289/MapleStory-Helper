@@ -13,7 +13,9 @@ const RootLayout = ({
 }: Readonly<{
   children: React.ReactNode
 }>) => {
-  return <div className="flex flex-col lg:flex-row gap-2">{children}</div>
+  return (
+    <div className="flex flex-col lg:flex-row gap-2 h-full">{children}</div>
+  )
 }
 
 export default RootLayout
