@@ -1,4 +1,4 @@
-import { STAT_KEY } from '@/constants/characterStat'
+import { STAT_KEY } from '@/constants/domain/characterStat'
 
 export type StatKeyMap = typeof STAT_KEY
 

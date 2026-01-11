@@ -19,6 +19,12 @@ export const ERROR_DEFINITIONS = {
   [CLIENT_ERROR_TYPES.CHARACTERS_FETCH_ERROR]: {
     defaultMessage: '여러 캐릭터 정보를 불러오는 중 일부 오류가 발생했습니다.',
   },
+  [CLIENT_ERROR_TYPES.NOTICE_FETCH_ERROR]: {
+    defaultMessage: '올바른 공지의 타입을 입력해주세요.',
+  },
+  [CLIENT_ERROR_TYPES.NOTICES_FETCH_ERROR]: {
+    defaultMessage: '올바른 공지 리스트의 타입을 입력해주세요.',
+  },
 
   // 로직 에러
   [CLIENT_ERROR_TYPES.POWER_FILTER_MIN_LEVEL]: {

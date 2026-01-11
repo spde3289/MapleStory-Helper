@@ -1,4 +1,4 @@
-import { MAPLESTORY_NOTICE_API } from '@/constants/mapleEndpoints'
+import { MAPLESTORY_NOTICE_API } from '@/constants/routers/mapleEndpoints'
 import {
   CashshopNoticeDetailResponse,
   CashshopNoticeListResponse,
@@ -7,7 +7,7 @@ import {
   NoticeDetailResponse,
   NoticeListResponse,
   UpdateNoticeListResponse,
-} from '@/types/api/notice'
+} from '@/types/nexon/notice'
 import { nexonClient } from './nexonClient'
 
 /** 일반 공지 리스트 */

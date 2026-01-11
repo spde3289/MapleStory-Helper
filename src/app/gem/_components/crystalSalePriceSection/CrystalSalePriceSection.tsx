@@ -3,7 +3,7 @@
 import ItemContainer from '@/components/common/ItemContainer'
 import Button from '@/components/ui/button/Button'
 
-import { BOSSES } from '@/constants/bosses'
+import { BOSSES } from '@/constants/domain/bosses'
 import { useJuboCharacterStore } from '@/stores/useJubocCharacter'
 import type { ClearedBoss } from '@/types/storage/JubocCharacter'
 import { formatKoreanNumber, formatToEokUnit } from '@/utils/numberUtils'

@@ -4,7 +4,7 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 
 import { PRESET_BOSSES } from '@/constants/presetBosses'
-import { CharacterFullInfo } from '@/types/api/character'
+import { CharacterFullInfo } from '@/types/domain/character/character'
 import type { ClearedBoss, JuboCharacter } from '@/types/storage/JubocCharacter'
 
 const STORAGE_KEY = 'MAPLE_HELPER_JUBO_CHARACTERS_V1' as const

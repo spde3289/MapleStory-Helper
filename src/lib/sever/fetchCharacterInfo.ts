@@ -1,10 +1,10 @@
-import { SEVER_ERROR_TYPES } from '@/constants/severErrorTypes'
+import { SERVER_ERROR_TYPES } from '@/constants/errors/severErrorTypes'
 import {
   getCharacterBasic,
   getCharacterOcid,
   getCharacterStat,
 } from '@/lib/nexonApi/characterApi'
-import { CharacterFullInfo } from '@/types/api/character'
+import { CharacterFullInfo } from '@/types/domain/character/character'
 import { ApiError } from '../nexonApi/nexonClient'
 
 export const fetchCharacterFullInfo = async (
@@ -34,7 +34,7 @@ export const fetchCharacterFullInfo = async (
 
     throw new ApiError({
       message: '캐릭터 전체 정보를 불러오는 동안 오류 발생',
-      type: SEVER_ERROR_TYPES.CHARACTER_FULL_INFO_FETCH_ERROR,
+      type: SERVER_ERROR_TYPES.CHARACTER_FULL_INFO_FETCH_ERROR,
       status: 500,
       payload: {
         characterName,

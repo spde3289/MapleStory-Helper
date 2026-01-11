@@ -1,10 +1,10 @@
-import { ERROR_DEFINITIONS } from '@/constants/clientErrorDefinitions'
-import { CLIENT_ERROR_TYPES } from '@/constants/clientErrorTypes'
+import { ERROR_DEFINITIONS } from '@/constants/errors/clientErrorDefinitions'
+import { CLIENT_ERROR_TYPES } from '@/constants/errors/clientErrorTypes'
 import {
   ApiErrorPayload,
   ApiErrorResponse,
   ClientErrorType,
-} from '@/types/api/apiErrors'
+} from '@/types/error/apiErrors'
 import axios, { AxiosError, AxiosResponse } from 'axios'
 
 const ROUTER_URL = process.env.NEXT_PUBLIC_BACKEND_URL

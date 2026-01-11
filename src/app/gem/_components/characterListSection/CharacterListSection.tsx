@@ -8,7 +8,7 @@ import {
   fetchCharactersByNames,
 } from '@/lib/services/charactersApi'
 import { useJuboCharacterStore } from '@/stores/useJubocCharacter'
-import { WorldType } from '@/types/models/game/World'
+import { WorldType } from '@/types/domain/game/worldtype'
 import Link from 'next/link'
 import { ChangeEventHandler, memo, useMemo, useReducer, useState } from 'react'
 import useWorldSelector from '../../_hooks/useWorldsSelector'

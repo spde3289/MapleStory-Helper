@@ -1,12 +1,12 @@
-import { CLIENT_ERROR_TYPES } from '@/constants/clientErrorTypes'
-import { SEVER_ERROR_TYPES } from '@/constants/severErrorTypes'
+import { CLIENT_ERROR_TYPES } from '@/constants/errors/clientErrorTypes'
+import { SERVER_ERROR_TYPES } from '@/constants/errors/severErrorTypes'
 import { ApiError } from '@/lib/nexonApi/nexonClient'
 
 export type ApiErrorPayload = Record<string, unknown>
 
 // 서버 에러 타입
 export type SeverErrorType =
-  (typeof SEVER_ERROR_TYPES)[keyof typeof SEVER_ERROR_TYPES]
+  (typeof SERVER_ERROR_TYPES)[keyof typeof SERVER_ERROR_TYPES]
 
 // 클라이언트 에러 타입
 export type ClientErrorType =

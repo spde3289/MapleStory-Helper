@@ -2,7 +2,7 @@
 
 import quest from '@/data/destiny/quest.json'
 import reward from '@/data/destiny/reward.json'
-import { bossListType, currentQuestType } from '@/types/models/game/genesis'
+import { bossListType, currentQuestType } from '@/types/domain/game/genesis'
 import { checkNumberRex } from '@/utils/inputUtils'
 import { ChangeEventHandler, useCallback, useMemo, useState } from 'react'
 import Calculate from './_components/Calculate'

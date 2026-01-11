@@ -1,6 +1,6 @@
-import { BossId } from '@/constants/bosses'
-import { CharacterFullInfo } from '@/types/api/character'
-import type { BossDifficultyType } from '@/types/models/game/Boss'
+import { BossId } from '@/constants/domain/bosses'
+import { CharacterFullInfo } from '@/types/domain/character/character'
+import type { BossDifficultyType } from '@/types/domain/game/bosstype'
 
 export interface ClearedBoss {
   bossId: BossId

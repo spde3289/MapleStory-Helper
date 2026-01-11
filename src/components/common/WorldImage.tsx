@@ -1,6 +1,6 @@
 import worldIcons from '@/assets/icons/world'
-import { KOR_TO_ENG_WORLD } from '@/constants/worldName'
-import type { WorldType } from '@/types/models/game/World'
+import { KOR_TO_ENG_WORLD } from '@/constants/domain/worldName'
+import type { WorldType } from '@/types/domain/game/worldtype'
 import Image from 'next/image'
 import { memo } from 'react'
 

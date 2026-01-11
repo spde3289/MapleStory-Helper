@@ -1,8 +1,8 @@
-import { SEVER_ERROR_TYPES } from './severErrorTypes'
+import { SERVER_ERROR_TYPES } from './severErrorTypes'
 
 export const CLIENT_ERROR_TYPES = {
   // 서버 에러 타입들
-  ...SEVER_ERROR_TYPES,
+  ...SERVER_ERROR_TYPES,
 
   // 클라이언트 common 에러
   NETWORK_ERROR: 'NETWORK_ERROR',

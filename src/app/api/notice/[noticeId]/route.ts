@@ -1,24 +1,28 @@
 import { SERVER_ERROR_TYPES } from '@/constants/errors/severErrorTypes'
 import { ApiError } from '@/lib/nexonApi/nexonClient'
 import {
-  getCashshopNoticeList,
-  getEventNoticeList,
-  getNoticeList,
-  getUpdateNoticeList,
+  getCashshopDetailNotice,
+  getDetailNotice,
+  getEventDetailNotice,
+  getUpdateDetailNotice,
 } from '@/lib/nexonApi/noticeApi'
 import { NOTICE_TYPES, NoticeType } from '@/types/domain/game/notice'
 import { NextResponse } from 'next/server'
 
-const list = (type: NoticeType) => {
+type Params = {
+  noticeId: string
+}
+
+const detail = (type: NoticeType, noticeId: string) => {
   switch (type) {
     case 'notice':
-      return getNoticeList()
+      return getDetailNotice(noticeId)
     case 'update':
-      return getUpdateNoticeList()
+      return getUpdateDetailNotice(noticeId)
     case 'event':
-      return getEventNoticeList()
+      return getEventDetailNotice(noticeId)
     case 'cashshop':
-      return getCashshopNoticeList()
+      return getCashshopDetailNotice(noticeId)
     default: {
       const exhaustive: never = type
       return exhaustive
@@ -26,7 +30,11 @@ const list = (type: NoticeType) => {
   }
 }
 
-export const GET = async (req: Request) => {
+export const GET = async (
+  req: Request,
+  context: { params: Promise<Params> },
+) => {
+  const { noticeId } = await context.params
   const { searchParams } = new URL(req.url)
   const type = searchParams.get('type') as NoticeType
 
@@ -39,7 +47,7 @@ export const GET = async (req: Request) => {
       })
     }
 
-    const data = await list(type)
+    const data = await detail(type, noticeId)
 
     return NextResponse.json(data)
   } catch (error: any) {
@@ -56,7 +64,7 @@ export const GET = async (req: Request) => {
     return Response.json(
       new ApiError({
         ...error,
-        type: SERVER_ERROR_TYPES.NOTICES_FETCH_ERROR,
+        type: SERVER_ERROR_TYPES.NOTICE_FETCH_ERROR,
         message: '알 수 없는 서버 에러입니다.',
       }),
       { status: 500 },

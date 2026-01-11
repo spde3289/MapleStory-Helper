@@ -1,4 +1,4 @@
-import { BossId } from '@/constants/bosses'
+import { BossId } from '@/constants/domain/bosses'
 
 export type BossDifficultyType =
   | '이지'

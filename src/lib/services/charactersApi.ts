@@ -1,5 +1,8 @@
-import { ROUTER_ENDPOINTS } from '@/constants/routerEndpoints'
-import { CharacterFullInfo, CharactersInfo } from '@/types/api/character'
+import { ROUTER_ENDPOINTS } from '@/constants/routers/routerEndpoints'
+import {
+  CharacterFullInfo,
+  CharactersInfo,
+} from '@/types/domain/character/character'
 import { splitSettled } from '@/utils/promise'
 import { services } from './servicesClient'
 

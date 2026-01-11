@@ -1,6 +1,6 @@
 'use client'
 
-import { WorldType } from '@/types/models/game/World'
+import { WorldType } from '@/types/domain/game/worldtype'
 import { JuboCharacter } from '@/types/storage/JubocCharacter'
 import CharacterCard from './CharacterCard'
 

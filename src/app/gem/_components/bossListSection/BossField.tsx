@@ -2,7 +2,7 @@
 
 import BossImage from '@/components/common/BossImage'
 import { useJuboCharacterStore } from '@/stores/useJubocCharacter'
-import { BossDifficultyType, BossInfo } from '@/types/models/game/Boss'
+import { BossDifficultyType, BossInfo } from '@/types/domain/game/bosstype'
 import { useEffect, useMemo, useState } from 'react'
 import BossPrice from './BossPrice'
 
