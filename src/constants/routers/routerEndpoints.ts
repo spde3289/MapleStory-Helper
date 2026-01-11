@@ -1,3 +1,10 @@
 export const ROUTER_ENDPOINTS = {
-  character: '/characters',
+  CHARACTER: {
+    LIST: '/characters',
+    SINGLE: (characterName: string) => `/characters/${characterName}`,
+  },
+  NOTICE: {
+    ROOT: '/notice',
+    DETAIL: (noticeId: string) => `/notice/${noticeId}`,
+  },
 } as const
