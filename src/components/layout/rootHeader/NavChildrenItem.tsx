@@ -6,7 +6,7 @@ interface Props {
   href: string
 }
 
-const NavItem = ({ content, href }: Props) => {
+const NavChildrenItem = ({ content, href }: Props) => {
   const pathname = usePathname()
   const isActive = pathname === href
 
@@ -14,8 +14,9 @@ const NavItem = ({ content, href }: Props) => {
     <Link
       href={href}
       className={clsx(
-        'text-sm md:text-base',
-        isActive && 'text-orange-500 font-semibold',
+        'text-xs md:text-sm font-normal text-nowrap px-2.5 py-1.5 rounded-md',
+        'hover:bg-stone-100 dark:hover:bg-neutral-700',
+        isActive && 'text-orange-500 dark:text-orange-400 font-normal',
       )}
       aria-current={isActive ? 'page' : undefined}
     >
@@ -24,4 +25,4 @@ const NavItem = ({ content, href }: Props) => {
   )
 }
 
-export default NavItem
+export default NavChildrenItem

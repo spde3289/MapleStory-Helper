@@ -50,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${pretendard.variable} ${mapleFont.variable}  antialiased bg-white dark:bg-neutral-900 dark:text-white/90`}
+        className={`${pretendard.variable} ${mapleFont.variable} antialiased bg-white dark:bg-neutral-900 dark:text-white/90`}
       >
         {/* Vercel Analytics Script */}
         <Analytics />
@@ -64,7 +64,7 @@ export default function RootLayout({
         ></Script>
         <ThemeProvider>
           <RootHeader />
-          <main className="w-full xl:w-[1200px] my-0 mx-auto min-h-[calc(100vh-340px)]">
+          <main className="w-full xl:w-[1200px] my-0 mx-auto min-h-[calc(100vh-309px)]">
             {children}
           </main>
           <RootFooter />
