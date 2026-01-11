@@ -16,7 +16,7 @@ export const getCharacterList = async (
   ApiKey: string,
 ): Promise<CharacterListResponse> => {
   const response = await nexonClient.get<CharacterListResponse>(
-    MAPLE_ENDPOINTS.character.list,
+    MAPLE_ENDPOINTS.CHARACTER.LIST,
     {
       headers: { 'x-nxopen-api-key': ApiKey },
     },
@@ -30,7 +30,7 @@ export const getCharacterOcid = async (
   character_name: string,
 ): Promise<CharacterIdResponse> => {
   const { data } = await nexonClient.get<CharacterIdResponse>(
-    MAPLE_ENDPOINTS.character.ocid,
+    MAPLE_ENDPOINTS.CHARACTER.OCID,
     {
       params: { character_name },
     },
@@ -44,7 +44,7 @@ export const getCharacterBasic = async (
   ocid: string,
 ): Promise<CharacterBasicResponse> => {
   const { data } = await nexonClient.get<CharacterBasicResponse>(
-    MAPLE_ENDPOINTS.character.basic,
+    MAPLE_ENDPOINTS.CHARACTER.BASIC,
     {
       params: { ocid },
     },
@@ -58,7 +58,7 @@ export const getCharacterStat = async (
   ocid: string,
 ): Promise<CharacterStats> => {
   const { data } = await nexonClient.get<CharacterStatResponse>(
-    MAPLE_ENDPOINTS.character.stat,
+    MAPLE_ENDPOINTS.CHARACTER.STAT,
     {
       params: { ocid },
     },
