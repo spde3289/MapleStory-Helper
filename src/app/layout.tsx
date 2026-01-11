@@ -23,7 +23,12 @@ const mapleFont = localFont({
       style: 'bold',
     },
   ],
-  variable: '--font-Maplestory',
+  variable: '--font-maplestory',
+})
+
+const pretendard = localFont({
+  src: '../assets/fonts/PretendardVariable.ttf',
+  variable: '--font-pretendard',
 })
 
 export const metadata: Metadata = {
@@ -45,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${mapleFont.className} antialiased bg-white dark:bg-neutral-900 dark:text-white/90`}
+        className={`${pretendard.variable} ${mapleFont.variable}  antialiased bg-white dark:bg-neutral-900 dark:text-white/90`}
       >
         {/* Vercel Analytics Script */}
         <Analytics />
@@ -59,7 +64,9 @@ export default function RootLayout({
         ></Script>
         <ThemeProvider>
           <RootHeader />
-          <main className="w-full xl:w-[1200px] my-0 mx-auto">{children}</main>
+          <main className="w-full xl:w-[1200px] my-0 mx-auto min-h-[calc(100vh-340px)]">
+            {children}
+          </main>
           <RootFooter />
         </ThemeProvider>
       </body>

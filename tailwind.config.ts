@@ -12,6 +12,10 @@ const config: Config = {
       ...defaultTheme.screens,
     },
     extend: {
+      fontFamily: {
+        sans: ['var(--font-pretendard)', 'system-ui', 'sans-serif'],
+        maple: ['var(--font-maplestory)'],
+      },
       fontSize: {
         'title-2xl': ['72px', '90px'],
         'title-xl': ['60px', '72px'],
