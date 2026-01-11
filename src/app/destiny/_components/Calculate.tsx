@@ -3,7 +3,7 @@ import BossImage from '@/components/common/BossImage'
 import ItemContainer from '@/components/common/ItemContainer'
 import { useTheme } from '@/context/ThemeContext'
 import quest from '@/data/destiny/quest.json'
-import { CalculateProps } from '@/types/domain/game/genesis'
+import { CalculateProps } from '@/types/domain/genesis'
 
 const Calculate = ({
   currentQuest,

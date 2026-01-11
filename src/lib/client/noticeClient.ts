@@ -1,9 +1,5 @@
 import { ROUTER_ENDPOINTS } from '@/constants/routers/routerEndpoints'
-import {
-  NoticeDetail,
-  NoticeList,
-  NoticeType,
-} from '@/types/domain/game/notice'
+import { NoticeDetail, NoticeList, NoticeType } from '@/types/domain/notice'
 import { client } from './client'
 
 interface FetchfetchNoticeParams {

@@ -1,8 +1,5 @@
 import { ROUTER_ENDPOINTS } from '@/constants/routers/routerEndpoints'
-import {
-  CharacterFullInfo,
-  CharactersInfo,
-} from '@/types/domain/character/character'
+import { CharacterFullInfo, CharactersInfo } from '@/types/domain/character'
 import { splitSettled } from '@/utils/promise'
 import { client } from './client'
 

@@ -4,7 +4,7 @@ import {
   getNoticeList,
   getUpdateNoticeList,
 } from '@/lib/nexonApi/noticeApi'
-import type { NoticeList, NoticeType } from '@/types/domain/game/notice'
+import type { NoticeList, NoticeType } from '@/types/domain/notice'
 
 import type {
   CashshopNoticeListResponse,

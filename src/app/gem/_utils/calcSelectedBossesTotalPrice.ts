@@ -1,5 +1,5 @@
 import { BOSSES, BossId } from '@/constants/domain/bosses'
-import { BossDifficultyType } from '@/types/domain/game/boss'
+import { BossDifficultyType } from '@/types/domain/boss'
 import { ClearedBoss } from '@/types/storage/JubocCharacter'
 
 type PriceKey = `${BossId}__${BossDifficultyType}`

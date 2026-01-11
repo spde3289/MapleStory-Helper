@@ -1,6 +1,12 @@
+import { STAT_KEY } from '@/constants/domain/characterStat'
 import { CharacterBasicResponse } from '@/types/nexon/character'
-import { ApiErrorResponse } from '../../error/apiErrors'
-import { CharacterStats } from './charstat'
+import { ApiErrorResponse } from '../error/apiErrors'
+
+export type StatKeyMap = typeof STAT_KEY
+
+export type StatKeyEnglish = StatKeyMap[keyof StatKeyMap]
+
+export type CharacterStats = Record<StatKeyEnglish, number>
 
 export interface CharacterFullInfo {
   ocid: string

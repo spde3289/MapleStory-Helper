@@ -1,7 +1,7 @@
 import { SERVER_ERROR_TYPES } from '@/constants/errors/severErrorTypes'
 import { ApiError } from '@/lib/nexonApi/nexon'
 import { buildNotice } from '@/lib/server/getNoticeByType'
-import { NOTICE_TYPES, NoticeType } from '@/types/domain/game/notice'
+import { NOTICE_TYPES, NoticeType } from '@/types/domain/notice'
 import { NextResponse } from 'next/server'
 
 type Params = {

@@ -1,4 +1,4 @@
-import type { NoticeDetail, NoticeType } from '@/types/domain/game/notice'
+import type { NoticeDetail, NoticeType } from '@/types/domain/notice'
 
 import type {
   CashshopNoticeDetailResponse,

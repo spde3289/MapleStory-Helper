@@ -1,4 +1,4 @@
-import { BossDifficultyType, BossInfo } from '@/types/domain/game/boss'
+import { BossDifficultyType, BossInfo } from '@/types/domain/boss'
 import { formatKoreanNumber } from '@/utils/numberUtils'
 
 interface Props {

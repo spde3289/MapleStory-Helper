@@ -4,7 +4,7 @@ import {
   getCharacterOcid,
   getCharacterStat,
 } from '@/lib/nexonApi/characterApi'
-import { CharacterFullInfo } from '@/types/domain/character/character'
+import { CharacterFullInfo } from '@/types/domain/character'
 import { ApiError } from '../nexonApi/nexon'
 
 export const buildCharacterFullInfo = async (

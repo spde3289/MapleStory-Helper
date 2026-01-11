@@ -1,7 +1,7 @@
 import { SERVER_ERROR_TYPES } from '@/constants/errors/severErrorTypes'
 import { ApiError } from '@/lib/nexonApi/nexon'
 import { buildNoticeList } from '@/lib/server/getNoticeListByType'
-import { NOTICE_TYPES, NoticeType } from '@/types/domain/game/notice'
+import { NOTICE_TYPES, NoticeType } from '@/types/domain/notice'
 import { NextResponse } from 'next/server'
 
 export const GET = async (req: Request) => {
