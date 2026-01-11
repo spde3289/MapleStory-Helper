@@ -67,7 +67,7 @@ const Calculate = ({
           </div>
         </div>
       </div>
-      <table className="w-full border-collapse dark:border-white/[0.2] text-base">
+      <table className="w-full border-collapse dark:border-white/[0.2] text-sm md:text-base">
         <thead>
           <tr className="border-b dark:border-white/[0.2] ">
             <th className="">보스</th>
@@ -92,7 +92,7 @@ const Calculate = ({
                 </div>
               </td>
               <td className="">
-                <form className="flex gap-4">
+                <form className="flex gap-4 flex-wrap">
                   {item.type.map((type) => (
                     <label
                       key={type.difficulty}

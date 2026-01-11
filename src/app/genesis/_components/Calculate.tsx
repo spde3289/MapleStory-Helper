@@ -84,7 +84,7 @@ const Calculate = ({
           >
             <input
               alt="보유 어둠의 흔적"
-              className="w-12 h-7  bg-transparent outline-none "
+              className="w-12 h-7 bg-transparent outline-none "
               maxLength={4}
               onChange={handleGauge}
               value={currentQuest.gauge}
@@ -93,9 +93,9 @@ const Calculate = ({
           </div>
         </div>
       </div>
-      <table className="w-full border-collapse dark:border-white/[0.2] text-base">
+      <table className="w-full border-collapse dark:border-white/[0.2] text-sm md:text-base">
         <thead>
-          <tr className="border-b dark:border-white/[0.2] ">
+          <tr className="border-b dark:border-white/[0.2]">
             <th className="">보스</th>
             <th className="">
               난이도{' '}
@@ -118,12 +118,12 @@ const Calculate = ({
                 </div>
               </td>
               <td className="">
-                <form className="flex gap-4">
+                <form className="flex gap-2 flex-wrap">
                   {item.type.map((type) => (
                     <label
                       key={type.difficulty}
                       htmlFor={`${type.difficulty}${item.krName}`}
-                      className="flex items-center "
+                      className="flex items-center"
                     >
                       <input
                         onChange={handleType}
