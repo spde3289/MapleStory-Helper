@@ -1,10 +1,10 @@
 'use client'
 
-import { ThemeToggleButton } from '@/components/common/ThemeToggleButton'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import maple from '@/assets/icons/maple.ico'
+import ThemeToggleButton from '@/components/common/ThemeToggleButton'
 import NAV_ITEMS from '@/constants/navItems'
 import clsx from 'clsx'
 import NavGroup from './NavGroup'
@@ -50,7 +50,9 @@ const RootHeader = () => {
               ))}
             </div>
           </div>
-          <ThemeToggleButton />
+          <div>
+            <ThemeToggleButton />
+          </div>
         </div>
       </div>
     </header>

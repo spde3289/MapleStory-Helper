@@ -50,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${pretendard.variable} ${mapleFont.variable} antialiased bg-white dark:bg-neutral-900 dark:text-white/90`}
+        className={`${pretendard.variable} ${mapleFont.variable} antialiased bg-white dark:bg-neutral-900 dark:text-white/90 font-sans`}
       >
         {/* Vercel Analytics Script */}
         <Analytics />

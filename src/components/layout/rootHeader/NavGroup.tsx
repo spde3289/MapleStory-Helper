@@ -18,7 +18,7 @@ const NavGroup = ({ item }: Props) => {
     <div
       className={clsx(
         'relative h-full py-2 px-4',
-        ' text-[#2a3038] dark:text-[#dfdfdf]',
+        'text-[#2a3038] dark:text-[#dfdfdf]',
       )}
       ref={rootRef}
       onMouseEnter={onOpen}
@@ -43,8 +43,8 @@ const NavGroup = ({ item }: Props) => {
         <div
           onClick={onClose}
           className={clsx(
-            'absolute top-full left-2 z-50 flex flex-col px-1 py-1.5 rounded-md',
-            'bg-white dark:bg-neutral-800 shadow-[0_8px_24px_rgba(0,0,0,0.15)] dark:shadow-[0_8px_24px_rgb(255, 255, 255)]',
+            'absolute top-full left-2 z-50 flex flex-col px-1 py-1.5 rounded-md border',
+            'bg-white dark:bg-neutral-800 shadow-[0_8px_24px_rgba(0,0,0,0.15)] dark:border-neutral-600',
           )}
         >
           {item.children.map((child) => (
