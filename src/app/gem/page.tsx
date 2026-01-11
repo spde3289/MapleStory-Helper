@@ -1,5 +1,6 @@
 'use client'
 
+import clsx from 'clsx'
 import { useState } from 'react'
 import BossListSection from './_components/bossListSection/BossListSection'
 import CharacterListSection from './_components/characterListSection/CharacterListSection'
@@ -20,11 +21,15 @@ const GemPage = () => {
   }
 
   return (
-    <>
-      <CharacterListSection unit={unit} />
-      <BossListSection unit={unit} />
+    <div className="py-8 px-2 m-0 md:my-0 md:m-auto lg:px-0 flex flex-col gap-4 ">
       <CrystalSalePriceSection unit={unit} unitHandler={unitHandler} />
-    </>
+      <div
+        className={clsx('flex gap-2 flex-col justify-between', 'lg:flex-row')}
+      >
+        <CharacterListSection unit={unit} />
+        <BossListSection unit={unit} />
+      </div>
+    </div>
   )
 }
 

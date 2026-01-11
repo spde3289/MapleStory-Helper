@@ -84,6 +84,7 @@ const Genesis = () => {
   }, [handleGauge])
   return (
     <>
+      <Result isPass={isPass} bossList={bossList} currentQuest={currentQuest} />
       <Calculate
         isPass={isPass}
         setIsPass={setIsPass}
@@ -92,7 +93,6 @@ const Genesis = () => {
         currentQuest={currentQuest}
         handleQuest={handleQuest}
       />
-      <Result isPass={isPass} bossList={bossList} currentQuest={currentQuest} />
     </>
   )
 }

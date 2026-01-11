@@ -84,13 +84,13 @@ const Destiny = () => {
 
   return (
     <>
+      <Result bossList={bossList} currentQuest={currentQuest} />
       <Calculate
         handleBossList={handleBossList}
         bossList={bossList}
         currentQuest={currentQuest}
         handleQuest={handleQuest}
       />
-      <Result bossList={bossList} currentQuest={currentQuest} />
     </>
   )
 }

@@ -87,11 +87,11 @@ const BossField = ({ sort, unit, boss }: Props) => {
           : `${boss.bossId}_${boss.difficulties[0].difficulty}`
       }
     >
-      <td className="flex items-center gap-2 w-fit xsm:w-[180px]">
-        <div className="size-8 rounded-lg overflow-hidden">
+      <td className="flex items-center gap-2 w-fit">
+        <div className="size-10 md:size-8 rounded-lg overflow-hidden">
           <BossImage boss={boss.bossId} alt={boss.bossName} />
         </div>
-        <div className="hidden xsm:block">{boss.bossName}</div>
+        <div className="text-sm hidden sm:block">{boss.bossName}</div>
       </td>
       <td>
         <form
@@ -100,7 +100,7 @@ const BossField = ({ sort, unit, boss }: Props) => {
               ? { justifyContent: '' }
               : { justifyContent: 'center' }
           }
-          className="flex gap-4 w-[262px]"
+          className="flex flex-row flex-wrap gap-2"
         >
           {boss.difficulties.map((type) => (
             <label
@@ -144,7 +144,7 @@ const BossField = ({ sort, unit, boss }: Props) => {
           <option value="6">6</option>
         </select>
       </td>
-      <td className="min-w-fit w-36 whitespace-nowrap text-xs md:text-sm">
+      <td className="min-w-fit whitespace-nowrap text-xs md:text-sm">
         <BossPrice
           boss={boss}
           selectedDifficulty={selectedDifficulty}

@@ -113,11 +113,8 @@ const CharacterListSection = ({ unit }: Props) => {
   }, [characters, sortState])
 
   return (
-    <ItemContainer
-      className="relative lg:min-w-[460px] lg:max-w-[460px]"
-      title="캐릭터 등록"
-    >
-      <div className="w-full ">
+    <ItemContainer className="relative" title="캐릭터 등록">
+      <div className="w-full lg:w-[300px]">
         <div className="absolute top-3 right-4 underline">
           <Link
             target="_blank"
@@ -134,14 +131,14 @@ const CharacterListSection = ({ unit }: Props) => {
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
-        <div className="w-full flex flex-col gap-2 justify-between ">
-          <div className="flex overflow-y-scroll scrollBar gap-2">
+        <div className="flex flex-col gap-2 justify-between overflow-hidden">
+          <div className="flex flex-wrap gap-2">
             {worlds.map((world) => {
               return (
                 <Button
                   key={world.name}
-                  size="md"
-                  className={`${world.current ? ' bg-orange-400 rounded-md' : ''} w-max flex items-center gap-2 whitespace-nowrap `}
+                  size="sm"
+                  className={`${world.current ? ' bg-orange-500 text-gray-200 rounded-md ' : ''} h-full flex items-center gap-2 whitespace-nowrap `}
                   onClick={() => selectWorld(world.name)}
                 >
                   <WorldImage worldName={world.name} size={20} />
