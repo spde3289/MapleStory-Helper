@@ -1,30 +1,8 @@
 import { SERVER_ERROR_TYPES } from '@/constants/errors/severErrorTypes'
 import { ApiError } from '@/lib/nexonApi/nexon'
-import {
-  getCashshopNoticeList,
-  getEventNoticeList,
-  getNoticeList,
-  getUpdateNoticeList,
-} from '@/lib/nexonApi/noticeApi'
+import { buildNoticeList } from '@/lib/server/getNoticeListByType'
 import { NOTICE_TYPES, NoticeType } from '@/types/domain/game/notice'
 import { NextResponse } from 'next/server'
-
-const list = (type: NoticeType) => {
-  switch (type) {
-    case 'notice':
-      return getNoticeList()
-    case 'update':
-      return getUpdateNoticeList()
-    case 'event':
-      return getEventNoticeList()
-    case 'cashshop':
-      return getCashshopNoticeList()
-    default: {
-      const exhaustive: never = type
-      return exhaustive
-    }
-  }
-}
 
 export const GET = async (req: Request) => {
   const { searchParams } = new URL(req.url)
@@ -39,7 +17,7 @@ export const GET = async (req: Request) => {
       })
     }
 
-    const data = await list(type)
+    const data = await buildNoticeList(type)
 
     return NextResponse.json(data)
   } catch (error: any) {

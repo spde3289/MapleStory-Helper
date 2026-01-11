@@ -5,6 +5,6 @@ export const ROUTER_ENDPOINTS = {
   },
   NOTICE: {
     ROOT: '/notice',
-    DETAIL: (noticeId: string) => `/notice/${noticeId}`,
+    DETAIL: (noticeId: number) => `/notice/${noticeId}`,
   },
 } as const

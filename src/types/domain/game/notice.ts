@@ -1,7 +1,7 @@
 export const NOTICE_TYPES = ['notice', 'update', 'event', 'cashshop'] as const
 export type NoticeType = (typeof NOTICE_TYPES)[number]
 
-export interface NoticeListItem {
+export interface NoticeItem {
   noticeId: number
   title: string
   url: string
@@ -13,12 +13,12 @@ export interface NoticeListItem {
 
 export interface NoticeList {
   type: NoticeType
-  items: NoticeList[]
+  items: NoticeItem[]
 }
 
 export interface NoticeDetail {
   type: NoticeType
-  noticeId?: number // 넥슨 상세에 id가 없으면(지금 스키마상 없음) 우리가 params로 채워줄 수 있음
+  noticeId?: number
   title: string
   url: string
   contents: string

@@ -1,33 +1,11 @@
 import { SERVER_ERROR_TYPES } from '@/constants/errors/severErrorTypes'
 import { ApiError } from '@/lib/nexonApi/nexon'
-import {
-  getCashshopDetailNotice,
-  getDetailNotice,
-  getEventDetailNotice,
-  getUpdateDetailNotice,
-} from '@/lib/nexonApi/noticeApi'
+import { buildNotice } from '@/lib/server/getNoticeByType'
 import { NOTICE_TYPES, NoticeType } from '@/types/domain/game/notice'
 import { NextResponse } from 'next/server'
 
 type Params = {
-  noticeId: string
-}
-
-const detail = (type: NoticeType, noticeId: string) => {
-  switch (type) {
-    case 'notice':
-      return getDetailNotice(noticeId)
-    case 'update':
-      return getUpdateDetailNotice(noticeId)
-    case 'event':
-      return getEventDetailNotice(noticeId)
-    case 'cashshop':
-      return getCashshopDetailNotice(noticeId)
-    default: {
-      const exhaustive: never = type
-      return exhaustive
-    }
-  }
+  noticeId: number
 }
 
 export const GET = async (
@@ -47,7 +25,7 @@ export const GET = async (
       })
     }
 
-    const data = await detail(type, noticeId)
+    const data = await buildNotice(type, Number(noticeId))
 
     return NextResponse.json(data)
   } catch (error: any) {

@@ -23,7 +23,7 @@ export const fetchNoticeList = async (
 
 // 공고 리스트 요청 함수
 export const fetchNotice = async (
-  noticeId: string,
+  noticeId: number,
   params: FetchfetchNoticeParams,
 ): Promise<NoticeDetail> => {
   const { data } = await client.get(ROUTER_ENDPOINTS.NOTICE.DETAIL(noticeId), {

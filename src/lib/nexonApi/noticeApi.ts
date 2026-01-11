@@ -21,7 +21,7 @@ export const getNoticeList = async (): Promise<NoticeListResponse> => {
 
 /** 일반 공지 상세보기 */
 export const getDetailNotice = async (
-  notice_id: string,
+  notice_id: number,
 ): Promise<NoticeDetailResponse> => {
   const response = await nexonClient.get<NoticeDetailResponse>(
     MAPLESTORY_NOTICE_API.NOTICE.DETAIL,
@@ -43,7 +43,7 @@ export const getUpdateNoticeList =
 
 /** 업데이트 공지 상세보기 */
 export const getUpdateDetailNotice = async (
-  notice_id: string,
+  notice_id: number,
 ): Promise<NoticeDetailResponse> => {
   const response = await nexonClient.get<NoticeDetailResponse>(
     MAPLESTORY_NOTICE_API.UPDATE.DETAIL,
@@ -65,7 +65,7 @@ export const getEventNoticeList =
 
 /** 이벤트 공지 상세보기 */
 export const getEventDetailNotice = async (
-  notice_id: string,
+  notice_id: number,
 ): Promise<EventNoticeDetailResponse> => {
   const response = await nexonClient.get<EventNoticeDetailResponse>(
     MAPLESTORY_NOTICE_API.EVENT.DETAIL,
@@ -87,7 +87,7 @@ export const getCashshopNoticeList =
 
 /** 캐시샵 공지 상세보기 */
 export const getCashshopDetailNotice = async (
-  notice_id: string,
+  notice_id: number,
 ): Promise<CashshopNoticeDetailResponse> => {
   const response = await nexonClient.get<CashshopNoticeDetailResponse>(
     MAPLESTORY_NOTICE_API.CASHSHOP.DETAIL,
