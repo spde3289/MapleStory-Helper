@@ -61,7 +61,7 @@ const Tooltip = ({ tip, targetRect }: TooltipProps) => {
     <div
       role="tooltip"
       style={tooltipStyle}
-      className="px-2 py-1 bg-gray-700 text-white text-sm rounded transition-opacity"
+      className="px-2 py-1 bg-white border dark:bg-neutral-900 border-neutral-300 dark:border-neutral-600 text-sm rounded transition-opacity"
     >
       {tip}
     </div>,

@@ -23,8 +23,7 @@ const CharacterImage = ({ src }: CharacterImagePropsType) => {
   }, [src])
 
   return (
-    // 부모 div에 relative와 w-full, h-full (또는 원하는 높이)를 설정해서 Image의 fill 속성이 동작하게 함
-    <div className="relative w-40 h-40 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+    <div className="relative w-40 h-40 left-1/2 top-9 -translate-x-1/2 -translate-y-1/2">
       <Image
         unoptimized
         fill

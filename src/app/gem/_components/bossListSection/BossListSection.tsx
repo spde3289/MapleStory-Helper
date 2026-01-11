@@ -1,13 +1,13 @@
 import ItemContainer from '@/components/common/ItemContainer'
 import Button from '@/components/ui/button/Button'
 import { BOSSES } from '@/constants/bosses'
+import { PRESET_BOSSES } from '@/constants/presetBosses'
 import { useJuboCharacterStore } from '@/stores/useJubocCharacter'
 import { BossInfo } from '@/types/models/game/Boss'
 import { ClearedBoss } from '@/types/storage/JubocCharacter'
 import { ChangeEventHandler, memo, useMemo, useState } from 'react'
 import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa'
 import BossField from './BossField'
-import { PRESET_BOSSES } from '@/constants/presetBosses'
 
 interface Props {
   unit: '일반' | '유닛'
@@ -106,10 +106,10 @@ const BossListSection = ({ unit }: Props) => {
   return (
     <ItemContainer
       title="보스 리스트"
-      className="relative lg:w-[698px] text-nowrap no-drag overflow-x-scroll scrollBar"
+      className="relative text-nowrap no-drag"
       tip="주관적인 쾌적함 기준입니다."
     >
-      <div className="flex gap-2 mb-2 flex-wrap ">
+      <div className="flex gap-2 mb-2 flex-wrap">
         {PRESET_BOSSES.map((el) => {
           return (
             <Button

@@ -55,9 +55,6 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     [theme, resolvedTheme, setTheme],
   )
 
-  // ❗ 준비되기 전엔 렌더링 안 함
-  // if (!mounted) return null
-
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }
 
