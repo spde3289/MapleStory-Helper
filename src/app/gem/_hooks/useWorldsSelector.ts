@@ -1,4 +1,4 @@
-import { WorldType } from '@/types/domain/game/worldtype'
+import { WorldType } from '@/types/domain/game/world'
 import { JuboCharacter } from '@/types/storage/JubocCharacter'
 import { useEffect, useMemo, useState } from 'react'
 
