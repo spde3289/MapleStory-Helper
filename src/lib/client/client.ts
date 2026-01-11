@@ -9,7 +9,7 @@ import axios, { AxiosError, AxiosResponse } from 'axios'
 
 const ROUTER_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
-export const services = axios.create({
+export const client = axios.create({
   timeout: 5000,
   baseURL: ROUTER_URL,
   headers: {
@@ -80,4 +80,4 @@ const onError = (
   )
 }
 
-services.interceptors.response.use(onResponse, onError)
+client.interceptors.response.use(onResponse, onError)

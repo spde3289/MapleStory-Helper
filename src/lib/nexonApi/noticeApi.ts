@@ -8,7 +8,7 @@ import {
   NoticeListResponse,
   UpdateNoticeListResponse,
 } from '@/types/nexon/notice'
-import { nexonClient } from './nexonClient'
+import { nexonClient } from './nexon'
 
 /** 일반 공지 리스트 */
 export const getNoticeList = async (): Promise<NoticeListResponse> => {

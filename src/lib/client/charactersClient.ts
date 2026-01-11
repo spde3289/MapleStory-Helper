@@ -4,7 +4,7 @@ import {
   CharactersInfo,
 } from '@/types/domain/character/character'
 import { splitSettled } from '@/utils/promise'
-import { services } from './servicesClient'
+import { client } from './client'
 
 type FetchCharactersParams = {
   minLevel?: number
@@ -16,7 +16,7 @@ export const fetchCharacters = async (
   ApiKey: string,
   params?: FetchCharactersParams,
 ): Promise<CharactersInfo> => {
-  const { data } = await services.get<CharactersInfo>(
+  const { data } = await client.get<CharactersInfo>(
     ROUTER_ENDPOINTS.CHARACTER.LIST,
     {
       headers: { 'x-user-api-key': ApiKey },
@@ -31,7 +31,7 @@ export const fetchCharacters = async (
 export const fetchCharacter = async (
   characterName: string,
 ): Promise<CharacterFullInfo> => {
-  const { data } = await services.get<CharacterFullInfo>(
+  const { data } = await client.get<CharacterFullInfo>(
     ROUTER_ENDPOINTS.CHARACTER.SINGLE(characterName),
   )
 

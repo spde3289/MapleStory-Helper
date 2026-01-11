@@ -1,6 +1,6 @@
 import { CLIENT_ERROR_TYPES } from '@/constants/errors/clientErrorTypes'
 import { SERVER_ERROR_TYPES } from '@/constants/errors/severErrorTypes'
-import { ApiError } from '@/lib/nexonApi/nexonClient'
+import { ApiError } from '@/lib/nexonApi/nexon'
 
 export type ApiErrorPayload = Record<string, unknown>
 

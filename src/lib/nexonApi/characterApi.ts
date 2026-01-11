@@ -9,7 +9,7 @@ import {
   CharacterListResponse,
   CharacterStatResponse,
 } from '@/types/nexon/character'
-import { ApiError, nexonClient } from './nexonClient'
+import { ApiError, nexonClient } from './nexon'
 
 // 캐릭터 리스트
 export const getCharacterList = async (

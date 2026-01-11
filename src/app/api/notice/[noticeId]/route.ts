@@ -1,5 +1,5 @@
 import { SERVER_ERROR_TYPES } from '@/constants/errors/severErrorTypes'
-import { ApiError } from '@/lib/nexonApi/nexonClient'
+import { ApiError } from '@/lib/nexonApi/nexon'
 import {
   getCashshopDetailNotice,
   getDetailNotice,

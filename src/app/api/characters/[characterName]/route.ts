@@ -1,6 +1,6 @@
 import { SERVER_ERROR_TYPES } from '@/constants/errors/severErrorTypes'
-import { ApiError } from '@/lib/nexonApi/nexonClient'
-import { fetchCharacterFullInfo } from '@/lib/sever/fetchCharacterInfo'
+import { ApiError } from '@/lib/nexonApi/nexon'
+import { buildCharacterFullInfo } from '@/lib/server/buildCharacterFullInfo'
 import { NextResponse } from 'next/server'
 
 export const GET = async (
@@ -10,7 +10,7 @@ export const GET = async (
   const { characterName } = await context.params
 
   try {
-    const data = await fetchCharacterFullInfo(characterName)
+    const data = await buildCharacterFullInfo(characterName)
 
     return NextResponse.json(data)
   } catch (error: any) {

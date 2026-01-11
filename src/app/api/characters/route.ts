@@ -1,7 +1,7 @@
 import { SERVER_ERROR_TYPES } from '@/constants/errors/severErrorTypes'
 import { getCharacterList } from '@/lib/nexonApi/characterApi'
-import { ApiError } from '@/lib/nexonApi/nexonClient'
-import { fetchCharacterFullInfo } from '@/lib/sever/fetchCharacterInfo' // 위치에 맞게 수정
+import { ApiError } from '@/lib/nexonApi/nexon'
+import { buildCharacterFullInfo } from '@/lib/server/buildCharacterFullInfo' // 위치에 맞게 수정
 import { splitSettled } from '@/utils/promise'
 
 export const GET = async (req: Request) => {
@@ -32,7 +32,7 @@ export const GET = async (req: Request) => {
 
     if (!hasMinLevel && !hasMinPower) {
       const fullList = await Promise.allSettled(
-        allCharacters.map((ch) => fetchCharacterFullInfo(ch.character_name)),
+        allCharacters.map((ch) => buildCharacterFullInfo(ch.character_name)),
       )
 
       const { success, errors } = splitSettled(fullList)
@@ -49,7 +49,7 @@ export const GET = async (req: Request) => {
       )
 
       const fullList = await Promise.allSettled(
-        levelFiltered.map((ch) => fetchCharacterFullInfo(ch.character_name)),
+        levelFiltered.map((ch) => buildCharacterFullInfo(ch.character_name)),
       )
 
       const { success, errors } = splitSettled(fullList)

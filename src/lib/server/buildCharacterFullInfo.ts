@@ -5,9 +5,9 @@ import {
   getCharacterStat,
 } from '@/lib/nexonApi/characterApi'
 import { CharacterFullInfo } from '@/types/domain/character/character'
-import { ApiError } from '../nexonApi/nexonClient'
+import { ApiError } from '../nexonApi/nexon'
 
-export const fetchCharacterFullInfo = async (
+export const buildCharacterFullInfo = async (
   characterName: string,
 ): Promise<CharacterFullInfo> => {
   try {

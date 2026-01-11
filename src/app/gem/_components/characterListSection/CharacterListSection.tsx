@@ -6,7 +6,7 @@ import {
   fetchCharacter,
   fetchCharacters,
   fetchCharactersByNames,
-} from '@/lib/services/fetchCharacters'
+} from '@/lib/client/charactersClient'
 import { useJuboCharacterStore } from '@/stores/useJubocCharacter'
 import { WorldType } from '@/types/domain/game/world'
 import Link from 'next/link'
