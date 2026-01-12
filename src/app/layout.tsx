@@ -42,13 +42,46 @@ export const metadata: Metadata = {
   },
 }
 
+const ScriptTag = () => {
+  const codeToRunOnClient = `(() => {
+  try {
+    const storedTheme = localStorage.getItem('theme'); // 'light' | 'dark' | 'system' | null
+
+    const theme =
+      storedTheme === 'light' ||
+      storedTheme === 'dark' ||
+      storedTheme === 'system'
+        ? storedTheme
+        : 'system';
+
+    const systemPrefersDark = window.matchMedia(
+      '(prefers-color-scheme: dark)',
+    ).matches;
+
+    const resolvedTheme =
+      theme === 'system' ? (systemPrefersDark ? 'dark' : 'light') : theme;
+
+    if (resolvedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  } catch (e) {
+    // localStorage 접근 실패 등 예외 상황 대비
+  }
+})();
+`
+
+  return <script dangerouslySetInnerHTML={{ __html: codeToRunOnClient }} />
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
       <body
         className={`${pretendard.variable} ${mapleFont.variable} antialiased bg-[#edeef1] dark:bg-neutral-900 dark:text-white/90 font-sans`}
       >
@@ -62,9 +95,10 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1891953654573817"
           crossOrigin="anonymous"
         ></Script>
+        <ScriptTag />
         <ThemeProvider>
           <RootHeader />
-          <main className="w-full xl:w-[1024px] my-0 mx-auto min-h-[calc(100vh-309px)]">
+          <main className="w-full lg:w-[800px] xl:w-[1024px] my-0 mx-auto min-h-[calc(100vh-309px)]">
             {children}
           </main>
           <RootFooter />

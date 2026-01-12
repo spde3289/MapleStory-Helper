@@ -21,10 +21,10 @@ const GemPage = () => {
   }
 
   return (
-    <div className="py-8 px-2 m-0 md:my-0 md:m-auto lg:px-0 flex flex-col gap-4 ">
+    <div className="py-8 px-2 md:px-4 lg:px-0 flex flex-col gap-4 w-full">
       <CrystalSalePriceSection unit={unit} unitHandler={unitHandler} />
       <div
-        className={clsx('flex gap-2 flex-col justify-between', 'lg:flex-row')}
+        className={clsx('flex gap-2 flex-col justify-between', 'md:flex-row')}
       >
         <CharacterListSection unit={unit} />
         <BossListSection unit={unit} />

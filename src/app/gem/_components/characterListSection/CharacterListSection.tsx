@@ -114,7 +114,7 @@ const CharacterListSection = ({ unit }: Props) => {
 
   return (
     <ItemContainer className="relative" title="캐릭터 등록">
-      <div className="w-full lg:w-[300px]">
+      <div className="w-full md:w-[300px]">
         <div className="absolute top-3 right-4 underline">
           <Link
             target="_blank"

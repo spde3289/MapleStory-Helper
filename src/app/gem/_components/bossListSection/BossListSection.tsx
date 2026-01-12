@@ -106,7 +106,7 @@ const BossListSection = ({ unit }: Props) => {
   return (
     <ItemContainer
       title="보스 리스트"
-      className="relative text-nowrap no-drag"
+      className="relative text-nowrap no-drag flex-1 w-full"
       tip="주관적인 쾌적함 기준입니다."
     >
       <div className="flex gap-2 mb-2 flex-wrap">
@@ -137,7 +137,7 @@ const BossListSection = ({ unit }: Props) => {
         />{' '}
         보스 숨기기
       </label>
-      <table align="center" cellPadding={8} className="w-full">
+      <table align="center" cellPadding={6} className="w-full">
         <thead>
           <tr className="border-b w-full dark:border-white/[0.2]">
             <th className="text-center">보스</th>
@@ -148,7 +148,7 @@ const BossListSection = ({ unit }: Props) => {
               tabIndex={0}
               onKeyDown={handelPriceSort}
               onClick={handelPriceSort}
-              className="w-full flex items-center justify-center gap-1 cursor-pointer"
+              className="w-36 flex items-center justify-center gap-1 cursor-pointer "
             >
               가격
               {sort.icon}

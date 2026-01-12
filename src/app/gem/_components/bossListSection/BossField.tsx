@@ -87,11 +87,13 @@ const BossField = ({ sort, unit, boss }: Props) => {
           : `${boss.bossId}_${boss.difficulties[0].difficulty}`
       }
     >
-      <td className="flex items-center gap-2 w-fit">
+      <td className="flex items-center md:flex-col lg:flex-row gap-2 md:gap-1 lg:gap-2">
         <div className="size-10 md:size-8 rounded-lg overflow-hidden">
           <BossImage boss={boss.bossId} alt={boss.bossName} />
         </div>
-        <div className="text-sm hidden sm:block">{boss.bossName}</div>
+        <div className="text-sm hidden sm:block">
+          {boss.bossName === '가디언 엔젤 슬라임' ? '가엔슬' : boss.bossName}
+        </div>
       </td>
       <td>
         <form
@@ -127,7 +129,7 @@ const BossField = ({ sort, unit, boss }: Props) => {
         <select
           onChange={handlePartySize}
           value={partySize}
-          className="w-fit dark:bg-gray-800 dark:border-white/[0.2] border rounded-lg h-fit px-2 py-1 outline-none"
+          className="w-fit dark:bg-gray-800 dark:border-white/[0.2] border rounded-lg h-fit px-1.5 py-0.5 outline-none"
           name="player"
           id={
             boss.difficulties.length >= 2
