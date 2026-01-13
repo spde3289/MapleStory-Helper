@@ -1,10 +1,15 @@
-import NavigationContainer from './_components/NavigationContainer'
+import NoticeListSection from './_components/NoticeListSection/NoticeListSection'
+
+import 'swiper/css'
+import 'swiper/css/pagination'
 
 function Home() {
   return (
-    <div className="w-full h-full flex lg:justify-center">
-      <NavigationContainer />
-    </div>
+    <>
+      <div className="w-full h-full py-16">
+        <NoticeListSection />
+      </div>
+    </>
   )
 }
 

@@ -83,7 +83,7 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <body
-        className={`${pretendard.variable} ${mapleFont.variable} antialiased bg-[#edeef1] dark:bg-neutral-900 dark:text-white/90 font-sans`}
+        className={`${pretendard.variable} ${mapleFont.variable} min-w-96 w-full antialiased bg-[#edeef1] dark:bg-neutral-900 dark:text-white/90 font-sans`}
       >
         {/* Vercel Analytics Script */}
         <Analytics />
@@ -98,7 +98,7 @@ export default function RootLayout({
         <ScriptTag />
         <ThemeProvider>
           <RootHeader />
-          <main className="w-full lg:w-[800px] xl:w-[1024px] my-0 mx-auto min-h-[calc(100vh-309px)]">
+          <main className="min-w-96 w-full lg:w-[800px] xl:w-[1024px] my-0 mx-auto min-h-[calc(100vh-309px)]">
             {children}
           </main>
           <RootFooter />

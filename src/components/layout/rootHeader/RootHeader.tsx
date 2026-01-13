@@ -13,7 +13,7 @@ const RootHeader = () => {
   return (
     <header
       className={clsx(
-        'w-full py-2.5',
+        'py-2.5',
         'bg-white border-b border-gray-200 dark:border-neutral-700 dark:bg-neutral-900',
       )}
     >
