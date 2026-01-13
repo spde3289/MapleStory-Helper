@@ -28,6 +28,7 @@ export interface UpdateNoticeListResponse {
 
 /** 이벤트 공지 리스트 아이템 */
 export interface EventNoticeListItem extends NoticeListItem {
+  thumbnail_url: string
   date_event_start: string
   date_event_end: string
 }
@@ -45,6 +46,7 @@ export interface EventNoticeDetailResponse extends NoticeDetailResponse {
 
 /** 캐시샵 공지 리스트 아이템 */
 export interface CashshopNoticeListItem extends NoticeListItem {
+  thumbnail_url: string
   date_sale_start: string
   date_sale_end: string
   /** 상시 판매 여부 (true - 상시) */

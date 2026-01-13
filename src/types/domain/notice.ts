@@ -7,8 +7,8 @@ export interface NoticeItem {
   url: string
   date: string
   // type에 따라 optional 메타
-  event?: { start: string; end: string }
-  sale?: { start: string; end: string; ongoing: boolean }
+  event?: { start: string; end: string; thumbnail_url: string }
+  sale?: { start: string; end: string; ongoing: boolean; thumbnail_url: string }
 }
 
 export interface NoticeList {

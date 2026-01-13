@@ -57,7 +57,11 @@ export const normalizeNoticeList = (
           title: n.title,
           url: n.url,
           date: n.date,
-          event: { start: n.date_event_start, end: n.date_event_end },
+          event: {
+            start: n.date_event_start,
+            end: n.date_event_end,
+            thumbnail_url: n.thumbnail_url,
+          },
         })),
       }
     }
@@ -75,6 +79,7 @@ export const normalizeNoticeList = (
             start: n.date_sale_start,
             end: n.date_sale_end,
             ongoing: n.ongoing_flag === 'true',
+            thumbnail_url: n.thumbnail_url,
           },
         })),
       }
