@@ -1,0 +1,30 @@
+.root :global(.swiper-wrapper) {
+  height: fit-content;
+}
+
+/* 슬라이드 자체 (Swiper가 생성) */
+.root :global(.swiper-slide) {
+  transition: transform 0.2s ease;
+}
+
+.pagination :global(.swiper-pagination-bullets) {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  transition: transform 0.2s ease;
+  transform: translatey(20%);
+}
+
+.pagination :global(.swiper-pagination-bullet) {
+  background: #fb6514;
+}
+
+.pagination
+  :global(
+    .swiper-pagination-horizontal.swiper-pagination-bullets
+      .swiper-pagination-bullet
+  ) {
+  background: #fb6514;
+  margin: 0;
+}
