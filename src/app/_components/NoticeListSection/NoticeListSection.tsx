@@ -27,10 +27,12 @@ const NoticeListSection = async () => {
         >
           <NoticePlainList
             title="공지사항"
+            type={noticeList.type}
             noticeList={mapNoticesToSimpleList(noticeList.items)}
           />
           <NoticePlainList
             title="업데이트"
+            type={updateNoticeList.type}
             noticeList={mapNoticesToSimpleList(updateNoticeList.items)}
           />
         </div>
@@ -42,10 +44,12 @@ const NoticeListSection = async () => {
         >
           <NoticeThumbnailList
             title="이벤트"
+            type={eventNoticeList.type}
             noticeList={mapThumbnailNoticesToSimpleList(eventNoticeList.items)}
           />
           <NoticeThumbnailList
             title="캐시샵"
+            type={cashshopNoticeList.type}
             noticeList={mapThumbnailNoticesToSimpleList(
               cashshopNoticeList.items,
             )}

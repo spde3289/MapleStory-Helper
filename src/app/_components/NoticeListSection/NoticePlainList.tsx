@@ -3,6 +3,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import styles from './Carousel.module.css'
 
 import { NoticeSimple } from '@/app/_utils/mapper'
+import { ROUTES } from '@/constants/routers/appRoutes'
+import { NoticeType } from '@/types/domain/notice'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useEffect, useRef } from 'react'
@@ -11,10 +13,11 @@ import type { Swiper as SwiperType } from 'swiper/types'
 
 interface Props {
   title: string
+  type: NoticeType
   noticeList: NoticeSimple[]
 }
 
-const NoticePlainList = ({ title, noticeList }: Props) => {
+const NoticePlainList = ({ title, type, noticeList }: Props) => {
   const paginationRef = useRef<HTMLDivElement | null>(null)
   const swiperRef = useRef<SwiperType | null>(null)
 
@@ -65,7 +68,10 @@ const NoticePlainList = ({ title, noticeList }: Props) => {
       >
         {noticeList.map((notice) => (
           <SwiperSlide key={notice.title} className="text-sm hover:underline">
-            <Link href={`${notice.noticeId}`} className="flex gap-1 w-full">
+            <Link
+              href={ROUTES.BOARD.DETAIL(type, notice.noticeId)}
+              className="flex gap-1 w-full"
+            >
               <span className="text-gray-500 shrink-0">{notice.date}</span>
               <span className="min-w-0 flex-1 truncate">{notice.title}</span>
             </Link>

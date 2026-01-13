@@ -3,6 +3,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import styles from './Carousel.module.css'
 
 import { ThumbnailNoticeSimple } from '@/app/_utils/mapper'
+import { ROUTES } from '@/constants/routers/appRoutes'
+import { NoticeType } from '@/types/domain/notice'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -12,10 +14,11 @@ import type { Swiper as SwiperType } from 'swiper/types'
 
 interface Props {
   title: string
+  type: NoticeType
   noticeList: ThumbnailNoticeSimple[]
 }
 
-const NoticeThumbnailList = ({ title, noticeList }: Props) => {
+const NoticeThumbnailList = ({ title, type, noticeList }: Props) => {
   const paginationRef = useRef<HTMLDivElement | null>(null)
   const swiperRef = useRef<SwiperType | null>(null)
 
@@ -70,7 +73,10 @@ const NoticeThumbnailList = ({ title, noticeList }: Props) => {
             key={notice.title}
             className="text-sm hover:underline h-fit"
           >
-            <Link href={`${notice.noticeId}`} className="flex flex-col group">
+            <Link
+              href={ROUTES.BOARD.DETAIL(type, notice.noticeId)}
+              className="flex flex-col group"
+            >
               <div className="relative aspect-video rounded-md overflow-hidden ">
                 <Image
                   src={notice.thumbnail_url}

@@ -1,17 +1,19 @@
+import { ROUTES } from './routers/appRoutes'
+
 const NAV_ITEMS = [
   {
     name: '계산기',
     children: [
       {
-        path: '/gem',
+        path: ROUTES.CALCULATOR.GEM,
         name: '주보수익',
       },
       {
-        path: '/genesis',
+        path: ROUTES.CALCULATOR.GENESIS,
         name: '제네시스 해방 퀘스트',
       },
       {
-        path: '/destiny',
+        path: ROUTES.CALCULATOR.DESTINY,
         name: '데스티니 해방 퀘스트',
       },
     ],
