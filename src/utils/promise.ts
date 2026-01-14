@@ -1,4 +1,4 @@
-import { ApiErrorResponse } from '@/types/api/apiErrors'
+import { ApiErrorResponse } from '@/types/error/apiErrors'
 
 export const splitSettled = <T>(results: PromiseSettledResult<T>[]) => {
   const success: T[] = []

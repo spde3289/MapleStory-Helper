@@ -18,3 +18,23 @@ export const getDateAfterWeeks = (n: number) => {
 
   return koreanDate
 }
+
+const WEEKDAY_KR = ['일', '월', '화', '수', '목', '금', '토'] as const
+
+const parseYMD = (iso: string) => {
+  const [date] = iso.split('T')
+  const [year, month, day] = date.split('-').map(Number)
+  return { year, month, day }
+}
+
+const getWeekdayKR = (iso: string) => {
+  const date = new Date(iso)
+  return WEEKDAY_KR[date.getDay()]
+}
+
+export const formatEventPeriod = (start: string, end: string): string => {
+  const s = parseYMD(start)
+  const e = parseYMD(end)
+
+  return `${s.month}/${s.day} ${getWeekdayKR(start)} ~ ${e.month}/${e.day} ${getWeekdayKR(end)}`
+}

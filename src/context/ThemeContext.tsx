@@ -1,55 +1,71 @@
 'use client'
 
-import type React from 'react'
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 
-type Theme = 'light' | 'dark'
+export type Theme = 'light' | 'dark' | 'system'
 
 type ThemeContextType = {
   theme: Theme
-  toggleTheme: () => void
+  resolvedTheme: 'light' | 'dark'
+  setTheme: (theme: Theme) => void
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const [theme, setTheme] = useState<Theme>('light')
-  const [isInitialized, setIsInitialized] = useState(false)
+const getInitialResolvedTheme = () => {
+  if (typeof document === 'undefined') return 'light'
+  return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'
+}
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as Theme | null
-    const initialTheme = savedTheme || 'light'
+export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+  const [theme, setThemeState] = useState<Theme>('system')
+  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>(() =>
+    getInitialResolvedTheme(),
+  )
+  const applyTheme = useCallback((t: Theme) => {
+    const systemPrefersDark = window.matchMedia(
+      '(prefers-color-scheme: dark)',
+    ).matches
 
-    setTheme(initialTheme)
-    setIsInitialized(true)
+    const finalTheme =
+      t === 'system' ? (systemPrefersDark ? 'dark' : 'light') : t
+
+    setResolvedTheme(finalTheme)
+    document.documentElement.classList.toggle('dark', finalTheme === 'dark')
   }, [])
 
+  const setTheme = useCallback(
+    (newTheme: Theme) => {
+      setThemeState(newTheme)
+      localStorage.setItem('theme', newTheme)
+      applyTheme(newTheme)
+    },
+    [applyTheme],
+  )
+
   useEffect(() => {
-    if (isInitialized) {
-      localStorage.setItem('theme', theme)
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
-    }
-  }, [theme, isInitialized])
+    const stored = (localStorage.getItem('theme') as Theme) ?? 'system'
+    setThemeState(stored)
+    applyTheme(stored)
+  }, [applyTheme])
 
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'))
-  }
-
-  const value = useMemo(() => ({ theme, toggleTheme }), [theme])
+  const value = useMemo(
+    () => ({ theme, resolvedTheme, setTheme }),
+    [theme, resolvedTheme, setTheme],
+  )
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }
 
 export const useTheme = () => {
-  const context = useContext(ThemeContext)
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider')
-  }
-  return context
+  const ctx = useContext(ThemeContext)
+  if (!ctx) throw new Error('useTheme must be used within ThemeProvider')
+  return ctx
 }

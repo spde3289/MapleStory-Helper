@@ -1,5 +1,6 @@
 'use client'
 
+import clsx from 'clsx'
 import React, { MouseEventHandler, useRef, useState } from 'react'
 import Tooltip from './Tooltip'
 
@@ -26,7 +27,7 @@ const Button = ({
 
   const sizeClasses = {
     sm: 'px-2 py-0.5 text-sm',
-    md: 'px-2 py-1 text-base',
+    md: 'px-3 py-1 text-base',
   }
 
   const handleMouseEnter = () => {
@@ -40,7 +41,17 @@ const Button = ({
     setIsHovered(false)
   }
   return (
-    <div className="w-max group rounded-lg border border-gray-300 bg-white text-theme-sm font-medium text-gray-900 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-white/[0.03] dark:hover:text-gray-200">
+    <div
+      className={clsx(
+        'rounded-lg w-fit',
+        'group',
+        'bg-white border dark:bg-neutral-900 border-neutral-300 dark:border-neutral-600',
+        'text-theme-sm font-medium text-gray-900',
+        'dark:text-gray-100',
+        'hover:bg-neutral-100 hover:text-gray-800',
+        'dark:hover:bg-white/[0.03] dark:hover:text-gray-200',
+      )}
+    >
       <button
         ref={buttonRef}
         onClick={onClick}

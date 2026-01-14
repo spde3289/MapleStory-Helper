@@ -1,7 +1,6 @@
-import AppHeader from '@/components/layout/AppHeader'
-import Backdrop from '@/components/layout/Backdrop'
-import NavBar from '@/components/layout/NavBar'
-import DesigeProvider from '@/components/porvider/DesigeProvider'
+import RootFooter from '@/components/layout/rootFooter/RootFooter'
+import RootHeader from '@/components/layout/rootHeader/RootHeader'
+import { ThemeProvider } from '@/context/ThemeContext'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
@@ -24,7 +23,12 @@ const mapleFont = localFont({
       style: 'bold',
     },
   ],
-  variable: '--font-Maplestory',
+  variable: '--font-maplestory',
+})
+
+const pretendard = localFont({
+  src: '../assets/fonts/PretendardVariable.ttf',
+  variable: '--font-pretendard',
 })
 
 export const metadata: Metadata = {
@@ -38,15 +42,48 @@ export const metadata: Metadata = {
   },
 }
 
+const ScriptTag = () => {
+  const codeToRunOnClient = `(() => {
+  try {
+    const storedTheme = localStorage.getItem('theme'); // 'light' | 'dark' | 'system' | null
+
+    const theme =
+      storedTheme === 'light' ||
+      storedTheme === 'dark' ||
+      storedTheme === 'system'
+        ? storedTheme
+        : 'system';
+
+    const systemPrefersDark = window.matchMedia(
+      '(prefers-color-scheme: dark)',
+    ).matches;
+
+    const resolvedTheme =
+      theme === 'system' ? (systemPrefersDark ? 'dark' : 'light') : theme;
+
+    if (resolvedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  } catch (e) {
+    // localStorage 접근 실패 등 예외 상황 대비
+  }
+})();
+`
+
+  return <script dangerouslySetInnerHTML={{ __html: codeToRunOnClient }} />
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
       <body
-        className={`${mapleFont.className} antialiased dark:bg-gray-900 dark:text-white/90`}
+        className={`${pretendard.variable} ${mapleFont.variable} min-w-96 w-full antialiased bg-[#edeef1] dark:bg-neutral-900 dark:text-white/90 font-sans`}
       >
         {/* Vercel Analytics Script */}
         <Analytics />
@@ -58,19 +95,14 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1891953654573817"
           crossOrigin="anonymous"
         ></Script>
-
-        <DesigeProvider>
-          <main className="">
-            <AppHeader />
-            <NavBar />
-            <Backdrop />
-            <div className="h-[calc(100vh-65px)] lg:pl-[290px] ">
-              <main className="h-full p-1 overflow-scroll scrollBar sm:p-4 md:p-5 flex flex-col lg:flex-row gap-2 sm:gap-5">
-                {children}
-              </main>
-            </div>
+        <ScriptTag />
+        <ThemeProvider>
+          <RootHeader />
+          <main className="min-w-96 w-full lg:w-[800px] xl:w-[1024px] my-0 mx-auto min-h-[calc(100vh-309px)]">
+            {children}
           </main>
-        </DesigeProvider>
+          <RootFooter />
+        </ThemeProvider>
       </body>
     </html>
   )
