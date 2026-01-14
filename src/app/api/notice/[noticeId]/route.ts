@@ -5,7 +5,7 @@ import { NOTICE_TYPES, NoticeType } from '@/types/domain/notice'
 import { NextResponse } from 'next/server'
 
 type Params = {
-  noticeId: number
+  noticeId: string
 }
 
 export const GET = async (
