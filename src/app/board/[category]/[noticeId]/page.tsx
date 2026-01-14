@@ -1,19 +1,20 @@
 import { fetchNotice } from '@/lib/client/noticeClient'
-import { NoticeType } from '@/types/domain/notice'
 import NoticeHtml from './_components/NoticeHtml'
 
 type Category = 'notice' | 'update' | 'event' | 'cashshop'
 
 interface Props {
-  params: {
+  params: Promise<{
     category: Category
     noticeId: string
-  }
+  }>
 }
 
 const NoticeDetailPage = async ({ params }: Props) => {
-  const notice = await fetchNotice(Number(params.noticeId), {
-    type: params.category,
+  const { noticeId, category } = await params
+
+  const notice = await fetchNotice(Number(noticeId), {
+    type: category,
   })
 
   return (
