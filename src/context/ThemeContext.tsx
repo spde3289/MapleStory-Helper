@@ -19,10 +19,16 @@ type ThemeContextType = {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
+const getInitialResolvedTheme = () => {
+  if (typeof document === 'undefined') return 'light'
+  return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'
+}
+
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [theme, setThemeState] = useState<Theme>('system')
-  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light')
-
+  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>(() =>
+    getInitialResolvedTheme(),
+  )
   const applyTheme = useCallback((t: Theme) => {
     const systemPrefersDark = window.matchMedia(
       '(prefers-color-scheme: dark)',

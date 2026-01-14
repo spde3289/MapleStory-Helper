@@ -1,7 +1,7 @@
-import { SEVER_ERROR_TYPES } from '@/constants/severErrorTypes'
+import { SERVER_ERROR_TYPES } from '@/constants/errors/severErrorTypes'
 import { getCharacterList } from '@/lib/nexonApi/characterApi'
-import { ApiError } from '@/lib/nexonApi/nexonClient'
-import { fetchCharacterFullInfo } from '@/lib/sever/fetchCharacterInfo' // 위치에 맞게 수정
+import { ApiError } from '@/lib/nexonApi/nexon'
+import { buildCharacterFullInfo } from '@/lib/server/buildCharacterFullInfo' // 위치에 맞게 수정
 import { splitSettled } from '@/utils/promise'
 
 export const GET = async (req: Request) => {
@@ -19,7 +19,7 @@ export const GET = async (req: Request) => {
       throw new ApiError({
         status: 400,
         message: 'minPower는 minLevel과 함께 사용해야 합니다.',
-        type: SEVER_ERROR_TYPES.POWER_FILTER_MIN_LEVEL,
+        type: SERVER_ERROR_TYPES.POWER_FILTER_MIN_LEVEL,
       })
     }
 
@@ -32,7 +32,7 @@ export const GET = async (req: Request) => {
 
     if (!hasMinLevel && !hasMinPower) {
       const fullList = await Promise.allSettled(
-        allCharacters.map((ch) => fetchCharacterFullInfo(ch.character_name)),
+        allCharacters.map((ch) => buildCharacterFullInfo(ch.character_name)),
       )
 
       const { success, errors } = splitSettled(fullList)
@@ -49,7 +49,7 @@ export const GET = async (req: Request) => {
       )
 
       const fullList = await Promise.allSettled(
-        levelFiltered.map((ch) => fetchCharacterFullInfo(ch.character_name)),
+        levelFiltered.map((ch) => buildCharacterFullInfo(ch.character_name)),
       )
 
       const { success, errors } = splitSettled(fullList)
@@ -84,7 +84,7 @@ export const GET = async (req: Request) => {
     return Response.json(
       new ApiError({
         ...error,
-        type: SEVER_ERROR_TYPES.CHARACTERS_FETCH_ERROR,
+        type: SERVER_ERROR_TYPES.CHARACTERS_FETCH_ERROR,
         message: '알 수 없는 서버 에러입니다.',
       }),
       { status: 500 },

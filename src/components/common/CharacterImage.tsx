@@ -27,8 +27,8 @@ const CharacterImage = ({ src }: CharacterImagePropsType) => {
       <Image
         unoptimized
         fill
-        src={characterImage}
         className="object-cover"
+        src={characterImage}
         onError={() => setCharacterImage(noChar)} // 에러 발생 시 기본 이미지로 변경
         alt="대표 캐릭터 이미지"
         priority
