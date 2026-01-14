@@ -8,10 +8,19 @@ import NoticePlainList from './NoticePlainList'
 import NoticeThumbnailList from './NoticeThumbnailList'
 
 const NoticeListSection = async () => {
-  const noticeList = await fetchNoticeList({ type: 'notice' })
-  const updateNoticeList = await fetchNoticeList({ type: 'update' })
-  const eventNoticeList = await fetchNoticeList({ type: 'event' })
-  const cashshopNoticeList = await fetchNoticeList({ type: 'cashshop' })
+  const noticeList = await fetchNoticeList({ type: 'notice' }).catch(() => ({
+    items: [],
+    type: 'notice' as const,
+  }))
+  const updateNoticeList = await fetchNoticeList({ type: 'update' }).catch(
+    () => ({ items: [], type: 'update' as const }),
+  )
+  const eventNoticeList = await fetchNoticeList({ type: 'event' }).catch(
+    () => ({ items: [], type: 'event' as const }),
+  )
+  const cashshopNoticeList = await fetchNoticeList({ type: 'cashshop' }).catch(
+    () => ({ items: [], type: 'cashshop' as const }),
+  )
 
   return (
     <section
@@ -33,7 +42,7 @@ const NoticeListSection = async () => {
           <NoticePlainList
             title="업데이트"
             type={updateNoticeList.type}
-            noticeList={mapNoticesToSimpleList(updateNoticeList.items)}
+            noticeList={mapNoticesToSimpleList(updateNoticeList?.items)}
           />
         </div>
         <div className="w-full my-2 h-[1px] bg-gray-200 dark:bg-neutral-700 " />
@@ -44,12 +53,12 @@ const NoticeListSection = async () => {
         >
           <NoticeThumbnailList
             title="이벤트"
-            type={eventNoticeList.type}
+            type={eventNoticeList?.type}
             noticeList={mapThumbnailNoticesToSimpleList(eventNoticeList.items)}
           />
           <NoticeThumbnailList
             title="캐시샵"
-            type={cashshopNoticeList.type}
+            type={cashshopNoticeList?.type}
             noticeList={mapThumbnailNoticesToSimpleList(
               cashshopNoticeList.items,
             )}
