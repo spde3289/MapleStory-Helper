@@ -2,9 +2,11 @@ import { fetchNotice } from '@/lib/client/noticeClient'
 import { NoticeType } from '@/types/domain/notice'
 import NoticeHtml from './_components/NoticeHtml'
 
+type Category = 'notice' | 'update' | 'event' | 'cashshop'
+
 interface Props {
   params: {
-    category: NoticeType
+    category: Category
     noticeId: string
   }
 }
