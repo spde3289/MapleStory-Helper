@@ -3,6 +3,8 @@ import NoticeListSection from './_components/NoticeListSection/NoticeListSection
 import 'swiper/css'
 import 'swiper/css/pagination'
 
+export const dynamic = 'force-dynamic'
+
 function Home() {
   return (
     <>
