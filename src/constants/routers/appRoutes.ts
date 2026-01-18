@@ -5,6 +5,7 @@ export const ROUTES = {
     GEM: '/calculator/gem',
     GENESIS: '/calculator/genesis',
     DESTINY: '/calculator/destiny',
+    SEOKBANG: '/calculator/seokbang',
   },
 
   BOARD: {

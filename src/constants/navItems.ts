@@ -16,6 +16,10 @@ const NAV_ITEMS = [
         path: ROUTES.CALCULATOR.DESTINY,
         name: '데스티니 해방 퀘스트',
       },
+      {
+        path: ROUTES.CALCULATOR.SEOKBANG,
+        name: '보조무기 석방 퀘스트',
+      },
     ],
   },
 ] as const
