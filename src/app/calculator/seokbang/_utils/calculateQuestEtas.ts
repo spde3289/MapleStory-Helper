@@ -24,6 +24,7 @@ export const calculateQuestEtas = (
     startIndex >= 0 ? requirements.slice(startIndex) : requirements
 
   let cursorDate = startDate
+  let accumulatedDays = 0
 
   return targetRequirements.map((req, idx) => {
     const isCurrentQuest = startIndex >= 0 && idx === 0
@@ -41,14 +42,18 @@ export const calculateQuestEtas = (
     const traceWeeks = ceilDiv(remainingTrace, rates.trace)
     const traceDays = traceWeeks * 7
 
-    const requiredDays = Math.max(fragmentDays, traceDays)
+    const currentQuestDays = Math.max(fragmentDays, traceDays)
 
-    cursorDate = addDays(cursorDate, requiredDays)
+    accumulatedDays += currentQuestDays
+    cursorDate = addDays(startDate, accumulatedDays)
 
     return {
-      remaining: { fragment: req.fragment, trace: req.trace }, // ✅ 남은 요구량
       name: req.name,
-      requiredDays,
+      remaining: {
+        fragment: remainingFragment,
+        trace: remainingTrace,
+      },
+      requiredDays: accumulatedDays,
       expectedDate: cursorDate.toLocaleDateString('ko-KR'),
     }
   })

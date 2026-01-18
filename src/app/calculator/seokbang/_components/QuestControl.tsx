@@ -16,7 +16,7 @@ const QuestControl = ({ onChange, currentQuest }: Props) => {
   return (
     <div className="flex flex-col sm:flex-row gap-3 items-center mb-4">
       <div>
-        <div className="text-sm">진행중인 보스</div>
+        <div className="text-sm mb-1">진행중인 보스</div>
         <select
           onChange={onChange.setName}
           className="mr-4 outline-none px-4 py-2 border dark:border-white/[0.2] rounded-lg dark:bg-neutral-900"
@@ -31,7 +31,7 @@ const QuestControl = ({ onChange, currentQuest }: Props) => {
         </select>
       </div>
       <div className="flex flex-col ">
-        <label className="text-sm " htmlFor="fragment">
+        <label className="text-sm mb-1" htmlFor="fragment">
           캐릭터 레벨
         </label>
         <input
@@ -44,7 +44,7 @@ const QuestControl = ({ onChange, currentQuest }: Props) => {
         />{' '}
       </div>
       <div className="flex flex-col ">
-        <label className="text-sm " htmlFor="fragment">
+        <label className="text-sm mb-1" htmlFor="fragment">
           보유 에리온의 조각
         </label>
         <input
@@ -57,7 +57,7 @@ const QuestControl = ({ onChange, currentQuest }: Props) => {
         />{' '}
       </div>
       <div className="flex flex-col  ">
-        <label className="text-sm " htmlFor="trace">
+        <label className="text-sm mb-1" htmlFor="trace">
           보유 격전의 흔적
         </label>
         <input
