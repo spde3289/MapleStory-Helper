@@ -83,7 +83,7 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <body
-        className={`${pretendard.variable} ${mapleFont.variable} min-w-96 w-full antialiased bg-[#edeef1] dark:bg-neutral-900 dark:text-white/90 font-sans`}
+        className={`${pretendard.variable} ${mapleFont.variable} min-w-96 w-full antialiased dark:bg-neutral-900 dark:text-white/90 font-sans`}
       >
         {/* Vercel Analytics Script */}
         <Analytics />
