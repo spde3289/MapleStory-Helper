@@ -36,3 +36,25 @@ export const mapBossTraceGroupToBossRows = (
     })),
   }))
 }
+
+type BossTraceRow = {
+  bossId: string
+  bossName: string
+  difficulty: string
+  trace: number
+}
+
+export const mapAndSortBossTraces = (
+  list: BossTraceGroup[],
+): BossTraceRow[] => {
+  return list
+    .flatMap((boss) =>
+      boss.difficulties.map((d) => ({
+        bossId: boss.bossId,
+        bossName: boss.bossName,
+        difficulty: d.difficulty,
+        trace: d.trace,
+      })),
+    )
+    .sort((a, b) => a.trace - b.trace)
+}
