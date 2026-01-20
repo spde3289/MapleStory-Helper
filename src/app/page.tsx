@@ -1,4 +1,4 @@
-import NoticeListSection from './_components/NoticeListSection/NoticeListSection'
+import NoticeListSection from './_components/noticeListSection/NoticeListSection'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
