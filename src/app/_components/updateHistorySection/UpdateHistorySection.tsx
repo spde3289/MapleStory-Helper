@@ -7,7 +7,7 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { MdArrowForwardIos } from 'react-icons/md'
 
-const UpdateTableSection = () => {
+const UpdateHistorySection = () => {
   const recentItems = [...SERVICE_UPDATE_HISTORY].slice(0, 3)
 
   return (
@@ -49,4 +49,4 @@ const UpdateTableSection = () => {
   )
 }
 
-export default UpdateTableSection
+export default UpdateHistorySection

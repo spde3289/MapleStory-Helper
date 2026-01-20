@@ -7,7 +7,7 @@ import clsx from 'clsx'
 import NoticePlainList from './NoticePlainList'
 import NoticeThumbnailList from './NoticeThumbnailList'
 
-const NoticeListSection = async () => {
+const NoticeFeedSection = async () => {
   const noticeList = await fetchNoticeList({ type: 'notice' }).catch(() => ({
     items: [],
     type: 'notice' as const,
@@ -59,4 +59,4 @@ const NoticeListSection = async () => {
   )
 }
 
-export default NoticeListSection
+export default NoticeFeedSection
