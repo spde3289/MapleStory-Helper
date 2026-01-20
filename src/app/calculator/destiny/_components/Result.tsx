@@ -1,8 +1,8 @@
 import ItemContainer from '@/components/common/ItemContainer'
 import quest from '@/data/destiny/quest.json'
 import { bossListType, currentQuestType } from '@/types/domain/genesis'
+import { getDateAfterWeeks } from '@/utils/date'
 import { calculateRewards, convertTime } from '@/utils/numberUtils'
-import { getDateAfterWeeks } from '@/utils/setDate'
 
 interface ResultProps {
   currentQuest: currentQuestType

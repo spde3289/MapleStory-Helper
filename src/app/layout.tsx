@@ -75,11 +75,11 @@ const ScriptTag = () => {
   return <script dangerouslySetInnerHTML={{ __html: codeToRunOnClient }} />
 }
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode
-}>) {
+}>) => {
   return (
     <html lang="ko" suppressHydrationWarning>
       <body
@@ -107,3 +107,5 @@ export default function RootLayout({
     </html>
   )
 }
+
+export default RootLayout
