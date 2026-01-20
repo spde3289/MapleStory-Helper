@@ -38,3 +38,13 @@ export const formatEventPeriod = (start: string, end: string): string => {
 
   return `${s.month}/${s.day} ${getWeekdayKR(start)} ~ ${e.month}/${e.day} ${getWeekdayKR(end)}`
 }
+
+export const isWithinDays = (targetDate: string | Date, days = 3) => {
+  const now = new Date()
+  const target = new Date(targetDate)
+
+  const diffMs = now.getTime() - target.getTime()
+  const diffDays = diffMs / (1000 * 60 * 60 * 24)
+
+  return diffDays <= days
+}

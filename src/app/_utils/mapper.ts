@@ -1,5 +1,5 @@
 import { NoticeItem } from '@/types/domain/notice'
-import { formatEventPeriod } from '@/utils/setDate'
+import { formatEventPeriod } from '@/utils/date'
 
 export interface NoticeSimple {
   title: string
