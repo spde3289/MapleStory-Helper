@@ -8,6 +8,10 @@ export const ROUTES = {
     SEOKBANG: '/calculator/seokbang',
   },
 
+  GUIDE: {
+    ROOT: '/guide',
+  },
+
   BOARD: {
     DETAIL: (category: NoticeType, noticeId: number | string) =>
       `/board/${category}/${noticeId}`,

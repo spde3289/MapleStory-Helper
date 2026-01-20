@@ -1,4 +1,5 @@
-import NoticeListSection from './_components/NoticeListSection/NoticeListSection'
+import NoticeFeedSection from './_components/noticeFeedSection/NoticeFeedSection'
+import UpdateHistorySection from './_components/updateHistorySection/UpdateHistorySection'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
@@ -9,7 +10,8 @@ const Home = () => {
   return (
     <>
       <div className="w-full h-full py-16">
-        <NoticeListSection />
+        <UpdateHistorySection />
+        <NoticeFeedSection />
       </div>
     </>
   )
