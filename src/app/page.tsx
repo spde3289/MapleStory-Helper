@@ -5,7 +5,7 @@ import 'swiper/css/pagination'
 
 export const dynamic = 'force-dynamic'
 
-function Home() {
+const Home = () => {
   return (
     <>
       <div className="w-full h-full py-16">
