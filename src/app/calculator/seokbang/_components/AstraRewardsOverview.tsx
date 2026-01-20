@@ -9,50 +9,56 @@ const AstraRewardsOverview = () => {
 
   return (
     <section className="flex flex-col sm:flex-row gap-4 w-full text-sm">
-      <TableCard
-        title="보스별 획득 흔적"
-        data={result}
-        getRowKey={(row) => row.bossName + row.difficulty}
-        columns={[
-          {
-            key: 'boss',
-            header: '보스',
-            render: (row) => row.bossName,
-          },
-          {
-            key: 'difficulty',
-            header: '난이도',
-            render: (row) => row.difficulty,
-          },
-          {
-            key: 'trace',
-            header: '흔적',
-            render: (row) => row.trace,
-          },
-        ]}
-      />
-      <TableCard
-        title="일일 퀘스트별 획득 조각"
-        data={result}
-        getRowKey={(row) => row.bossName + row.difficulty}
-        columns={[
-          {
-            key: 'boss',
-            header: '보스',
-            render: (row) => row.bossName,
-          },
-          {
-            key: 'difficulty',
-            header: '난이도',
-            render: (row) => row.difficulty,
-          },
-          {
-            key: 'trace',
-            header: '흔적',
-            render: (row) => row.trace,
-          },
-        ]}
-      />
+      <div className="w-full h-fit bg-white py-2 px-4 rounded-md border border-gray-200 dark:border-neutral-700 dark:bg-neutral-800">
+        <h3 className="text-center mb-2 font-semibold">보스별 획득 흔적</h3>
+        <TableCard
+          data={result}
+          getRowKey={(row) => row.bossName + row.difficulty}
+          columns={[
+            {
+              key: 'boss',
+              header: '보스',
+              render: (row) => row.bossName,
+            },
+            {
+              key: 'difficulty',
+              header: '난이도',
+              render: (row) => row.difficulty,
+            },
+            {
+              key: 'trace',
+              header: '흔적',
+              render: (row) => row.trace,
+            },
+          ]}
+        />
+      </div>
+      <div className="w-full h-fit bg-white py-2 px-4 rounded-md border border-gray-200 dark:border-neutral-700 dark:bg-neutral-800">
+        <h3 className="text-center mb-2 font-semibold">
+          일일 퀘스트별 획득 조각
+        </h3>
+        <TableCard
+          data={result}
+          getRowKey={(row) => row.bossName + row.difficulty}
+          columns={[
+            {
+              key: 'boss',
+              header: '보스',
+              render: (row) => row.bossName,
+            },
+            {
+              key: 'difficulty',
+              header: '난이도',
+              render: (row) => row.difficulty,
+            },
+            {
+              key: 'trace',
+              header: '흔적',
+              render: (row) => row.trace,
+            },
+          ]}
+        />
+      </div>
     </section>
   )
 }
