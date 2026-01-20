@@ -10,8 +10,8 @@ const Home = () => {
   return (
     <>
       <div className="w-full h-full py-16">
-        <NoticeListSection />
         <TimeLineSection />
+        <NoticeListSection />
       </div>
     </>
   )
