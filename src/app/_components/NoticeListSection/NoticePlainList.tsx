@@ -3,9 +3,12 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import styles from './Carousel.module.css'
 
 import { NoticeSimple } from '@/app/_utils/mapper'
+import newImg from '@/assets/pngs/new.png'
 import { ROUTES } from '@/constants/routers/appRoutes'
 import { NoticeType } from '@/types/domain/notice'
+import { isWithinDays } from '@/utils/date'
 import clsx from 'clsx'
+import Image from 'next/image'
 import Link from 'next/link'
 
 interface Props {
@@ -30,6 +33,11 @@ const NoticePlainList = ({ title, type, noticeList }: Props) => {
               href={ROUTES.BOARD.DETAIL(type, notice.noticeId)}
               className="flex gap-1 w-full"
             >
+              {isWithinDays(notice.date) && (
+                <div className="flex items-center">
+                  <Image className="aspect-square" src={newImg} alt="new" />
+                </div>
+              )}
               <p className="min-w-0 flex-1 truncate font-medium">
                 {notice.title}
               </p>
