@@ -17,11 +17,11 @@ interface Props {
 const NoticePlainList = ({ title, type, noticeList }: Props) => {
   return (
     <div className={clsx(styles.pagination, 'w-full')}>
-      <h3 className="font-medium text-zinc-500 text-sm mb-2">{title}</h3>
+      <h3 className="font-bold text-base mb-2">{title}</h3>
       <Swiper
         className={clsx(styles.root)}
         direction={'vertical'}
-        spaceBetween={2}
+        spaceBetween={4}
         slidesPerView={'auto'}
       >
         {noticeList.map((notice) => (
@@ -30,8 +30,10 @@ const NoticePlainList = ({ title, type, noticeList }: Props) => {
               href={ROUTES.BOARD.DETAIL(type, notice.noticeId)}
               className="flex gap-1 w-full"
             >
+              <p className="min-w-0 flex-1 truncate font-medium">
+                {notice.title}
+              </p>
               <span className="text-gray-500 shrink-0">{notice.date}</span>
-              <span className="min-w-0 flex-1 truncate">{notice.title}</span>
             </Link>
           </SwiperSlide>
         ))}

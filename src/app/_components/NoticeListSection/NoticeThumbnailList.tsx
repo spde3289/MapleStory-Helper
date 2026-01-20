@@ -17,7 +17,7 @@ interface Props {
 const NoticeThumbnailList = ({ title, type, noticeList }: Props) => {
   return (
     <div className={clsx(styles.pagination, 'w-full aspect-auto')}>
-      <h3 className="font-bold text-sm mb-2">{title}</h3>
+      <h3 className="font-bold text-base mb-2">{title}</h3>
       <div className="grid grid-cols-3 sm:grid-cols-4 gap-x-4 gap-y-2 text-xs">
         {noticeList.map((notice) => (
           <Link

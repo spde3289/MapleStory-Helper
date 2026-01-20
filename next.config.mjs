@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   images: {
     qualities: [50, 75, 100],
     domains: ['open.api.nexon.com'], // 여기에 도메인 추가
