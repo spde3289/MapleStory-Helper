@@ -2,7 +2,7 @@ import NoticeListSection from './_components/noticeListSection/NoticeListSection
 
 import 'swiper/css'
 import 'swiper/css/pagination'
-import TimeLineSection from './_components/timeLineSection/TimeLineSection'
+import UpdateTableSection from './_components/updateTableSection/UpdateTableSection'
 
 export const dynamic = 'force-dynamic'
 
@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <>
       <div className="w-full h-full py-16">
-        <TimeLineSection />
+        <UpdateTableSection />
         <NoticeListSection />
       </div>
     </>
