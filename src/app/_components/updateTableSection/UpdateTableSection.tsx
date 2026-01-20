@@ -25,7 +25,7 @@ const UpdateTableSection = () => {
           더보기 <MdArrowForwardIos />
         </Link>
       </div>
-      <div className="border py-2 px-4 border-gray-200 dark:border-neutral-700 rounded-sm">
+      <div className="border py-2 px-4 border-gray-300 dark:border-neutral-700 rounded-sm">
         <TableCard
           data={recentItems}
           getRowKey={(row) => row.date + row.title}
