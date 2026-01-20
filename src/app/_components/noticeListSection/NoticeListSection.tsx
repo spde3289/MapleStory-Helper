@@ -25,7 +25,7 @@ const NoticeListSection = async () => {
   return (
     <section
       className={clsx(
-        'bg-white py-2 px-4 rounded-md border border-gray-200 dark:border-neutral-700 dark:bg-neutral-800 ',
+        'bg-white py-2 px-4 rounded-md border border-gray-200 dark:border-neutral-700 dark:bg-neutral-800 mb-8',
       )}
     >
       <div className={clsx('grid grid-cols-1 sm:grid-cols-2 gap-x-7 text-xs')}>
