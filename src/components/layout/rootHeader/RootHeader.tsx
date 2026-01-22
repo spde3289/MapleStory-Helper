@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import maple from '@/assets/icons/maple.ico'
-import ThemeToggleButton from '@/components/common/ThemeToggleButton'
 import NAV_ITEMS from '@/constants/navItems'
 import clsx from 'clsx'
 import NavGroup from './NavGroup'
@@ -49,9 +48,6 @@ const RootHeader = () => {
                 <NavGroup key={item.name} item={item} />
               ))}
             </div>
-          </div>
-          <div>
-            <ThemeToggleButton />
           </div>
         </div>
       </div>

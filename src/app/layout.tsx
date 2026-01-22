@@ -47,12 +47,13 @@ const ScriptTag = () => {
   try {
     const storedTheme = localStorage.getItem('theme'); // 'light' | 'dark' | 'system' | null
 
-    const theme =
-      storedTheme === 'light' ||
-      storedTheme === 'dark' ||
-      storedTheme === 'system'
-        ? storedTheme
-        : 'system';
+    const theme = 'light'
+      // 다크모드 비활성화
+      // storedTheme === 'light' || 
+      // storedTheme === 'dark' ||
+      // storedTheme === 'system'
+      //   ? storedTheme
+      //   : 'light';
 
     const systemPrefersDark = window.matchMedia(
       '(prefers-color-scheme: dark)',
