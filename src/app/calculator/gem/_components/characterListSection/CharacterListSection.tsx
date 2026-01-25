@@ -1,6 +1,6 @@
 import ItemContainer from '@/components/common/ItemContainer'
 import WorldImage from '@/components/common/WorldImage'
-import Button from '@/components/ui/button/Button'
+import Button from '@/components/ui/Button'
 import { useSubmitInput } from '@/hooks/useSubmitInput'
 import {
   fetchCharacter,
