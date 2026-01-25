@@ -1,5 +1,5 @@
 import ItemContainer from '@/components/common/ItemContainer'
-import Button from '@/components/ui/button/Button'
+import Button from '@/components/ui/Button'
 import { BOSSES } from '@/constants/domain/bosses'
 import { PRESET_BOSSES } from '@/constants/presetBosses'
 import { useJuboCharacterStore } from '@/stores/useJubocCharacter'
