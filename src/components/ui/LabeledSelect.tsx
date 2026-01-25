@@ -8,7 +8,7 @@ interface SelectOption {
 interface LabeledSelectProps {
   id: string
   label: string
-  value?: string
+  value?: string | number
   options: SelectOption[]
   onChange?: (e: ChangeEvent<HTMLSelectElement>) => void
 }
