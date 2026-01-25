@@ -20,6 +20,10 @@ const NAV_ITEMS = [
         path: ROUTES.CALCULATOR.SEOKBANG,
         name: '보조무기 석방 퀘스트',
       },
+      {
+        path: ROUTES.CALCULATOR.PARTY_PROFIT,
+        name: '보스 분배금 계산기',
+      },
     ],
   },
 ] as const

@@ -6,6 +6,7 @@ export const ROUTES = {
     GENESIS: '/calculator/genesis',
     DESTINY: '/calculator/destiny',
     SEOKBANG: '/calculator/seokbang',
+    PARTY_PROFIT: '/calculator/partyProfit',
   },
 
   GUIDE: {
