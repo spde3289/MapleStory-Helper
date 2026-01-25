@@ -8,7 +8,6 @@ type Props = {
   saleAmount: number
   netAmount: number
   feeRate: number
-  fee: number
   onChange: {
     setSaleAmount: (value: number) => void
     setNetAmount: (value: number) => void
@@ -21,7 +20,6 @@ const ProfitControl = ({
   saleAmount,
   netAmount,
   feeRate,
-  fee,
   onChange,
   onClick,
 }: Props) => {
@@ -49,7 +47,7 @@ const ProfitControl = ({
           {formatKoreanNumber(netAmount)} 메소
         </div>
       </div>
-      <div>
+      <div className="w-fit">
         <LabeledSelect
           id="auction-fee"
           label="경매장 수수료"
@@ -57,9 +55,6 @@ const ProfitControl = ({
           value={feeRate}
           onChange={(e) => onChange.setFeeRate(Number(e.target.value))}
         />
-        <div className="text-xs mt-1 ml-3 text-gray-600">
-          {formatKoreanNumber(fee)} 메소
-        </div>
       </div>
       <div className="flex items-center">
         <CommonButton onClick={onClick}>초기화</CommonButton>

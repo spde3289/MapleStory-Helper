@@ -10,7 +10,6 @@ const PartyProfitSplitSection = () => {
     saleAmount,
     netAmount,
     feeRate,
-    fee,
     setSaleAmount,
     setNetAmount,
     setFeeRate,
@@ -26,7 +25,6 @@ const PartyProfitSplitSection = () => {
         saleAmount={saleAmount}
         netAmount={netAmount}
         feeRate={feeRate}
-        fee={fee}
         onChange={{ setSaleAmount, setNetAmount, setFeeRate }}
         onClick={reset}
       />
