@@ -24,7 +24,7 @@ const ProfitControl = ({
   onClick,
 }: Props) => {
   return (
-    <div className="flex gap-4 justify-center">
+    <div className="flex flex-col sm:flex-row gap-2 lg:gap-4 justify-center sm:relative">
       <div>
         <LabeledInput
           id="item-profit"
@@ -47,7 +47,7 @@ const ProfitControl = ({
           {formatKoreanNumber(netAmount)} 메소
         </div>
       </div>
-      <div className="w-fit">
+      <div className="flex justify-between sm:w-full sm:items-start md:w-fit items-center">
         <LabeledSelect
           id="auction-fee"
           label="경매장 수수료"
@@ -55,9 +55,9 @@ const ProfitControl = ({
           value={feeRate}
           onChange={(e) => onChange.setFeeRate(Number(e.target.value))}
         />
-      </div>
-      <div className="flex items-center">
-        <CommonButton onClick={onClick}>초기화</CommonButton>
+        <div className="flex items-center sm:absolute right-0">
+          <CommonButton onClick={onClick}>초기화</CommonButton>
+        </div>
       </div>
     </div>
   )
