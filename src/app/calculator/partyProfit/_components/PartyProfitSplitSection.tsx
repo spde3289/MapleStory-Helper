@@ -3,6 +3,7 @@
 import Divider from '@/components/ui/Divider'
 import clsx from 'clsx'
 import { useProfitControl } from '../_hooks/useProfitControl'
+import PartyMemberControl from './PartyMemberControl'
 import ProfitControl from './ProfitControl'
 
 const PartyProfitSplitSection = () => {
@@ -15,6 +16,7 @@ const PartyProfitSplitSection = () => {
     setFeeRate,
     reset,
   } = useProfitControl(5)
+
   return (
     <section
       className={clsx(
@@ -29,6 +31,7 @@ const PartyProfitSplitSection = () => {
         onClick={reset}
       />
       <Divider />
+      <PartyMemberControl netAmount={netAmount} feeRate={feeRate} />
     </section>
   )
 }
