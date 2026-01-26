@@ -29,6 +29,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>(() =>
     getInitialResolvedTheme(),
   )
+
   const applyTheme = useCallback((t: Theme) => {
     const systemPrefersDark = window.matchMedia(
       '(prefers-color-scheme: dark)',
@@ -51,9 +52,9 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   )
 
   useEffect(() => {
-    const stored = (localStorage.getItem('theme') as Theme) ?? 'system'
-    setThemeState(stored)
-    applyTheme(stored)
+    // const stored = (localStorage.getItem('theme') as Theme) ?? 'system' // 다크모드 비활성화
+    setThemeState('light')
+    applyTheme('light')
   }, [applyTheme])
 
   const value = useMemo(
