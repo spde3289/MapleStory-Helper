@@ -1,11 +1,9 @@
-import { formatKoreanNumber } from '@/utils/numberUtils'
 import { BiErrorCircle } from 'react-icons/bi'
 
 interface Props {
   isVisible: boolean
   overRatio: number
   remainingRatio: number
-  remainder: number
 }
 
 const BannerLayout = ({ children }: { children: React.ReactNode }) => {
@@ -21,7 +19,6 @@ const AllocationStatusBanner = ({
   isVisible,
   overRatio,
   remainingRatio,
-  remainder,
 }: Props) => {
   if (!isVisible) {
     return <div className="w-full bg-gray-300 dark:bg-neutral-700 my-4" />
@@ -41,7 +38,6 @@ const AllocationStatusBanner = ({
     <BannerLayout>
       <div className="flex gap-3">
         <span>남은 비율 : {remainingRatio}</span>
-        <span>남은 메소 : {formatKoreanNumber(remainder)}</span>
       </div>
     </BannerLayout>
   )

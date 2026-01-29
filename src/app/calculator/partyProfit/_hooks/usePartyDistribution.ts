@@ -129,8 +129,7 @@ export const usePartyDistribution = (totalProfit: number, feeRate: number) => {
   return {
     mode: state.mode,
 
-    members: distribution.results,
-    remainder: distribution.remainder,
+    members: distribution,
 
     canAddMember: canAddMember,
     remainingRatio: remainingRatio,

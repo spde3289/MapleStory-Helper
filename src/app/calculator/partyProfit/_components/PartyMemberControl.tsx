@@ -12,7 +12,6 @@ const PartyMemberControl = ({ netAmount, feeRate }: Props) => {
   const {
     mode,
     members,
-    remainder,
     overRatio,
     remainingRatio,
     canAddMember,
@@ -51,7 +50,6 @@ const PartyMemberControl = ({ netAmount, feeRate }: Props) => {
           isVisible={isAllocationBannerVisible}
           overRatio={overRatio}
           remainingRatio={remainingRatio}
-          remainder={remainder}
         />
         <PartyMemberList
           members={members}
