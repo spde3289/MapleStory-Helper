@@ -42,9 +42,16 @@ const PartyMemberCard = ({
           </div>
         </div>
         <div className="text-[13px] text-gray-600 dark:text-gray-300">
+          송금할 금액:{' '}
+          <span className="text-[16px] font-semibold text-blue-700 dark:text-blue-400">
+            {formatKoreanNumber(member.transferAmount)}
+          </span>{' '}
+          메소
+        </div>
+        <div className="text-[13px] text-gray-600 dark:text-gray-300">
           최종 분배금:{' '}
           <span className="text-[16px] font-semibold text-blue-700 dark:text-blue-400">
-            {formatKoreanNumber(member.amount)}
+            {formatKoreanNumber(member.finalReceivedAmount)}
           </span>{' '}
           메소
         </div>

@@ -71,14 +71,12 @@ export const distributeProfitByPercent = (
   const activeOwnerIndex = 0
   const ownerMember = normalizedMembers[activeOwnerIndex]
 
-  // 3. 핵심 지표 계산 (Fair Base Profit)
   const fairBaseProfit = calculateFairBaseProfit(
     totalProfit,
     ownerMember.ratio,
     feeRate,
   )
 
-  // 4. 개별 결과 계산 (매핑)
   const results = normalizedMembers.map((member, idx) =>
     computeMemberShare(
       member,
