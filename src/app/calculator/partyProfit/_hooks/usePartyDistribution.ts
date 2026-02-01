@@ -1,4 +1,5 @@
 import { useReducer } from 'react'
+// 경로가 맞는지 확인해주세요
 import { distributeProfitByPercent } from '../_utils/distributeProfitByPercent'
 
 export type PartyMember = {
@@ -119,11 +120,23 @@ export const usePartyDistribution = (totalProfit: number, feeRate: number) => {
   const overRatio = usedRatio > 100 ? usedRatio - 100 : 0
   const canAddMember = state.members.length < MAX_MEMBERS
 
+  const ownerId = state.members[0]?.id ?? ''
+
+  const calculationMembers = state.members.map((member) => {
+    if (state.mode === 'EQUAL') {
+      return {
+        ...member,
+        ratio: 100 / state.members.length,
+      }
+    }
+    return member
+  })
+
   const distribution = distributeProfitByPercent(
     totalProfit,
     feeRate,
-    state.members,
-    state.mode,
+    calculationMembers,
+    ownerId,
   )
 
   return {
@@ -131,9 +144,9 @@ export const usePartyDistribution = (totalProfit: number, feeRate: number) => {
 
     members: distribution,
 
-    canAddMember: canAddMember,
-    remainingRatio: remainingRatio,
-    overRatio: overRatio,
+    canAddMember,
+    remainingRatio,
+    overRatio,
 
     addMember: () => dispatch({ type: 'ADD_MEMBER' }),
     removeMember: (id: string) => dispatch({ type: 'REMOVE_MEMBER', id }),

@@ -2,7 +2,7 @@ import { formatKoreanNumber } from '@/utils/numberUtils'
 import { IoIosRemove } from 'react-icons/io'
 import { DistributionResult } from '../_utils/distributeProfitByPercent'
 
-interface Props {
+interface PartyMemberCardProps {
   member: DistributionResult
   canRemove: boolean
   onChangeName: (id: string, name: string) => void
@@ -16,7 +16,7 @@ const PartyMemberCard = ({
   onChangeName,
   onChangeRatio,
   onRemove,
-}: Props) => {
+}: PartyMemberCardProps) => {
   return (
     <div className="flex justify-between items-center rounded-md border border-gray-300 dark:border-white/[0.2] dark:bg-neutral-900 px-3 py-2 text-sm md:text-base">
       <div>
@@ -31,7 +31,7 @@ const PartyMemberCard = ({
           <div className="flex gap-1 w-20 items-center rounded-md border border-gray-300 dark:border-white/[0.2] dark:bg-neutral-900 px-1.5 py-0.5 text-sm md:text-base">
             <input
               className="min-w-0 text-left flex-1 w-0 bg-transparent focus:outline-none"
-              value={member.ratio}
+              value={Math.floor(member.ratio)}
               type="number"
               inputMode="numeric"
               min={0}

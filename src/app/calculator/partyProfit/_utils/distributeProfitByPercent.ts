@@ -2,20 +2,11 @@ export type DistributionResult = {
   id: string
   name: string
   ratio: number
-  transferAmount: number // 입력 금액 (송금액)
-  finalReceivedAmount: number // 실수령액
+  transferAmount: number
+  finalReceivedAmount: number
 }
 
 type Member = { id: string; name: string; ratio: number }
-type Mode = 'MANUAL' | 'EQUAL'
-
-const normalizeMembers = (members: Member[], mode: Mode): Member[] => {
-  if (mode === 'EQUAL') {
-    const equalRatio = 100 / members.length
-    return members.map((m) => ({ ...m, ratio: equalRatio }))
-  }
-  return members
-}
 
 const calculateFairBaseProfit = (
   totalProfit: number,
@@ -64,12 +55,18 @@ export const distributeProfitByPercent = (
   totalProfit: number,
   feeRate: number,
   members: Member[],
-  mode: Mode,
+  ownerId: string,
 ): DistributionResult[] => {
-  const normalizedMembers = normalizeMembers(members, mode)
+  if (!members || members.length === 0) {
+    return []
+  }
 
-  const activeOwnerIndex = 0
-  const ownerMember = normalizedMembers[activeOwnerIndex]
+  const ownerMember = members.find((m) => m.id === ownerId)
+
+  if (!ownerMember) {
+    console.warn(`Owner with ID ${ownerId} not found in members list.`)
+    return []
+  }
 
   const fairBaseProfit = calculateFairBaseProfit(
     totalProfit,
@@ -77,13 +74,8 @@ export const distributeProfitByPercent = (
     feeRate,
   )
 
-  const results = normalizedMembers.map((member, idx) =>
-    computeMemberShare(
-      member,
-      fairBaseProfit,
-      feeRate,
-      idx === activeOwnerIndex, // isOwner check
-    ),
+  const results = members.map((member) =>
+    computeMemberShare(member, fairBaseProfit, feeRate, member.id === ownerId),
   )
 
   return results
